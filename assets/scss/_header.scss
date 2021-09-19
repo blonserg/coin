@@ -1,0 +1,40 @@
+.header {
+  &-avatar {
+    margin-right: 40px;
+
+    &_image {
+      margin-right: 9px;
+    }
+
+    &_txt {
+      font-size: 14px;
+      line-height: 15px;
+      letter-spacing: 0.02em;
+    }
+
+    &_subtxt {
+      font-size: 13px;
+      line-height: 14px;
+      color: #6a6b79;
+      display: block;
+    }
+  }
+
+  &-rate {
+    margin-right: 40px;
+
+    &_txt {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
+  &-balance {
+    margin-right: 40px;
+
+    &_txt {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+}

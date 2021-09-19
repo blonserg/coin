@@ -32,5 +32,6 @@ export default {
     text-transform: none;
     border-radius: 6px;
     padding: 15px 20px;
+    letter-spacing: 0;
   }
 </style>
