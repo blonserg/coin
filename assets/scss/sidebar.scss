@@ -1,0 +1,32 @@
+.sidebar {
+  .v-list {
+    padding: 0 20px;
+  }
+
+  &-balance {
+    margin: 0 20px;
+    background-color: #23262e;
+    padding: 30px 24px;
+    border: 1px solid #272a33;
+    border-radius: 15px;
+    text-align: center;
+
+    &-ttl {
+      color: #eef1f8;
+      font-size: 16px;
+    }
+
+    &-count {
+      font-weight: 600;
+      font-size: 64px;
+      color: #61ccbf;
+    }
+
+    &-txt {
+      color: #808190;
+      font-size: 13px;
+      line-height: 130%;
+      margin-bottom: 30px;
+    }
+  }
+}
