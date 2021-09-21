@@ -58,15 +58,16 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: colors.purple,
+          primary: '#ffffff',
           secondary: colors.grey.darken1,
           accent: colors.shades.black,
           error: colors.red.accent3,
-          background: colors.indigo.lighten5
+          background: '#ffffff'
         },
         dark: {
-          primary: colors.blue.lighten3,
-          background: colors.indigo.base
+          primary: '#23262e',
+          secondary: '#23262e',
+          background: '#1d1e21'
         }
       }
     }

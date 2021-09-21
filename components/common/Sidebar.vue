@@ -129,3 +129,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.theme--dark.v-icon {
+  color: #6a6b79;
+}
+
+.theme--dark.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+  color: #6a6b79;
+}
+
+.theme--dark.v-navigation-drawer {
+  background: #131418 !important;
+}
+</style>

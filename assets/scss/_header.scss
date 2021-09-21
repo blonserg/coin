@@ -1,4 +1,6 @@
 .header {
+  padding: 45px 0;
+
   &-avatar {
     margin-right: 40px;
 
@@ -20,7 +22,8 @@
     }
   }
 
-  &-rate {
+  &-rate,
+  &-balance {
     margin-right: 40px;
 
     &_txt {
@@ -29,12 +32,33 @@
     }
   }
 
-  &-balance {
-    margin-right: 40px;
+  &-refs {
+    .v-input .v-input__control {
+      .v-input__slot {
+        min-height: 30px;
+        height: 30px;
+        margin-bottom: 0;
+        background: #18191f;
+        border: 1px solid #272a33;
+        border-radius: 6px;
+      }
 
-    &_txt {
-      font-size: 13px;
-      line-height: 20px;
+      .v-text-field__details {
+        display: none;
+      }
     }
+
+    &_btn {
+      width: 30px;
+      height: 30px;
+      background: #23262e;
+      border-radius: 6px;
+      margin-left: 10px;
+    }
+  }
+
+  &-notifcatns {
+    text-align: right;
+    flex: 1;
   }
 }

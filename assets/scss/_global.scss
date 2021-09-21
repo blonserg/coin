@@ -7,3 +7,46 @@
     }
   }
 }
+
+.title {
+  h1 {
+    font-weight: 600;
+    font-size: 36px;
+  }
+}
+
+.filter {
+  border: 1px solid #272a33;
+  border-radius: 6px;
+  padding: 0 10px;
+
+  &-txt {
+    font-weight: normal;
+    font-size: 13px;
+  }
+
+  .v-text-field {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .v-text-field__details {
+    display: none;
+  }
+
+  .v-input__slot {
+    margin-bottom: 0;
+  }
+
+  .v-text-field > .v-input__control > .v-input__slot::before {
+    content: none;
+  }
+}
+
+.theme--dark.v-application {
+  background: #1d1e21 !important;
+}
+
+.theme--dark.v-list {
+  color: #6a6b79 !important;
+}
