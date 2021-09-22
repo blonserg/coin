@@ -1,0 +1,66 @@
+.events {
+  &-list {
+    margin-bottom: 60px;
+  }
+
+  &-item {
+    width: 390px;
+    background: #23262e;
+    border: 1px solid #272a33;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 18px;
+    min-height: 120px;
+  }
+
+  &-date {
+    text-align: center;
+    min-width: 90px;
+
+    &_month {
+      display: block;
+      font-size: 14px;
+      line-height: 110%;
+      text-transform: uppercase;
+      color: primary;
+      font-weight: bold;
+    }
+
+    &_day {
+      font-size: 46px;
+      line-height: 46px;
+      text-align: center;
+      letter-spacing: -0.03em;
+      color: #adafc2;
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 30px;
+  }
+
+  &-ttl {
+    font-size: 20px;
+    line-height: 26px;
+    padding-right: 20px;
+  }
+
+  &-name {
+    font-size: 13px;
+    color: #808190;
+  }
+
+  &-time {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 6px;
+    background: #1b1d23;
+    border-radius: 4px;
+    color: #2d7bf6;
+  }
+}

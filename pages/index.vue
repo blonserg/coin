@@ -1,32 +1,61 @@
 <template>
-  <div class="title d-flex justify-space-between align-center">
-    <h1>Мероприятие</h1>
-    <div class="title-group d-flex justify-space-between">
-      <div class="filter d-flex align-center">
-        <span class="filter-txt">Сортировать</span>
-        <v-select
-          v-model="select"
-          :items="items"
-        />
-      </div>
-      <div class="filter d-flex align-center">
-        <span class="filter-txt">Фильтр категорий</span>
-        <v-select
-          v-model="select"
-          :items="items"
-        />
+  <div>
+    <Title />
+    <div class="events-list">
+      <v-card class="events-item d-flex justify-space-between align-center">
+        <div class="events-date">
+          <span class="events-date_month">
+            Авг
+          </span>
+          <span class="events-date_day">
+            26
+          </span>
+        </div>
+        <v-divider
+          vertical
+        ></v-divider>
+        <div class="events-info">
+          <div class="events-ttl">
+            Как инвестировать в криптовалюту
+          </div>
+          <div class="events-info_bottom d-flex justify-space-between align-center">
+            <div class="events-name">
+              Дмитрий Портнягин
+            </div>
+            <div class="events-time">
+              12:00
+            </div>
+          </div>
+        </div>
+      </v-card>
+    </div>
+    <div class="seetoo">
+      <div class="seetoo-ttl">
+        Вам будет интересно:
       </div>
     </div>
+    <Title />
+    <News />
+    <v-btn block>
+      Смотреть еще
+    </v-btn>
   </div>
 </template>
 
 <script>
+import Title from '~~/components/common/Title'
+import News from '~~/components/common/News'
+
 export default {
-  data () {
-    return {
-      select: ['Foo'],
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz']
-    }
+  components: {
+    Title,
+    News
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .theme--dark.v-card {
+    background: #23262e;
+  }
+</style>

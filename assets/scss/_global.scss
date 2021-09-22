@@ -20,9 +20,14 @@
   border-radius: 6px;
   padding: 0 10px;
 
+  & + & {
+    margin-left: 10px;
+  }
+
   &-txt {
     font-weight: normal;
     font-size: 13px;
+    margin-right: 10px;
   }
 
   .v-text-field {
@@ -32,6 +37,11 @@
 
   .v-text-field__details {
     display: none;
+  }
+
+  .v-input {
+    width: 120px;
+    font-size: 13px;
   }
 
   .v-input__slot {
