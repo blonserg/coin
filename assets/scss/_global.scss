@@ -60,3 +60,21 @@
 .theme--dark.v-list {
   color: #6a6b79 !important;
 }
+
+.btn-seetoo.v-btn {
+  background: #1e1f26;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #2d7bf6;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  height: 50px !important;
+
+  .v-btn__content {
+    color: #2d7bf6;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}

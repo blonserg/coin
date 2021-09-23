@@ -36,9 +36,105 @@
     </div>
     <Title />
     <News />
-    <v-btn block>
+    <v-btn class="btn btn-seetoo" block>
       Смотреть еще
     </v-btn>
+    <h2 class="main-ttl">
+      Общее количество пользователей
+    </h2>
+    <span class="main-subttl">
+      Учитываются все пользователи, зарегистрировавшиеся на Strike Team
+    </span>
+    <div class="main-table">
+      <div class="main-table_head d-flex justify-space-between">
+        <div class="main-table_people">
+          <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 15.2518C0 12.7553 2.46729 9.80496 6.4486 9.80496C8.13084 9.80496 9.42056 10.3156 10.4299 11.0532C8.52337 12.5851 7.51402 15.3085 8.41121 16.5H1.45794C0.448598 16.5 0 16.0461 0 15.2518ZM3.42056 5.03901C3.42056 3.16667 4.82243 1.69149 6.50467 1.69149C8.18692 1.69149 9.53271 3.16667 9.53271 5.03901C9.53271 6.96809 8.13084 8.44326 6.50467 8.44326C4.87851 8.44326 3.42056 6.96809 3.42056 5.03901ZM9.19626 15.3085C9.19626 12.9823 12.0561 9.8617 16.5981 9.8617C21.1402 9.8617 24 13.039 24 15.3085C24 16.1028 23.4953 16.4433 22.2617 16.4433H10.9907C9.70094 16.5 9.19626 16.1028 9.19626 15.3085ZM13.1215 4.35816C13.1215 2.20213 14.7477 0.5 16.6542 0.5C18.5607 0.5 20.1869 2.14539 20.1869 4.30142C20.1869 6.51418 18.5607 8.21631 16.6542 8.21631C14.7477 8.27305 13.1215 6.57092 13.1215 4.35816Z" fill="#6A6B79"/>
+          </svg>
+          36 459
+        </div>
+        <v-btn-toggle
+          v-model="text"
+          tile
+          group
+        >
+          <v-btn value="day">
+            Сутки
+          </v-btn>
+
+          <v-btn value="week">
+            Неделя
+          </v-btn>
+
+          <v-btn value="month">
+            Месяц
+          </v-btn>
+
+          <v-btn value="all">
+            ВСе время
+          </v-btn>
+        </v-btn-toggle>
+      </div>
+      <div class="main-body">
+        <v-container>
+          <v-row>
+            <v-col md='6'>
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        Name
+                      </th>
+                      <th class="text-left">
+                        Calories
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="item in desserts"
+                      :key="item.name"
+                    >
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.calories }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-col>
+            <v-col md='6'>
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        Name
+                      </th>
+                      <th class="text-left">
+                        Calories
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="item in desserts"
+                      :key="item.name"
+                    >
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.calories }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+      <p class="main-info">
+        Время и границы суток определены в GMT (MSK −3:00)
+      </p>
+    </div>
   </div>
 </template>
 
@@ -50,6 +146,53 @@ export default {
   components: {
     Title,
     News
+  },
+  data () {
+    return {
+      text: 'all',
+      desserts: [
+        {
+          name: 'Frozen Yogurt',
+          calories: 159
+        },
+        {
+          name: 'Ice cream sandwich',
+          calories: 237
+        },
+        {
+          name: 'Eclair',
+          calories: 262
+        },
+        {
+          name: 'Cupcake',
+          calories: 305
+        },
+        {
+          name: 'Gingerbread',
+          calories: 356
+        },
+        {
+          name: 'Jelly bean',
+          calories: 375
+        },
+        {
+          name: 'Lollipop',
+          calories: 392
+        },
+        {
+          name: 'Honeycomb',
+          calories: 408
+        },
+        {
+          name: 'Donut',
+          calories: 452
+        },
+        {
+          name: 'KitKat',
+          calories: 518
+        }
+      ]
+    }
   }
 }
 </script>
@@ -57,5 +200,24 @@ export default {
 <style lang="scss" scoped>
   .theme--dark.v-card {
     background: #23262e;
+  }
+
+  .theme--light.v-btn.v-btn--has-bg {
+    background: #1e1f26;
+  }
+
+  .main {
+    &-ttl {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 31px;
+      color: white;
+    }
+
+    &-subttl {
+      font-size: 16px;
+      line-height: 21px;
+      color: #808190;
+    }
   }
 </style>

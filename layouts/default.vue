@@ -5,6 +5,7 @@
       <v-container>
         <Header />
         <Nuxt />
+        <Footer />
       </v-container>
     </v-main>
   </v-app>
@@ -13,11 +14,13 @@
 <script>
 import Sidebar from '~~/components/common/Sidebar'
 import Header from '~~/components/common/Header'
+import Footer from '~~/components/common/Footer'
 
 export default {
   components: {
     Sidebar,
-    Header
+    Header,
+    Footer
   }
 }
 </script>
