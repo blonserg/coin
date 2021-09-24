@@ -8,6 +8,7 @@
     width="260px"
     class="sidebar"
   >
+    <LogoSvg />
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
@@ -36,21 +37,27 @@
       </div>
       <Button :text="`Пополнить баланс`" :block="block" />
     </div>
-    <v-switch
-      inset
-      :value="darkMode"
-      :label="`Темный режим`"
-      @change="toggleDarkMode"
-    />
+    <div class="sidebar-footer">
+      <v-divider></v-divider>
+      <v-switch
+        inset
+        color='accent'
+        :value="darkMode"
+        :label="`Темный режим`"
+        @change="toggleDarkMode"
+      />
+    </div>
   </v-navigation-drawer>
 </template>
 
 <script>
 import Button from '~~/components/common/Button'
+import LogoSvg from '~~/components/svg/LogoSvg'
 
 export default {
   components: {
-    Button
+    Button,
+    LogoSvg
   },
   data () {
     return {
@@ -141,5 +148,38 @@ export default {
 
 .theme--dark.v-navigation-drawer {
   background: #131418 !important;
+}
+
+.logo {
+  padding: 0 20px;
+  margin: 10px 0;
+}
+
+.v-list-item__title {
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.02em;
+}
+
+.v-application--is-ltr .v-list-item__action:first-child {
+  margin-right: 20px;
+}
+
+.theme--dark.v-list-item--active::before {
+  opacity: 0;
+}
+
+.v-list-item--active {
+  background: #2d7bf6;
+  color: white;
+  border-radius: 8px;
+}
+
+.v-divider {
+  margin: 40px 0;
+}
+
+.v-input--switch--inset .v-input--switch__track {
+  opacity: 1;
 }
 </style>

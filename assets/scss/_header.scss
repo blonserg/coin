@@ -29,6 +29,7 @@
     &_txt {
       font-size: 13px;
       line-height: 20px;
+      margin-right: 10px;
     }
   }
 
@@ -60,5 +61,26 @@
   &-notifcatns {
     text-align: right;
     flex: 1;
+  }
+
+  &-tariph {
+    background: #241a40;
+    border: 1px solid #241a40;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+
+    &.premium {
+      border: 1px solid #8d68f5;
+      color: #8d68f5;
+    }
+  }
+
+  &-balance_info {
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    color: #61ccbf;
+    border: 1px solid #61ccbf;
   }
 }

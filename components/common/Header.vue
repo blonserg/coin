@@ -14,17 +14,17 @@
         <div class="header-rate_txt">
           Тариф:
         </div>
-        <v-chip class="ma-2" label outlined>
+        <div class="header-tariph premium">
           PREMIUM
-        </v-chip>
+        </div>
       </div>
       <div class="header-balance d-flex align-center">
         <div class="header-balance_txt">
           Баланс:
         </div>
-        <v-chip class="ma-2" label outlined>
+        <div class="header-balance_info">
           497 баллов
-        </v-chip>
+        </div>
       </div>
       <div class="header-refs d-flex align-center">
         <v-text-field ref="textToCopy" v-model="value" outlined readonly />
@@ -35,12 +35,11 @@
         </button>
       </div>
       <div class="header-notifcatns">
-        <v-badge overlap>
+        <v-badge overlap color="#F75050">
           <v-btn
             class="header-notifcatns-btn"
             fab
             small
-            color="primary"
           >
             <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 18.0026C0 16.8044 1.0614 15.8177 2.09868 14.8544C2.99123 14.0322 3.13597 12.3641 3.32895 10.5787C3.54605 6.70225 4.82456 4.00051 7.69518 3.03728C8.10526 1.58069 9.35965 0.5 11 0.5C12.6404 0.5 13.8947 1.58069 14.3289 3.06078C17.1996 4.024 18.4539 6.72574 18.6711 10.6021C18.864 12.3876 19.0088 14.0322 19.9013 14.8779C20.9145 15.8177 22 16.8279 22 18.026C22 18.9423 21.3004 19.5531 20.1908 19.5531H15.3662C15.2939 21.6205 13.557 23.5 11 23.5C8.41886 23.5 6.68202 21.597 6.63377 19.5531H1.80921C0.699561 19.5531 0 18.9423 0 18.0026ZM19.2741 17.5327V17.4152C18.9605 17.0628 18.3333 16.452 17.7544 15.8177C16.9342 14.8779 16.6206 13.0455 16.4759 10.9076C16.2829 6.8667 14.9803 5.36313 13.1711 4.89326C12.8816 4.82278 12.7127 4.68182 12.6886 4.3764C12.6162 3.27222 11.989 2.54392 11 2.54392C10.011 2.54392 9.38377 3.29571 9.3114 4.3764C9.28728 4.68182 9.11842 4.82278 8.82895 4.89326C7.04386 5.36313 5.71711 6.84321 5.52412 10.9076C5.35526 13.0455 5.08991 14.8779 4.24561 15.8177C3.66667 16.452 3.01535 17.0628 2.70175 17.4152V17.5327H19.2741ZM13.2675 19.5531H8.75658C8.82895 20.9157 9.74561 21.8085 11 21.8085C12.2785 21.785 13.1952 20.8922 13.2675 19.5531Z" fill="#6A6B79" />
@@ -68,3 +67,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.v-badge__badge {
+  background: #f75050;
+}
+</style>

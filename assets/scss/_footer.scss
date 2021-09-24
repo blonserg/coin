@@ -1,0 +1,50 @@
+.footer {
+  background: #131418;
+  border: 1px solid #1d1f26;
+  border-radius: 15px;
+  text-align: center;
+
+  &-link {
+    display: block;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    color: #6a6b79;
+  }
+
+  &-socials {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+
+    &_item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background: #1a1b21;
+      border-radius: 10px;
+      margin: 0 8px;
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    line-height: 20px;
+    color: #6a6b79;
+    margin-bottom: 14px;
+
+    a {
+      color: #6a6b79;
+    }
+
+    p + p {
+      margin-left: 15px;
+    }
+  }
+}

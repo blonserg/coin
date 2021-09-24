@@ -4,12 +4,13 @@
   }
 
   &-balance {
-    margin: 0 20px;
+    margin: 50px 20px;
     background-color: #23262e;
     padding: 30px 24px;
     border: 1px solid #272a33;
     border-radius: 15px;
     text-align: center;
+    min-width: 220px;
 
     &_ttl {
       color: #eef1f8;
@@ -29,4 +30,13 @@
       margin-bottom: 30px;
     }
   }
+
+  &-footer {
+    padding: 0 20px;
+  }
+}
+
+.v-application--is-ltr .v-input--switch.v-input--is-dirty .v-input--switch__thumb {
+  background: #fff !important;
+  color: #fff !important;
 }

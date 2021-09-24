@@ -67,7 +67,8 @@ export default {
         dark: {
           primary: '#ffffff',
           secondary: '#23262e',
-          background: '#1d1e21'
+          background: '#1d1e21',
+          accent: '#2d7bf6'
         }
       }
     }
