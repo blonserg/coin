@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title />
+    <Title :title="`Мероприятия`" />
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
@@ -33,8 +33,12 @@
       </v-card>
     </div>
     <Seetoo />
-    <Title />
-    <News v-bind="news" />
+    <Title :title="`Новости`" />
+    <v-row>
+      <v-col v-for="item in news" :key="item.title" md="4">
+        <News :title="item.title" :views="item.views" :date="item.date" />
+      </v-col>
+    </v-row>
     <v-btn class="btn btn-seetoo" block>
       Смотреть еще
     </v-btn>

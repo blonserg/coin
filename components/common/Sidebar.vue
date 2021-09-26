@@ -108,7 +108,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Новости',
-          to: '/inspire'
+          to: '/news'
         },
         {
           icon: 'mdi-apps',

@@ -1,6 +1,8 @@
 <template>
   <div class="seetoo">
-    <div class="seetoo-ttl">Вам будет интересно:</div>
+    <div class="seetoo-ttl">
+      Вам будет интересно:
+    </div>
     <div class="seetoo-list d-flex justify-space-between">
       <v-card class="seetoo-item item-2">
         <img src="" alt="">

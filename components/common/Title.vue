@@ -1,6 +1,6 @@
 <template>
   <div class="title d-flex justify-space-between align-center">
-    <h1>Мероприятие</h1>
+    <h1>{{ title }}</h1>
     <div class="title-group d-flex justify-space-between">
       <div class="filter d-flex align-center">
         <span class="filter-txt">Сортировать</span>
@@ -16,6 +16,12 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String,
+      default: 'Заголовок'
+    }
+  },
   data () {
     return {
       select: ['Foo'],
