@@ -38,10 +38,10 @@
       <Button :text="`Пополнить баланс`" :block="block" />
     </div>
     <div class="sidebar-footer">
-      <v-divider></v-divider>
+      <v-divider />
       <v-switch
         inset
-        color='accent'
+        color="accent"
         :value="darkMode"
         :label="`Темный режим`"
         @change="toggleDarkMode"
