@@ -1,0 +1,41 @@
+.seetoo {
+  margin-bottom: 60px;
+
+  &-ttl {
+    font-size: 18px;
+    line-height: 23px;
+    color: #6a6b79;
+    margin-bottom: 25px;
+  }
+
+  &-item {
+    height: 290px;
+    padding: 25px 30px;
+
+    &.v-card {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &.item-1 {
+      width: 32%;
+    }
+
+    &.item-2 {
+      width: 65%;
+    }
+
+    &_ttl {
+      font-size: 20px;
+      line-height: 26px;
+      color: #eef1f8;
+    }
+
+    &_subttl {
+      font-size: 14px;
+      line-height: 18px;
+      color: #808190;
+      display: inline-block;
+    }
+  }
+}

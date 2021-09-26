@@ -14,8 +14,7 @@
 export default {
   props: {
     block: {
-      type: String,
-      default: 'block'
+      type: String
     },
     text: {
       type: String,

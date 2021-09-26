@@ -29,11 +29,7 @@
         </div>
       </v-card>
     </div>
-    <div class="seetoo">
-      <div class="seetoo-ttl">
-        Вам будет интересно:
-      </div>
-    </div>
+    <Seetoo />
     <Title />
     <News />
     <v-btn class="btn btn-seetoo" block>
@@ -141,11 +137,13 @@
 <script>
 import Title from '~~/components/common/Title'
 import News from '~~/components/common/News'
+import Seetoo from '~~/components/Seetoo'
 
 export default {
   components: {
     Title,
-    News
+    News,
+    Seetoo
   },
   data () {
     return {
