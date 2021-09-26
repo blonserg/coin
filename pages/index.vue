@@ -112,6 +112,7 @@
                       </th>
                     </tr>
                   </thead>
+                  <v-spacer />
                   <tbody>
                     <tr
                       v-for="item in desserts"
@@ -216,6 +217,82 @@ export default {
       font-size: 16px;
       line-height: 21px;
       color: #808190;
+      margin-bottom: 30px;
+      display: inline-block;
     }
+
+    &-table {
+      &_people {
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 47px;
+      }
+
+      &_head {
+        margin-bottom: 20px;
+      }
+
+      .v-btn-toggle {
+        .v-btn {
+          font-size: 13px;
+          line-height: 17px;
+          color: #6a6b79;
+          height: 30px;
+          letter-spacing: 0;
+          text-transform: none;
+          border: 1px solid #272a33;
+          border-radius: 4px !important;
+          width: 89px;
+        }
+
+        .v-btn--active {
+          background: #2d7bf6 !important;
+          border-color: #2d7bf6;
+          color: #fff;
+        }
+      }
+    }
+
+    &-info {
+      margin-top: 30px;
+      text-align: right;
+      font-size: 13px;
+      line-height: 17px;
+      color: #6a6b79;
+    }
+  }
+
+  .theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+    height: 30px;
+    background: #1e1f26;
+    border-radius: 6px;
+    border-bottom: 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    height: 30px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #adafc2;
+    background: none;
+  }
+
+  .v-data-table .v-data-table__wrapper table thead::after {
+    content: "@";
+    display: block;
+    line-height: 17px;
+    text-indent: -99999px;
+  }
+
+  .theme--dark.v-data-table {
+    background: inherit;
+  }
+
+  .v-btn-toggle:not(.v-btn-toggle--dense) .v-btn.v-btn.v-size--default {
+    height: 30px;
+  }
+
+  .v-application--is-ltr .v-btn-toggle > .v-btn.v-btn:not(:first-child) {
+    border-left-width: 1px;
   }
 </style>
