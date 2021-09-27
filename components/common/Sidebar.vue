@@ -73,7 +73,7 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'Инвестиии',
-          to: '/inspire'
+          to: '/invests'
         },
         {
           icon: 'mdi-apps',

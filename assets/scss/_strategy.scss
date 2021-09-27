@@ -1,0 +1,153 @@
+.strategy {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 170px;
+  align-items: baseline;
+  position: absolute;
+  width: 100%;
+
+  &-wrap {
+    height: 550px;
+    position: relative;
+  }
+
+  &-btn {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    border-radius: 6px !important;
+
+    .btn {
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      color: #2d7bf6;
+      background: #eef1f8;
+      border-radius: 6px !important;
+      padding: 15px 20px;
+      width: 100%;
+      display: block;
+      text-decoration: none;
+      margin-top: 50px;
+    }
+  }
+
+  &-txt {
+    font-size: 12px;
+    line-height: 16px;
+    color: #808190;
+    margin-bottom: 0;
+  }
+
+  &-info {
+    margin-top: 30px;
+
+    &_item {
+      background: #2b2e38;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+
+    &_lt {
+      font-size: 13px;
+      line-height: 18px;
+      color: #adafc2;
+    }
+
+    &_rt {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.01em;
+
+      .basic & {
+        color: #61ccbf;
+      }
+
+      .professional & {
+        color: #8d68f5;
+      }
+
+      .professional-more & {
+        color: #f75050;
+      }
+    }
+  }
+
+  &-item {
+    border-radius: 15px;
+    width: 252px;
+    padding: 25px 20px 30px;
+
+    &:hover {
+      .strategy-btn {
+        height: auto;
+        visibility: visible;
+        overflow: none;
+      }
+
+      .strategy-txt {
+        color: #eef1f8;
+      }
+
+      .strategy-info_item {
+        background: #286cd9;
+      }
+
+      .strategy-info_lt,
+      .strategy-info_rt {
+        color: #eef1f8;
+      }
+    }
+
+    &_invest {
+      border-radius: 15px;
+      padding: 30px;
+
+      &.theme--dark.v-card {
+        background: #23262e;
+        border: 1px solid #272a33;
+        border-radius: 15px;
+      }
+    }
+  }
+
+  &-item.theme--dark.v-card {
+    background: #23262e;
+    border: 1px solid #272a33;
+    border-radius: 15px;
+    transition: all 0.4s;
+  }
+
+  &-item:hover.theme--dark.v-card {
+    background: #2d7bf6;
+    border: 1px solid #2d7bf6;
+  }
+
+  &-ttl {
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom: 10px;
+
+    .basic & {
+      color: #61ccbf;
+    }
+
+    .professional & {
+      color: #8d68f5;
+    }
+
+    .professional-more & {
+      color: #f75050;
+    }
+  }
+
+  &-count {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    color: #eef1f8;
+    margin-bottom: 20px;
+  }
+}
