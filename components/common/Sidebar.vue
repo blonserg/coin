@@ -88,7 +88,7 @@ export default {
         {
           icon: 'm,di-apps',
           title: 'Биржа услуг',
-          to: '/inspire'
+          to: '/stock'
         },
         {
           icon: 'mdi-apps',
