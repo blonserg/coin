@@ -1,4 +1,4 @@
-.strategy {
+.article {
   display: flex;
   justify-content: space-between;
   margin-bottom: 170px;
@@ -81,22 +81,22 @@
     padding: 25px 20px 30px;
 
     &:hover {
-      .strategy-btn {
+      .article-btn {
         height: auto;
         visibility: visible;
         overflow: none;
       }
 
-      .strategy-txt {
+      .article-txt {
         color: #eef1f8;
       }
 
-      .strategy-info_item {
+      .article-info_item {
         background: #286cd9;
       }
 
-      .strategy-info_lt,
-      .strategy-info_rt {
+      .article-info_lt,
+      .article-info_rt {
         color: #eef1f8;
       }
     }
@@ -110,6 +110,10 @@
         border: 1px solid #272a33;
         border-radius: 15px;
       }
+    }
+
+    &_tel {
+      margin-bottom: 80px;
     }
   }
 
@@ -185,6 +189,7 @@
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.5px;
+    text-align: center;
   }
 
   &-bottom {
@@ -200,5 +205,9 @@
 
   &-stock {
     margin-top: 30px;
+  }
+
+  &-telegram {
+    margin-top: 60px;
   }
 }

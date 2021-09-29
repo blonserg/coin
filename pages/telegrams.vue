@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="ttl">
-      Биржа услуг
+      Актуальные чаты:
     </div>
-    <div class="article-stock">
+    <div class="article-telegram">
       <v-row>
-        <v-col v-for="(item, i) in invests" :key="i" md="6">
-          <v-card class="article-item_invest">
+        <v-col v-for="(item, i) in invests" :key="i" md="5">
+          <div class="article-item_tel">
             <div class="article-head d-flex align-center">
               <div class="article-head_img">
                 <svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,18 +24,11 @@
               Значимость этих проблем настолько очевидна, что дальнейшее развитие различных форм деятельности обеспечивает, что дальнейшее развитие различных форм деятельности ...
             </p>
             <div class="article-bottom d-flex justify-space-between align-center">
-              <div class="article-bottom_info">
-                <span>Воспользовались услугой:</span>
-                <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 9.97586C0 8.45862 1.96296 6.37241 5 6.37241C8.03704 6.37241 10 8.45862 10 9.97586C10 10.6207 9.62963 11 8.51852 11H1.48148C0.37037 11 0 10.6207 0 9.97586ZM2.59259 2.65517C2.59259 1.21379 3.66667 0 5 0C6.33333 0 7.40741 1.21379 7.40741 2.65517C7.40741 4.17241 6.33333 5.34828 5 5.34828C3.66667 5.34828 2.59259 4.17241 2.59259 2.65517Z" fill="#808190" />
-                </svg>
-                <span>2340</span>
-              </div>
               <a class="article-link" href="">
-                Читать больше
+                Перейти в чат
               </a>
             </div>
-          </v-card>
+          </div>
         </v-col>
       </v-row>
     </div>

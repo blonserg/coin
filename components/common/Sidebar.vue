@@ -37,6 +37,20 @@
       </div>
       <Button :text="`Пополнить баланс`" :block="block" />
     </div>
+    <v-list>
+      <v-list-item
+        :to="`/profile`"
+        router
+        exact
+      >
+        <v-list-item-action>
+          <v-icon>mdi-apps</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title v-text="`Мой профиль`" />
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
     <div class="sidebar-footer">
       <v-divider />
       <v-switch
@@ -113,7 +127,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Группы Telegram',
-          to: '/inspire'
+          to: '/telegrams'
         }
       ],
       miniVariant: false,
