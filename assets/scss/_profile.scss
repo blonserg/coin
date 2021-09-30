@@ -1,0 +1,103 @@
+.profile {
+  &-info {
+    text-align: center;
+    padding: 60px 30px;
+
+    &.v-card.v-sheet.theme--dark {
+      background: #23262e;
+      border: 1px solid #272a33;
+      border-radius: 15px;
+    }
+  }
+
+  &-avatar {
+    margin-bottom: 30px;
+
+    &_txt {
+      font-weight: 500;
+      font-size: 52px;
+      line-height: 68px;
+      text-align: center;
+      color: #adafc2;
+    }
+  }
+
+  &-name {
+    font-size: 18px;
+    line-height: 23px;
+    color: #eef1f8;
+    margin-bottom: 40px;
+
+    &_nick {
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.01em;
+      color: #adafc2;
+    }
+  }
+
+  &-tariph {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+
+    &_txt {
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.02em;
+      color: #eef1f8;
+      margin-right: 15px;
+      align-items: center;
+    }
+
+    &_date {
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.01em;
+      color: #808190;
+      margin: 20px 0;
+    }
+  }
+
+  &-referal {
+    margin-top: 40px;
+
+    &_ttl {
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.02em;
+      color: #eef1f8;
+      margin-bottom: 30px;
+    }
+
+    &_txt {
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.01em;
+      color: #808190;
+      margin-top: 30px;
+    }
+  }
+
+  &-ttl {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 31px;
+    letter-spacing: 0.01em;
+    color: #eef1f8;
+    margin-bottom: 50px;
+  }
+
+  &-refitem {
+    &_name {
+      font-size: 16px;
+      line-height: 21px;
+      color: #eef1f8;
+      margin-left: 20px;
+    }
+
+    & + & {
+      border-top: 1px solid #313440;
+    }
+  }
+}
