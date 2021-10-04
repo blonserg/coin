@@ -54,6 +54,7 @@
     <div class="sidebar-footer">
       <v-divider />
       <v-switch
+        v-model="switch1"
         inset
         color="accent"
         :value="darkMode"
@@ -78,6 +79,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      switch1: true,
       items: [
         {
           icon: 'mdi-apps',
@@ -134,7 +136,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js',
-      darkMode: false
+      darkMode: true
     }
   },
   computed: {
