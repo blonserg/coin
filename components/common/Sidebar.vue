@@ -109,7 +109,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Моя команда',
-          to: '/inspire'
+          to: '/mycomand'
         },
         {
           icon: 'mdi-apps',
