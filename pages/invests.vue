@@ -203,9 +203,9 @@
                 <div class="article-name">
                   {{ item.title }}
                 </div>
-                <a class="article-link" href="">
+                <NuxtLink class="article-link" to="/portfel">
                   Смотреть проект
-                </a>
+                </NuxtLink>
               </div>
             </div>
             <p class="article-txt">
