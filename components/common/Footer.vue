@@ -85,7 +85,7 @@ export default {
         },
         {
           title: 'Инвестиии',
-          to: '/inspire'
+          to: '/invests'
         },
         {
           title: 'Резервый фонд',
@@ -99,11 +99,11 @@ export default {
         },
         {
           title: 'Биржа услуг',
-          to: '/inspire'
+          to: '/stock'
         },
         {
           title: 'Моя команда',
-          to: '/inspire'
+          to: '/mycomand'
         },
         {
           title: 'Лояльность',
@@ -117,11 +117,11 @@ export default {
         },
         {
           title: 'Новости',
-          to: '/inspire'
+          to: '/news'
         },
         {
           title: 'Группы Telegram',
-          to: '/inspire'
+          to: '/telegrams'
         }
       ]
     }
