@@ -1,0 +1,58 @@
+.mycomand {
+  &-main {
+    &_ttl {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 26px;
+      letter-spacing: 0.01em;
+      color: #eef1f8;
+      margin-bottom: 8px;
+    }
+
+    &_txt {
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.01em;
+      color: #808190;
+      margin-bottom: 20px;
+    }
+
+    &_count {
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      color: #eef1f8;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 7px;
+      }
+    }
+  }
+
+  &-ttl {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 31px;
+    color: #eef1f8;
+    margin-bottom: 30px;
+  }
+
+  &-avatar {
+    margin-right: 15px;
+  }
+
+  &-name {
+    font-size: 16px;
+    line-height: 21px;
+    color: #eef1f8;
+
+    &_nick {
+      display: block;
+      color: #2d7bf6;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}
