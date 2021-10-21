@@ -1,7 +1,10 @@
 <template>
   <div>
     <header class="header d-flex align-center">
-      <div class="header-avatar d-flex align-center">
+      <div class="d-block d-md-none">
+        <LogoSvg />
+      </div>
+      <div class="header-avatar d-none d-md-flex align-center">
         <div class="header-avatar_image">
           <img src="/avatar.png" alt="">
         </div>
@@ -10,7 +13,7 @@
           <span class="header-avatar_subtxt">Lorem ipsum</span>
         </div>
       </div>
-      <div class="header-rate d-flex align-center">
+      <div class="header-rate d-none d-md-flex align-center">
         <div class="header-rate_txt">
           Тариф:
         </div>
@@ -18,7 +21,7 @@
           PREMIUM
         </div>
       </div>
-      <div class="header-balance d-flex align-center">
+      <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">
           Баланс:
         </div>
@@ -26,7 +29,7 @@
           497 баллов
         </div>
       </div>
-      <div class="header-refs d-flex align-center">
+      <div class="header-refs d-none d-md-flex align-center">
         <v-text-field ref="textToCopy" v-model="value" outlined readonly />
         <button color="primary" class="header-refs_btn d-flex align-center justify-center" @click="copyText">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +55,12 @@
 </template>
 
 <script>
+import LogoSvg from '~~/components/svg/LogoSvg'
+
 export default {
+  components: {
+    LogoSvg
+  },
   data () {
     return {
       value: 'loremipsum'
@@ -71,5 +79,9 @@ export default {
 <style lang="scss" scoped>
 .v-badge__badge {
   background: #f75050;
+}
+
+.logo {
+  width: 120px;
 }
 </style>

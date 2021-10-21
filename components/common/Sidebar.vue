@@ -1,68 +1,90 @@
 <template>
-  <v-navigation-drawer
-    v-model="drawer"
-    :mini-variant="miniVariant"
-    :clipped="clipped"
-    fixed
-    app
-    width="260px"
-    class="sidebar"
-  >
-    <LogoSvg />
-    <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
-        router
-        exact
-      >
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <div class="sidebar-balance">
-      <div class="sidebar-balance_ttl">
-        Ваши баллы:
+  <div>
+    <v-app-bar-nav-icon class="sidebar-menu d-md-none" @click.stop="drawer = !drawer" />
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+      class="sidebar"
+      width="256px"
+    >
+      <LogoSvg />
+      <div class="d-flex flex-column d-md-none">
+        <div class="header-avatar d-flex align-center">
+          <div class="header-avatar_image">
+            <img src="/avatar.png" alt="">
+          </div>
+          <div class="header-avatar_txt">
+            Влад Борин
+            <span class="header-avatar_subtxt">Lorem ipsum</span>
+          </div>
+        </div>
+        <div class="header-rate d-flex align-center">
+          <div class="header-rate_txt">
+            Тариф:
+          </div>
+          <div class="header-tariph premium">
+            PREMIUM
+          </div>
+        </div>
       </div>
-      <div class="sidebar-balance_count">
-        479
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <div class="sidebar-balance">
+        <div class="sidebar-balance_ttl">
+          Ваши баллы:
+        </div>
+        <div class="sidebar-balance_count">
+          479
+        </div>
+        <div class="sidebar-balance_txt">
+          Вы можете использовать их для доступа к закрытым материалам
+        </div>
+        <Button :text="`Пополнить баланс`" :block="block" />
       </div>
-      <div class="sidebar-balance_txt">
-        Вы можете использовать их для доступа к закрытым материалам
+      <v-list>
+        <v-list-item
+          :to="`/profile`"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-apps</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="`Мой профиль`" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <div class="sidebar-footer">
+        <v-divider />
+        <v-switch
+          v-model="switch1"
+          inset
+          color="accent"
+          :value="darkMode"
+          :label="`Темный режим`"
+          @change="toggleDarkMode"
+        />
       </div>
-      <Button :text="`Пополнить баланс`" :block="block" />
-    </div>
-    <v-list>
-      <v-list-item
-        :to="`/profile`"
-        router
-        exact
-      >
-        <v-list-item-action>
-          <v-icon>mdi-apps</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="`Мой профиль`" />
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <div class="sidebar-footer">
-      <v-divider />
-      <v-switch
-        v-model="switch1"
-        inset
-        color="accent"
-        :value="darkMode"
-        :label="`Темный режим`"
-        @change="toggleDarkMode"
-      />
-    </div>
-  </v-navigation-drawer>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
@@ -197,5 +219,17 @@ export default {
 
 .v-input--switch--inset .v-input--switch__track {
   opacity: 1;
+}
+
+.sidebar {
+  @media screen and (max-width: 758px) {
+    width: 100% !important;
+  }
+}
+
+.sidebar-menu {
+  position: absolute;
+  right: 10px;
+  z-index: 10;
 }
 </style>

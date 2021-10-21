@@ -3,7 +3,7 @@
     <div class="seetoo-ttl">
       Вам будет интересно:
     </div>
-    <div class="seetoo-list d-flex justify-space-between">
+    <div class="seetoo-list d-flex flex-column flex-md-row justify-space-between">
       <v-card class="seetoo-item item-2">
         <img src="" alt="">
         <div class="seetoo-item_bottom d-flex justify-space-between">

@@ -1,10 +1,14 @@
 <template>
-  <div class="title d-flex justify-space-between align-center">
+  <div class="title d-flex flex-column flex-md-row justify-space-between align-center">
     <h1>{{ title }}</h1>
     <div class="title-group d-flex justify-space-between">
       <div class="filter d-flex align-center">
-        <span class="filter-txt">Сортировать</span>
-        <v-select v-model="select" :items="items" />
+        <v-select
+          v-model="select"
+          :items="items"
+          :menu-props="{ left: true }"
+          label="Сортировать"
+        />
       </div>
       <div class="filter d-flex align-center">
         <span class="filter-txt">Фильтр категорий</span>

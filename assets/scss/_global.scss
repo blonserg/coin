@@ -24,7 +24,8 @@
     margin-left: 10px;
   }
 
-  &-txt {
+  &-txt,
+  .v-label {
     font-weight: normal;
     font-size: 13px;
     margin-right: 10px;
@@ -40,7 +41,6 @@
   }
 
   .v-input {
-    width: 120px;
     font-size: 13px;
   }
 
