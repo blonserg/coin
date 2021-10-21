@@ -34,7 +34,27 @@
     </div>
     <v-list>
       <v-list-item
-        v-for="(item, i) in items"
+        v-for="(item, i) in items_first"
+        :key="i"
+        :to="item.to"
+        router
+      >
+        <v-list-item-title v-text="item.title" />
+      </v-list-item>
+    </v-list>
+    <v-list>
+      <v-list-item
+        v-for="(item, i) in items_second"
+        :key="i"
+        :to="item.to"
+        router
+      >
+        <v-list-item-title v-text="item.title" />
+      </v-list-item>
+    </v-list>
+    <v-list>
+      <v-list-item
+        v-for="(item, i) in items_third"
         :key="i"
         :to="item.to"
         router
@@ -58,7 +78,7 @@ export default {
   },
   data () {
     return {
-      items: [
+      items_first: [
         {
           title: 'Главная',
           to: '/'
@@ -70,7 +90,9 @@ export default {
         {
           title: 'Резервый фонд',
           to: '/inspire'
-        },
+        }
+      ],
+      items_second: [
         {
           title: 'CRM',
           to: '/inspire'
@@ -86,7 +108,9 @@ export default {
         {
           title: 'Лояльность',
           to: '/inspire'
-        },
+        }
+      ],
+      items_third: [
         {
           title: 'FAQ',
           to: '/inspire'
@@ -131,5 +155,13 @@ export default {
 .logo {
   max-width: 140px;
   margin: 0 auto;
+}
+
+.v-sheet.v-list {
+  padding: 0;
+
+  .v-list-item {
+    padding: 0 8px;
+  }
 }
 </style>
