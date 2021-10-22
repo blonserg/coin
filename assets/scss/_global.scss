@@ -8,10 +8,21 @@
   }
 }
 
-.title {
+.ttl {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 47px;
+  color: #eef1f8;
+
   h1 {
     font-weight: 600;
     font-size: 36px;
+  }
+
+  &--small {
+    h1 {
+      font-size: 24px;
+    }
   }
 }
 
@@ -75,13 +86,6 @@
   }
 }
 
-.ttl {
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 47px;
-  color: #eef1f8;
-}
-
 .subttl {
   font-weight: normal;
   font-size: 16px;
@@ -97,4 +101,31 @@
   letter-spacing: 0.02em;
   color: #808190;
   margin-bottom: 5px;
+}
+
+.table {
+  &-head {
+    background: #1e1f26;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: #adafc2;
+    padding: 0 30px;
+    margin-bottom: 30px;
+  }
+
+  &-body {
+    padding: 15px 30px;
+    border-radius: 16px;
+    border: 1px solid #272a33;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #adafc2;
+
+    .row + .row {
+      border-top: 1px solid #272a33;
+    }
+  }
 }

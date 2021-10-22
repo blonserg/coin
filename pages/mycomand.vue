@@ -3,7 +3,7 @@
     <h1 class="ttl">
       Моя команда
     </h1>
-    <v-row>
+    <v-row class="mb-12">
       <v-col md="4">
         <v-card class="mycomand-main">
           <div class="mycomand-main_ttl">
@@ -50,7 +50,7 @@
         <div class="mycomand-ttl">
           Вышестоящие партнеры
         </div>
-        <div class="d-flex align-center">
+        <div class="d-flex align-center mb-15">
           <div class="d-flex align-center">
             <div class="mycomand-avatar">
               <v-avatar
@@ -91,60 +91,95 @@
         <div class="mycomand-ttl">
           Проекты
         </div>
-        <v-simple-table>
-          <template #default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                  Calories
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="item in desserts"
-                :key="item.name"
-              >
-                <td>{{ item.name }}</td>
-                <td>{{ item.calories }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <div class="table">
+          <div class="table-head">
+            <v-row>
+              <v-col class="text-center col-1">
+                #-
+              </v-col>
+              <v-col class="text-left col-2">
+                Проект
+              </v-col>
+              <v-col class="text-center col-2">
+                Мое участие
+              </v-col>
+              <v-col class="text-right col-3">
+                Первая линия
+              </v-col>
+              <v-col class="text-right col-4">
+                Партнеров в структуре
+              </v-col>
+            </v-row>
+          </div>
+          <div class="table-body">
+            <v-row
+              v-for="item in desserts"
+              :key="item.name"
+            >
+              <v-col class="text-center col-1">
+                {{ item.number }}
+              </v-col>
+              <v-col class="text-left col-2">
+                {{ item.calories }}
+              </v-col>
+              <v-col class="text-center col-2">
+                {{ item.calories }}
+              </v-col>
+              <v-col class="text-right col-3">
+                {{ item.calories }}
+              </v-col>
+              <v-col class="text-right col-4">
+                {{ item.calories }}
+              </v-col>
+            </v-row>
+          </div>
+        </div>
       </v-col>
     </v-row>
-    <Title :title="`Сетка реферальных партнеров`" />
-    <v-simple-table>
-      <template #default>
-        <thead>
-          <tr>
-            <th class="text-left">
-              Name
-            </th>
-            <th class="text-left">
-              Calories
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in desserts"
-            :key="item.name"
-          >
-            <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.calories }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <Title class="ttl--small mb-9" :title="`Сетка реферальных партнеров`" />
+    <div class="table mb-16">
+      <div class="table-head">
+        <v-row>
+          <v-col class="text-center col-1">
+            #-
+          </v-col>
+          <v-col class="text-left col-2">
+            Проект
+          </v-col>
+          <v-col class="text-center col-2">
+            Мое участие
+          </v-col>
+          <v-col class="text-right col-3">
+            Первая линия
+          </v-col>
+          <v-col class="text-right col-4">
+            Партнеров в структуре
+          </v-col>
+        </v-row>
+      </div>
+      <div class="table-body">
+        <v-row
+          v-for="item in desserts"
+          :key="item.name"
+        >
+          <v-col class="text-center col-1">
+            {{ item.number }}
+          </v-col>
+          <v-col class="text-left col-2">
+            {{ item.calories }}
+          </v-col>
+          <v-col class="text-center col-2">
+            {{ item.calories }}
+          </v-col>
+          <v-col class="text-right col-3">
+            {{ item.calories }}
+          </v-col>
+          <v-col class="text-right col-4">
+            {{ item.calories }}
+          </v-col>
+        </v-row>
+      </div>
+    </div>
     <div class="mycomand-ttl">
       Воронка продаж
     </div>
@@ -232,42 +267,52 @@ export default {
     return {
       desserts: [
         {
+          number: 1,
           name: 'Frozen Yogurt',
           calories: 159
         },
         {
+          number: 2,
           name: 'Ice cream sandwich',
           calories: 237
         },
         {
+          number: 3,
           name: 'Eclair',
           calories: 262
         },
         {
+          number: 4,
           name: 'Cupcake',
           calories: 305
         },
         {
+          number: 5,
           name: 'Gingerbread',
           calories: 356
         },
         {
+          number: 6,
           name: 'Jelly bean',
           calories: 375
         },
         {
+          number: 7,
           name: 'Lollipop',
           calories: 392
         },
         {
+          number: 8,
           name: 'Honeycomb',
           calories: 408
         },
         {
+          number: 9,
           name: 'Donut',
           calories: 452
         },
         {
+          number: 10,
           name: 'KitKat',
           calories: 518
         }
@@ -296,6 +341,39 @@ export default {
     .v-divider {
       margin: 25px 0;
     }
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+    height: 30px;
+    background: #1e1f26;
+    border-bottom: 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:last-child {
+    border-radius: 0 6px 6px 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    height: 30px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #adafc2;
+    background: none;
+  }
+
+  .v-data-table .v-data-table__wrapper table thead::after {
+    content: "@";
+    display: block;
+    line-height: 17px;
+    text-indent: -99999px;
+  }
+
+  .theme--dark.v-data-table {
+    background: inherit;
   }
 }
 </style>

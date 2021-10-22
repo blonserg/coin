@@ -284,8 +284,15 @@ export default {
   .theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
     height: 30px;
     background: #1e1f26;
-    border-radius: 6px;
     border-bottom: 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:last-child {
+    border-radius: 0 6px 6px 0;
   }
 
   .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {

@@ -8,7 +8,7 @@
       fixed
       app
       class="sidebar"
-      width="256px"
+      width="260px"
     >
       <LogoSvg />
       <div class="d-flex flex-column d-md-none">
