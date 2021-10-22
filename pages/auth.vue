@@ -2,30 +2,16 @@
   <v-card class="login">
     <LogoSvg />
     <div class="login-ttl">
-      Зайдите в ваш аккаунт
+      Мы отправили вам код подтверждения
     </div>
-    <v-text-field
-      label="Email"
-      solo
-      height="40px"
-    />
-    <div class="login-password">
-      <v-text-field
-        label="Password"
-        solo
-        height="40px"
-      />
-      <a href="" class="login-password_btn">Забыли пароль?</a>
-    </div>
-    <v-checkbox
-      v-model="checkbox"
-      :label="`Запомнить выбор`"
-    />
-    <Button :text="`Войти`" />
-    <div class="login-bottom">
-      <span>Нет аккаунта?</span>
-      <a href="/register">Зарегестрирйутесь</a>
-    </div>
+    <v-form class="login-auth">
+      <v-row>
+        <v-col cols="3">
+          <input inputmode="numeric" minlength="1" maxlength="1" size="8">
+        </v-col>
+      </v-row>
+    </v-form>
+    <Button :text="`Продолжить`" />
   </v-card>
 </template>
 

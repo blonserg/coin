@@ -1,6 +1,5 @@
 <template>
   <v-btn
-    :block="block"
     class="btn"
     color="#2d7bf6"
     x-large
@@ -13,9 +12,6 @@
 <script>
 export default {
   props: {
-    block: {
-      type: String
-    },
     text: {
       type: String,
       default: 'Button'

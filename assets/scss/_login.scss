@@ -1,7 +1,44 @@
 .login {
-  .theme--dark.v-text-field--solo > .v-input__control > .v-input__slot {
-    background: #16171c;
+  .v-text-field--solo > .v-input__control > .v-input__slot {
+    background: #16171c !important;
     border: 1px solid #272a33;
     border-radius: 6px;
+    max-height: 40px;
+    font-size: 14px;
+  }
+
+  .v-text-field__details {
+    display: none;
+  }
+
+  &-password {
+    position: relative;
+
+    &_btn {
+      position: absolute;
+      right: 12px;
+      top: 15px;
+      text-decoration: none;
+      font-size: 12px;
+      line-height: 16px;
+      color: #eef1f8;
+    }
+  }
+
+  .v-label {
+    font-size: 14px;
+  }
+
+  .v-input--selection-controls__input {
+    font-size: 12px;
+  }
+
+  &-bottom {
+    font-size: 13px;
+    color: #eef1f8;
+  }
+
+  &-refer {
+    text-align: center;
   }
 }
