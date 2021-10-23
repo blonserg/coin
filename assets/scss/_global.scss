@@ -129,3 +129,16 @@
     }
   }
 }
+
+.link {
+  font-size: 13px;
+  line-height: 17px;
+  color: #2d7bf6 !important;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+}

@@ -3,9 +3,9 @@
     <div class="news-img" />
     <div class="news-info">
       <div class="news-ttl">
-        <a href="">
+        <NuxtLink to="/article">
           {{ title }}
-        </a>
+        </NuxtLink>
       </div>
       <div class="news-bottom d-flex justify-space-between">
         <div class="news-label c-green">
