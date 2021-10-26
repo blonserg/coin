@@ -1,0 +1,116 @@
+.landing {
+  &-ttl {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 62px;
+    color: #eef1f8;
+
+    span {
+      font-style: italic;
+      color: #2d7bf6;
+    }
+  }
+
+  &-txt {
+    font-size: 20px;
+    line-height: 30px;
+    color: #abacb8;
+  }
+
+  &-subtxt {
+    font-size: 20px;
+    line-height: 30px;
+    color: #6a6b79;
+    margin-bottom: 20px;
+  }
+
+  &-block {
+    margin-bottom: 280px !important;
+
+    &_system {
+      margin-bottom: 200px !important;
+    }
+
+    &_ttl {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 31px;
+      color: #eef1f8;
+      margin-bottom: 20px;
+    }
+
+    &_txt {
+      font-size: 18px;
+      line-height: 27px;
+      color: #6a6b79;
+      max-width: 400px;
+    }
+  }
+
+  &-ascent {
+    background: #2d7bf6;
+    border: 1px solid #1d1f26;
+    border-radius: 15px;
+    padding: 50px 0;
+    text-align: center;
+    color: white;
+    margin-bottom: 350px;
+
+    &_ttl {
+      font-size: 28px;
+      line-height: 36px;
+      text-align: center;
+      color: #eef1f8;
+      max-width: 622px;
+      margin: 0 auto 30px;
+    }
+  }
+
+  &-review {
+    position: relative;
+    margin: 350px 0;
+    text-align: center;
+
+    &_item {
+      position: absolute;
+      width: 307px;
+      background: #18191f;
+      border-radius: 27px;
+      padding: 20px 25px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-image: url("../../static/svg/review.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        bottom: -34px;
+        right: 60px;
+      }
+    }
+
+    &_txt {
+      font-size: 16px;
+      line-height: 24px;
+      color: #6a6b79;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+
+    &_name {
+      font-size: 16px;
+      line-height: 24px;
+      color: #eef1f8;
+      text-align: left;
+    }
+
+    &_img {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
+  }
+}

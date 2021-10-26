@@ -5,3 +5,16 @@
     </svg>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  .icon {
+    background: #23262e;
+    border-radius: 31px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+</style>

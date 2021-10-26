@@ -1,11 +1,11 @@
 <template>
   <div class="landing">
-    <v-row>
+    <v-row class="landing-block align-center">
       <v-col md="7">
         <div class="landing-ttl">
           <LandTtl />
         </div>
-        <div class="landing-txt">
+        <div class="landing-txt mb-10">
           Хочешь выжать максимум из инвестиций? Мы расскажем как это сделать и поделимся своим опытом!
         </div>
         <div class="d-flex align-center">
@@ -16,33 +16,48 @@
         <img src="/man-rocket.png" alt="">
       </v-col>
     </v-row>
-    <div class="landing-subtxt">
-      О команде
-    </div>
-    <v-row>
-      <v-col md="3" class="landing-ttl">
-        Lorem ipsum dolor sit amet
-      </v-col>
-      <v-col md="9" class="landing-txt">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </v-col>
-    </v-row>
-    <div class="landing-block">
+    <v-lazy
+      :options="{
+        threshold: 1.0
+      }"
+      transition="scroll-y-transition"
+    >
+      <div class="landing-subtxt">
+        О команде
+      </div>
+    </v-lazy>
+    <v-lazy
+      :options="{
+        threshold: 1.0
+      }"
+      min-height="200"
+      transition="scroll-y-transition"
+    >
+      <v-row class="landing-block">
+        <v-col md="4" class="landing-ttl">
+          Lorem ipsum dolor sit amet
+        </v-col>
+        <v-col md="8" class="landing-txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </v-col>
+      </v-row>
+    </v-lazy>
+    <div class="landing-block_system text-center">
       <div class="landing-subtxt">
         Про систему
       </div>
       <div class="landing-ttl">
-        Мы разработали <span>уникальную</span> систему, аналогов которой еще нет
+        Мы разработали <span>уникальную</span> систему,<br> аналогов которой еще нет
       </div>
       <div class="landing-txt">
-        Стать ее частью и прокачай себя и свою команду на максимум!
+        Стать ее частью и прокачай себя и<br> свою команду на максимум!
       </div>
     </div>
-    <v-row>
-      <v-col md="6">
+    <v-row class="landing-block_system">
+      <v-col md="7">
         <img src="/learn.png" alt="">
       </v-col>
-      <v-col md="6">
+      <v-col md="5" class="pr-14">
         <LandSmile />
         <div class="landing-block_ttl">
           Обучение
@@ -52,8 +67,8 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col md="6">
+    <v-row class="landing-block_system">
+      <v-col md="5" class="pl-14">
         <LandSmile />
         <div class="landing-block_ttl">
           Стратегии
@@ -62,15 +77,15 @@
           Неважно, с какой суммы Вы желаете начать свой путь инвестора, мы поможем подобрать оптимальную стратегию исходя из Ваших желаний и возможностей
         </div>
       </v-col>
-      <v-col md="6">
+      <v-col md="7">
         <img src="/strategy.png" alt="">
       </v-col>
     </v-row>
-    <v-row>
-      <v-col md="6">
+    <v-row class="landing-block_system">
+      <v-col md="7">
         <img src="/stock.png" alt="">
       </v-col>
-      <v-col md="6">
+      <v-col md="5" class="pr-14">
         <LandSmile />
         <div class="landing-block_ttl">
           Биржа услуг
@@ -80,8 +95,8 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col md="6">
+    <v-row class="landing-block_system">
+      <v-col md="5" class="pl-14">
         <LandSmile />
         <div class="landing-block_ttl">
           Нетворк
@@ -90,7 +105,7 @@
           StrikeTeam это большая и дружная команда, с которой можно не только работать, но и отлично проводить время. Вливайся!
         </div>
       </v-col>
-      <v-col md="6">
+      <v-col md="7">
         <img src="/strategy.png" alt="">
       </v-col>
     </v-row>
@@ -98,11 +113,11 @@
       <div class="landing-ascent_ttl">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
       </div>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center justify-center">
         <Button :text="`Начать сейчас`" />
       </div>
     </div>
-    <v-row>
+    <v-row transition="scroll-y-transition">
       <v-col md="6">
         <div class="landing-subtxt">
           Статистика
@@ -186,6 +201,17 @@
         What <span>motivates</span> users to use<br> Strike strategies to <span>earn</span><br> and <span>discover</span> new opportunities
       </div>
       <Button :text="`Смотерть видео отзывы`" />
+      <div class="landing-review_item">
+        <div class="landing-review_txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <div class="landing-review_name">
+          Дмитрий Портнягин
+        </div>
+        <div class="landing-review_img">
+          <img src="/review-1.png" alt="">
+        </div>
+      </div>
     </div>
     <div class="landing-ascent">
       <div class="landing-ascent_ttl">
@@ -193,17 +219,6 @@
       </div>
       <div class="d-flex align-center">
         <Button :text="`Начать сейчас`" />
-      </div>
-    </div>
-    <div class="landing-review_item">
-      <div class="landing-review_txt">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-      </div>
-      <div class="landing-review_name">
-        Дмитрий Портнягин
-      </div>
-      <div class="landing-review_img">
-        <img src="/review-1.png" alt="">
       </div>
     </div>
   </div>
@@ -224,6 +239,7 @@ export default {
   data () {
     return {
       text: 'all',
+      isActive: false,
       desserts: [
         {
           name: 'Frozen Yogurt',
