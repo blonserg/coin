@@ -13,7 +13,7 @@
         </div>
       </v-col>
       <v-col md="5">
-        <img src="/man-rocket.png" alt="">
+        <img class="landing-main_image" src="/man-rocket.png" alt="">
       </v-col>
     </v-row>
     <v-lazy
@@ -129,7 +129,7 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
       </v-col>
-      <v-col md="6">
+      <v-col md="6" class="table">
         <div class="landing-table">
           <div class="main-table">
             <div class="main-table_head d-flex flex-column flex-md-row justify-space-between">
@@ -201,7 +201,7 @@
         What <span>motivates</span> users to use<br> Strike strategies to <span>earn</span><br> and <span>discover</span> new opportunities
       </div>
       <Button :text="`Смотерть видео отзывы`" />
-      <div class="landing-review_item">
+      <div class="landing-review_item item1">
         <div class="landing-review_txt">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </div>
@@ -210,6 +210,50 @@
         </div>
         <div class="landing-review_img">
           <img src="/review-1.png" alt="">
+        </div>
+      </div>
+      <div class="landing-review_item item2">
+        <div class="landing-review_txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <div class="landing-review_name">
+          Дмитрий Портнягин
+        </div>
+        <div class="landing-review_img">
+          <img src="/review-2.png" alt="">
+        </div>
+      </div>
+      <div class="landing-review_item item3">
+        <div class="landing-review_txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <div class="landing-review_name">
+          Дмитрий Портнягин
+        </div>
+        <div class="landing-review_img">
+          <img src="/review-3.png" alt="">
+        </div>
+      </div>
+      <div class="landing-review_item item4">
+        <div class="landing-review_txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <div class="landing-review_name">
+          Дмитрий Портнягин
+        </div>
+        <div class="landing-review_img">
+          <img src="/review-4.png" alt="">
+        </div>
+      </div>
+      <div class="landing-review_item item5">
+        <div class="landing-review_txt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </div>
+        <div class="landing-review_name">
+          Дмитрий Портнягин
+        </div>
+        <div class="landing-review_img">
+          <img src="/review-5.png" alt="">
         </div>
       </div>
     </div>
@@ -240,6 +284,7 @@ export default {
     return {
       text: 'all',
       isActive: false,
+      isLanding: false,
       desserts: [
         {
           name: 'Frozen Yogurt',
@@ -286,3 +331,92 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .main {
+    &-table {
+      &_people {
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 47px;
+      }
+
+      &_head {
+        margin-bottom: 20px;
+      }
+
+      .v-btn-toggle {
+        .v-btn {
+          font-size: 13px;
+          line-height: 17px;
+          color: #6a6b79;
+          height: 30px;
+          letter-spacing: 0;
+          text-transform: none;
+          border: 1px solid #272a33;
+          border-radius: 4px !important;
+          width: 89px;
+        }
+
+        .v-btn--active {
+          background: #2d7bf6 !important;
+          border-color: #2d7bf6;
+          color: #fff;
+        }
+      }
+    }
+
+    &-info {
+      margin-top: 30px;
+      text-align: right;
+      font-size: 13px;
+      line-height: 17px;
+      color: #6a6b79;
+    }
+  }
+
+  .theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+    height: 30px;
+    background: #1e1f26;
+    border-bottom: 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:last-child {
+    border-radius: 0 6px 6px 0;
+  }
+
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    height: 30px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #adafc2;
+    background: none;
+  }
+
+  .v-data-table .v-data-table__wrapper table thead::after {
+    content: "@";
+    display: block;
+    line-height: 17px;
+    text-indent: -99999px;
+  }
+
+  .theme--dark.v-data-table {
+    background: inherit;
+  }
+
+  .v-btn-toggle:not(.v-btn-toggle--dense) .v-btn.v-btn.v-size--default {
+    height: 30px;
+  }
+
+  .v-application--is-ltr .v-btn-toggle > .v-btn.v-btn:not(:first-child) {
+    border-left-width: 1px;
+  }
+
+  .v-sheet.v-card:not(.v-sheet--outlined) {
+    border-radius: 15px;
+  }
+</style>
