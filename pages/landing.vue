@@ -12,7 +12,7 @@
           <Button :text="`Начать сейчас`" />
         </div>
       </v-col>
-      <v-col md="5">
+      <v-col md="5" style="position: relative;">
         <img class="landing-main_image" src="/man-rocket.png" alt="">
       </v-col>
     </v-row>
