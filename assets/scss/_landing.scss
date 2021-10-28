@@ -150,7 +150,7 @@
 
   &-main_image {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 50px);
     transform: translateY(-50%);
     animation-direction: alternate;
     animation-duration: 2s;

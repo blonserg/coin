@@ -83,4 +83,17 @@
     color: #61ccbf;
     border: 1px solid #61ccbf;
   }
+
+  &-menu {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+
+    a {
+      display: inline-block;
+      margin: 0 20px;
+      color: #6a6b79;
+      text-decoration: none;
+    }
+  }
 }
