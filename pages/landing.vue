@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
     <v-row class="landing-block align-center">
-      <v-col md="7">
+      <v-col cols="12" md="7">
         <div class="landing-ttl">
           <LandTtl />
         </div>
@@ -12,7 +12,7 @@
           <Button :text="`Начать сейчас`" />
         </div>
       </v-col>
-      <v-col md="5" style="position: relative;">
+      <v-col cols="12" md="5" style="position: relative;">
         <img class="landing-main_image" src="/man-rocket.png" alt="">
       </v-col>
     </v-row>
@@ -36,10 +36,10 @@
       transition="scroll-y-transition"
     >
       <v-row class="landing-block">
-        <v-col md="4" class="landing-ttl">
+        <v-col cols="12" md="4" class="landing-ttl">
           Lorem ipsum dolor sit amet
         </v-col>
-        <v-col md="8" class="landing-txt">
+        <v-col cols="12" md="8" class="landing-txt">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </v-col>
       </v-row>
@@ -73,10 +73,10 @@
       min-height="200"
     >
       <v-row class="landing-block_system">
-        <v-col md="7">
+        <v-col cols="12" md="7">
           <img src="/learn.png" alt="">
         </v-col>
-        <v-col md="5" class="pr-14">
+        <v-col cols="12" md="5" class="pr-md-14">
           <LandSmile />
           <div class="landing-block_ttl">
             Обучение
@@ -96,7 +96,7 @@
       min-height="200"
     >
       <v-row class="landing-block_system">
-        <v-col md="5" class="pl-14">
+        <v-col cols="12" md="5" class="pl-md-14">
           <LandSmile />
           <div class="landing-block_ttl">
             Стратегии
@@ -105,7 +105,7 @@
             Неважно, с какой суммы Вы желаете начать свой путь инвестора, мы поможем подобрать оптимальную стратегию исходя из Ваших желаний и возможностей
           </div>
         </v-col>
-        <v-col md="7">
+        <v-col cols="12" md="7">
           <img src="/strategy.png" alt="">
         </v-col>
       </v-row>
@@ -119,10 +119,10 @@
       min-height="200"
     >
       <v-row class="landing-block_system">
-        <v-col md="7">
+        <v-col cols="12" md="7">
           <img src="/stock.png" alt="">
         </v-col>
-        <v-col md="5" class="pr-14">
+        <v-col cols="12" md="5" class="pr-md-14">
           <LandSmile />
           <div class="landing-block_ttl">
             Биржа услуг
@@ -142,7 +142,7 @@
       min-height="200"
     >
       <v-row class="landing-block_system">
-        <v-col md="5" class="pl-14">
+        <v-col cols="12" md="5" class="pl-md-14">
           <LandSmile />
           <div class="landing-block_ttl">
             Нетворк

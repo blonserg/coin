@@ -1,10 +1,10 @@
 <template>
   <div>
-    <header class="header-land d-flex align-center justify-space-between">
+    <header class="header-land d-flex align-center flex-column flex-md-row justify-space-between">
       <div class="d-block">
         <LogoSvg />
       </div>
-      <div class="header-menu">
+      <div class="header-menu d-none d-md-block">
         <a href="">О команде</a>
         <a href="">О команде</a>
         <a href="">О команде</a>

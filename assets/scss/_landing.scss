@@ -6,6 +6,12 @@
     line-height: 62px;
     color: #eef1f8;
 
+    svg {
+      @media screen and (max-width: 758px) {
+        width: 100% !important;
+      }
+    }
+
     span {
       font-style: italic;
       color: #2d7bf6;
@@ -28,8 +34,16 @@
   &-block {
     margin-bottom: 280px !important;
 
+    @media screen and (max-width: 758px) {
+      margin-bottom: 40px !important;
+    }
+
     &_system {
       margin-bottom: 200px !important;
+
+      @media screen and (max-width: 758px) {
+        margin-bottom: 40px !important;
+      }
     }
 
     &_ttl {
@@ -72,12 +86,20 @@
     margin: 350px 0;
     text-align: center;
 
+    @media screen and (max-width: 758px) {
+      margin: 50px 0;
+    }
+
     &_item {
       position: absolute;
       width: 307px;
       background: #18191f;
       border-radius: 27px;
       padding: 20px 25px;
+
+      @media screen and (max-width: 758px) {
+        position: relative;
+      }
 
       &::after {
         content: '';
@@ -94,26 +116,51 @@
       &.item1 {
         top: -160px;
         left: 9%;
+
+        @media screen and (max-width: 758px) {
+          top: 0;
+          left: auto;
+        }
       }
 
       &.item2 {
         top: -210px;
         right: 12%;
+
+        @media screen and (max-width: 758px) {
+          top: 0;
+          right: auto;
+        }
       }
 
       &.item3 {
         top: 36%;
         right: -75px;
+
+        @media screen and (max-width: 758px) {
+          top: 0;
+          right: auto;
+        }
       }
 
       &.item4 {
         bottom: -175px;
         left: 44%;
+
+        @media screen and (max-width: 758px) {
+          bottom: 0;
+          left: auto;
+        }
       }
 
       &.item5 {
         top: 58%;
         left: -65px;
+
+        @media screen and (max-width: 758px) {
+          top: 0;
+          left: auto;
+        }
       }
     }
 
@@ -146,6 +193,10 @@
     margin-right: -80px;
     position: relative;
     z-index: 1;
+
+    @media screen and (max-width: 758px) {
+      margin-right: 0;
+    }
   }
 
   &-main_image {
@@ -159,6 +210,14 @@
     animation-timing-function: ease-in-out;
     left: auto;
     right: 5%;
+
+    @media screen and (max-width: 758px) {
+      position: static;
+      top: 0;
+      transform: none;
+      max-width: 100%;
+      animation-name: none;
+    }
   }
 
   .table {
@@ -174,6 +233,18 @@
       z-index: 0;
       top: -40px;
       left: -20px;
+
+      @media screen and (max-width: 758px) {
+        content: none;
+      }
+    }
+  }
+
+  .v-lazy {
+    img {
+      @media screen and (max-width: 758px) {
+        max-width: 100%;
+      }
     }
   }
 }
