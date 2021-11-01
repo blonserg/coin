@@ -1,7 +1,7 @@
 <template>
-  <div class="ttl d-flex flex-column flex-md-row justify-space-between align-center">
+  <div class="ttl d-flex flex-column flex-md-row justify-space-between align-md-center">
     <h1>{{ title }}</h1>
-    <div class="ttl-group d-flex justify-space-between">
+    <div class="ttl-group d-flex mb-5 mb-md-0 justify-space-between">
       <div class="filter d-flex align-center">
         <v-select
           v-model="select"

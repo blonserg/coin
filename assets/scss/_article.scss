@@ -6,9 +6,18 @@
   position: absolute;
   width: 100%;
 
+  @media screen and (max-width: 758px) {
+    position: relative;
+    flex-direction: column;
+  }
+
   &-wrap {
     height: 550px;
     position: relative;
+
+    @media screen and (max-width: 758px) {
+      height: auto;
+    }
   }
 
   &-btn {
@@ -80,6 +89,10 @@
     width: 252px;
     padding: 25px 20px 30px;
 
+    @media screen and (max-width: 758px) {
+      padding: 20px;
+    }
+
     &:hover {
       .article-btn {
         height: auto;
@@ -104,6 +117,10 @@
     &_invest {
       border-radius: 15px;
       padding: 30px;
+
+      @media screen and (max-width: 758px) {
+        padding: 20px;
+      }
 
       &.theme--dark.v-card {
         background: #23262e;

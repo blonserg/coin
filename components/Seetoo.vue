@@ -6,8 +6,8 @@
     <div class="seetoo-list d-flex flex-column flex-md-row justify-space-between">
       <v-card class="seetoo-item item-2">
         <img src="" alt="">
-        <div class="seetoo-item_bottom d-flex justify-space-between">
-          <div class="seetoo-item_ttl">
+        <div class="seetoo-item_bottom d-md-flex justify-space-between">
+          <div class="seetoo-item_ttl mb-2 mb-md-0">
             Выиграй iPhone 12 Pro Max
             <span class="seetoo-item_subttl">
               Читай условия розыгрыша в описании

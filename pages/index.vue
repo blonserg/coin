@@ -252,6 +252,10 @@ export default {
       }
 
       .v-btn-toggle {
+        @media screen and (max-width: 758px) {
+          overflow-y: scroll;
+        }
+
         .v-btn {
           font-size: 13px;
           line-height: 17px;

@@ -12,6 +12,10 @@
     height: 290px;
     padding: 25px 30px;
 
+    @media screen and (max-width: 758px) {
+      padding: 15px 20px;
+    }
+
     &.v-card {
       display: flex;
       align-items: flex-end;
@@ -19,10 +23,18 @@
 
     &.item-1 {
       width: 32%;
+
+      @media screen and (max-width: 758px) {
+        width: 100%;
+      }
     }
 
     &.item-2 {
       width: 65%;
+
+      @media screen and (max-width: 758px) {
+        width: 100%;
+      }
     }
 
     &_ttl {

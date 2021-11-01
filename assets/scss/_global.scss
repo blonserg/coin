@@ -14,9 +14,17 @@
   line-height: 47px;
   color: #eef1f8;
 
+  @media screen and (max-width: 758px) {
+    margin-bottom: 10px;
+  }
+
   h1 {
     font-weight: 600;
     font-size: 36px;
+
+    @media screen and (max-width: 758px) {
+      font-size: 32px;
+    }
   }
 
   &--small {
@@ -30,6 +38,10 @@
   border: 1px solid #272a33;
   border-radius: 6px;
   padding: 0 10px;
+
+  @media screen and (max-width: 758px) {
+    height: 30px;
+  }
 
   & + & {
     margin-left: 10px;
