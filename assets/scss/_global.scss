@@ -1,3 +1,11 @@
+@import '~/assets/font/font.css';
+
+html,
+body,
+.v-application {
+  font-family: 'SF Pro Display', sans-serif !important;
+}
+
 .v-main {
   &__wrap {
     padding: 0 40px;

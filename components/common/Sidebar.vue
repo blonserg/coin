@@ -56,7 +56,7 @@
         <div class="sidebar-balance_txt">
           Вы можете использовать их для доступа к закрытым материалам
         </div>
-        <Button :text="`Пополнить баланс`" :block="block" />
+        <Button :text="`Пополнить баланс`" />
       </div>
       <v-list>
         <v-list-item
