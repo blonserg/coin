@@ -1,5 +1,22 @@
 <template>
   <div>
+    <hr>
+    <div>
+      Zhytomyr vehicles
+      <p v-if="$fetchState.pending">
+        Fetching vehicles...
+      </p>
+      <p v-else-if="$fetchState.error">
+        An error occurred :(
+      </p>
+      <div v-else>
+        <div v-for="vehicle in vehicles" :key="vehicle.imei">
+          {{ vehicle.route_long_name }} -> {{ vehicle.time }}
+        </div>
+      </div>
+    </div>
+    <hr>
+
     <Title :title="`Мероприятия`" />
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
@@ -156,61 +173,25 @@ export default {
   data () {
     return {
       text: 'all',
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237
-        },
-        {
-          name: 'Eclair',
-          calories: 262
-        },
-        {
-          name: 'Cupcake',
-          calories: 305
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375
-        },
-        {
-          name: 'Lollipop',
-          calories: 392
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408
-        },
-        {
-          name: 'Donut',
-          calories: 452
-        },
-        {
-          name: 'KitKat',
-          calories: 518
-        }
-      ],
-      news: [
-        {
-          title: 'Cложность майнинга биткоина снова выросла',
-          views: 830,
-          date: '14 авг'
-        },
-        {
-          title: 'Cложность майнинга биткоина снова выросла',
-          views: 830,
-          date: '14 авг'
-        }
-      ]
+      vehicles: []
     }
+  },
+  async fetch () {
+    this.vehicles = await this.$axios.$get('https://city.dozor.tech/zhytomyr/devices.json')
+    this.vehicles = this.vehicles.slice(0, 10)
+  },
+  fetchOnServer: false,
+  fetchKey: 'exchange-rate',
+  computed: {
+    desserts () {
+      return this.$store.state.desserts
+    },
+    news () {
+      return this.$store.state.news
+    }
+  },
+  mounted () {
+
   }
 }
 </script>
