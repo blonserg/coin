@@ -5,17 +5,12 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    parser: "@babel/eslint-parser",
+    ecmaVersion: 6,
     requireConfigFile: false
   },
-  extends: [
-    
-  ],
-  plugins: [
-    
-  ],
+  extends: [],
+  plugins: [],
   // add your custom rules here
-  rules: {
-    
-  }
-}
+  rules: {}
+};
