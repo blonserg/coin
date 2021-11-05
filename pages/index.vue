@@ -1,22 +1,11 @@
 <template>
   <div>
-    <hr>
-    <div>
-      Zhytomyr vehicles
-      <p v-if="$fetchState.pending">
-        Fetching vehicles...
-      </p>
-      <p v-else-if="$fetchState.error">
-        An error occurred :(
-      </p>
-      <div v-else>
-        <div v-for="vehicle in vehicles" :key="vehicle.imei">
-          {{ vehicle.route_long_name }} -> {{ vehicle.time }}
-        </div>
-      </div>
+    <div v-if="$fetchState.pending">
+      Loading...
     </div>
-    <hr>
-
+    <div v-else>
+      {{ staticData }}
+    </div>
     <Title :title="`Мероприятия`" />
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
@@ -163,6 +152,7 @@
 import Title from '~~/components/common/Title'
 import News from '~~/components/common/News'
 import Seetoo from '~~/components/Seetoo'
+import Http from '~~/api/http'
 
 export default {
   components: {
@@ -173,15 +163,15 @@ export default {
   data () {
     return {
       text: 'all',
-      vehicles: []
+      staticData: [],
+      dynamicData: {}
     }
   },
   async fetch () {
-    this.vehicles = await this.$axios.$get('https://city.dozor.tech/zhytomyr/devices.json')
-    this.vehicles = this.vehicles.slice(0, 10)
+    this.staticData = await Http.get('/static-content/main')
+    this.dynamicData = await Http.get('/main-page')
   },
   fetchOnServer: false,
-  fetchKey: 'exchange-rate',
   computed: {
     desserts () {
       return this.$store.state.desserts
@@ -189,9 +179,6 @@ export default {
     news () {
       return this.$store.state.news
     }
-  },
-  mounted () {
-
   }
 }
 </script>
