@@ -10,19 +10,29 @@
         <a href="">О команде</a>
         <a href="">О команде</a>
       </div>
-      <Button class="d-none d-md-block" :text="`Регистрация`" />
+      <NuxtLink to="/register">
+        <v-btn
+          class="btn d-none d-md-flex"
+          color="#2d7bf6"
+          x-large
+          height="48px"
+        >
+          Регистрация
+          <RegisterSvg class="ml-2" />
+        </v-btn>
+      </NuxtLink>
     </header>
   </div>
 </template>
 
 <script>
 import LogoSvg from '~~/components/svg/LogoSvg'
-import Button from '~~/components/common/Button'
+import RegisterSvg from '~~/components/svg/RegisterSvg'
 
 export default {
   components: {
     LogoSvg,
-    Button
+    RegisterSvg
   },
   data () {
     return {
@@ -46,5 +56,20 @@ export default {
 
 .logo {
   width: 200px;
+}
+
+.btn {
+  color: white;
+  font-size: 14px;
+  text-transform: none;
+  border-radius: 6px;
+  padding: 15px 20px;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

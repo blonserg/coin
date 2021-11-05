@@ -24,7 +24,9 @@
     <Button :text="`Войти`" />
     <div class="login-bottom">
       <span>Нет аккаунта?</span>
-      <a href="/register">Зарегестрирйутесь</a>
+      <NuxtLink to="/register">
+        Зарегестрирйутесь
+      </NuxtLink>
     </div>
   </v-card>
 </template>
