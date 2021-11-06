@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div v-if="$fetchState.pending">Loading...</div>
-    <div v-else>
-      {{ staticData }}
-    </div>
     <Title :title="`Мероприятия`" />
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
@@ -137,7 +133,6 @@
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
-import Http from "~~/api/http";
 
 export default {
   components: {
@@ -148,15 +143,8 @@ export default {
   data() {
     return {
       text: "all",
-      staticData: [],
-      dynamicData: {},
     };
   },
-  async fetch() {
-    this.staticData = await Http.get("/static-content/main");
-    this.dynamicData = await Http.get("/main-page");
-  },
-  fetchOnServer: false,
   computed: {
     desserts() {
       return this.$store.state.desserts;

@@ -358,6 +358,13 @@
         </div>
       </div>
     </v-lazy>
+    <div v-if="$fetchState.pending">
+      Loading...
+    </div>
+    <div v-else>
+      {{ staticData }}
+      {{ dynamicData }}
+    </div>
   </div>
 </template>
 
@@ -365,6 +372,7 @@
 import Button from '~~/components/common/Button'
 import LandTtl from '~~/components/svg/LandTtl'
 import LandSmile from '~~/components/svg/LandSmile'
+import Http from "~~/api/http"
 
 export default {
   components: {
@@ -427,9 +435,16 @@ export default {
           name: 'KitKat',
           calories: 518
         }
-      ]
+      ],
+      staticData: [],
+      dynamicData: {}
     }
-  }
+  },
+  async fetch() {
+   this.staticData = await Http.get("/static-content/main");
+    this.dynamicData = await Http.get("/main-page");
+  },
+  fetchOnServer: false,
 }
 </script>
 
