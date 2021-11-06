@@ -9,7 +9,9 @@ module.exports = {
     ecmaVersion: 6,
     requireConfigFile: false
   },
-  extends: [],
+  extends: [
+    "@nuxtjs"
+  ],
   plugins: [],
   // add your custom rules here
   rules: {}

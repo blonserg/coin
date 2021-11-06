@@ -363,6 +363,9 @@
     </div>
     <div v-else>
       {{ staticData }}
+      <br />
+      <hr />
+      <br />
       {{ dynamicData }}
     </div>
   </div>
@@ -372,7 +375,7 @@
 import Button from '~~/components/common/Button'
 import LandTtl from '~~/components/svg/LandTtl'
 import LandSmile from '~~/components/svg/LandSmile'
-import Http from "~~/api/http"
+import Http from '~~/api/http'
 
 export default {
   components: {
