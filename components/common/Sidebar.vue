@@ -10,7 +10,10 @@
       class="sidebar"
       width="260px"
     >
-      <LogoSvg />
+      <div class="sidebar-head d-flex d-md-block align-center">
+        <LogoSvg />
+        <v-app-bar-nav-icon class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer" />
+      </div>
       <div class="d-flex flex-column d-md-none">
         <div class="header-avatar d-flex align-center">
           <div class="header-avatar_image">
@@ -21,7 +24,7 @@
             <span class="header-avatar_subtxt">Lorem ipsum</span>
           </div>
         </div>
-        <div class="header-rate d-flex align-center">
+        <div class="header-rate d-none d-md-flex align-center">
           <div class="header-rate_txt">
             Тариф:
           </div>
@@ -229,7 +232,16 @@ export default {
 
 .sidebar-menu {
   position: absolute;
-  right: 10px;
-  z-index: 10;
+  right: 20px;
+  z-index: 1;
+  top: 25px;
+}
+
+.v-navigation-drawer__content {
+  .logo {
+    @media screen and (max-width: 758px) {
+      width: 200px;
+    }
+  }
 }
 </style>

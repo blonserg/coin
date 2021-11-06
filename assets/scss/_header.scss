@@ -1,8 +1,20 @@
 .header {
   padding: 45px 0;
 
+  @media screen and (max-width: 758px) {
+    padding: 10px 0;
+  }
+
   &-avatar {
     margin-right: 40px;
+
+    @media screen and (max-width: 758px) {
+      background: #18191f;
+      border: 1px solid #1d1f26;
+      border-radius: 15px;
+      padding: 16px;
+      margin: 0 20px 20px;
+    }
 
     &_image {
       margin-right: 9px;
@@ -61,6 +73,10 @@
   &-notifcatns {
     text-align: right;
     flex: 1;
+
+    @media screen and (max-width: 758px) {
+      padding-right: 40px;
+    }
   }
 
   &-tariph {

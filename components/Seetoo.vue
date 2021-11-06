@@ -13,7 +13,64 @@
               Читай условия розыгрыша в описании
             </span>
           </div>
-          <Button :text="`Подробнее`" />
+          <v-dialog
+            v-model="dialog"
+          >
+            <template #activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                class="btn"
+                color="#2d7bf6"
+                x-large
+                height="48px"
+                v-on="on"
+              >
+                Подробнее
+              </v-btn>
+            </template>
+
+            <v-card class="dialog">
+              <v-row>
+                <v-col cols="12" md="4">
+                  <div class="dialog-image">
+                    <img src="/article.png" alt="">
+                  </div>
+                </v-col>
+                <v-col cols="12" md="8">
+                  <v-card-text class="dialog-text">
+                    <h2>Выиграй iPhone 12 Pro Max</h2>
+                    <strong>
+                      Условия розыгрыша
+                    </strong>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <p>
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </p>
+                    <div class="dialog-text_bottom">
+                      <p>
+                        Посмотри отзывы счастливых победителей прошлых розыгрышей
+                      </p>
+                      <a href="">Смотреть отзывы</a>
+                    </div>
+                  </v-card-text>
+                </v-col>
+              </v-row>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                >
+                  I accept
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </v-card>
       <v-card class="seetoo-item item-1">
@@ -29,19 +86,29 @@
 </template>
 
 <script>
-import Button from '~~/components/common/Button'
 
 export default {
-  components: {
-    Button
+  data () {
+    return {
+      dialog: false
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.theme--dark.v-card {
-  background: #2b2e38;
-  border: 1px solid #272a33;
-  border-radius: 15px;
-}
+  .theme--dark.v-card {
+    background: #2b2e38;
+    border: 1px solid #272a33;
+    border-radius: 15px;
+  }
+
+  .btn {
+    color: white;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 6px;
+    padding: 15px 20px;
+    letter-spacing: 0;
+  }
 </style>

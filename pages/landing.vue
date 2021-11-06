@@ -34,8 +34,9 @@
       }"
       min-height="200"
       transition="scroll-y-transition"
+      class="landing-block"
     >
-      <v-row class="landing-block">
+      <v-row>
         <v-col cols="12" md="4" class="landing-ttl">
           Lorem ipsum dolor sit amet
         </v-col>
