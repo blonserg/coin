@@ -14,10 +14,10 @@ export default {
   props: {
     text: {
       type: String,
-      default: 'Button'
+      default: "Button"
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

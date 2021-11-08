@@ -267,39 +267,39 @@ export default {
     return {
       invests: [
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          ititle: 'Torexo Project'
+          ititle: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         },
         {
-          title: 'Torexo Project'
+          title: "Torexo Project"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import LogoSvg from '~~/components/svg/LogoSvg'
-import RegisterSvg from '~~/components/svg/RegisterSvg'
+import LogoSvg from "~~/components/svg/LogoSvg";
+import RegisterSvg from "~~/components/svg/RegisterSvg";
 
 export default {
   components: {
@@ -36,17 +36,17 @@ export default {
   },
   data () {
     return {
-      value: 'loremipsum'
-    }
+      value: "loremipsum"
+    };
   },
   methods: {
     copyText () {
-      const textToCopy = this.$refs.textToCopy.$el.querySelector('input')
-      textToCopy.select()
-      document.execCommand('copy')
+      const textToCopy = this.$refs.textToCopy.$el.querySelector("input");
+      textToCopy.select();
+      document.execCommand("copy");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

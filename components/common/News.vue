@@ -32,18 +32,18 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Новость'
+      default: "Новость"
     },
     views: {
       type: String,
-      default: '1'
+      default: "1"
     },
     date: {
       type: String,
-      default: '1 янв'
+      default: "1 янв"
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

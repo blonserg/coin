@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import LogoSvg from '~~/components/svg/LogoSvg'
+import LogoSvg from "~~/components/svg/LogoSvg";
 
 export default {
   components: {
@@ -80,53 +80,53 @@ export default {
     return {
       items_first: [
         {
-          title: 'Главная',
-          to: '/'
+          title: "Главная",
+          to: "/"
         },
         {
-          title: 'Инвестиии',
-          to: '/invests'
+          title: "Инвестиии",
+          to: "/invests"
         },
         {
-          title: 'Резервый фонд',
-          to: '/inspire'
+          title: "Резервый фонд",
+          to: "/inspire"
         }
       ],
       items_second: [
         {
-          title: 'CRM',
-          to: '/inspire'
+          title: "CRM",
+          to: "/inspire"
         },
         {
-          title: 'Биржа услуг',
-          to: '/stock'
+          title: "Биржа услуг",
+          to: "/stock"
         },
         {
-          title: 'Моя команда',
-          to: '/mycomand'
+          title: "Моя команда",
+          to: "/mycomand"
         },
         {
-          title: 'Лояльность',
-          to: '/inspire'
+          title: "Лояльность",
+          to: "/inspire"
         }
       ],
       items_third: [
         {
-          title: 'FAQ',
-          to: '/inspire'
+          title: "FAQ",
+          to: "/inspire"
         },
         {
-          title: 'Новости',
-          to: '/news'
+          title: "Новости",
+          to: "/news"
         },
         {
-          title: 'Группы Telegram',
-          to: '/telegrams'
+          title: "Группы Telegram",
+          to: "/telegrams"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

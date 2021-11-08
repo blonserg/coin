@@ -16,16 +16,16 @@
 </template>
 
 <script>
-import LogoSvg from '~~/components/svg/LogoSvg'
-import Button from '~~/components/common/Button'
+import LogoSvg from "~~/components/svg/LogoSvg";
+import Button from "~~/components/common/Button";
 
 export default {
   components: {
     LogoSvg,
     Button
   },
-  layout: 'signup'
-}
+  layout: "signup"
+};
 </script>
 
 <style lang="scss" scoped>

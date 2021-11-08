@@ -23,14 +23,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Заголовок'
+      default: "Заголовок"
     }
   },
   data () {
     return {
-      select: ['Foo'],
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz']
-    }
+      select: ["Foo"],
+      items: ["Foo", "Bar", "Fizz", "Buzz"]
+    };
   }
-}
+};
 </script>

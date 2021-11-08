@@ -11,15 +11,15 @@
 </template>
 
 <script>
-import HeaderLand from '~~/components/common/HeaderLand'
-import Footer from '~~/components/common/Footer'
+import HeaderLand from "~~/components/common/HeaderLand";
+import Footer from "~~/components/common/Footer";
 
 export default {
   components: {
     HeaderLand,
     Footer
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

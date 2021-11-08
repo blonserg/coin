@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import Button from '~~/components/common/Button'
-import LogoSvg from '~~/components/svg/LogoSvg'
+import Button from "~~/components/common/Button";
+import LogoSvg from "~~/components/svg/LogoSvg";
 
 export default {
   components: {
@@ -107,75 +107,75 @@ export default {
       switch1: true,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Главная',
-          to: '/'
+          icon: "mdi-apps",
+          title: "Главная",
+          to: "/"
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Инвестиии',
-          to: '/invests'
+          icon: "mdi-chart-bubble",
+          title: "Инвестиии",
+          to: "/invests"
         },
         {
-          icon: 'mdi-apps',
-          title: 'Резервый фонд',
-          to: '/inspire'
+          icon: "mdi-apps",
+          title: "Резервый фонд",
+          to: "/inspire"
         },
         {
-          icon: 'mdi-apps',
-          title: 'CRM',
-          to: '/inspire'
+          icon: "mdi-apps",
+          title: "CRM",
+          to: "/inspire"
         },
         {
-          icon: 'm,di-apps',
-          title: 'Биржа услуг',
-          to: '/stock'
+          icon: "m,di-apps",
+          title: "Биржа услуг",
+          to: "/stock"
         },
         {
-          icon: 'mdi-apps',
-          title: 'Моя команда',
-          to: '/mycomand'
+          icon: "mdi-apps",
+          title: "Моя команда",
+          to: "/mycomand"
         },
         {
-          icon: 'mdi-apps',
-          title: 'Лояльность',
-          to: '/inspire'
+          icon: "mdi-apps",
+          title: "Лояльность",
+          to: "/inspire"
         },
         {
-          icon: 'mdi-apps',
-          title: 'FAQ',
-          to: '/inspire'
+          icon: "mdi-apps",
+          title: "FAQ",
+          to: "/inspire"
         },
         {
-          icon: 'mdi-apps',
-          title: 'Новости',
-          to: '/news'
+          icon: "mdi-apps",
+          title: "Новости",
+          to: "/news"
         },
         {
-          icon: 'mdi-apps',
-          title: 'Группы Telegram',
-          to: '/telegrams'
+          icon: "mdi-apps",
+          title: "Группы Telegram",
+          to: "/telegrams"
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: "Vuetify.js",
       darkMode: true
-    }
+    };
   },
   computed: {
     switchLabel () {
-      return this.darkMode ? 'light' : 'dark'
+      return this.darkMode ? "light" : "dark";
     }
   },
   methods: {
     toggleDarkMode () {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      this.darkMode = !this.darkMode
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.darkMode = !this.darkMode;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

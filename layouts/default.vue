@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import Sidebar from '~~/components/common/Sidebar'
-import Header from '~~/components/common/Header'
-import Footer from '~~/components/common/Footer'
+import Sidebar from "~~/components/common/Sidebar";
+import Header from "~~/components/common/Header";
+import Footer from "~~/components/common/Footer";
 
 export default {
   components: {
@@ -22,5 +22,5 @@ export default {
     Header,
     Footer
   }
-}
+};
 </script>

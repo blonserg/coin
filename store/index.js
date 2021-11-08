@@ -1,60 +1,60 @@
 export const state = () => ({
   desserts: [
     {
-      name: 'Frozen Yogurt',
+      name: "Frozen Yogurt",
       calories: 159
     },
     {
-      name: 'Ice cream sandwich',
+      name: "Ice cream sandwich",
       calories: 237
     },
     {
-      name: 'Eclair',
+      name: "Eclair",
       calories: 262
     },
     {
-      name: 'Cupcake',
+      name: "Cupcake",
       calories: 305
     },
     {
-      name: 'Gingerbread',
+      name: "Gingerbread",
       calories: 356
     },
     {
-      name: 'Jelly bean',
+      name: "Jelly bean",
       calories: 375
     },
     {
-      name: 'Lollipop',
+      name: "Lollipop",
       calories: 392
     },
     {
-      name: 'Honeycomb',
+      name: "Honeycomb",
       calories: 408
     },
     {
-      name: 'Donut',
+      name: "Donut",
       calories: 452
     },
     {
-      name: 'KitKat',
+      name: "KitKat",
       calories: 518
     }
   ],
   news: [
     {
-      title: 'Cложность майнинга биткоина снова выросла',
-      views: '830',
-      date: '14 авг'
+      title: "Cложность майнинга биткоина снова выросла",
+      views: "830",
+      date: "14 авг"
     },
     {
-      title: 'Cложность майнинга биткоина снова выросла',
-      views: '830',
-      date: '14 авг'
+      title: "Cложность майнинга биткоина снова выросла",
+      views: "830",
+      date: "14 авг"
     }
   ]
-})
+});
 
 export const mutations = {
 
-}
+};

@@ -257,7 +257,7 @@
 </template>
 
 <script>
-import Title from '~~/components/common/Title'
+import Title from "~~/components/common/Title";
 
 export default {
   components: {
@@ -268,52 +268,52 @@ export default {
       desserts: [
         {
           number: 1,
-          name: 'Frozen Yogurt',
+          name: "Frozen Yogurt",
           calories: 159
         },
         {
           number: 2,
-          name: 'Ice cream sandwich',
+          name: "Ice cream sandwich",
           calories: 237
         },
         {
           number: 3,
-          name: 'Eclair',
+          name: "Eclair",
           calories: 262
         },
         {
           number: 4,
-          name: 'Cupcake',
+          name: "Cupcake",
           calories: 305
         },
         {
           number: 5,
-          name: 'Gingerbread',
+          name: "Gingerbread",
           calories: 356
         },
         {
           number: 6,
-          name: 'Jelly bean',
+          name: "Jelly bean",
           calories: 375
         },
         {
           number: 7,
-          name: 'Lollipop',
+          name: "Lollipop",
           calories: 392
         },
         {
           number: 8,
-          name: 'Honeycomb',
+          name: "Honeycomb",
           calories: 408
         },
         {
           number: 9,
-          name: 'Donut',
+          name: "Donut",
           calories: 452
         },
         {
           number: 10,
-          name: 'KitKat',
+          name: "KitKat",
           calories: 518
         }
       ],
@@ -324,9 +324,9 @@ export default {
           sell: 130
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -138,21 +138,21 @@ export default {
   components: {
     Title,
     News,
-    Seetoo,
+    Seetoo
   },
-  data() {
+  data () {
     return {
-      text: "all",
+      text: "all"
     };
   },
   computed: {
-    desserts() {
+    desserts () {
       return this.$store.state.desserts;
     },
-    news() {
+    news () {
       return this.$store.state.news;
-    },
-  },
+    }
+  }
 };
 </script>
 
