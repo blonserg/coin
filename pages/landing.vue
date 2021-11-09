@@ -374,6 +374,10 @@
     </v-lazy>
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
+      {{ staticData.main_first_text }}
+      <br />
+      <hr />
+      <br />
       {{ staticData }}
       <br />
       <hr />
