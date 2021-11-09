@@ -2,5 +2,5 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
-	"eslint.validate": ["vue", "html", "javascript", "nuxtjs"]
+	"eslint.validate": ["vue", "html", "javascript", "nuxtjs", "ts"]
 }

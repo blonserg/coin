@@ -387,7 +387,8 @@
 import Button from "~~/components/common/Button";
 import LandTtl from "~~/components/svg/LandTtl";
 import LandSmile from "~~/components/svg/LandSmile";
-import Http from "~~/api/http";
+import StaticService from "~/api/StaticService";
+import HttpService from "~/api/HttpService";
 
 export default {
   components: {
@@ -456,8 +457,8 @@ export default {
     };
   },
   async fetch () {
-    this.staticData = await Http.get("/static-content/main");
-    this.dynamicData = await Http.get("/main-page");
+    this.staticData = await StaticService.main();
+    this.dynamicData = await HttpService.get("/main-page");
   },
   fetchOnServer: false
 };
