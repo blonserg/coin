@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="header-land d-flex align-center flex-md-row justify-space-between">
+    <header class="header-land mt-8 mb-8 d-flex align-center flex-md-row justify-space-between">
       <div class="d-block">
         <LogoSvg />
       </div>
