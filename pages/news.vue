@@ -9,12 +9,14 @@
     <v-btn class="btn btn-seetoo" block>
       Смотреть еще
     </v-btn>
+    {{ staticData.news_show_more }}
   </div>
 </template>
 
 <script>
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
@@ -69,8 +71,13 @@ export default {
           views: "830",
           date: "14 авг"
         }
-      ]
+      ],
+      staticData: []
     };
-  }
+  },
+  async fetch () {
+    this.staticData = await StaticService.news();
+  },
+  fetchOnServer: false
 };
 </script>
