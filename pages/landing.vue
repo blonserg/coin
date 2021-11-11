@@ -295,7 +295,7 @@
             x-large
             height="48px"
           >
-            Смотерть видео отзывы
+            {{ staticData.review_about_us_talk }}
             <PlaySvg class="ml-2" />
           </v-btn>
           <div class="landing-review_wrap">

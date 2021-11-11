@@ -162,3 +162,23 @@ body,
     margin-right: 5px;
   }
 }
+
+.btn {
+  color: white;
+  font-size: 14px;
+  text-transform: none;
+  border-radius: 6px;
+  padding: 15px 20px;
+  letter-spacing: 0;
+
+  &--invert {
+    .v-btn__content {
+      color: #2d7bf6;
+    }
+  }
+
+  .v-btn__content {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
