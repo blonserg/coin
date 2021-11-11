@@ -182,3 +182,7 @@ body,
     letter-spacing: 0;
   }
 }
+
+.v-overlay + .v-application--wrap {
+  filter: blur(4px);
+}
