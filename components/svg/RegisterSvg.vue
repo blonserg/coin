@@ -5,3 +5,9 @@
     </svg>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  .icon {
+    margin-top: 4px;
+  }
+</style>

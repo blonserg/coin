@@ -26,7 +26,6 @@
         </v-col>
       </v-row>
       <v-lazy
-        v-model="firstBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -35,7 +34,6 @@
         <div class="landing-subtxt">{{ staticData.about_team }}</div>
       </v-lazy>
       <v-lazy
-        v-model="secondBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -53,7 +51,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="thirdBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -72,7 +69,6 @@
         </div>
       </v-lazy>
       <v-lazy
-        v-model="fourBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -95,7 +91,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="fiveBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -118,7 +113,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="sixBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -140,7 +134,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="sevenBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -163,7 +156,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="eightBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -273,7 +265,6 @@
         </v-row>
       </v-lazy>
       <v-lazy
-        v-model="nineBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -289,15 +280,83 @@
             Strike strategies to <span>earn</span><br class="d-none d-md-block" />
             and <span>discover</span> new opportunities
           </div>
-          <v-btn
-            class="btn d-none d-md-block"
-            color="#2d7bf6"
-            x-large
-            height="48px"
+          <v-dialog
+            v-model="dialog"
           >
-            Смотерть видео отзывы
-            <PlaySvg class="ml-2" />
-          </v-btn>
+            <template #activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                class="btn d-none d-md-block"
+                color="#2d7bf6"
+                x-large
+                height="48px"
+                v-on="on"
+              >
+                {{ staticData.review_about_us_talk }}
+                <PlaySvg class="ml-2" />
+              </v-btn>
+            </template>
+
+            <v-card class="dialog dialog--review">
+              <v-row>
+                <v-col cols="12" md="5">
+                  <v-card-text class="dialog-text">
+                    <h2>{{ staticData.video_review_modal_headline }}</h2>
+                    <p>
+                      {{ staticData.video_review_modal_paragraph1 }}
+                    </p>
+                    <p class="dialog-text_review">
+                      {{ staticData.video_review_modal_paragraph2 }}
+                    </p>
+                    <NuxtLink to="/register">
+                      <v-btn
+                        class="btn d-none d-md-flex"
+                        color="#2d7bf6"
+                        x-large
+                        height="48px"
+                      >
+                        Регистрация
+                        <RegisterSvg class="ml-2" />
+                      </v-btn>
+                    </NuxtLink>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" md="7">
+                  <v-row>
+                    <v-col cols="12" md="6" class="dialog-review">
+                      <div class="dialog-review_video">
+                      </div>
+                      <div class="dialog-review_name">
+                        Отзыв от Дмитрия Портнягина
+                      </div>
+                      <div class="dialog-review_date">
+                        28 окт
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="6" class="dialog-review">
+                      <div class="dialog-review_video">
+                      </div>
+                      <div class="dialog-review_name">
+                        Отзыв от Дмитрия Портнягина
+                      </div>
+                      <div class="dialog-review_date">
+                        28 окт
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <div class="landing-review_wrap">
             <div v-for="dynamicDataitem in dynamicData.reviews" :key="dynamicDataitem.id" class="landing-review_item">
               <div class="landing-review_txt">
@@ -312,7 +371,6 @@
         </div>
       </v-lazy>
       <v-lazy
-        v-model="tenBlock"
         :options="{
           threshold: 1.0,
         }"
@@ -345,12 +403,16 @@ import LandSmile from "~~/components/svg/LandSmile";
 import StaticService from "~/api/StaticService";
 import HttpService from "~/api/HttpService";
 import PlaySvg from "~~/components/svg/PlaySvg";
+import RegisterSvg from "~~/components/svg/RegisterSvg";
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
   components: {
     LandTtl,
     LandSmile,
-    PlaySvg
+    PlaySvg,
+    RegisterSvg,
+    CloseButton
   },
   layout: "landing",
   async asyncData () {
@@ -360,16 +422,7 @@ export default {
   data () {
     return {
       text: "all",
-      firstBlock: false,
-      secondBlock: false,
-      thirdBlock: false,
-      fourBlock: false,
-      fiveBlock: false,
-      sixBlock: false,
-      sevenBlock: false,
-      eightBlock: false,
-      nineBlock: false,
-      tenBlock: false,
+      dialog: false,
       desserts: [
         {
           name: "Frozen Yogurt",
@@ -424,96 +477,100 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .main {
-        &-table {
-            &_people {
-                font-weight: 500;
-                font-size: 36px;
-                line-height: 47px;
-            }
+  .main {
+      &-table {
+          &_people {
+              font-weight: 500;
+              font-size: 36px;
+              line-height: 47px;
+          }
 
-            &_head {
-                margin-bottom: 20px;
-            }
+          &_head {
+              margin-bottom: 20px;
+          }
 
-            .v-btn-toggle {
-                .v-btn {
-                    font-size: 13px;
-                    line-height: 17px;
-                    color: #6a6b79;
-                    height: 30px;
-                    letter-spacing: 0;
-                    text-transform: none;
-                    border: 1px solid #272a33;
-                    border-radius: 4px !important;
-                    width: 89px;
-                }
+          .v-btn-toggle {
+              .v-btn {
+                  font-size: 13px;
+                  line-height: 17px;
+                  color: #6a6b79;
+                  height: 30px;
+                  letter-spacing: 0;
+                  text-transform: none;
+                  border: 1px solid #272a33;
+                  border-radius: 4px !important;
+                  width: 89px;
+              }
 
-                .v-btn--active {
-                    background: #2d7bf6 !important;
-                    border-color: #2d7bf6;
-                    color: #fff;
-                }
-            }
-        }
+              .v-btn--active {
+                  background: #2d7bf6 !important;
+                  border-color: #2d7bf6;
+                  color: #fff;
+              }
+          }
+      }
 
-        &-info {
-            margin-top: 30px;
-            text-align: right;
-            font-size: 13px;
-            line-height: 17px;
-            color: #6a6b79;
-        }
-    }
+      &-info {
+          margin-top: 30px;
+          text-align: right;
+          font-size: 13px;
+          line-height: 17px;
+          color: #6a6b79;
+      }
+  }
 
-    .theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
-        height: 30px;
-        background: #1e1f26;
-        border-bottom: 0;
-    }
+  .theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+      height: 30px;
+      background: #1e1f26;
+      border-bottom: 0;
+  }
 
-    .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
-        border-radius: 6px 0 0 6px;
-    }
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
+      border-radius: 6px 0 0 6px;
+  }
 
-    .v-data-table > .v-data-table__wrapper > table > thead > tr > th:last-child {
-        border-radius: 0 6px 6px 0;
-    }
+  .v-data-table > .v-data-table__wrapper > table > thead > tr > th:last-child {
+      border-radius: 0 6px 6px 0;
+  }
 
-    .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
-        height: 30px;
-        font-size: 14px;
-        line-height: 18px;
-        color: #adafc2;
-        background: none;
-    }
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+      height: 30px;
+      font-size: 14px;
+      line-height: 18px;
+      color: #adafc2;
+      background: none;
+  }
 
-    .v-data-table .v-data-table__wrapper table thead::after {
-        content: "@";
-        display: block;
-        line-height: 17px;
-        text-indent: -99999px;
-    }
+  .v-data-table .v-data-table__wrapper table thead::after {
+      content: "@";
+      display: block;
+      line-height: 17px;
+      text-indent: -99999px;
+  }
 
-    .theme--dark.v-data-table {
-        background: inherit;
-    }
+  .theme--dark.v-data-table {
+      background: inherit;
+  }
 
-    .v-btn-toggle:not(.v-btn-toggle--dense) .v-btn.v-btn.v-size--default {
-        height: 30px;
-    }
+  .v-btn-toggle:not(.v-btn-toggle--dense) .v-btn.v-btn.v-size--default {
+      height: 30px;
+  }
 
-    .v-application--is-ltr .v-btn-toggle > .v-btn.v-btn:not(:first-child) {
-        border-left-width: 1px;
-    }
+  .v-application--is-ltr .v-btn-toggle > .v-btn.v-btn:not(:first-child) {
+      border-left-width: 1px;
+  }
 
-    .v-sheet.v-card:not(.v-sheet--outlined) {
-        border-radius: 15px;
-    }
+  .v-sheet.v-card:not(.v-sheet--outlined) {
+      border-radius: 15px;
+  }
 
-    .v-btn-toggle--group {
-        @media screen and (max-width: 758px) {
-            overflow-y: scroll;
-        }
-    }
+  .v-btn-toggle--group {
+      @media screen and (max-width: 758px) {
+          overflow-y: scroll;
+      }
+  }
+
+  a {
+    text-decoration: none;
+  }
 </style>

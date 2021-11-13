@@ -53,6 +53,11 @@
       @media screen and (max-width: 758px) {
         margin-bottom: 40px !important;
       }
+
+      .landing-txt {
+        margin: 0 auto;
+        max-width: 345px;
+      }
     }
 
     &_ttl {
@@ -103,6 +108,10 @@
       margin: 200px 0 50px;
     }
 
+    .btn {
+      margin: 0 auto;
+    }
+
     &_item {
       position: absolute;
       width: 307px;
@@ -127,7 +136,7 @@
         right: 60px;
       }
 
-      &.item1 {
+      &:nth-child(1) {
         top: -160px;
         left: 9%;
 
@@ -137,7 +146,7 @@
         }
       }
 
-      &.item2 {
+      &:nth-child(2) {
         top: -210px;
         right: 12%;
 
@@ -147,7 +156,7 @@
         }
       }
 
-      &.item3 {
+      &:nth-child(3) {
         top: 36%;
         right: -75px;
 
@@ -157,7 +166,7 @@
         }
       }
 
-      &.item4 {
+      &:nth-child(4) {
         bottom: -175px;
         left: 44%;
 
@@ -167,7 +176,7 @@
         }
       }
 
-      &.item5 {
+      &:nth-child(5) {
         top: 58%;
         left: -65px;
 

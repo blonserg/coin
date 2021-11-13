@@ -4,7 +4,7 @@
       <v-container>
         <HeaderLand />
         <Nuxt />
-        <Footer />
+        <FooterLand />
       </v-container>
     </v-main>
   </v-app>
@@ -12,12 +12,12 @@
 
 <script>
 import HeaderLand from "~~/components/common/HeaderLand";
-import Footer from "~~/components/common/Footer";
+import FooterLand from "~~/components/common/FooterLand";
 
 export default {
   components: {
     HeaderLand,
-    Footer
+    FooterLand
   }
 };
 </script>
