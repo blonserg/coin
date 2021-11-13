@@ -50,6 +50,7 @@
       <NuxtLink to="/login">
         Выполните вход
       </NuxtLink>
+      {{ staticData }}
     </div>
   </v-card>
 </template>
@@ -57,6 +58,7 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
@@ -64,9 +66,14 @@ export default {
     Button
   },
   layout: "signup",
+  async asyncData () {
+    const staticData = await StaticService.get("/registration")
+    return { staticData }
+  },
   data () {
     return {
-      refer: true
+      refer: true,
+      staticData: []
     };
   }
 };

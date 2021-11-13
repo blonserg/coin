@@ -108,15 +108,26 @@
         </v-col>
       </v-row>
     </div>
+    {{ staticData }}
   </div>
 </template>
 
 <script>
 import Button from "~~/components/common/Button";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
     Button
+  },
+  async asyncData () {
+    const staticData = await StaticService.get("/project")
+    return { staticData }
+  },
+  data () {
+    return {
+      staticData: []
+    };
   }
 };
 </script>

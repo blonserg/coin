@@ -126,6 +126,7 @@
         Время и границы суток определены в GMT (MSK −3:00)
       </p>
     </div>
+    {{ staticData }}
   </div>
 </template>
 
@@ -133,6 +134,7 @@
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
@@ -140,9 +142,14 @@ export default {
     News,
     Seetoo
   },
+  async asyncData () {
+    const staticData = await StaticService.get("/cabinet_main")
+    return { staticData }
+  },
   data () {
     return {
-      text: "all"
+      text: "all",
+      staticData: []
     };
   },
   computed: {

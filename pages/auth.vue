@@ -12,19 +12,30 @@
       </v-row>
     </v-form>
     <Button :text="`Продолжить`" />
+    {{ staticData }}
   </v-card>
 </template>
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
     LogoSvg,
     Button
   },
-  layout: "signup"
+  layout: "signup",
+  async asyncData () {
+    const staticData = await StaticService.get("/two_factor")
+    return { staticData }
+  },
+  data () {
+    return {
+      staticData: []
+    };
+  }
 };
 </script>
 

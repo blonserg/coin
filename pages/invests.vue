@@ -258,11 +258,18 @@
         </v-col>
       </v-row>
     </div>
+    {{ staticData }}
   </div>
 </template>
 
 <script>
+import StaticService from "~/api/StaticService";
+
 export default {
+  async asyncData () {
+    const staticData = await StaticService.get("/strategy")
+    return { staticData }
+  },
   data () {
     return {
       invests: [
@@ -296,7 +303,8 @@ export default {
         {
           title: "Torexo Project"
         }
-      ]
+      ],
+      staticData: []
     };
   }
 };

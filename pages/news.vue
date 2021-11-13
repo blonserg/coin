@@ -9,7 +9,7 @@
     <v-btn class="btn btn-seetoo" block>
       Смотреть еще
     </v-btn>
-    {{ staticData.news_show_more }}
+    {{ staticData }}
   </div>
 </template>
 
@@ -22,6 +22,10 @@ export default {
   components: {
     Title,
     News
+  },
+  async asyncData () {
+    const staticData = await StaticService.get("/news")
+    return { staticData }
   },
   data () {
     return {
@@ -74,10 +78,6 @@ export default {
       ],
       staticData: []
     };
-  },
-  async fetch () {
-    this.staticData = await StaticService.news();
-  },
-  fetchOnServer: false
+  }
 };
 </script>

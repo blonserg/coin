@@ -353,6 +353,10 @@ export default {
     PlaySvg
   },
   layout: "landing",
+  async asyncData () {
+    const staticData = await StaticService.get("/main")
+    return { staticData }
+  },
   data () {
     return {
       text: "all",
@@ -413,7 +417,6 @@ export default {
     };
   },
   async fetch () {
-    this.staticData = await StaticService.main();
     this.dynamicData = await HttpService.get("/main-page");
   },
   fetchOnServer: false

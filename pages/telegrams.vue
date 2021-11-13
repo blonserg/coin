@@ -32,11 +32,18 @@
         </v-col>
       </v-row>
     </div>
+    {{ staticData }}
   </div>
 </template>
 
 <script>
+import StaticService from "~/api/StaticService";
+
 export default {
+  async asyncData () {
+    const staticData = await StaticService.get("/telegram")
+    return { staticData }
+  },
   data () {
     return {
       invests: [
@@ -58,7 +65,8 @@ export default {
         {
           title: "SMM продвижение и аналитика"
         }
-      ]
+      ],
+      staticData: []
     };
   }
 };

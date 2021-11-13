@@ -27,6 +27,7 @@
       <NuxtLink to="/register">
         Зарегестрирйутесь
       </NuxtLink>
+      {{ staticData }}
     </div>
   </v-card>
 </template>
@@ -34,13 +35,23 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
+import StaticService from "~/api/StaticService";
 
 export default {
   components: {
     LogoSvg,
     Button
   },
-  layout: "signup"
+  layout: "signup",
+  async asyncData () {
+    const staticData = await StaticService.get("/signin")
+    return { staticData }
+  },
+  data () {
+    return {
+      staticData: []
+    }
+  }
 };
 </script>
 

@@ -131,13 +131,21 @@
         </div>
       </div>
     </v-col>
+    {{ staticData }}
   </v-row>
 </template>
 
 <script>
+import StaticService from "~/api/StaticService";
+
 export default {
+  async asyncData () {
+    const staticData = await StaticService.get("/my_profile")
+    return { staticData }
+  },
   data: () => ({
-    items: ["Foo", "Bar", "Fizz", "Buzz"]
+    items: ["Foo", "Bar", "Fizz", "Buzz"],
+    staticData: []
   })
 };
 </script>
