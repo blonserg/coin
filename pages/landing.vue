@@ -2,7 +2,7 @@
   <div class="landing">
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
-      <v-row class="landing-block align-center">
+      <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7">
           <div class="landing-ttl">
             <LandTtl />

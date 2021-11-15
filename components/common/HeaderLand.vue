@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="header-land mt-8 mb-8 d-flex align-center flex-md-row justify-space-between">
+    <header class="header-land mt-5 mb-5 d-flex align-center flex-md-row justify-space-between">
       <div class="d-block">
         <LogoSvg />
       </div>
@@ -21,6 +21,37 @@
           <RegisterSvg class="ml-2" />
         </v-btn>
       </NuxtLink>
+      <v-app-bar-nav-icon class="sidebar-menu d-md-none" @click.stop="drawer = !drawer" />
+      <v-navigation-drawer
+        v-model="drawer"
+        :clipped="clipped"
+        fixed
+        class="header-land-nav"
+      >
+        <div class="header-land-head mt-5 mb-5 d-flex d-md-block align-center justify-space-between">
+          <LogoSvg />
+          <v-app-bar-nav-icon class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer" />
+        </div>
+        <div class="header-menu">
+          <a href="">О команде</a>
+          <a href="">О команде</a>
+          <a href="">О команде</a>
+          <a href="">О команде</a>
+        </div>
+        <div class="d-flex justify-center">
+          <NuxtLink to="/register">
+            <v-btn
+              class="btn d-md-flex"
+              color="#2d7bf6"
+              x-large
+              height="48px"
+            >
+              Регистрация
+              <RegisterSvg class="ml-2" />
+            </v-btn>
+          </NuxtLink>
+        </div>
+      </v-navigation-drawer>
     </header>
   </div>
 </template>
@@ -36,7 +67,8 @@ export default {
   },
   data () {
     return {
-      value: "loremipsum"
+      value: "loremipsum",
+      drawer: null
     };
   },
   methods: {
@@ -71,5 +103,29 @@ export default {
 
 a {
   text-decoration: none;
+}
+
+.header-land-nav {
+  @media screen and (max-width: 758px) {
+    width: 100% !important;
+    padding: 0 25px;
+    background: #131418 !important;
+  }
+}
+
+.header-menu {
+  @media screen and (max-width: 758px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  a {
+    @media screen and (max-width: 758px) {
+      margin-bottom: 20px;
+    }
+  }
 }
 </style>
