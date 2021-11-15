@@ -18,7 +18,8 @@
 </template>
 
 <style lang="scss" scoped>
-  .icon {
-    margin-top: 4px;
+  .logo {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 </style>
