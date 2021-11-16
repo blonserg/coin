@@ -7,12 +7,16 @@
           v-model="select"
           :items="items"
           :menu-props="{ left: true }"
-          label="Сортировать"
+          :label="sort"
         />
       </div>
       <div class="filter d-flex align-center">
-        <span class="filter-txt">Фильтр категорий</span>
-        <v-select v-model="select" :items="items" />
+        <v-select
+          v-model="select"
+          :items="items"
+          :menu-props="{ left: true }"
+          :label="filtr"
+        />
       </div>
     </div>
   </div>
@@ -24,6 +28,14 @@ export default {
     title: {
       type: String,
       default: "Заголовок"
+    },
+    sort: {
+      type: String,
+      default: "Сортировать"
+    },
+    filtr: {
+      type: String,
+      default: "Фильтр категорий"
     }
   },
   data () {

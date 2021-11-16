@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="ttl">
-      Стратегии
+      {{ staticData.strategy_title }}
     </div>
     <div class="subttl">
-      С анализом данных появляются новые возможности. Мы поможем вам торговать и инвестировать, даже если вы только начинаете
+      {{ staticData.strategy_paragraph }}
     </div>
     <div class="article-wrap">
       <div class="article">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="article-btn">
-            <a class="btn" href="">Смотреть стратегию</a>
+            <a class="btn" href="">{{ staticData.strategy_button }}</a>
           </div>
         </v-card>
         <v-card class="article-item individual">
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="article-btn">
-            <a class="btn" href="">Смотреть стратегию</a>
+            <a class="btn" href="">{{ staticData.strategy_button }}</a>
           </div>
         </v-card>
         <v-card class="article-item professional">
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="article-btn">
-            <a class="btn" href="">Смотреть стратегию</a>
+            <a class="btn" href="">{{ staticData.strategy_button }}</a>
           </div>
         </v-card>
         <v-card class="article-item professional-more">
@@ -177,7 +177,7 @@
             </div>
           </div>
           <div class="article-btn">
-            <a class="btn" href="">Смотреть стратегию</a>
+            <a class="btn" href="">{{ staticData.strategy_button }}</a>
           </div>
         </v-card>
       </div>
@@ -258,7 +258,6 @@
         </v-col>
       </v-row>
     </div>
-    {{ staticData }}
   </div>
 </template>
 

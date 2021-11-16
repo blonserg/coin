@@ -23,7 +23,7 @@
       </div>
     </div>
     <div v-else class="login-ttl">
-      Регистрация
+      {{ staticData.registration_title }}
     </div>
     <v-text-field
       label="Email"
@@ -31,26 +31,25 @@
       height="40px"
     />
     <v-text-field
-      label="Пароль"
+      :label="staticData.password"
       solo
       height="40px"
     />
     <v-text-field
-      label="Повторите пароль"
+      :label="staticData.repeat_password"
       solo
       height="40px"
     />
     <v-checkbox
       v-model="checkbox"
-      :label="`Запомнить выбор`"
+      :label="staticData.reg_remember_me"
     />
-    <Button :text="`Зарегистрироваться`" />
+    <Button :text="staticData.registration_button" />
     <div class="login-bottom">
-      <span>Уже есть аккаунт?</span>
+      <span>{{ staticData.reg_have_account }}</span>
       <NuxtLink to="/login">
-        Выполните вход
+        {{ staticData.reg_sign_in }}
       </NuxtLink>
-      {{ staticData }}
     </div>
   </v-card>
 </template>

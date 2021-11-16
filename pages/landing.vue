@@ -393,6 +393,7 @@
           </div>
         </div>
       </v-lazy>
+      {{ staticData.privacy_policy }}
     </div>
   </div>
 </template>

@@ -5,6 +5,11 @@
   text-align: center;
   margin-top: 250px;
 
+  .theme--light & {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+  }
+
   &-link {
     display: block;
     text-decoration: none;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title :title="`Мероприятия`" />
+    <Title :title="staticData.cabinet_main_event" />
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
@@ -33,15 +33,15 @@
         </div>
       </v-card>
     </div>
-    <Seetoo />
-    <Title :title="`Новости`" />
+    <Seetoo :title="staticData.cabinet_main_be_interested" />
+    <Title :title="staticData.cabinet_main_news" />
     <v-row>
       <v-col v-for="item in news" :key="item.title" md="4">
         <News :title="item.title" :views="item.views" :date="item.date" />
       </v-col>
     </v-row>
-    <v-btn class="btn btn-seetoo" block> Смотреть еще </v-btn>
-    <h2 class="main-ttl">Общее количество пользователей</h2>
+    <v-btn class="btn btn-seetoo" block>{{ staticData.cabinet_main_see_more }} </v-btn>
+    <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
       Учитываются все пользователи, зарегистрировавшиеся на Strike Team
     </span>
@@ -123,10 +123,9 @@
         </v-container>
       </div>
       <p class="main-info">
-        Время и границы суток определены в GMT (MSK −3:00)
+        {{ staticData.cabinet_main_time_defined_in_gmt }}
       </p>
     </div>
-    {{ staticData }}
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="seetoo">
     <div class="seetoo-ttl">
-      Вам будет интересно:
+      {{ title }}
     </div>
     <div class="seetoo-list d-flex flex-column flex-md-row justify-space-between">
       <v-card class="seetoo-item item-2">
@@ -88,6 +88,12 @@
 <script>
 
 export default {
+  props: {
+    title: {
+      type: String,
+      default: "Вам будет интересно:"
+    }
+  },
   data () {
     return {
       dialog: false

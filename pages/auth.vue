@@ -2,7 +2,7 @@
   <v-card class="login">
     <LogoSvg />
     <div class="login-ttl">
-      Мы отправили вам код подтверждения
+      {{ staticData.two_factor_sent_code }}
     </div>
     <v-form class="login-auth">
       <v-row>
@@ -11,7 +11,7 @@
         </v-col>
       </v-row>
     </v-form>
-    <Button :text="`Продолжить`" />
+    <Button :text="staticData.two_factor_continue_button" />
     {{ staticData }}
   </v-card>
 </template>

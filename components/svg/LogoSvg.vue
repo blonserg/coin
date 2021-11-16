@@ -21,5 +21,11 @@
   .logo {
     padding-top: 10px;
     padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      max-width: 190px;
+    }
   }
 </style>
