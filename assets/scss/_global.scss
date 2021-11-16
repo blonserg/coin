@@ -183,6 +183,6 @@ body,
   }
 }
 
-// .v-overlay + .v-application--wrap {
-//   filter: blur(4px);
-// }
+.v-overlay + .v-application--wrap {
+  filter: blur(4px);
+}

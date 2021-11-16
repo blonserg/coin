@@ -66,7 +66,7 @@
                   text
                   @click="dialog = false"
                 >
-                  I accept
+                  <CloseButton />
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -86,8 +86,12 @@
 </template>
 
 <script>
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
+  components: {
+    CloseButton
+  },
   props: {
     title: {
       type: String,

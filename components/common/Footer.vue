@@ -64,7 +64,6 @@
     </v-list>
     <div class="footer-bottom">
       <p>©2021. Все права соблюдены</p>
-      <p>Powered by <a href="">97 digital büro</a></p>
     </div>
   </footer>
 </template>

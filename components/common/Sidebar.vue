@@ -5,6 +5,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      hide-overlay="true"
       fixed
       app
       class="sidebar"
@@ -192,7 +193,7 @@ export default {
 }
 
 .logo {
-  padding: 0 20px;
+  padding: 20px 0;
   margin: 10px 0;
 }
 
@@ -234,7 +235,7 @@ export default {
   position: absolute;
   right: 20px;
   z-index: 1;
-  top: 25px;
+  top: 15px;
 }
 
 .v-navigation-drawer__content {
