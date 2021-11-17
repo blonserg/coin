@@ -45,7 +45,7 @@
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
-import StaticService from "~/api/StaticService";
+import StaticService from "~/services/StaticService";
 
 export default {
   components: {

@@ -1,5 +1,6 @@
 <template>
   <div class="landing">
+    {{ user }}
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
       <v-row class="landing-block align-center">
@@ -400,11 +401,12 @@
 <script>
 import LandTtl from "~~/components/svg/LandTtl";
 import LandSmile from "~~/components/svg/LandSmile";
-import StaticService from "~/api/StaticService";
-import HttpService from "~/api/HttpService";
+import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 import PlaySvg from "~~/components/svg/PlaySvg";
 import RegisterSvg from "~~/components/svg/RegisterSvg";
 import CloseButton from "~~/components/svg/CloseButton";
+import StoreService from "~/services/StoreService"
 
 export default {
   components: {
@@ -466,11 +468,14 @@ export default {
         }
       ],
       staticData: [],
-      dynamicData: {}
+      dynamicData: {},
+      user: null
     };
   },
   async fetch () {
     this.dynamicData = await HttpService.get("/main-page");
+    const user = StoreService.getUser(this.$store);
+    this.user = user;
   },
   fetchOnServer: false
 };

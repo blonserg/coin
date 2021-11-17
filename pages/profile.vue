@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import StaticService from "~/api/StaticService";
+import StaticService from "~/services/StaticService";
 
 export default {
   async asyncData () {

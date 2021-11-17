@@ -16,7 +16,7 @@
 <script>
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
-import StaticService from "~/api/StaticService";
+import StaticService from "~/services/StaticService";
 
 export default {
   components: {

@@ -134,7 +134,7 @@
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
-import StaticService from "~/api/StaticService";
+import StaticService from "~/services/StaticService";
 
 export default {
   components: {

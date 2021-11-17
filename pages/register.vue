@@ -26,16 +26,25 @@
       Регистрация
     </div>
     <v-text-field
+      v-model="user.name"
+      label="Name"
+      solo
+      height="40px"
+    />
+    <v-text-field
+      v-model="user.email"
       label="Email"
       solo
       height="40px"
     />
     <v-text-field
+      v-model="user.password"
       label="Пароль"
       solo
       height="40px"
     />
     <v-text-field
+      v-model="user.password_confirmation"
       label="Повторите пароль"
       solo
       height="40px"
@@ -44,7 +53,7 @@
       v-model="checkbox"
       :label="`Запомнить выбор`"
     />
-    <Button :text="`Зарегистрироваться`" />
+    <Button :text="`Зарегистрироваться`" @click.native="registration" />
     <div class="login-bottom">
       <span>Уже есть аккаунт?</span>
       <NuxtLink to="/login">
@@ -58,7 +67,8 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
-import StaticService from "~/api/StaticService";
+import StaticService from "~/services/StaticService";
+import UserService from "~/services/UserService";
 
 export default {
   components: {
@@ -66,17 +76,56 @@ export default {
     Button
   },
   layout: "signup",
-  async asyncData () {
-    const staticData = await StaticService.get("/registration")
-    return { staticData }
-  },
+  // async asyncData () {
+  //   // let staticData;
+  //   // if (this.refer) {
+  //   //   staticData = await StaticService.get("/ref_registration");
+  //   // } else {
+  //   //   staticData = await StaticService.get("/registration")
+  //   // }
+  //   return { staticData }
+  // },
   data () {
     return {
-      refer: true,
-      staticData: []
+      refer: false,
+      staticData: [],
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        ip: ""
+      },
+      checkbox: false
     };
+  },
+  async fetch () {
+    const res = await UserService.getMyIp();
+    this.user.ip = res;
+    let staticData;
+    if (this.refer) {
+      staticData = await StaticService.get("/ref_registration");
+    } else {
+      staticData = await StaticService.get("/registration")
+    }
+    this.staticData = staticData
+  },
+  fetchOnServer: false,
+  methods: {
+    async registration () {
+      const registrationUserData = {
+        ...this.user
+      };
+      if (this.refer) {
+        registrationUserData.referer_id = 1; // TODO
+      }
+      const user = await UserService.registration(registrationUserData);
+      this.$store.commit("setUser", user);
+      // TODO: PROCESS ERRORS
+      this.$router.push("landing");
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

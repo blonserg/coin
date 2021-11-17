@@ -15,4 +15,4 @@ export default {
       throw new Error("Error " + res.status);
     }
   }
-};
+}
