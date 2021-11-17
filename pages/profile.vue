@@ -36,7 +36,7 @@
         <v-divider class="mt-15" />
         <div class="profile-referal">
           <div class="profile-referal_ttl">
-            Реферальная ссылка
+            {{ staticData.my_profile_ref_link }}
           </div>
           <div class="header-refs d-flex align-center">
             <v-text-field ref="textToCopy" v-model="value" outlined readonly />
@@ -47,25 +47,25 @@
             </button>
           </div>
           <div class="profile-referal_txt">
-            С помощью личной реферальной ссылки вы можете приглашать новых участников в вашу реферальную систему
+            {{ staticData.my_profile_desc }}
           </div>
         </div>
       </v-card>
     </v-col>
     <v-col class="profile-form" md="8">
       <div class="profile-ttl">
-        Основная информация
+        {{ staticData.my_profile_main_info }}
       </div>
       <v-row>
         <v-col md="6" class="mb-10">
-          <span class="label">Имя</span>
+          <span class="label">{{ staticData.my_profile_name }}</span>
           <v-text-field
             label="Solo"
             solo
           />
         </v-col>
         <v-col md="6" class="mb-10">
-          <span class="label">Фамилия</span>
+          <span class="label">{{ staticData.my_profile_last_name }}</span>
           <v-text-field
             label="Solo"
             solo
@@ -74,14 +74,14 @@
       </v-row>
       <v-row>
         <v-col md="6" class="mb-10">
-          <span class="label">Telegram </span>
+          <span class="label">{{ staticData.my_profile_telegram }}</span>
           <v-text-field
             label="Solo"
             solo
           />
         </v-col>
         <v-col md="6" class="mb-10">
-          <span class="label">Instagram</span>
+          <span class="label">{{ staticData.my_profile_instagram }}</span>
           <v-text-field
             label="Solo"
             solo
@@ -90,7 +90,7 @@
       </v-row>
       <v-row>
         <v-col md="6" class="mb-15">
-          <span class="label">Страна</span>
+          <span class="label">{{ staticData.my_profile_country }}</span>
           <v-select
             :items="items"
             label="Solo field"
@@ -98,7 +98,7 @@
           />
         </v-col>
         <v-col md="6" class="mb-15">
-          <span class="label">Город</span>
+          <span class="label">{{ staticData.my_profile_city }}</span>
           <v-select
             :items="items"
             label="Solo field"
@@ -107,7 +107,7 @@
         </v-col>
       </v-row>
       <div class="profile-ttl">
-        Реферальные ссылки проектов
+        {{ staticData.my_profile_ref_project_links }}
       </div>
       <div class="profile-refitem d-flex align-center justify-space-between">
         <div class="d-flex align-center">
@@ -131,7 +131,6 @@
         </div>
       </div>
     </v-col>
-    {{ staticData }}
   </v-row>
 </template>
 

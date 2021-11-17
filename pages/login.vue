@@ -2,7 +2,7 @@
   <v-card class="login">
     <LogoSvg />
     <div class="login-ttl">
-      Зайдите в ваш аккаунт
+      {{ staticData.sign_in }}
     </div>
     <v-text-field
       label="Email"
@@ -11,23 +11,22 @@
     />
     <div class="login-password">
       <v-text-field
-        label="Password"
+        :label="staticData.sign_in_password"
         solo
         height="40px"
       />
-      <a href="" class="login-password_btn">Забыли пароль?</a>
+      <a href="" class="login-password_btn">{{ staticData.sign_in_forgot_password }}</a>
     </div>
     <v-checkbox
       v-model="checkbox"
-      :label="`Запомнить выбор`"
+      :label="staticData.sign_in_remember_me"
     />
-    <Button :text="`Войти`" />
+    <Button :text="staticData.sign_in_button" />
     <div class="login-bottom">
-      <span>Нет аккаунта?</span>
+      <span>{{ staticData.sign_in_dont_have_account }}</span>
       <NuxtLink to="/register">
-        Зарегестрирйутесь
+        {{ staticData.sign_in_register }}
       </NuxtLink>
-      {{ staticData }}
     </div>
   </v-card>
 </template>

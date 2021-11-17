@@ -1,7 +1,7 @@
 <template>
   <div class="seetoo">
     <div class="seetoo-ttl">
-      Вам будет интересно:
+      {{ title }}
     </div>
     <div class="seetoo-list d-flex flex-column flex-md-row justify-space-between">
       <v-card class="seetoo-item item-2">
@@ -66,7 +66,7 @@
                   text
                   @click="dialog = false"
                 >
-                  I accept
+                  <CloseButton />
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -86,8 +86,18 @@
 </template>
 
 <script>
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
+  components: {
+    CloseButton
+  },
+  props: {
+    title: {
+      type: String,
+      default: "Вам будет интересно:"
+    }
+  },
   data () {
     return {
       dialog: false

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ttl">
-      Актуальные чаты:
+      {{ staticData.telegram_title }}
     </div>
     <div class="article-telegram">
       <v-row>
@@ -32,7 +32,6 @@
         </v-col>
       </v-row>
     </div>
-    {{ staticData }}
   </div>
 </template>
 
