@@ -338,6 +338,11 @@ export default {
     border-radius: 15px;
     padding: 30px;
 
+    .theme--light & {
+      background: #fff;
+      border: 1px solid #fff;
+    }
+
     .v-divider {
       margin: 25px 0;
     }
@@ -347,6 +352,10 @@ export default {
     height: 30px;
     background: #1e1f26;
     border-bottom: 0;
+
+    .theme--light & {
+      background: #fff;
+    }
   }
 
   .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
@@ -372,7 +381,7 @@ export default {
     text-indent: -99999px;
   }
 
-  .theme--dark.v-data-table {
+  .v-data-table {
     background: inherit;
   }
 }

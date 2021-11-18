@@ -1,8 +1,14 @@
 .header {
-  padding: 45px 0;
+  padding: 45px 40px;
+  margin-bottom: 30px;
 
   @media screen and (max-width: 758px) {
-    padding: 10px 0;
+    padding: 10px 25px;
+    margin-bottom: 0;
+  }
+
+  .theme--light & {
+    background-color: #fff;
   }
 
   &-avatar {
@@ -54,6 +60,18 @@
         background: #18191f;
         border: 1px solid #272a33;
         border-radius: 6px;
+
+        .theme--light & {
+          background: #f3f3f3;
+          border: 1px solid #f3f3f3;
+          color: #9e9ea7;
+        }
+
+        input {
+          .theme--light & {
+            color: #9e9ea7;
+          }
+        }
       }
 
       .v-text-field__details {
@@ -67,6 +85,10 @@
       background: #23262e;
       border-radius: 6px;
       margin-left: 10px;
+
+      .theme--light & {
+        background: #f6f7f9;
+      }
     }
   }
 
@@ -85,6 +107,10 @@
     border-radius: 6px;
     padding: 4px 8px;
     font-size: 13px;
+
+    .theme--light & {
+      background: #f6f7f9;
+    }
 
     &.premium {
       border: 1px solid #8d68f5;

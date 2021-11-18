@@ -34,6 +34,10 @@
       background: #1a1b21;
       border-radius: 10px;
       margin: 0 8px;
+
+      .theme--light & {
+        background: #f6f7f9;
+      }
     }
   }
 
@@ -53,5 +57,9 @@
     p + p {
       margin-left: 15px;
     }
+  }
+
+  .logo {
+    margin: 30px auto;
   }
 }

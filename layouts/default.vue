@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <Sidebar />
-    <v-main>
+    <v-main class="base">
       <v-container>
         <Header />
-        <Nuxt />
+        <Nuxt class="main" />
         <Footer />
       </v-container>
     </v-main>

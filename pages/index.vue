@@ -167,8 +167,12 @@ export default {
   background: #23262e;
 }
 
-.theme--light.v-btn.v-btn--has-bg {
+.v-btn.v-btn--has-bg {
   background: #1e1f26;
+}
+
+.theme--light.v-btn.v-btn--has-bg {
+  background: #eef0f2;
 }
 
 .main {
@@ -177,6 +181,10 @@ export default {
     font-size: 24px;
     line-height: 31px;
     color: white;
+
+    .theme--light & {
+      color: #474856;
+    }
   }
 
   &-subttl {
@@ -213,6 +221,11 @@ export default {
         border: 1px solid #272a33;
         border-radius: 4px !important;
         width: 89px;
+
+        .theme--light & {
+          border: 1px solid #e1e3ea;
+          background: rgba(255, 255, 255, 0.5);
+        }
       }
 
       .v-btn--active {
@@ -232,10 +245,18 @@ export default {
   }
 }
 
-.theme--dark.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
   height: 30px;
   background: #1e1f26;
   border-bottom: 0;
+
+  .theme--light & {
+    background: #fff;
+  }
+}
+
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+  color: #afb0bb;
 }
 
 .v-data-table > .v-data-table__wrapper > table > thead > tr > th:first-child {
@@ -261,7 +282,7 @@ export default {
   text-indent: -99999px;
 }
 
-.theme--dark.v-data-table {
+.v-data-table {
   background: inherit;
 }
 
