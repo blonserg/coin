@@ -155,6 +155,7 @@ export default {
   async fetch () {
     this.staticData = await StaticService.get("/my_profile")
   },
+  fetchOnServer: false,
   methods: {
     async logoutUser () {
       const errors = await UserService.logout();

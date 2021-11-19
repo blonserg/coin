@@ -126,6 +126,7 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/project")
-  }
+  },
+  fetchOnServer: false
 };
 </script>

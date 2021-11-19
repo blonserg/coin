@@ -76,6 +76,7 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
-  }
+  },
+  fetchOnServer: false
 };
 </script>

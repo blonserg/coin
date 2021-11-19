@@ -58,6 +58,7 @@ export default {
   async fetch () {
     this.staticData = await StaticService.get("/signin");
   },
+  fetchOnServer: false,
   methods: {
     async login () {
       const loginUserData = {

@@ -34,7 +34,8 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/two_factor");
-  }
+  },
+  fetchOnServer: false
 };
 </script>
 

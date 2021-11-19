@@ -73,6 +73,7 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/burse")
-  }
+  },
+  fetchOnServer: false
 };
 </script>

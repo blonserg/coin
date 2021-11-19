@@ -2,6 +2,7 @@
   <div class="landing">
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
+      {{ authUserInfo }}
       <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7">
           <div class="landing-ttl">
@@ -358,6 +359,7 @@
             </v-card>
           </v-dialog>
           <div class="landing-review_wrap">
+            TEST begin
             <div v-for="dynamicDataitem in dynamicData.reviews" :key="dynamicDataitem.id" class="landing-review_item">
               <div class="landing-review_txt">
                 {{ dynamicDataitem.content }}
@@ -367,6 +369,7 @@
                 <img src="/review-1.png" alt="" />
               </div>
             </div>
+            TEST END
           </div>
         </div>
       </v-lazy>
@@ -464,12 +467,26 @@ export default {
       ],
       staticData: [],
       dynamicData: {},
+      authUserInfo: null,
       user: null
     };
   },
   async fetch () {
-    this.dynamicData = await HttpService.get("/main-page");
     this.staticData = await StaticService.get("/main");
+
+    let response = await HttpService.get("/main-page");
+    if (response.status === 200) {
+      this.dynamicData = response.data;
+    } else {
+      // TODO
+    }
+
+    response = await HttpService.get("/auth-user-info");
+    if (response.status === 200) {
+      this.authUserInfo = response.data;
+    } else {
+      // TODO
+    }
   },
   fetchOnServer: false
 };

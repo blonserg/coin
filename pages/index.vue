@@ -150,6 +150,7 @@ export default {
   async fetch () {
     this.staticData = await StaticService.get("/cabinet_main");
   },
+  fetchOnServer: false,
   computed: {
     desserts () {
       return this.$store.state.desserts;

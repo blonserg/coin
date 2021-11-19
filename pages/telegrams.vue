@@ -66,6 +66,7 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/telegram")
-  }
+  },
+  fetchOnServer: false
 };
 </script>

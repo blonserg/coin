@@ -304,7 +304,8 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/strategy");
-  }
+  },
+  fetchOnServer: false
 };
 </script>
 
