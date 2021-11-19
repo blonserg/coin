@@ -48,14 +48,13 @@ export default {
   components: {
     LogoSvg
   },
-  async asyncData () {
-    const staticData = await StaticService.get("/main")
-    return { staticData }
-  },
   data () {
     return {
       staticData: []
     }
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/main");
   }
 };
 </script>

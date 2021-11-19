@@ -148,14 +148,13 @@ import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
 
 export default {
-  async asyncData () {
-    const staticData = await StaticService.get("/my_profile")
-    return { staticData }
-  },
   data: () => ({
     items: ["Foo", "Bar", "Fizz", "Buzz"],
     staticData: []
   }),
+  async fetch () {
+    this.staticData = await StaticService.get("/my_profile")
+  },
   methods: {
     async logoutUser () {
       const errors = await UserService.logout();

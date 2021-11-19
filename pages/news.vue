@@ -22,10 +22,6 @@ export default {
     Title,
     News
   },
-  async asyncData () {
-    const staticData = await StaticService.get("/news")
-    return { staticData }
-  },
   data () {
     return {
       news: [
@@ -77,6 +73,9 @@ export default {
       ],
       staticData: []
     };
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/news");
   }
 };
 </script>

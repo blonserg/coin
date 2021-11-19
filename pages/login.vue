@@ -45,10 +45,6 @@ export default {
     Button
   },
   layout: "signup",
-  async asyncData () {
-    const staticData = await StaticService.get("/signin")
-    return { staticData }
-  },
   data () {
     return {
       staticData: [],
@@ -58,6 +54,9 @@ export default {
       },
       checkbox: false
     }
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/signin");
   },
   methods: {
     async login () {

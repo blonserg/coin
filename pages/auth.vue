@@ -27,14 +27,13 @@ export default {
     Button
   },
   layout: "signup",
-  async asyncData () {
-    const staticData = await StaticService.get("/two_factor")
-    return { staticData }
-  },
   data () {
     return {
       staticData: []
     };
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/two_factor");
   }
 };
 </script>

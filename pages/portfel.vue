@@ -119,14 +119,13 @@ export default {
   components: {
     Button
   },
-  async asyncData () {
-    const staticData = await StaticService.get("/project")
-    return { staticData }
-  },
   data () {
     return {
       staticData: []
     };
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/project")
   }
 };
 </script>

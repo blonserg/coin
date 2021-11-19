@@ -416,10 +416,6 @@ export default {
     CloseButton
   },
   layout: "landing",
-  async asyncData () {
-    const staticData = await StaticService.get("/main")
-    return { staticData }
-  },
   data () {
     return {
       text: "all",
@@ -473,6 +469,7 @@ export default {
   },
   async fetch () {
     this.dynamicData = await HttpService.get("/main-page");
+    this.staticData = await StaticService.get("/main");
   },
   fetchOnServer: false
 };

@@ -265,10 +265,6 @@
 import StaticService from "~/services/StaticService";
 
 export default {
-  async asyncData () {
-    const staticData = await StaticService.get("/strategy")
-    return { staticData }
-  },
   data () {
     return {
       invests: [
@@ -305,6 +301,9 @@ export default {
       ],
       staticData: []
     };
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/strategy");
   }
 };
 </script>

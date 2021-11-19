@@ -141,15 +141,14 @@ export default {
     News,
     Seetoo
   },
-  async asyncData () {
-    const staticData = await StaticService.get("/cabinet_main")
-    return { staticData }
-  },
   data () {
     return {
       text: "all",
       staticData: []
     };
+  },
+  async fetch () {
+    this.staticData = await StaticService.get("/cabinet_main");
   },
   computed: {
     desserts () {
