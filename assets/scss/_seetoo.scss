@@ -41,13 +41,21 @@
       font-size: 20px;
       line-height: 26px;
       color: #eef1f8;
+
+      .theme--light & {
+        color: #474856;
+      }
     }
 
     &_subttl {
       font-size: 14px;
       line-height: 18px;
       color: #808190;
-      display: inline-block;
+      display: block;
+    }
+
+    &_bottom {
+      width: 100%;
     }
   }
 }

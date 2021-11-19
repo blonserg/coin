@@ -56,6 +56,10 @@
       border-radius: 6px;
       padding: 10px 12px;
       margin-bottom: 8px;
+
+      .theme--light & {
+        background: #f6f7f9;
+      }
     }
 
     &_lt {
@@ -176,6 +180,10 @@
     line-height: 38px;
     color: #eef1f8;
     margin-bottom: 20px;
+
+    .theme--light & {
+      color: #474856;
+    }
   }
 
   &-head {
@@ -192,6 +200,10 @@
     line-height: 31px;
     letter-spacing: 0.01em;
     color: #eef1f8;
+
+    .theme--light & {
+      color: #474856;
+    }
   }
 
   &-link {
@@ -207,6 +219,10 @@
     text-decoration: none;
     letter-spacing: 0.5px;
     text-align: center;
+
+    .theme--light & {
+      color: #fff;
+    }
   }
 
   &-bottom {
@@ -241,6 +257,10 @@
       line-height: 23px;
       color: #fff;
       margin-bottom: 10px;
+
+      .theme--light & {
+        color: #474856;
+      }
     }
 
     &_txt {

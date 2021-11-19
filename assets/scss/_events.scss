@@ -28,6 +28,10 @@
       text-transform: uppercase;
       color: primary;
       font-weight: bold;
+
+      .theme--light & {
+        color: #73747e;
+      }
     }
 
     &_day {
@@ -80,5 +84,9 @@
     background: #1b1d23;
     border-radius: 4px;
     color: #2d7bf6;
+
+    .theme--light & {
+      background: #f6f7f9;
+    }
   }
 }

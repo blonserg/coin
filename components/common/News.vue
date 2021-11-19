@@ -58,6 +58,11 @@ export default {
       border: 1px solid #272a33;
       border-radius: 15px;
       width: 344px;
+
+      .theme--light & {
+        background: #e4e5e8;
+        border: 1px solid #f0f0f0;
+      }
     }
 
     &-img {
@@ -67,6 +72,10 @@ export default {
     &-info {
       background: #23262e;
       padding: 20px 16px;
+
+      .theme--light & {
+        background: #fff;
+      }
     }
 
     &-ttl {
@@ -78,6 +87,10 @@ export default {
       a {
         color: #eef1f8;
         text-decoration: none;
+
+        .theme--light & {
+          color: #474856;
+        }
       }
     }
 
@@ -90,6 +103,10 @@ export default {
       align-items: center;
       font-size: 13px;
       line-height: 17px;
+
+      .theme--light & {
+          background: #f6f7f9;
+        }
 
       &.c-green {
         color: #61ccbf;
