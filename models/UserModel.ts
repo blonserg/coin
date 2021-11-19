@@ -10,5 +10,9 @@ export default interface UserModel {
   email: string,
   api_token: string,
   referral_link: string,
-  user_id: number
+  user_id: number,
+  name: string,
+  email_verified_at: string,
+  created_at: string,
+  updated_at: string
 }

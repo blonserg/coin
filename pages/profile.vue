@@ -130,12 +130,22 @@
           </button>
         </div>
       </div>
+      <v-btn
+        class="btn d-none d-md-flex"
+        color="#2d7bf6"
+        x-large
+        height="48px"
+        @click.native="logoutUser"
+      >
+        Log out
+      </v-btn>
     </v-col>
   </v-row>
 </template>
 
 <script>
 import StaticService from "~/services/StaticService";
+import UserService from "~/services/UserService";
 
 export default {
   async asyncData () {
@@ -145,7 +155,17 @@ export default {
   data: () => ({
     items: ["Foo", "Bar", "Fizz", "Buzz"],
     staticData: []
-  })
+  }),
+  methods: {
+    async logoutUser () {
+      const errors = await UserService.logout();
+      if (!errors) {
+        this.$router.push("landing");
+      } else {
+        // TODO: process errors
+      }
+    }
+  }
 };
 </script>
 

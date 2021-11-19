@@ -77,6 +77,7 @@ export default {
   layout: "signup",
   data () {
     return {
+      // TODO: change refer - unknown logic?
       refer: false,
       staticData: [],
       user: {
@@ -107,12 +108,15 @@ export default {
         ...this.user
       };
       if (this.refer) {
-        registrationUserData.referer_id = 1; // TODO
+        // TODO: get from somewhere the referer_id
+        registrationUserData.referer_id = 1;
       }
-      const user = await UserService.registration(registrationUserData);
-      this.$store.commit("setUser", user);
-      // TODO: PROCESS ERRORS
-      this.$router.push("landing");
+      const errors = await UserService.registration(registrationUserData);
+      if (!errors) {
+        this.$router.push("landing");
+      } else {
+        // TODO: process errors
+      }
     }
   }
 }

@@ -5,12 +5,14 @@
       {{ staticData.sign_in }}
     </div>
     <v-text-field
+      v-model="user.email"
       label="Email"
       solo
       height="40px"
     />
     <div class="login-password">
       <v-text-field
+        v-model="user.password"
         :label="staticData.sign_in_password"
         solo
         height="40px"
@@ -21,7 +23,7 @@
       v-model="checkbox"
       :label="staticData.sign_in_remember_me"
     />
-    <Button :text="staticData.sign_in_button" />
+    <Button :text="staticData.sign_in_button" @click.native="login" />
     <div class="login-bottom">
       <span>{{ staticData.sign_in_dont_have_account }}</span>
       <NuxtLink to="/register">
@@ -35,6 +37,7 @@
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
+import UserService from "~/services/UserService";
 
 export default {
   components: {
@@ -48,7 +51,25 @@ export default {
   },
   data () {
     return {
-      staticData: []
+      staticData: [],
+      user: {
+        email: "",
+        password: ""
+      },
+      checkbox: false
+    }
+  },
+  methods: {
+    async login () {
+      const loginUserData = {
+        ...this.user
+      };
+      const errors = await UserService.login(loginUserData);
+      if (!errors) {
+        this.$router.push("landing");
+      } else {
+        // TODO: process errors
+      }
     }
   }
 };

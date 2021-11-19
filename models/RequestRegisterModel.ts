@@ -1,4 +1,4 @@
-export default interface RegistrationUserModel {
+export default interface RequestRegisterModel {
   name: string,
   email: string,
   password: string,
