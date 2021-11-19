@@ -11,10 +11,8 @@ export default {
 
     if (params) {
       path += "?"
-      params.entries().forEach((objectItem: any[]) => {
-        const key = objectItem[0];
-        const value = objectItem[1];
-        path += key + "=" + value + "&"
+      Object.keys(params).forEach((key: string) => {
+        path += key + "=" + params[key] + "&"
       });
     }
 
@@ -46,10 +44,8 @@ export default {
 
     if (params) {
       path += "?";
-      params.entries().forEach((objectItem: any[]) => {
-        const key = objectItem[0];
-        const value = objectItem[1];
-        path += key + "=" + value + "&"
+      Object.keys(params).forEach((key: string) => {
+        path += key + "=" + params[key] + "&"
       });
     }
 
