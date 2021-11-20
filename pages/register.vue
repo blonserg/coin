@@ -25,35 +25,50 @@
     <div v-else class="login-ttl">
       {{ staticData.registration_title }}
     </div>
-    <v-text-field
-      v-model="user.name"
-      label="Name"
-      solo
-      height="40px"
-    />
-    <v-text-field
-      v-model="user.email"
-      label="Email"
-      solo
-      height="40px"
-    />
-    <v-text-field
-      v-model="user.password"
-      :label="staticData.password"
-      solo
-      height="40px"
-    />
-    <v-text-field
-      v-model="user.password_confirmation"
-      :label="staticData.repeat_password"
-      solo
-      height="40px"
-    />
-    <v-checkbox
-      v-model="checkbox"
-      :label="staticData.reg_remember_me"
-    />
-    <Button :text="staticData.registration_button" @click.native="registration" />
+    <v-form v-model="valid">
+      <v-text-field
+        v-model="user.name"
+        label="Name"
+        solo
+        height="40px"
+        :rules="nameRules"
+        required
+      />
+      <v-text-field
+        v-model="user.email"
+        label="Email"
+        solo
+        height="40px"
+        :rules="emailRules"
+        required
+      />
+      <v-text-field
+        v-model="user.password"
+        :label="staticData.password"
+        solo
+        height="40px"
+        :rules="nameRules"
+        required
+      />
+      <v-text-field
+        v-model="user.password_confirmation"
+        :label="staticData.repeat_password"
+        solo
+        height="40px"
+        :rules="nameRules"
+        required
+      />
+      <v-checkbox
+        v-model="checkbox"
+        :label="staticData.reg_remember_me"
+      />
+      <div v-if="valid">
+        <Button :text="staticData.registration_button" @click.native="registration" />
+      </div>
+      <div v-if="error">
+        Error
+      </div>
+    </v-form>
     <div class="login-bottom">
       <span>{{ staticData.reg_have_account }}</span>
       <NuxtLink to="/login">
@@ -79,6 +94,7 @@ export default {
     return {
       // TODO: change refer - unknown logic?
       refer: false,
+      valid: false,
       staticData: [],
       user: {
         name: "",
@@ -87,7 +103,15 @@ export default {
         password_confirmation: "",
         ip: ""
       },
-      checkbox: false
+      checkbox: false,
+      error: false,
+      nameRules: [
+        v => !!v || "Обязательное поле"
+      ],
+      emailRules: [
+        v => !!v || "Обязательное поле",
+        v => /.+@.+/.test(v) || "E-mail не правильное"
+      ]
     };
   },
   async fetch () {
@@ -116,6 +140,7 @@ export default {
         this.$router.push("landing");
       } else {
         // TODO: process errors
+        this.error = true
       }
     }
   }

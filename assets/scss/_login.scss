@@ -7,8 +7,21 @@
     font-size: 14px;
   }
 
+  .v-text-field--solo.error--text > .v-input__control > .v-input__slot {
+    border: 1px solid red;
+  }
+
   .v-text-field__details {
-    display: none;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .v-text-field.v-text-field--enclosed .v-text-field__details {
+    margin-bottom: 0;
+  }
+
+  .v-text-field.v-text-field--enclosed .v-text-field__details .error--text {
+    margin-bottom: 8px;
   }
 
   &-password {
