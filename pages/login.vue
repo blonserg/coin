@@ -4,26 +4,32 @@
     <div class="login-ttl">
       {{ staticData.sign_in }}
     </div>
-    <v-text-field
-      v-model="user.email"
-      label="Email"
-      solo
-      height="40px"
-    />
-    <div class="login-password">
+    <v-form v-model="valid">
       <v-text-field
-        v-model="user.password"
-        :label="staticData.sign_in_password"
+        v-model="user.email"
+        label="Email"
         solo
         height="40px"
+        :rules="nameRules"
+        required
       />
-      <a href="" class="login-password_btn">{{ staticData.sign_in_forgot_password }}</a>
-    </div>
-    <v-checkbox
-      v-model="checkbox"
-      :label="staticData.sign_in_remember_me"
-    />
-    <Button :text="staticData.sign_in_button" @click.native="login" />
+      <div class="login-password">
+        <v-text-field
+          v-model="user.password"
+          :label="staticData.sign_in_password"
+          solo
+          height="40px"
+          :rules="nameRules"
+          required
+        />
+        <a href="" class="login-password_btn">{{ staticData.sign_in_forgot_password }}</a>
+      </div>
+      <v-checkbox
+        v-model="checkbox"
+        :label="staticData.sign_in_remember_me"
+      />
+      <Button :text="staticData.sign_in_button" @click.native="login" />
+    </v-form>
     <div class="login-bottom">
       <span>{{ staticData.sign_in_dont_have_account }}</span>
       <NuxtLink to="/register">
@@ -48,11 +54,15 @@ export default {
   data () {
     return {
       staticData: [],
+      valid: true,
       user: {
         email: "",
         password: ""
       },
-      checkbox: false
+      checkbox: false,
+      nameRules: [
+        v => !!v || "Обязательное поле"
+      ]
     }
   },
   async fetch () {

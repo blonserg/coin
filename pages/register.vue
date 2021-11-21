@@ -63,10 +63,16 @@
         :label="staticData.reg_remember_me"
       />
       <div v-if="valid">
-        <Button :text="staticData.registration_button" @click.native="registration" />
+        <Button :disabled="!valid" :text="staticData.registration_button" @click.native="registration" />
       </div>
-      <div v-if="error">
-        Error
+      <div v-if="errorStatus">
+        <v-alert
+          dense
+          outlined
+          type="error"
+        >
+          {{ errorList }}
+        </v-alert>
       </div>
     </v-form>
     <div class="login-bottom">
@@ -94,7 +100,7 @@ export default {
     return {
       // TODO: change refer - unknown logic?
       refer: false,
-      valid: false,
+      valid: true,
       staticData: [],
       user: {
         name: "",
@@ -104,7 +110,8 @@ export default {
         ip: ""
       },
       checkbox: false,
-      error: false,
+      errorStatus: false,
+      errorList: "",
       nameRules: [
         v => !!v || "Обязательное поле"
       ],
@@ -140,7 +147,8 @@ export default {
         this.$router.push("landing");
       } else {
         // TODO: process errors
-        this.error = true
+        this.errorStatus = true
+        this.errorList = errors;
       }
     }
   }
@@ -172,6 +180,13 @@ export default {
 
   .btn {
     width: 100%;
-    margin-bottom: 65px;
+  }
+
+  .login-bottom {
+    margin-top: 60px;
+  }
+
+  .v-alert {
+    margin-top: 10px;
   }
 </style>
