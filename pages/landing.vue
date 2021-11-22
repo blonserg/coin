@@ -2,6 +2,7 @@
   <div class="landing">
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
+      Auth user info:
       {{ authUserInfo }}
       <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7">

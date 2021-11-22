@@ -1,6 +1,8 @@
 <template>
   <div>
     <Title :title="staticData.cabinet_main_event" />
+    Events:
+    {{ events }}
     <div class="events-list">
       <v-card class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
@@ -33,7 +35,14 @@
         </div>
       </v-card>
     </div>
+    Promo:
+    {{ promo }}
+    <br>
+    Отзывы - reviews:
+    {{ reviews }}
     <Seetoo :title="staticData.cabinet_main_be_interested" />
+    News:
+    {{ newsApi }}
     <Title :title="staticData.cabinet_main_news" />
     <v-row>
       <v-col v-for="item in news" :key="item.title" md="4">
@@ -41,6 +50,8 @@
       </v-col>
     </v-row>
     <v-btn class="btn btn-seetoo" block>{{ staticData.cabinet_main_see_more }} </v-btn>
+    Выдача статистики - statistics
+    {{ statistics }}
     <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
       Учитываются все пользователи, зарегистрировавшиеся на Strike Team
@@ -134,6 +145,7 @@ import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -144,11 +156,51 @@ export default {
   data () {
     return {
       text: "all",
-      staticData: []
+      staticData: [],
+      events: null,
+      promo: null,
+      reviews: null,
+      newsApi: null,
+      statistics: null
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/cabinet_main");
+
+    const response = await HttpService.get("/events");
+    if (response.status === 200) {
+      this.events = response.data;
+    } else {
+      // TODO
+    }
+
+    const resp = await HttpService.get("/promo");
+    if (resp.status === 200) {
+      this.promo = resp.data;
+    } else {
+      // TODO
+    }
+
+    const res = await HttpService.get("/reviews");
+    if (res.status === 200) {
+      this.reviews = res.data;
+    } else {
+      // TODO
+    }
+
+    const re = await HttpService.get("/news");
+    if (re.status === 200) {
+      this.apiNews = re.data.articles;
+    } else {
+      // TODO
+    }
+
+    const respo = await HttpService.get("/statistics");
+    if (respo.status === 200) {
+      this.statistics = respo.data;
+    } else {
+      // TODO
+    }
   },
   fetchOnServer: false,
   computed: {

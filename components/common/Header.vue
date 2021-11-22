@@ -38,6 +38,8 @@
         </button>
       </div>
       <div class="header-notifcatns">
+        User notifications:
+        {{ userNotifications }}
         <v-badge overlap color="#F75050">
           <v-btn
             class="header-notifcatns-btn"
@@ -56,6 +58,7 @@
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -63,9 +66,19 @@ export default {
   },
   data () {
     return {
-      value: "loremipsum"
+      value: "loremipsum",
+      userNotifications: null
     };
   },
+  async fetch () {
+    const response = await HttpService.get("/user-notifications");
+    if (response.status === 200) {
+      this.userNotifications = response.data;
+    } else {
+      // TODO
+    }
+  },
+  fetchOnServer: false,
   methods: {
     copyText () {
       const textToCopy = this.$refs.textToCopy.$el.querySelector("input");

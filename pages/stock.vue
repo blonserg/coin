@@ -3,6 +3,11 @@
     <div class="ttl">
       {{ staticData.burse_title }}
     </div>
+    Services: (Биржа услуг)
+    {{ services }}
+    <br>
+    Services request: (Биржа услуг заявки )
+    {{ servicesRequest }}
     <div class="article-stock">
       <v-row>
         <v-col v-for="(item, i) in invests" :key="i" md="6">
@@ -44,6 +49,7 @@
 
 <script>
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   data () {
@@ -68,11 +74,30 @@ export default {
           title: "SMM продвижение и аналитика"
         }
       ],
-      staticData: []
+      staticData: [],
+      services: null,
+      servicesRequest: null,
+      servicesRequestParams: {
+        "link": "https://rozetka.com.ua/"
+      }
     };
   },
   async fetch () {
-    this.staticData = await StaticService.get("/burse")
+    this.staticData = await StaticService.get("/burse");
+
+    const response = await HttpService.get("/services");
+    if (response.status === 200) {
+      this.services = response.data;
+    } else {
+      // TODO
+    }
+
+    const resp = await HttpService.get("/services-request", this.servicesRequestParams);
+    if (resp.status === 200) {
+      this.servicesRequest = resp.data;
+    } else {
+      // TODO
+    }
   },
   fetchOnServer: false
 };

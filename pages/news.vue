@@ -9,6 +9,7 @@
     <v-btn class="btn btn-seetoo" block>
       {{ staticData.news_show_more }}
     </v-btn>
+    {{ apiNews }}
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -71,11 +73,19 @@ export default {
           date: "14 авг"
         }
       ],
-      staticData: []
+      staticData: [],
+      apiNews: null
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
+
+    const response = await HttpService.get("/news");
+    if (response.status === 200) {
+      this.apiNews = response.data.articles;
+    } else {
+      // TODO
+    }
   },
   fetchOnServer: false
 };
