@@ -3,6 +3,8 @@
     <div class="ttl">
       {{ staticData.strategy_title }}
     </div>
+    Стратегии strategy:
+    {{ strategies }}
     <div class="subttl">
       {{ staticData.strategy_paragraph }}
     </div>
@@ -182,6 +184,8 @@
         </v-card>
       </div>
     </div>
+    Инвестиционные портфели projects:
+    {{ projects }}
     <div class="ttl">
       Инвестиционный портфель
     </div>
@@ -263,6 +267,7 @@
 
 <script>
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   data () {
@@ -299,11 +304,27 @@ export default {
           title: "Torexo Project"
         }
       ],
-      staticData: []
+      staticData: [],
+      strategies: null,
+      projects: null
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/strategy");
+
+    let response = await HttpService.get("/strategy");
+    if (response.status === 200) {
+      this.strategies = response.data;
+    } else {
+      // TODO
+    }
+
+    response = await HttpService.get("/projects");
+    if (response.status === 200) {
+      this.projects = response.data;
+    } else {
+      // TODO
+    }
   },
   fetchOnServer: false
 };

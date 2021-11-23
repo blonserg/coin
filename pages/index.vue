@@ -167,37 +167,37 @@ export default {
   async fetch () {
     this.staticData = await StaticService.get("/cabinet_main");
 
-    const response = await HttpService.get("/events");
+    let response = await HttpService.get("/events");
     if (response.status === 200) {
       this.events = response.data;
     } else {
       // TODO
     }
 
-    const resp = await HttpService.get("/promo");
-    if (resp.status === 200) {
-      this.promo = resp.data;
+    response = await HttpService.get("/promo");
+    if (response.status === 200) {
+      this.promo = response.data;
     } else {
       // TODO
     }
 
-    const res = await HttpService.get("/reviews");
-    if (res.status === 200) {
-      this.reviews = res.data;
+    response = await HttpService.get("/reviews");
+    if (response.status === 200) {
+      this.reviews = response.data;
     } else {
       // TODO
     }
 
-    const re = await HttpService.get("/news");
-    if (re.status === 200) {
-      this.apiNews = re.data.articles;
+    response = await HttpService.get("/news");
+    if (response.status === 200) {
+      this.apiNews = response.data.articles;
     } else {
       // TODO
     }
 
-    const respo = await HttpService.get("/statistics");
-    if (respo.status === 200) {
-      this.statistics = respo.data;
+    response = await HttpService.get("/statistics");
+    if (response.status === 200) {
+      this.statistics = response.data;
     } else {
       // TODO
     }

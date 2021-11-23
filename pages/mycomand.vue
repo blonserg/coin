@@ -3,6 +3,8 @@
     <h1 class="ttl">
       Моя команда
     </h1>
+    Моя команда user-team:
+    {{ userTeam }}
     <v-row class="mb-12">
       <v-col md="4">
         <v-card class="mycomand-main">
@@ -258,6 +260,7 @@
 
 <script>
 import Title from "~~/components/common/Title";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -323,9 +326,19 @@ export default {
           reg: 159,
           sell: 130
         }
-      ]
+      ],
+      userTeam: null
     };
-  }
+  },
+  async fetch () {
+    const response = await HttpService.get("/user-team");
+    if (response.status === 200) {
+      this.userTeam = response.data;
+    } else {
+      // TODO
+    }
+  },
+  fetchOnServer: false
 };
 </script>
 
