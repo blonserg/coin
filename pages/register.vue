@@ -144,7 +144,7 @@ export default {
       }
       const errors = await UserService.registration(registrationUserData);
       if (!errors) {
-        this.$router.push("landing");
+        this.$router.push("login");
       } else {
         // TODO: process errors
         this.errorStatus = true
