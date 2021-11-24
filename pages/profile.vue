@@ -224,9 +224,9 @@ export default {
       }
     },
     async changeUserProfile () {
-      const response = await HttpService.post("/user-profile", this.userProfile);
+      const response = await HttpService.post("/user-profile", this.userProfile.profile);
       if (response.status === 200) {
-        this.userProfile = response.data.profile;
+        this.userProfile = response.data;
       } else {
       // TODO
       }
