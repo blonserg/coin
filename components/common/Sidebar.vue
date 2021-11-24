@@ -5,7 +5,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
-      hide-overlay="true"
+      hide-overlay
       fixed
       app
       class="sidebar"

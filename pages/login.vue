@@ -22,7 +22,7 @@
           :rules="nameRules"
           required
         />
-        <a href="" class="login-password_btn">{{ staticData.sign_in_forgot_password }}</a>
+        <span class="login-password_btn" @click="forgotPassword">{{ staticData.sign_in_forgot_password }}</span>
       </div>
       <v-checkbox
         v-model="checkbox"
@@ -44,6 +44,7 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -79,6 +80,16 @@ export default {
         this.$router.push("landing");
       } else {
         // TODO: process errors
+      }
+    },
+    async forgotPassword () {
+      const path = "/forgot-password?email=" + this.user.email;
+      const response = await HttpService.post(path);
+      if (response.status === 200) {
+        console.log(response);
+        // TODO inform user, that email was send
+      } else {
+      // TODO
       }
     }
   }

@@ -25,7 +25,7 @@
       <v-navigation-drawer
         v-model="drawer"
         :clipped="clipped"
-        hide-overlay="true"
+        hide-overlay
         fixed
         class="header-land-nav"
       >
