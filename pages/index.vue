@@ -50,8 +50,6 @@
       </v-col>
     </v-row>
     <v-btn class="btn btn-seetoo" block>{{ staticData.cabinet_main_see_more }} </v-btn>
-    Выдача статистики - statistics
-    {{ statistics }}
     <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
       Учитываются все пользователи, зарегистрировавшиеся на Strike Team
@@ -98,14 +96,14 @@
                 <template #default>
                   <thead>
                     <tr>
-                      <th class="text-left">Name</th>
-                      <th class="text-left">Calories</th>
+                      <th class="text-left">Страна</th>
+                      <th class="text-left">Количество</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in desserts" :key="item.name">
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.calories }}</td>
+                    <tr v-for="item in statisticsCountries" :key="item.country">
+                      <td>{{ item.country }}</td>
+                      <td>{{ item.procent }}</td>
                     </tr>
                   </tbody>
                 </template>
@@ -116,15 +114,15 @@
                 <template #default>
                   <thead>
                     <tr>
-                      <th class="text-left">Name</th>
-                      <th class="text-left">Calories</th>
+                      <th class="text-left">Город</th>
+                      <th class="text-left">Количество</th>
                     </tr>
                   </thead>
                   <v-spacer />
                   <tbody>
-                    <tr v-for="item in desserts" :key="item.name">
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.calories }}</td>
+                    <tr v-for="item in statisticsCities" :key="item.city">
+                      <td>{{ item.city }}</td>
+                      <td>{{ item.procent }}</td>
                     </tr>
                   </tbody>
                 </template>
@@ -161,7 +159,9 @@ export default {
       promo: null,
       reviews: null,
       newsApi: null,
-      statistics: null
+      statistics: null,
+      statisticsCountries: null,
+      statisticsCities: null
     };
   },
   async fetch () {
@@ -197,7 +197,8 @@ export default {
 
     response = await HttpService.get("/statistics");
     if (response.status === 200) {
-      this.statistics = response.data;
+      this.statisticsCountries = response.data.countries;
+      this.statisticsCities = response.data.cities;
     } else {
       // TODO
     }
@@ -325,6 +326,44 @@ export default {
   line-height: 18px;
   color: #adafc2;
   background: none;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td + td {
+  color: #fff;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr {
+  position: relative;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 11px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr:nth-child(5n + 1) td:first-child::before {
+  background-color: #8d68f5;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr:nth-child(5n + 2) td:first-child::before {
+  background-color: #68f58f;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr:nth-child(5n + 3) td:first-child::before {
+  background-color: #f5ac68;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr:nth-child(5n + 4)td:first-child::before {
+  background-color: #687ff5;
+}
+
+.v-data-table .v-data-table__wrapper table tbody tr:nth-child(5n + 5) td:first-child::before {
+  background-color: #f56868;
 }
 
 .v-data-table .v-data-table__wrapper table thead::after {

@@ -191,6 +191,12 @@
 
     &_img {
       margin-right: 20px;
+      max-width: 84px;
+
+      img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
     }
   }
 

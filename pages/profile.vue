@@ -56,6 +56,17 @@
               {{ staticData.my_profile_desc }}
             </div>
           </div>
+          <div class="d-flex justify-content-center">
+            <v-btn
+              class="btn btn--logout"
+              color="#2d7bf6"
+              x-large
+              height="48px"
+              @click.native="logoutUser"
+            >
+              Log out
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
       <v-col class="profile-form" md="8">
@@ -151,15 +162,6 @@
         >
           Save
         </v-btn>
-        <v-btn
-          class="btn d-none d-md-flex"
-          color="#2d7bf6"
-          x-large
-          height="48px"
-          @click.native="logoutUser"
-        >
-          Log out
-        </v-btn>
       </v-col>
     </v-row>
   </div>
@@ -242,6 +244,16 @@ export default {
     .v-avatar {
       background: #18191f !important;
     }
+  }
+}
+
+.btn--logout {
+  border: 1px solid #313440;
+  border-radius: 6px;
+  background-color: #23262e;
+
+  .v-btn__content {
+    color: #808190;
   }
 }
 </style>
