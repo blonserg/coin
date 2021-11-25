@@ -50,18 +50,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <div class="sidebar-balance">
-        <div class="sidebar-balance_ttl">
-          Ваши баллы:
-        </div>
-        <div class="sidebar-balance_count">
-          479
-        </div>
-        <div class="sidebar-balance_txt">
-          Вы можете использовать их для доступа к закрытым материалам
-        </div>
-        <Button :text="`Пополнить баланс`" />
-      </div>
       <v-list>
         <v-list-item
           :to="`/profile`"
@@ -92,12 +80,10 @@
 </template>
 
 <script>
-import Button from "~~/components/common/Button";
 import LogoSvg from "~~/components/svg/LogoSvg";
 
 export default {
   components: {
-    Button,
     LogoSvg
   },
   data () {
