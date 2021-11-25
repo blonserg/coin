@@ -159,7 +159,6 @@ export default {
       promo: null,
       reviews: null,
       newsApi: null,
-      statistics: null,
       statisticsCountries: null,
       statisticsCities: null
     };

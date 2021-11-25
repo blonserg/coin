@@ -236,6 +236,10 @@
                   </v-btn-toggle>
                 </div>
                 <div class="main-body">
+                  Statistics:
+                  {{ statisticsCountries }}
+                  <br>
+                  {{ statisticsCities }}
                   <v-simple-table>
                     <template #default>
                       <thead>
@@ -274,7 +278,7 @@
         min-height="200"
       >
         <div class="landing-review">
-          <div class="landing-subtxt">О нас гворят</div>
+          <div class="landing-subtxt">О нас говорят</div>
           <div class="landing-ttl mb-16 mb-md-4">
             What <span>motivates</span> users to use<br
               class="d-none d-md-block"
@@ -469,7 +473,9 @@ export default {
       staticData: [],
       dynamicData: {},
       authUserInfo: null,
-      user: null
+      user: null,
+      statisticsCountries: null,
+      statisticsCities: null
     };
   },
   async fetch () {
@@ -485,6 +491,14 @@ export default {
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
+    } else {
+      // TODO
+    }
+
+    response = await HttpService.get("/statistics");
+    if (response.status === 200) {
+      this.statisticsCountries = response.data.countries;
+      this.statisticsCities = response.data.cities;
     } else {
       // TODO
     }
