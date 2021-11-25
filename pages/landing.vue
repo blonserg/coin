@@ -2,8 +2,6 @@
   <div class="landing">
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
-      Auth user info:
-      {{ authUserInfo }}
       <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7">
           <div class="landing-ttl">
@@ -236,6 +234,10 @@
                   </v-btn-toggle>
                 </div>
                 <div class="main-body">
+                  Statistics:
+                  {{ statisticsCountries }}
+                  <br>
+                  {{ statisticsCities }}
                   <v-simple-table>
                     <template #default>
                       <thead>
@@ -274,7 +276,7 @@
         min-height="200"
       >
         <div class="landing-review">
-          <div class="landing-subtxt">О нас гворят</div>
+          <div class="landing-subtxt">О нас говорят</div>
           <div class="landing-ttl mb-16 mb-md-4">
             What <span>motivates</span> users to use<br
               class="d-none d-md-block"
@@ -468,8 +470,8 @@ export default {
       ],
       staticData: [],
       dynamicData: {},
-      authUserInfo: null,
-      user: null
+      statisticsCountries: null,
+      statisticsCities: null
     };
   },
   async fetch () {
@@ -482,9 +484,10 @@ export default {
       // TODO
     }
 
-    response = await HttpService.get("/auth-user-info");
+    response = await HttpService.get("/statistics");
     if (response.status === 200) {
-      this.authUserInfo = response.data;
+      this.statisticsCountries = response.data.countries;
+      this.statisticsCities = response.data.cities;
     } else {
       // TODO
     }
