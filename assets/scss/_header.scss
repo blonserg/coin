@@ -52,6 +52,8 @@
   }
 
   &-refs {
+    position: relative;
+
     .v-input .v-input__control {
       .v-input__slot {
         min-height: 30px;

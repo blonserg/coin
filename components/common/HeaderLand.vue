@@ -5,10 +5,9 @@
         <LogoSvg />
       </div>
       <div class="header-menu d-none d-md-block">
-        <a href="">О команде</a>
-        <a href="">О команде</a>
-        <a href="">О команде</a>
-        <a href="">О команде</a>
+        <nuxt-link :to="{ path: '/',hash:'#system'}">О системе</nuxt-link>
+        <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
+        <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
       </div>
       <NuxtLink to="/register">
         <v-btn
@@ -31,13 +30,14 @@
       >
         <div class="header-land-head mt-5 mb-5 d-flex d-md-block align-center justify-space-between">
           <LogoSvg />
-          <v-app-bar-nav-icon class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer" />
+          <span class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer">
+            <CloseMob />
+          </span>
         </div>
         <div class="header-menu">
-          <a href="">О команде</a>
-          <a href="">О команде</a>
-          <a href="">О команде</a>
-          <a href="">О команде</a>
+          <nuxt-link :to="{ path: '/',hash:'#system'}">О системе</nuxt-link>
+          <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
+          <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
         </div>
         <div class="d-flex justify-center">
           <NuxtLink to="/register">
@@ -60,11 +60,13 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import RegisterSvg from "~~/components/svg/RegisterSvg";
+import CloseMob from "~~/components/svg/CloseMob";
 
 export default {
   components: {
     LogoSvg,
-    RegisterSvg
+    RegisterSvg,
+    CloseMob
   },
   data () {
     return {

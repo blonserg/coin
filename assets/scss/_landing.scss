@@ -234,6 +234,16 @@
       padding: 0;
       border-radius: 0;
     }
+
+    &_ttl {
+      font-size: 24px;
+      line-height: 31px;
+      color: #eef1f8;
+    }
+
+    .logo {
+      width: 140px;
+    }
   }
 
   &-main_image {

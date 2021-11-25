@@ -18,6 +18,7 @@
           v-model="user.password"
           :label="staticData.sign_in_password"
           solo
+          type="password"
           height="40px"
           :rules="nameRules"
           required
@@ -28,6 +29,15 @@
         v-model="checkbox"
         :label="staticData.sign_in_remember_me"
       />
+      <div v-if="errorStatus">
+        <v-alert
+          dense
+          outlined
+          type="error"
+        >
+          Неверный логин или пароль
+        </v-alert>
+      </div>
       <Button :text="staticData.sign_in_button" @click.native="login" />
     </v-form>
     <div class="login-bottom">
@@ -61,6 +71,7 @@ export default {
         password: ""
       },
       checkbox: false,
+      errorStatus: false,
       nameRules: [
         v => !!v || "Обязательное поле"
       ]
@@ -80,6 +91,7 @@ export default {
         this.$router.push("main");
       } else {
         // TODO: process errors
+        this.errorStatus = true
       }
     },
     async forgotPassword () {

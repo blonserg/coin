@@ -75,17 +75,9 @@ export default {
         {
           title: "Инвестиии",
           to: "/invests"
-        },
-        {
-          title: "Резервый фонд",
-          to: "/inspire"
         }
       ],
       items_second: [
-        {
-          title: "CRM",
-          to: "/inspire"
-        },
         {
           title: "Биржа услуг",
           to: "/stock"
@@ -93,17 +85,9 @@ export default {
         {
           title: "Моя команда",
           to: "/mycomand"
-        },
-        {
-          title: "Лояльность",
-          to: "/inspire"
         }
       ],
       items_third: [
-        {
-          title: "FAQ",
-          to: "/inspire"
-        },
         {
           title: "Новости",
           to: "/news"
@@ -111,6 +95,10 @@ export default {
         {
           title: "Группы Telegram",
           to: "/telegrams"
+        },
+        {
+          title: "Мой профиль",
+          to: "/profile"
         }
       ]
     };

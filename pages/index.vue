@@ -51,6 +51,7 @@
         </v-row>
       </v-lazy>
       <v-lazy
+        id="system"
         :options="{
           threshold: 1.0,
         }"
@@ -179,6 +180,7 @@
         </div>
       </v-lazy>
       <v-lazy
+        id="statistic"
         :options="{
           threshold: 1.0,
         }"
@@ -199,11 +201,13 @@
           </v-col>
           <v-col md="6" class="table">
             <div class="landing-table">
-              <div class="d-flex justify-center">
+              <div class="d-flex justify-space-between align-center mb-14">
                 <div class="landing-table_ttl">
                   {{ staticData.statistics_right_headline }}
                 </div>
-                <LogoSvg />
+                <div class="d-block">
+                  <LogoSvg />
+                </div>
               </div>
               <div class="main-table">
                 <div
@@ -271,6 +275,7 @@
         </v-row>
       </v-lazy>
       <v-lazy
+        id="speak"
         :options="{
           threshold: 1.0,
         }"

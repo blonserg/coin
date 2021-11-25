@@ -13,7 +13,9 @@
     >
       <div class="sidebar-head d-flex d-md-block align-center">
         <LogoSvg />
-        <v-app-bar-nav-icon class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer" />
+        <span class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer">
+          <CloseMob />
+        </span>
       </div>
       <div class="d-flex flex-column d-md-none">
         <div class="header-avatar d-flex align-center">
@@ -81,10 +83,12 @@
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
+import CloseMob from "~~/components/svg/CloseMob";
 
 export default {
   components: {
-    LogoSvg
+    LogoSvg,
+    CloseMob
   },
   data () {
     return {
@@ -99,22 +103,12 @@ export default {
           to: "/main"
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Инвестиии",
+          icon: "mdi-apps",
+          title: "Инвестиции",
           to: "/invests"
         },
         {
           icon: "mdi-apps",
-          title: "Резервый фонд",
-          to: "/inspire"
-        },
-        {
-          icon: "mdi-apps",
-          title: "CRM",
-          to: "/inspire"
-        },
-        {
-          icon: "m,di-apps",
           title: "Биржа услуг",
           to: "/stock"
         },
@@ -122,16 +116,6 @@ export default {
           icon: "mdi-apps",
           title: "Моя команда",
           to: "/mycomand"
-        },
-        {
-          icon: "mdi-apps",
-          title: "Лояльность",
-          to: "/inspire"
-        },
-        {
-          icon: "mdi-apps",
-          title: "FAQ",
-          to: "/inspire"
         },
         {
           icon: "mdi-apps",

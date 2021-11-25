@@ -1,0 +1,30 @@
+<template>
+  <div class="icon">
+    <svg
+      width="21"
+      height="21"
+      viewBox="0 0 21 21"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="2.12207"
+        y="0.24707"
+        width="26"
+        height="3"
+        rx="1.5"
+        transform="rotate(45 2.12207 0.24707)"
+        fill="#6A6B79"
+      />
+      <rect
+        x="0.254883"
+        y="18.3848"
+        width="26"
+        height="3"
+        rx="1.5"
+        transform="rotate(-45 0.254883 18.3848)"
+        fill="#6A6B79"
+      />
+    </svg>
+  </div>
+</template>
