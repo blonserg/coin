@@ -232,6 +232,15 @@ body,
       color: #808190;
     }
   }
+
+  &--edit {
+    .v-btn__content {
+      color: #2d7bf6;
+      opacity: 1;
+      text-transform: none;
+      letter-spacing: 0.2px;
+    }
+  }
 }
 
 .v-overlay + .v-application--wrap {
