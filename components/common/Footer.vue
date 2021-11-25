@@ -70,7 +70,7 @@ export default {
       items_first: [
         {
           title: "Главная",
-          to: "/"
+          to: "/main"
         },
         {
           title: "Инвестиии",

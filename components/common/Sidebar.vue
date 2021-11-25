@@ -96,7 +96,7 @@ export default {
         {
           icon: "mdi-apps",
           title: "Главная",
-          to: "/"
+          to: "/main"
         },
         {
           icon: "mdi-chart-bubble",

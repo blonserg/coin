@@ -77,7 +77,7 @@ export default {
       };
       const errors = await UserService.login(loginUserData);
       if (!errors) {
-        this.$router.push("index");
+        this.$router.push("main");
       } else {
         // TODO: process errors
       }
