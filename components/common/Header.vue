@@ -67,13 +67,21 @@ export default {
   data () {
     return {
       value: "loremipsum",
-      userNotifications: null
+      userNotifications: null,
+      authUserInfo: null
     };
   },
   async fetch () {
-    const response = await HttpService.get("/user-notifications");
+    let response = await HttpService.get("/user-notifications");
     if (response.status === 200) {
       this.userNotifications = response.data;
+    } else {
+      // TODO
+    }
+
+    response = await HttpService.get("/auth-user-info");
+    if (response.status === 200) {
+      this.authUserInfo = response.data;
     } else {
       // TODO
     }

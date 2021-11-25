@@ -2,8 +2,6 @@
   <div class="landing">
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
-      Auth user info:
-      {{ authUserInfo }}
       <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7">
           <div class="landing-ttl">
@@ -472,8 +470,6 @@ export default {
       ],
       staticData: [],
       dynamicData: {},
-      authUserInfo: null,
-      user: null,
       statisticsCountries: null,
       statisticsCities: null
     };
@@ -484,13 +480,6 @@ export default {
     let response = await HttpService.get("/main-page");
     if (response.status === 200) {
       this.dynamicData = response.data;
-    } else {
-      // TODO
-    }
-
-    response = await HttpService.get("/auth-user-info");
-    if (response.status === 200) {
-      this.authUserInfo = response.data;
     } else {
       // TODO
     }
