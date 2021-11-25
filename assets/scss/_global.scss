@@ -222,6 +222,16 @@ body,
     text-transform: none;
     letter-spacing: 0;
   }
+
+  &--logout {
+    border: 1px solid #313440;
+    border-radius: 6px;
+    background-color: #23262e !important;
+  
+    .v-btn__content {
+      color: #808190;
+    }
+  }
 }
 
 .v-overlay + .v-application--wrap {
