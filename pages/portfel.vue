@@ -1,5 +1,6 @@
 <template>
   <div class="article-invest">
+    {{ portfelItem }}
     <NuxtLink class="link d-block mb-6" to="/invests">
       <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.2 5.0248C0.05 4.8748 0 4.7248 0 4.5248C0 4.3248 0.05 4.1748 0.2 4.0248L3.9 0.374805C4.05 0.224805 4.2 0.174805 4.35 0.174805C4.75 0.174805 5 0.474805 5 0.824805C5 0.974805 4.95 1.1748 4.8 1.2748L1.55 4.5248L4.8 7.7248C4.95 7.8748 5 8.0248 5 8.1748C5 8.52481 4.7 8.8248 4.35 8.8248C4.15 8.8248 4 8.7748 3.9 8.6248L0.2 5.0248Z" fill="#2D7BF6" />
@@ -114,6 +115,7 @@
 <script>
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -121,15 +123,22 @@ export default {
   },
   data () {
     return {
-      staticData: []
+      staticData: [],
+      portfelItem: null
     };
   },
   async fetch () {
     const slug = this.$route.params.slug || null;
     if (slug) {
-      // TODO: get portfel data by slug
-      console.log(slug);
+      const apiPath = "/project/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.portfelItem = response.data
+      } else {
+      // TODO
+      }
     }
+
     this.staticData = await StaticService.get("/project")
   },
   fetchOnServer: false

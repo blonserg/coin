@@ -98,7 +98,6 @@ export default {
       const path = "/forgot-password?email=" + this.user.email;
       const response = await HttpService.post(path);
       if (response.status === 200) {
-        console.log(response);
         // TODO inform user, that email was send
       } else {
       // TODO

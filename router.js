@@ -13,7 +13,7 @@ export function createRouter (ssrContext, createDefaultRouter, routerOptions, co
     routes: [
       ...options.routes,
       {
-        path: "/invests/:slug",
+        path: "/portfel/:slug",
         component: PortfelPage
       }
     ]

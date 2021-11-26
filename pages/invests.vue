@@ -297,12 +297,11 @@ export default {
   methods: {
     async getClickedProject (item) {
       const slug = item.slug;
-      const path = "/project/" + slug;
-      const response = await HttpService.get(path);
+      const apiPath = "/project/" + slug;
+      const response = await HttpService.get(apiPath);
       if (response.status === 200) {
-        //  item внести у store як clicked Project
-        store.commit("putClickedProject", item);
-        this.$router.push("portfel");
+        const path = "portfel/" + slug;
+        this.$router.push(path);
       } else {
       // TODO
       }
