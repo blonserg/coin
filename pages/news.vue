@@ -87,6 +87,17 @@ export default {
       // TODO
     }
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  methods: {
+    async getClickedNew () {
+      const path = "/news/" + slug;
+      const response = await HttpService.get(path);
+      if (response.status === 200) {
+        // open clicked new
+      } else {
+      // TODO
+      }
+    }
+  }
 };
 </script>

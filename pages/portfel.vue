@@ -125,6 +125,11 @@ export default {
     };
   },
   async fetch () {
+    const slug = this.$route.params.slug || null;
+    if (slug) {
+      // TODO: get portfel data by slug
+      console.log(slug);
+    }
     this.staticData = await StaticService.get("/project")
   },
   fetchOnServer: false
