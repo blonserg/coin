@@ -49,6 +49,7 @@
         height="40px"
         :rules="nameRules"
         required
+        type="password"
       />
       <v-text-field
         v-model="user.password_confirmation"
@@ -57,6 +58,7 @@
         height="40px"
         :rules="nameRules"
         required
+        type="password"
       />
       <v-checkbox
         v-model="checkbox"
@@ -77,7 +79,7 @@
     </v-form>
     <div class="login-bottom">
       <span>{{ staticData.reg_have_account }}</span>
-      <NuxtLink to="/login">
+      <NuxtLink to="/main">
         {{ staticData.reg_sign_in }}
       </NuxtLink>
     </div>

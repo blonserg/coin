@@ -159,23 +159,23 @@
       </div>
       <div class="table-body">
         <v-row
-          v-for="item in desserts"
+          v-for="item in userPartners"
           :key="item.name"
         >
           <v-col class="text-center col-1">
-            {{ item.number }}
+            {{ item.id }}
           </v-col>
           <v-col class="text-left col-2">
-            {{ item.calories }}
+            {{ item.project }}
           </v-col>
           <v-col class="text-center col-2">
-            {{ item.calories }}
+            {{ item.active }}
           </v-col>
           <v-col class="text-right col-3">
-            {{ item.calories }}
+            {{ item.first_line_referrals }}
           </v-col>
           <v-col class="text-right col-4">
-            {{ item.calories }}
+            {{ item.all_referrals }}
           </v-col>
         </v-row>
       </div>
@@ -193,58 +193,6 @@ export default {
   },
   data () {
     return {
-      desserts: [
-        {
-          number: 1,
-          name: "Frozen Yogurt",
-          calories: 159
-        },
-        {
-          number: 2,
-          name: "Ice cream sandwich",
-          calories: 237
-        },
-        {
-          number: 3,
-          name: "Eclair",
-          calories: 262
-        },
-        {
-          number: 4,
-          name: "Cupcake",
-          calories: 305
-        },
-        {
-          number: 5,
-          name: "Gingerbread",
-          calories: 356
-        },
-        {
-          number: 6,
-          name: "Jelly bean",
-          calories: 375
-        },
-        {
-          number: 7,
-          name: "Lollipop",
-          calories: 392
-        },
-        {
-          number: 8,
-          name: "Honeycomb",
-          calories: 408
-        },
-        {
-          number: 9,
-          name: "Donut",
-          calories: 452
-        },
-        {
-          number: 10,
-          name: "KitKat",
-          calories: 518
-        }
-      ],
       sells: [
         {
           clicks: 360,
@@ -255,7 +203,8 @@ export default {
       userTeam: null,
       userFirstReferal: null,
       userPaidReferal: null,
-      userProjects: null
+      userProjects: null,
+      userPartners: null
     };
   },
   async fetch () {
@@ -265,6 +214,7 @@ export default {
       this.userFirstReferal = response.data.team.first_line_referrals;
       this.userPaidReferal = response.data.team.paid_referrals;
       this.userProjects = response.data.projects;
+      this.userPartners = response.data.partners;
     } else {
       // TODO
     }

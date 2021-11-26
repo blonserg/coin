@@ -73,5 +73,17 @@
         </v-card>
       </v-col>
     </v-row>
+    <div class="sidebar-balance">
+      <div class="sidebar-balance_ttl">
+        Ваши баллы:
+      </div>
+      <div class="sidebar-balance_count">
+        479
+      </div>
+      <div class="sidebar-balance_txt">
+        Вы можете использовать их для доступа к закрытым материалам
+      </div>
+      <Button :text="`Пополнить баланс`" />
+    </div>
   </div>
 </template>

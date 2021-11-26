@@ -13,7 +13,9 @@
     >
       <div class="sidebar-head d-flex d-md-block align-center">
         <LogoSvg />
-        <v-app-bar-nav-icon class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer" />
+        <span class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer">
+          <CloseMob />
+        </span>
       </div>
       <div class="d-flex flex-column d-md-none">
         <div class="header-avatar d-flex align-center">
@@ -50,18 +52,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <div class="sidebar-balance">
-        <div class="sidebar-balance_ttl">
-          Ваши баллы:
-        </div>
-        <div class="sidebar-balance_count">
-          479
-        </div>
-        <div class="sidebar-balance_txt">
-          Вы можете использовать их для доступа к закрытым материалам
-        </div>
-        <Button :text="`Пополнить баланс`" />
-      </div>
       <v-list>
         <v-list-item
           :to="`/profile`"
@@ -92,13 +82,13 @@
 </template>
 
 <script>
-import Button from "~~/components/common/Button";
 import LogoSvg from "~~/components/svg/LogoSvg";
+import CloseMob from "~~/components/svg/CloseMob";
 
 export default {
   components: {
-    Button,
-    LogoSvg
+    LogoSvg,
+    CloseMob
   },
   data () {
     return {
@@ -110,25 +100,15 @@ export default {
         {
           icon: "mdi-apps",
           title: "Главная",
-          to: "/"
+          to: "/main"
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Инвестиии",
+          icon: "mdi-apps",
+          title: "Инвестиции",
           to: "/invests"
         },
         {
           icon: "mdi-apps",
-          title: "Резервый фонд",
-          to: "/inspire"
-        },
-        {
-          icon: "mdi-apps",
-          title: "CRM",
-          to: "/inspire"
-        },
-        {
-          icon: "m,di-apps",
           title: "Биржа услуг",
           to: "/stock"
         },
@@ -136,16 +116,6 @@ export default {
           icon: "mdi-apps",
           title: "Моя команда",
           to: "/mycomand"
-        },
-        {
-          icon: "mdi-apps",
-          title: "Лояльность",
-          to: "/inspire"
-        },
-        {
-          icon: "mdi-apps",
-          title: "FAQ",
-          to: "/inspire"
         },
         {
           icon: "mdi-apps",
