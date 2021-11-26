@@ -2,6 +2,7 @@ import Vue from "vue"
 import Router from "vue-router"
 
 import PortfelPage from "~/pages/portfel"
+import ArticlePage from "~/pages/article"
 
 Vue.use(Router)
 
@@ -15,6 +16,10 @@ export function createRouter (ssrContext, createDefaultRouter, routerOptions, co
       {
         path: "/portfel/:slug",
         component: PortfelPage
+      },
+      {
+        path: "/article/:slug",
+        component: ArticlePage
       }
     ]
   })

@@ -203,11 +203,8 @@
                 <div class="article-name">
                   {{ item.title }}
                 </div>
-                <!-- <NuxtLink class="article-link" to="/portfel" @click="getClickedProject">
-                  Смотреть проект
-                </NuxtLink> -->
                 <div class="article-link" @click="getClickedProject(item)">
-                  New Смотреть проект
+                  Смотреть проект
                 </div>
               </div>
             </div>

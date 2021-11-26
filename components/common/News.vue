@@ -1,5 +1,5 @@
 <template>
-  <v-card class="news-item">
+  <v-card class="news-item" @click="getClickedNew()">
     <div class="news-img" />
     <div class="news-info">
       <div class="news-ttl">
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import HttpService from "~/services/HttpService";
+
 export default {
   props: {
     title: {
@@ -41,6 +43,22 @@ export default {
     date: {
       type: String,
       default: "1 янв"
+    },
+    slug: {
+      type: String,
+      default: "new-year"
+    }
+  },
+  methods: {
+    async getClickedNew () {
+      const apiPath = "/news/" + this.slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        const path = "article/" + this.slug;
+        this.$router.push(path);
+      } else {
+      // TODO
+      }
     }
   }
 };

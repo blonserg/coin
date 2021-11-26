@@ -3,7 +3,12 @@
     <Title :title="staticData.news_title" :sort="staticData.news_sort" :filtr="staticData.news_category_filter" />
     <v-row>
       <v-col v-for="item in news" :key="item.title" md="4">
-        <News :title="item.title" :views="item.views" :date="item.date" />
+        <News
+          :title="item.title"
+          :views="item.views"
+          :date="item.date"
+          :slug="item.slug"
+        />
       </v-col>
     </v-row>
     <v-btn class="btn btn-seetoo" block>
@@ -30,47 +35,56 @@ export default {
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         },
         {
           title: "Cложность майнинга биткоина снова выросла",
           views: "830",
-          date: "14 авг"
+          date: "14 авг",
+          slug: "test"
         }
       ],
       staticData: [],
@@ -87,17 +101,6 @@ export default {
       // TODO
     }
   },
-  fetchOnServer: false,
-  methods: {
-    async getClickedNew () {
-      const path = "/news/" + slug;
-      const response = await HttpService.get(path);
-      if (response.status === 200) {
-        // open clicked new
-      } else {
-      // TODO
-      }
-    }
-  }
+  fetchOnServer: false
 };
 </script>
