@@ -1,6 +1,13 @@
 <template>
   <div class="news-page">
-    <Title :title="staticData.news_title" :sort="staticData.news_sort" :filtr="staticData.news_category_filter" />
+    <Title
+      :title="staticData.news_title"
+      :sort="staticData.news_sort"
+      :filtr="staticData.news_category_filter"
+      :get-sorted-news="getSortedNews"
+      :categories="categories"
+      :get-categorized-news="getCategorizedNews"
+    />
     <v-row>
       <v-col v-for="item in news" :key="item.title" md="4">
         <News
@@ -14,7 +21,6 @@
     <v-btn class="btn btn-seetoo" block>
       {{ staticData.news_show_more }}
     </v-btn>
-    {{ apiNews }}
   </div>
 </template>
 
@@ -88,7 +94,11 @@ export default {
         }
       ],
       staticData: [],
-      apiNews: null
+      apiNews: null,
+      latestNews: null,
+      oldestNews: null,
+      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
+      categorizedNews: null
     };
   },
   async fetch () {
@@ -101,6 +111,36 @@ export default {
       // TODO
     }
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  methods: {
+    async getSortedNews (selectedSortItem) {
+      let response;
+      if (selectedSortItem === "Latest") {
+        response = await HttpService.get("/news?sort=latest");
+        if (response.status === 200) {
+          this.latestNews = response.data;
+        } else {
+        // TODO
+        }
+      } else if (selectedSortItem === "Oldest") {
+        response = await HttpService.get("/news?sort=oldest");
+        if (response.status === 200) {
+          this.oldestNews = response.data;
+        } else {
+        // TODO
+        }
+      } else {
+        // TODO
+      }
+    },
+    async getCategorizedNews (selectedCategories) {
+      const response = await HttpService.get("/news?sort=oldest", selectedCategories);
+      if (response.status === 200) {
+        this.categorizedNews = response.data;
+      } else {
+        // TODO
+      }
+    }
+  }
 };
 </script>
