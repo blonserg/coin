@@ -23,7 +23,10 @@
           :rules="nameRules"
           required
         />
-        <span class="login-password_btn" @click="forgotPassword">{{ staticData.sign_in_forgot_password }}</span>
+        <NuxtLink to="/recovery">
+          <span class="login-password_btn">{{ staticData.sign_in_forgot_password }}</span>
+        </NuxtLink>
+        <!-- <span class="login-password_btn" @click="forgotPassword">{{ staticData.sign_in_forgot_password }}</span> -->
       </div>
       <v-checkbox
         v-model="checkbox"
