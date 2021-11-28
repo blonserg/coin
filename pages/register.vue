@@ -79,7 +79,7 @@
     </v-form>
     <div class="login-bottom">
       <span>{{ staticData.reg_have_account }}</span>
-      <NuxtLink to="/main">
+      <NuxtLink to="/login">
         {{ staticData.reg_sign_in }}
       </NuxtLink>
     </div>
@@ -146,7 +146,7 @@ export default {
       }
       const errors = await UserService.registration(registrationUserData);
       if (!errors) {
-        this.$router.push("login");
+        this.$router.push("main");
       } else {
         // TODO: process errors
         this.errorStatus = true
