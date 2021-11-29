@@ -3,6 +3,7 @@ import Router from "vue-router"
 
 import PortfelPage from "~/pages/portfel"
 import ArticlePage from "~/pages/article"
+import RecoveryPage from "~/pages/recovery"
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export function createRouter (ssrContext, createDefaultRouter, routerOptions, co
       {
         path: "/article/:slug",
         component: ArticlePage
+      },
+      {
+        path: "/recovery/:recoveryKey",
+        component: RecoveryPage
       }
     ]
   })

@@ -5,14 +5,6 @@
     <v-form v-model="valid">
       <div class="login-password">
         <v-text-field
-          v-model="user.email"
-          label="Email"
-          solo
-          height="40px"
-          :rules="emailRules"
-          required
-        />
-        <v-text-field
           v-model="user.password"
           :label="staticData.password"
           solo
@@ -36,7 +28,7 @@
           Неверный логин или пароль
         </v-alert>
       </div>
-      <Button :text="`Подвердить`" />
+      <Button :text="`Подвердить`" @click.native="send" />
     </v-form>
     <div class="login-bottom text-center">
       <NuxtLink to="/login">
@@ -50,6 +42,7 @@
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
+import UserService from "~/services/UserService";
 
 export default {
   components: {
@@ -62,9 +55,10 @@ export default {
       staticData: [],
       valid: true,
       user: {
-        email: "",
-        password: ""
+        password: "",
+        password_confirmation: ""
       },
+      recoveryKey: "",
       errorStatus: false,
       nameRules: [
         v => !!v || "Обязательное поле"
@@ -78,8 +72,21 @@ export default {
   async fetch () {
     this.staticData = await StaticService.get("/registration");
   },
+  mounted () {
+    this.recoveryKey = this.$route.params.recoveryKey;
+  },
   fetchOnServer: false,
-  methods: {}
+  methods: {
+    async send () {
+      const errors = await UserService.recoveryPassword(this.recoveryKey, this.user.password, this.user.password_confirmation);
+      if (!errors) {
+        this.$router.push("main");
+      } else {
+        // TODO: process errors
+        alert(errors.error_text);
+      }
+    }
+  }
 };
 </script>
 

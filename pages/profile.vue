@@ -263,7 +263,7 @@ export default {
     async logoutUser () {
       const errors = await UserService.logout();
       if (!errors) {
-        this.$router.push("landing");
+        this.$router.push("/");
       } else {
         // TODO: process errors
       }
