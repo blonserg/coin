@@ -114,6 +114,10 @@ a {
     padding: 0 25px;
     background: #131418 !important;
   }
+
+  @media screen and (min-width: 758px) {
+    transform: translateX(-100%) !important;
+  }
 }
 
 .header-menu {
