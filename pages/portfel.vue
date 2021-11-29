@@ -114,6 +114,7 @@
 <script>
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -121,10 +122,22 @@ export default {
   },
   data () {
     return {
-      staticData: []
+      staticData: [],
+      portfelItem: null
     };
   },
   async fetch () {
+    const slug = this.$route.params.slug || null;
+    if (slug) {
+      const apiPath = "/project/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.portfelItem = response.data
+      } else {
+      // TODO
+      }
+    }
+
     this.staticData = await StaticService.get("/project")
   },
   fetchOnServer: false

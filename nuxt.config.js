@@ -40,7 +40,10 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     // https://typescript.nuxtjs.org
-    "@nuxt/typescript-build"
+    "@nuxt/typescript-build",
+    ["@nuxtjs/router", {
+      keepDefaultRouter: true
+    }]
   ],
 
   typescript: {

@@ -95,7 +95,30 @@
 </template>
 
 <script>
+import HttpService from "~/services/HttpService";
+
 export default {
+  components: {
+
+  },
+  data () {
+    return {
+      article: null
+    };
+  },
+  async fetch () {
+    const slug = this.$route.params.slug || null;
+    if (slug) {
+      const apiPath = "/news/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.article = response.data;
+      } else {
+      // TODO
+      }
+    }
+  },
+  fetchOnServer: false
 };
 </script>
 

@@ -23,10 +23,10 @@
           :rules="nameRules"
           required
         />
-        <NuxtLink to="/recovery">
+        <!-- <NuxtLink to="/recovery">
           <span class="login-password_btn">{{ staticData.sign_in_forgot_password }}</span>
-        </NuxtLink>
-        <!-- <span class="login-password_btn" @click="forgotPassword">{{ staticData.sign_in_forgot_password }}</span> -->
+        </NuxtLink> -->
+        <span class="login-password_btn" @click="forgotPassword">{{ staticData.sign_in_forgot_password }}</span>
       </div>
       <v-checkbox
         v-model="checkbox"
@@ -84,6 +84,12 @@ export default {
     this.staticData = await StaticService.get("/signin");
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (token) {
+      this.$router.push("main");
+    }
+  },
   methods: {
     async login () {
       const loginUserData = {
@@ -101,10 +107,11 @@ export default {
       const path = "/forgot-password?email=" + this.user.email;
       const response = await HttpService.post(path);
       if (response.status === 200) {
-        // console.log(response);
         // TODO inform user, that email was send
+        alert("email sent");
       } else {
       // TODO
+        alert(response.errors.error_text);
       }
     }
   }

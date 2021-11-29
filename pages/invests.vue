@@ -194,6 +194,7 @@
     </div>
     <div class="article-invest">
       <v-row>
+        <!-- <v-col v-for="(item, i) in invests" :key="i" md="4"> -->
         <v-col v-for="(item, i) in projects" :key="i" md="4">
           <v-card transition="fade-transition" class="article-item_invest">
             <div class="article-head d-flex align-center">
@@ -204,9 +205,9 @@
                 <div class="article-name">
                   {{ item.title }}
                 </div>
-                <NuxtLink class="article-link" to="/portfel">
+                <div class="article-link" @click="getClickedProject(item)">
                   Смотреть проект
-                </NuxtLink>
+                </div>
               </div>
             </div>
             <p class="article-txt">
@@ -310,7 +311,20 @@ export default {
       // TODO
     }
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  methods: {
+    async getClickedProject (item) {
+      const slug = item.slug;
+      const apiPath = "/project/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        const path = "portfel/" + slug;
+        this.$router.push(path);
+      } else {
+      // TODO
+      }
+    }
+  }
 };
 </script>
 

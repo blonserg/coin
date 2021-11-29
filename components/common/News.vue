@@ -1,5 +1,5 @@
 <template>
-  <v-card class="news-item">
+  <v-card class="news-item" @click="goToNewsItem()">
     <div class="news-img" />
     <div class="news-info">
       <div class="news-ttl">
@@ -41,6 +41,15 @@ export default {
     date: {
       type: String,
       default: "1 янв"
+    },
+    slug: {
+      type: String,
+      default: "new-year"
+    }
+  },
+  methods: {
+    goToNewsItem () {
+      this.$router.push("article/" + this.slug);
     }
   }
 };

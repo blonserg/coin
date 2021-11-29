@@ -84,6 +84,7 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import CloseMob from "~~/components/svg/CloseMob";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -132,9 +133,19 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Vuetify.js",
-      darkMode: true
+      darkMode: true,
+      authUserInfo: null
     };
   },
+  async fetch () {
+    const response = await HttpService.get("/auth-user-info");
+    if (response.status === 200) {
+      this.authUserInfo = response.data;
+    } else {
+      // TODO
+    }
+  },
+  fetchOnServer: false,
   computed: {
     switchLabel () {
       return this.darkMode ? "light" : "dark";
