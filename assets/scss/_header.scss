@@ -20,6 +20,11 @@
       border-radius: 15px;
       padding: 16px;
       margin: 0 20px 20px;
+
+      .theme--light & {
+        background: #f6f7f9;
+        border: 1px solid #f6f7f9;
+      }
     }
 
     &_image {

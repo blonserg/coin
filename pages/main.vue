@@ -139,6 +139,8 @@
 </template>
 
 <script>
+// import VueSlickCarousel from "vue-slick-carousel";
+// import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
@@ -150,6 +152,7 @@ export default {
     Title,
     News,
     Seetoo
+    // VueSlickCarousel
   },
   data () {
     return {

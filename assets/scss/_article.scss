@@ -9,6 +9,13 @@
   @media screen and (max-width: 758px) {
     position: relative;
     flex-direction: column;
+    display: block;
+  }
+
+  .slick-list {
+    @media screen and (max-width: 758px) {
+      overflow: visible !important;
+    }
   }
 
   &-wrap {
@@ -90,11 +97,15 @@
 
   &-item {
     border-radius: 15px;
-    width: 252px;
+    width: 248px !important;
     padding: 25px 20px 30px;
+    max-width: 248px;
+    margin-right: 5px;
 
     @media screen and (max-width: 758px) {
       padding: 20px;
+      max-width: 90% !important;
+      margin-right: 0;
     }
 
     &:hover {
