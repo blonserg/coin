@@ -1,5 +1,5 @@
 <template>
-  <v-card class="news-item" @click="getClickedNew()">
+  <v-card class="news-item" @click="goToNewsItem()">
     <div class="news-img" />
     <div class="news-info">
       <div class="news-ttl">
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import HttpService from "~/services/HttpService";
-
 export default {
   props: {
     title: {
@@ -50,15 +48,8 @@ export default {
     }
   },
   methods: {
-    async getClickedNew () {
-      const apiPath = "/news/" + this.slug;
-      const response = await HttpService.get(apiPath);
-      if (response.status === 200) {
-        const path = "article/" + this.slug;
-        this.$router.push(path);
-      } else {
-      // TODO
-      }
+    goToNewsItem () {
+      this.$router.push("article/" + this.slug);
     }
   }
 };

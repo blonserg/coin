@@ -4,21 +4,21 @@
     <div class="ttl-group d-flex mb-5 mb-md-0 justify-space-between">
       <div class="filter d-flex align-center">
         <v-select
-          v-model="selectedSortItem"
+          v-model="selectedSortType"
           :items="sortItems"
           :menu-props="{ left: true }"
           :label="sort"
-          @input="getSortedNews(selectedSortItem)"
+          @input="onSelectSortType(selectedSortType)"
         />
       </div>
-      <div class="filter d-flex align-center">
+      <div v-if="categories" class="filter d-flex align-center">
         <v-select
           v-model="selectedCategories"
           :items="categories"
           :menu-props="{ left: true }"
           :label="filtr"
           multiple
-          @input="getCategorizedNews(selectedCategories)"
+          @input="onSelectCategories(selectedCategories)"
         />
       </div>
     </div>
@@ -41,25 +41,32 @@ export default {
       type: String,
       default: "Фильтр категорий"
     },
-    getSortedNews: {
-      type: Function,
-      default: null
-    },
     categories: {
       type: Array,
       default: null
     },
-    getCategorizedNews: {
+    onSelectSortType: {
+      type: Function,
+      default: null
+    },
+    onSelectCategories: {
       type: Function,
       default: null
     }
   },
   data () {
     return {
-      select: ["Foo"],
-      items: ["Foo", "Bar", "Fizz", "Buzz"],
-      sortItems: ["Latest", "Oldest"],
-      selectedSortItem: "",
+      sortItems: [
+        {
+          text: "Latest",
+          value: "latest"
+        },
+        {
+          text: "Oldest",
+          value: "oldest"
+        }
+      ],
+      selectedSortType: "latest",
       selectedCategories: []
     };
   }

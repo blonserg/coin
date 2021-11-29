@@ -45,7 +45,7 @@
     {{ newsApi }}
     <Title :title="staticData.cabinet_main_news" />
     <v-row>
-      <v-col v-for="item in news" :key="item.title" md="4">
+      <v-col v-for="item in news" :key="item.slug" md="4">
         <News :title="item.title" :views="item.views" :date="item.date" />
       </v-col>
     </v-row>
