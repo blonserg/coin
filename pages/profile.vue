@@ -199,6 +199,55 @@
         </div>
       </v-col>
     </v-row>
+    Змінити пароль:
+    <v-row>
+      <v-col md="6" class="mb-10">
+        <span class="label">Попередній пароль</span>
+        <v-text-field
+          v-model="oldPassword"
+          solo
+        />
+      </v-col>
+      <v-col md="6" class="mb-10">
+        <span class="label">Новий пароль</span>
+        <v-text-field
+          v-model="newPassword"
+          solo
+        />
+      </v-col>
+    </v-row>
+    <v-btn
+      class="btn--edit"
+      plain
+      @click.native="changeUserPassword"
+    >
+      Зберегти
+    </v-btn>
+    <hr>
+    Змінити email:
+    <v-row>
+      <v-col md="6" class="mb-10">
+        <span class="label">Новий email</span>
+        <v-text-field
+          v-model="newEmail"
+          solo
+        />
+      </v-col>
+      <v-col md="6" class="mb-10">
+        <span class="label">Пароль</span>
+        <v-text-field
+          v-model="oldPassword"
+          solo
+        />
+      </v-col>
+    </v-row>
+    <v-btn
+      class="btn--edit"
+      plain
+      @click.native="changeUserEmail"
+    >
+      Зберегти
+    </v-btn>
   </div>
 </template>
 
@@ -224,7 +273,11 @@ export default {
     userSecuritySettings: null,
     userProfileProjects: null,
     editUser: true,
-    show: false
+    show: false,
+    oldPassword: null,
+    newPassword: null,
+    newEmail: null
+
   }),
   async fetch () {
     this.staticData = await StaticService.get("/my_profile")
@@ -286,6 +339,12 @@ export default {
       document.execCommand("copy");
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
+    },
+    async changeUserPassword () {
+      await UserService.changePassword(this.oldPassword, this.newPassword);
+    },
+    async changeUserEmail () {
+      this.userProfile.profile.email = await UserService.changeEmail(this.newEmail, this.oldPassword);
     }
   }
 };

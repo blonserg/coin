@@ -66,5 +66,35 @@ export default {
     } else {
       return false;
     }
+  },
+  async changePassword (oldPassword: string, newPassword: string): Promise<string[] | false> {
+    const path = "/user-security-settings/password";
+    const params = {
+      "password": oldPassword,
+      "new_password": newPassword
+    };
+    const response = await HttpService.post(path, undefined, params);
+    if (response.status === 200) {
+      alert(response.data.message)
+      return false;
+    } else {
+      alert(response.errors.error_text)
+      return response.errors;
+    }
+  },
+  async changeEmail (newEmail: string, oldPassword: string): Promise<string[] | false> {
+    const path = "/user-security-settings/email";
+    const params = {
+      "email": newEmail,
+      "password": oldPassword
+    };
+    const response = await HttpService.post(path, undefined, params);
+    if (response.status === 200) {
+      alert("email змінено")
+      return response.data.email;
+    } else {
+      alert(response.errors); // TODO.
+      return response.errors;
+    }
   }
 }
