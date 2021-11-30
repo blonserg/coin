@@ -244,7 +244,7 @@
                   </v-btn-toggle>
                 </div>
                 <div class="main-body">
-                  <v-simple-table>
+                  <!-- <v-simple-table>
                     <template #default>
                       <thead>
                         <tr>
@@ -264,7 +264,7 @@
                         </tr>
                       </tbody>
                     </template>
-                  </v-simple-table>
+                  </v-simple-table> -->
                 </div>
                 <p class="main-info d-none d-md-block">
                   {{ staticData.statistics_bottom_text }}
@@ -439,25 +439,15 @@ export default {
         }
       ],
       staticData: [],
-      dynamicData: {},
-      statisticsCountries: null,
-      statisticsCities: null
+      dynamicData: {}
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/main");
 
-    let response = await HttpService.get("/main-page");
+    const response = await HttpService.get("/main-page");
     if (response.status === 200) {
       this.dynamicData = response.data;
-    } else {
-      // TODO
-    }
-
-    response = await HttpService.get("/statistics");
-    if (response.status === 200) {
-      this.statisticsCountries = response.data.countries;
-      this.statisticsCities = response.data.cities;
     } else {
       // TODO
     }
