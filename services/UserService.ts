@@ -3,6 +3,7 @@ import MyIpModel from "~/models/MyIpModel";
 import UserModel from "~/models/UserModel";
 import RequestRegisterModel from "~/models/RequestRegisterModel";
 import RequestLoginModel from "~/models/RequestLoginModel";
+import ResponseModel from "~/models/ResponseModel";
 
 export default {
   // TODO: detect client's IP on server side
@@ -15,15 +16,13 @@ export default {
       return "?";
     }
   },
-  async registration (user: RequestRegisterModel): Promise<string[] | false> {
+  async registration (user: RequestRegisterModel): Promise<ResponseModel> {
     const response = await HttpService.post("/register", user);
     if (response.status === 200) {
       const userData: UserModel = response.data.user;
       localStorage.setItem("userToken", userData.api_token);
-      return false;
-    } else {
-      return response.errors;
     }
+    return response;
   },
   async login (user: RequestLoginModel): Promise<string[] | false> {
     const response = await HttpService.post("/signin", user);
