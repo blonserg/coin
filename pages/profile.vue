@@ -197,57 +197,62 @@
             </button>
           </div>
         </div>
+        <div>
+          Змінити пароль:
+          <v-row>
+            <v-col md="6" class="mb-10">
+              <span class="label">Попередній пароль</span>
+              <v-text-field
+                v-model="oldPassword"
+                solo
+              />
+            </v-col>
+            <v-col md="6" class="mb-10">
+              <span class="label">Новий пароль</span>
+              <v-text-field
+                v-model="newPassword"
+                solo
+              />
+            </v-col>
+          </v-row>
+          <v-btn
+            class="btn--edit"
+            plain
+            @click.native="changeUserPassword"
+          >
+            Зберегти
+          </v-btn>
+        </div>
+        <br>
+        <br>
+        <div>
+          Змінити email:
+          <v-row>
+            <v-col md="6" class="mb-10">
+              <span class="label">Новий email</span>
+              <v-text-field
+                v-model="newEmail"
+                solo
+              />
+            </v-col>
+            <v-col md="6" class="mb-10">
+              <span class="label">Пароль</span>
+              <v-text-field
+                v-model="oldPassword"
+                solo
+              />
+            </v-col>
+          </v-row>
+          <v-btn
+            class="btn--edit"
+            plain
+            @click.native="changeUserEmail"
+          >
+            Зберегти
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
-    Змінити пароль:
-    <v-row>
-      <v-col md="6" class="mb-10">
-        <span class="label">Попередній пароль</span>
-        <v-text-field
-          v-model="oldPassword"
-          solo
-        />
-      </v-col>
-      <v-col md="6" class="mb-10">
-        <span class="label">Новий пароль</span>
-        <v-text-field
-          v-model="newPassword"
-          solo
-        />
-      </v-col>
-    </v-row>
-    <v-btn
-      class="btn--edit"
-      plain
-      @click.native="changeUserPassword"
-    >
-      Зберегти
-    </v-btn>
-    <hr>
-    Змінити email:
-    <v-row>
-      <v-col md="6" class="mb-10">
-        <span class="label">Новий email</span>
-        <v-text-field
-          v-model="newEmail"
-          solo
-        />
-      </v-col>
-      <v-col md="6" class="mb-10">
-        <span class="label">Пароль</span>
-        <v-text-field
-          v-model="oldPassword"
-          solo
-        />
-      </v-col>
-    </v-row>
-    <v-btn
-      class="btn--edit"
-      plain
-      @click.native="changeUserEmail"
-    >
-      Зберегти
-    </v-btn>
   </div>
 </template>
 
@@ -267,6 +272,9 @@ export default {
     cities: ["Sambir", "Lviv", "Kyiv"],
     countries: ["Ukraine", "France"],
     staticData: [],
+    staticDataAccountSettings: [],
+    staticDataChangeEmail: [],
+    staticDataChangePassword: [],
     userProfile: null,
     tariffs: null,
     userChats: null,
@@ -280,7 +288,10 @@ export default {
 
   }),
   async fetch () {
-    this.staticData = await StaticService.get("/my_profile")
+    this.staticData = await StaticService.get("/my_profile");
+    this.staticDataAccountSettings = await StaticService.get("/account_settings");
+    this.staticDataChangeEmail = await StaticService.get("/change_email");
+    this.staticDataChangePassword = await StaticService.get("/change_password");
 
     let response = await HttpService.get("/user-profile");
     if (response.status === 200) {
