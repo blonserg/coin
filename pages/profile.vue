@@ -78,7 +78,173 @@
               {{ staticData.my_profile_desc }}
             </div>
           </div>
-          <div class="d-flex justify-center mt-4">
+          <v-dialog
+            v-model="dialog"
+          >
+            <template #activator="{ on, attrs }">
+              <div class="d-flex justify-center mt-16">
+                <v-btn
+                  v-bind="attrs"
+                  class="btn btn--settings"
+                  color="#2d7bf6"
+                  x-large
+                  height="48px"
+                  v-on="on"
+                >
+                  Настройки аккаунта
+                  <LockSvg class="ml-2" />
+                </v-btn>
+              </div>
+            </template>
+
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2 class="text-center">{{ staticDataAccountSettings.account_settings_title }}</h2>
+                  <span class="label d-block">Email</span>
+                  <v-text-field
+                    solo
+                    disabled
+                  />
+                  <v-btn
+                    class="btn--change"
+                    plain
+                    @click="dialog1 = !dialog1"
+                  >
+                    {{ staticDataAccountSettings.account_settings_change }}
+                  </v-btn>
+                  <span class="label d-block">
+                    {{ staticDataAccountSettings.account_settings_your_password }}
+                  </span>
+                  <v-text-field
+                    solo
+                    disabled
+                  />
+                  <v-btn
+                    class="btn--change"
+                    plain
+                    @click="dialog2 = !dialog2"
+                  >
+                    {{ staticDataAccountSettings.account_settings_change }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
+            v-model="dialog2"
+          >
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2>{{ staticDataChangePassword.change_password_title }}</h2>
+                  <span class="label">
+                    {{ staticDataChangePassword.change_password_current_password }}
+                  </span>
+                  <v-text-field
+                    v-model="oldPassword"
+                    :label="staticDataChangePassword.change_password_enter_current_password"
+                    solo
+                  />
+                  <span class="label">
+                    {{ staticDataChangePassword.change_password_new_password }}
+                  </span>
+                  <v-text-field
+                    v-model="newPassword"
+                    :label="staticDataChangePassword.change_password_enter_new_password"
+                    solo
+                  />
+                  <v-btn
+                    class="btn--cancel"
+                    plain
+                    @click="dialog2 = false"
+                  >
+                    {{ staticDataChangePassword.change_password_cancel }}
+                  </v-btn>
+                  <v-btn
+                    class="btn"
+                    color="#2d7bf6"
+                    height="48px"
+                    x-large
+                    @click.native="changeUserPassword"
+                  >
+                    {{ staticDataChangePassword.change_password_save }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog2 = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
+            v-model="dialog1"
+          >
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2>{{ staticDataChangeEmail.change_email_title }}</h2>
+                  <span class="label">
+                    {{ staticDataChangeEmail.change_email_new_email }}
+                  </span>
+                  <v-text-field
+                    v-model="newEmail"
+                    :label="staticDataChangeEmail.change_email_enter_new_email"
+                    solo
+                  />
+                  <span class="label">
+                    {{ staticDataChangeEmail.change_email_password }}
+                  </span>
+                  <v-text-field
+                    v-model="oldPassword"
+                    :label="staticDataChangeEmail.change_email_enter_password"
+                    solo
+                  />
+                  <v-btn
+                    class="btn--cancel"
+                    plain
+                    @click="dialog1 = false"
+                  >
+                    {{ staticDataChangeEmail.change_email_cancel }}
+                  </v-btn>
+                  <v-btn
+                    class="btn"
+                    color="#2d7bf6"
+                    height="48px"
+                    x-large
+                    @click.native="changeUserEmail"
+                  >
+                    {{ staticDataChangeEmail.change_email_save }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog1 = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <div class="d-flex justify-center mt-8">
             <v-btn
               class="btn btn--logout"
               x-large
@@ -197,60 +363,6 @@
             </button>
           </div>
         </div>
-        <div>
-          Змінити пароль:
-          <v-row>
-            <v-col md="6" class="mb-10">
-              <span class="label">Попередній пароль</span>
-              <v-text-field
-                v-model="oldPassword"
-                solo
-              />
-            </v-col>
-            <v-col md="6" class="mb-10">
-              <span class="label">Новий пароль</span>
-              <v-text-field
-                v-model="newPassword"
-                solo
-              />
-            </v-col>
-          </v-row>
-          <v-btn
-            class="btn--edit"
-            plain
-            @click.native="changeUserPassword"
-          >
-            Зберегти
-          </v-btn>
-        </div>
-        <br>
-        <br>
-        <div>
-          Змінити email:
-          <v-row>
-            <v-col md="6" class="mb-10">
-              <span class="label">Новий email</span>
-              <v-text-field
-                v-model="newEmail"
-                solo
-              />
-            </v-col>
-            <v-col md="6" class="mb-10">
-              <span class="label">Пароль</span>
-              <v-text-field
-                v-model="oldPassword"
-                solo
-              />
-            </v-col>
-          </v-row>
-          <v-btn
-            class="btn--edit"
-            plain
-            @click.native="changeUserEmail"
-          >
-            Зберегти
-          </v-btn>
-        </div>
       </v-col>
     </v-row>
   </div>
@@ -262,11 +374,15 @@ import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
+import LockSvg from "~~/components/svg/LockSvg";
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
   components: {
     LogoutSvg,
-    PencilSvg
+    PencilSvg,
+    LockSvg,
+    CloseButton
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
@@ -284,7 +400,10 @@ export default {
     show: false,
     oldPassword: null,
     newPassword: null,
-    newEmail: null
+    newEmail: null,
+    dialog: false,
+    dialog1: false,
+    dialog2: false
 
   }),
   async fetch () {

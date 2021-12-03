@@ -94,7 +94,7 @@ export default {
   data () {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       switch1: true,
       items: [
