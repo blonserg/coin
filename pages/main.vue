@@ -79,13 +79,9 @@
           36 459
         </div>
         <v-btn-toggle v-model="text" tile group>
-          <v-btn value="day"> Сутки </v-btn>
-
-          <v-btn value="week"> Неделя </v-btn>
-
-          <v-btn value="month"> Месяц </v-btn>
-
-          <v-btn value="all"> ВСе время </v-btn>
+          <v-btn @click="applyInterval('1month')"> 1 месяц </v-btn>
+          <v-btn @click="applyInterval('3months')"> 3 месяца </v-btn>
+          <v-btn @click="applyInterval('all')"> Все время </v-btn>
         </v-btn-toggle>
       </div>
       <div class="main-body">
@@ -212,6 +208,20 @@ export default {
     },
     news () {
       return this.$store.state.news;
+    }
+  },
+  methods: {
+    async applyInterval (interval) {
+      const params = {
+        interval
+      }
+      const response = await HttpService.get("/statistics", params);
+      if (response.status === 200) {
+        this.statisticsCountries = response.data.countries;
+        this.statisticsCities = response.data.cities;
+      } else {
+      // TODO
+      }
     }
   }
 };
