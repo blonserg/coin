@@ -99,7 +99,6 @@ export default {
       staticData: [],
       apiNews: null,
       categories: ["category1", "category2", "category3"], // TODO get data from apiNews
-      categorizedNews: null,
       selectedSortType: null,
       selectedCategories: null
     };
