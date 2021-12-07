@@ -6,6 +6,12 @@
       </v-col>
     </v-row>
     <v-row v-else>
+      <div v-if="alert.active">
+        <Alert
+          :text="alert.text"
+          @close="() => { alert.active = false; }"
+        />
+      </div>
       <v-col md="4">
         <v-card class="profile-info">
           <div class="profile-avatar">
@@ -376,13 +382,15 @@ import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     LogoutSvg,
     PencilSvg,
     LockSvg,
-    CloseButton
+    CloseButton,
+    Alert
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
@@ -403,7 +411,11 @@ export default {
     newEmail: null,
     dialog: false,
     dialog1: false,
-    dialog2: false
+    dialog2: false,
+    alert: {
+      text: "test test test",
+      active: false
+    }
 
   }),
   async fetch () {
