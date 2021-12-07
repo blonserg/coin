@@ -71,6 +71,10 @@ body,
   }
 }
 
+.theme--dark.v-application.landing-page {
+  background: #131418;
+}
+
 .filter {
   border: 1px solid #272a33;
   border-radius: 6px;
@@ -213,6 +217,7 @@ body,
   border-radius: 6px;
   padding: 15px 20px;
   letter-spacing: 0;
+  box-shadow: none !important;
 
   &--invert {
     .v-btn__content {
@@ -274,6 +279,15 @@ body,
       .theme--light & {
         color: #474856;
       }
+    }
+  }
+
+  &--more {
+    .v-btn__content {
+      color: #fff;
+      opacity: 1 !important;
+      text-transform: none;
+      letter-spacing: 0.2px;
     }
   }
 }
