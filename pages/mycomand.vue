@@ -140,6 +140,7 @@
       class="ttl--small mb-9"
       :title="`Сетка реферальных партнеров`"
       :on-select-sort-type="onSortTypeChange"
+      :sort-items="sortItems"
     />
     <div class="table mb-16">
       <div class="table-head">
@@ -209,7 +210,17 @@ export default {
       userPaidReferal: null,
       userProjects: null,
       userPartners: null,
-      selectedSortType: null
+      selectedSortType: null,
+      sortItems: [
+        {
+          text: "Самие активние",
+          value: "1"
+        },
+        {
+          text: "Mенее активны",
+          value: "2"
+        }
+      ]
     };
   },
   async fetch () {

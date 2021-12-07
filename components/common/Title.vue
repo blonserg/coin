@@ -41,6 +41,10 @@ export default {
       type: String,
       default: "Фильтр категорий"
     },
+    sortItems: {
+      type: Array,
+      default: null
+    },
     categories: {
       type: Array,
       default: null
@@ -56,17 +60,7 @@ export default {
   },
   data () {
     return {
-      sortItems: [
-        {
-          text: "Latest",
-          value: "latest"
-        },
-        {
-          text: "Oldest",
-          value: "oldest"
-        }
-      ],
-      selectedSortType: "latest",
+      selectedSortType: "",
       selectedCategories: []
     };
   }

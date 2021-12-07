@@ -2,6 +2,7 @@
   <div>
     <Title
       :title="staticData.cabinet_main_event"
+      :sort-items="sortItems"
       :on-select-sort-type="onSortTypeChangeEvents"
     />
     Events:
@@ -47,6 +48,7 @@
     <Title
       :title="staticData.cabinet_main_news"
       :categories="categories"
+      :sort-items="sortItems"
       :on-select-sort-type="onSortTypeChangeNews"
       :on-select-categories="onCategoriesChangeNews"
     />
@@ -169,7 +171,17 @@ export default {
       selectedSortTypeEvents: null,
       selectedSortTypeNews: null,
       selectedCategoriesNews: null,
-      categories: ["category1", "category2", "category3"] // TODO get data from apiNews
+      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
+      sortItems: [
+        {
+          text: "Latest",
+          value: "latest"
+        },
+        {
+          text: "Oldest",
+          value: "oldest"
+        }
+      ]
     };
   },
   async fetch () {
