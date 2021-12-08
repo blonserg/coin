@@ -74,10 +74,8 @@ export default {
     };
     const response = await HttpService.post(path, undefined, params);
     if (response.status === 200) {
-      alert(response.data.message)
       return false;
     } else {
-      alert(response.errors.error_text)
       return response.errors;
     }
   },
@@ -89,11 +87,9 @@ export default {
     };
     const response = await HttpService.post(path, undefined, params);
     if (response.status === 200) {
-      alert("email змінено")
       return response.data.email;
     } else {
-      alert(response.errors); // TODO.
-      return response.errors;
+      return false;
     }
   }
 }

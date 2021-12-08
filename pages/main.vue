@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Title :title="staticData.cabinet_main_event" />
+    <Title
+      :title="staticData.cabinet_main_event"
+      :sort-items="sortItems"
+      :on-select-sort-type="onSortTypeChangeEvents"
+    />
     Events:
     {{ events }}
     <div class="events-list">
@@ -41,9 +45,13 @@
     Отзывы - reviews:
     {{ reviews }}
     <Seetoo :title="staticData.cabinet_main_be_interested" />
-    News:
-    {{ newsApi }}
-    <Title :title="staticData.cabinet_main_news" />
+    <Title
+      :title="staticData.cabinet_main_news"
+      :categories="categories"
+      :sort-items="sortItems"
+      :on-select-sort-type="onSortTypeChangeNews"
+      :on-select-categories="onCategoriesChangeNews"
+    />
     <v-row>
       <v-col v-for="item in news" :key="item.slug" md="4">
         <News :title="item.title" :views="item.views" :date="item.date" />
@@ -157,22 +165,33 @@ export default {
       events: null,
       promo: null,
       reviews: null,
-      newsApi: null,
+      apiNews: null,
       statisticsCountries: null,
-      statisticsCities: null
+      statisticsCities: null,
+      selectedSortTypeEvents: null,
+      selectedSortTypeNews: null,
+      selectedCategoriesNews: null,
+      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
+      sortItems: [
+        {
+          text: "Latest",
+          value: "latest"
+        },
+        {
+          text: "Oldest",
+          value: "oldest"
+        }
+      ]
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/cabinet_main");
 
-    let response = await HttpService.get("/events");
-    if (response.status === 200) {
-      this.events = response.data;
-    } else {
-      // TODO
-    }
+    await this.getEvents();
 
-    response = await HttpService.get("/promo");
+    await this.getNews();
+
+    let response = await HttpService.get("/promo");
     if (response.status === 200) {
       this.promo = response.data;
     } else {
@@ -182,13 +201,6 @@ export default {
     response = await HttpService.get("/reviews");
     if (response.status === 200) {
       this.reviews = response.data;
-    } else {
-      // TODO
-    }
-
-    response = await HttpService.get("/news");
-    if (response.status === 200) {
-      this.apiNews = response.data.articles;
     } else {
       // TODO
     }
@@ -222,6 +234,47 @@ export default {
       } else {
       // TODO
       }
+    },
+    async getEvents () {
+      const params = {};
+      if (this.selectedSortTypeEvents !== null) {
+        params.sort = this.selectedSortTypeEvents;
+      }
+      const response = await HttpService.get("/events", params);
+      if (response.status === 200) {
+        this.events = response.data;
+      } else {
+        // TODO
+      }
+    },
+    onSortTypeChangeEvents (sortType) {
+      this.selectedSortTypeEvents = sortType;
+      this.getEvents();
+    },
+    async getNews () {
+      const params = {};
+      if (this.selectedSortTypeNews !== null) {
+        params.sort = this.selectedSortTypeNews;
+      }
+      if (this.selectedCategoriesNews !== null) {
+        this.selectedCategoriesNews.forEach((categoryName, categoryIndex) => {
+          params["category[" + categoryIndex + "]"] = categoryName;
+        });
+      }
+      const response = await HttpService.get("/news", params);
+      if (response.status === 200) {
+        this.apiNews = response.data;
+      } else {
+        // TODO
+      }
+    },
+    onSortTypeChangeNews (sortType) {
+      this.selectedSortTypeNews = sortType;
+      this.getNews();
+    },
+    onCategoriesChangeNews (categories) {
+      this.selectedCategoriesNews = categories;
+      this.getNews();
     }
   }
 };
