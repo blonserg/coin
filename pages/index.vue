@@ -3,7 +3,7 @@
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
       <v-row class="landing-block first-block align-center">
-        <v-col cols="12" md="7" data-aos="zoom-in">
+        <v-col cols="12" md="7" data-aos="zoom-in" data-aos-duration="1500">
           <div class="landing-ttl">
             <LandTtl />
           </div>
@@ -30,7 +30,7 @@
             </v-btn>
           </div>
         </v-col>
-        <v-col cols="12" md="5" data-aos="zoom-in">
+        <v-col cols="12" md="5" data-aos="zoom-in" data-aos-duration="1500">
           <img class="landing-main_image" src="/man-rocket.png" alt="" />
         </v-col>
       </v-row>
@@ -51,6 +51,7 @@
       <div
         id="system"
         data-aos="fade-up"
+        data-aos-duration="1500"
       >
         <div class="landing-block_system text-center">
           <div class="landing-subtxt">{{ staticData.about_system }}</div>
@@ -65,7 +66,7 @@
       </div>
       <div>
         <v-row class="landing-block_system">
-          <v-col cols="12" md="7" data-aos="fade-right">
+          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500">
             <img src="/learn.png" alt="" />
           </v-col>
           <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
@@ -81,6 +82,8 @@
       </div>
       <div
         data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <v-row class="landing-block_system">
           <v-col cols="12" md="5" class="pl-md-14">
@@ -99,7 +102,7 @@
       </div>
       <div>
         <v-row class="landing-block_system">
-          <v-col cols="12" md="7" data-aos="fade-right">
+          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <img src="/stock.png" alt="" />
           </v-col>
           <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
@@ -114,6 +117,8 @@
       </div>
       <div
         data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <v-row class="landing-block_system">
           <v-col cols="12" md="5" class="pl-md-14">
@@ -132,6 +137,8 @@
       </div>
       <div
         data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <div class="landing-ascent">
           <div class="landing-ascent_ttl">
@@ -158,12 +165,9 @@
           </div>
         </div>
       </div>
-      <div
-        id="statistic"
-        data-aos="fade-up"
-      >
+      <div id="statistic">
         <v-row>
-          <v-col md="6">
+          <v-col md="6" data-aos="fade-down-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <div class="landing-subtxt">
               {{ staticData.statistics }}
             </div>
@@ -174,7 +178,7 @@
               {{ staticData.statistics_left_text }}
             </div>
           </v-col>
-          <v-col md="6" class="table">
+          <v-col md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <div class="landing-table">
               <div class="d-flex justify-space-between align-center mb-14">
                 <div class="landing-table_ttl">
@@ -354,6 +358,7 @@
       </div>
       <div
         data-aos="fade-up"
+        data-aos-anchor-placement="center-center"
       >
         <div class="landing-ascent">
           <div class="landing-ascent_ttl">
