@@ -5,14 +5,12 @@
       :sort-items="sortItems"
       :on-select-sort-type="onSortTypeChangeEvents"
     />
-    Events:
-    {{ events }}
     <div class="d-flex">
     <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
       <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
-          <span class="events-date_month"> Авг </span>
-          <span class="events-date_day"> 22</span>
+          <span class="events-date_month"> {{ item.date | moment("MMM") }}</span>
+          <span class="events-date_day">{{ item.date | moment("DD") }}</span>
         </div>
         <v-divider vertical />
         <div class="events-info">
@@ -150,12 +148,16 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
+import Vue from "vue";
+import VueMoment from "vue-moment";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
+
+Vue.use(VueMoment);
 
 export default {
   components: {
