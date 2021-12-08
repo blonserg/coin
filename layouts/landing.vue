@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="landing-page">
     <v-main>
       <v-container>
         <HeaderLand />

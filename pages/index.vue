@@ -10,9 +10,18 @@
           <div class="landing-txt mb-10">
             {{ staticData.want_max }}
           </div>
-          <div class="d-flex align-center">
+          <div class="d-flex align-center flex-column flex-md-row">
             <v-btn
-              class="btn"
+              class="btn--more"
+              x-large
+              plain
+              height="48px"
+            >
+              {{ staticData.learn_more }}
+              <ArrowRight class="ml-2" />
+            </v-btn>
+            <v-btn
+              class="btn ml-md-6 mt-4 mt-md-0"
               color="#2d7bf6"
               x-large
               height="48px"
@@ -167,9 +176,18 @@
           <div class="landing-ascent_ttl">
             {{ staticData.first_blue_background_big_text }}
           </div>
-          <div class="d-flex align-center justify-center">
+          <div class="d-flex align-center justify-center flex-column flex-md-row">
             <v-btn
-              class="btn btn--invert"
+              class="btn--more"
+              x-large
+              plain
+              height="48px"
+            >
+              {{ staticData.learn_more }}
+              <ArrowRight class="ml-2" />
+            </v-btn>
+            <v-btn
+              class="btn btn--invert ml-md-6 mb-2 mb-md-0"
               color="#fff"
               x-large
               height="48px"
@@ -417,6 +435,7 @@ import PlaySvg from "~~/components/svg/PlaySvg";
 import RegisterSvg from "~~/components/svg/RegisterSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import LogoSvg from "~~/components/svg/LogoSvg";
+import ArrowRight from "~~/components/svg/ArrowRight";
 
 export default {
   components: {
@@ -425,7 +444,8 @@ export default {
     PlaySvg,
     RegisterSvg,
     CloseButton,
-    LogoSvg
+    LogoSvg,
+    ArrowRight
   },
   layout: "landing",
   data () {

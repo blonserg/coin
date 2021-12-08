@@ -5,7 +5,8 @@
         <LogoSvg />
       </div>
       <div class="header-menu d-none d-md-block">
-        <nuxt-link :to="{ path: '/',hash:'#system'}">О системе</nuxt-link>
+        <nuxt-link :to="{ path: '/',hash:'#system'}">О команде</nuxt-link>
+        <nuxt-link :to="{ path: '/',hash:'#system'}">Про систему</nuxt-link>
         <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
         <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
       </div>
@@ -20,7 +21,7 @@
           <RegisterSvg class="ml-2" />
         </v-btn>
       </NuxtLink>
-      <v-app-bar-nav-icon class="sidebar-menu d-md-none" @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon class="d-md-none" @click.stop="drawer = !drawer" />
       <v-navigation-drawer
         v-model="drawer"
         :clipped="clipped"
@@ -35,7 +36,8 @@
           </span>
         </div>
         <div class="header-menu">
-          <nuxt-link :to="{ path: '/',hash:'#system'}">О системе</nuxt-link>
+          <nuxt-link :to="{ path: '/',hash:'#system'}">О команде</nuxt-link>
+          <nuxt-link :to="{ path: '/',hash:'#system'}">Про систему</nuxt-link>
           <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
           <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
         </div>
@@ -90,7 +92,7 @@ export default {
 }
 
 .logo {
-  width: 200px;
+  width: 145px;
 }
 
 .btn {
