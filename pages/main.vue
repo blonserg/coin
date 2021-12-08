@@ -7,15 +7,19 @@
     />
     Events:
     {{ events }}
-    <div class="events-list">
-      <v-card class="events-item d-flex justify-space-between align-center">
+    <div class="d-flex">
+    <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
+      <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
           <span class="events-date_month"> Авг </span>
-          <span class="events-date_day"> 26 </span>
+          <span class="events-date_day"> 22</span>
         </div>
         <v-divider vertical />
         <div class="events-info">
-          <div class="events-ttl">Как инвестировать в криптовалюту</div>
+          <div class="events-ttl d-flex">
+            {{ item.title }}
+            <ArrowRight class="ml-4" />
+          </div>
           <div
             class="events-info_bottom d-flex justify-space-between align-center"
           >
@@ -32,12 +36,13 @@
                   fill="#808190"
                 />
               </svg>
-              Дмитрий Портнягин
+              {{ item.author }}
             </div>
-            <div class="events-time">12:00</div>
+            <div v-if="item.event_time" class="events-time">{{ item.event_time }}</div>
           </div>
         </div>
       </v-card>
+    <!-- </VueSlickCarousel> -->
     </div>
     Promo:
     {{ promo }}
@@ -150,13 +155,14 @@ import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import ArrowRight from "~~/components/svg/ArrowRight";
 
 export default {
   components: {
     Title,
     News,
-    Seetoo
-    // VueSlickCarousel
+    Seetoo,
+    ArrowRight
   },
   data () {
     return {
@@ -182,6 +188,21 @@ export default {
           value: "oldest"
         }
       ]
+      // settings: {
+      //   "slidesToShow": 3,
+      //   "slidesToScroll": 1,
+      //   "arrows": false,
+      //   "variableWidth": true,
+      //   "responsive": [
+      //     {
+      //       "breakpoint": 768,
+      //       "settings": {
+      //         "slidesToShow": 1,
+      //         "slidesToScroll": 1
+      //       }
+      //     }
+      //   ]
+      // }
     };
   },
   async fetch () {

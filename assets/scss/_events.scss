@@ -11,6 +11,10 @@
     border-radius: 15px;
     padding: 18px;
     min-height: 120px;
+
+    // @media screen and (min-width: 758px) {
+    //   min-width: 390px;
+    // }
   }
 
   &-date {
@@ -48,6 +52,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-left: 30px;
+    min-height: 80px;
 
     @media screen and (max-width: 758px) {
       padding-left: 15px;
@@ -57,7 +62,6 @@
   &-ttl {
     font-size: 20px;
     line-height: 26px;
-    padding-right: 20px;
 
     @media screen and (max-width: 758px) {
       padding-right: 0;
