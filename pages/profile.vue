@@ -413,7 +413,7 @@ export default {
     dialog1: false,
     dialog2: false,
     alert: {
-      text: "test test test",
+      text: "",
       active: false
     }
 
@@ -429,28 +429,40 @@ export default {
       this.userProfile = response.data;
       this.userProfileProjects = response.data.projects_links;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
 
     response = await HttpService.get("/tariffs");
     if (response.status === 200) {
       this.tariffs = response.data;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
 
     response = await HttpService.get("/user-chats");
     if (response.status === 200) {
       this.userChats = response.data;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
 
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
       this.userSecuritySettings = response.data;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
   },
   fetchOnServer: false,
@@ -460,16 +472,26 @@ export default {
       if (!errors) {
         this.$router.push("/");
       } else {
-        // TODO: process errors
+        this.alert = {
+          text: errors.join("; "),
+          active: true
+        };
       }
     },
     async changeUserProfile () {
       const response = await HttpService.post("/user-profile", this.userProfile.profile);
       if (response.status === 200) {
         this.userProfile = response.data;
-        this.editUser = true
+        this.editUser = true;
+        this.alert = {
+          text: "Profile is changed",
+          active: true
+        };
       } else {
-      // TODO
+        this.alert = {
+          text: response.errors.join("; "),
+          active: true
+        };
       }
     },
     editUserProfile () {
@@ -483,10 +505,35 @@ export default {
       setTimeout(() => (this.show = false), 2000);
     },
     async changeUserPassword () {
-      await UserService.changePassword(this.oldPassword, this.newPassword);
+      const errors = await UserService.changePassword(this.oldPassword, this.newPassword);
+      if (!errors) {
+        this.alert = {
+          text: "Password is changed",
+          active: true
+        };
+        this.oldPassword = this.newPassword;
+        this.newPassword = null;
+      } else {
+        this.alert = {
+          text: errors.error_text,
+          active: true
+        };
+      }
     },
     async changeUserEmail () {
-      this.userProfile.profile.email = await UserService.changeEmail(this.newEmail, this.oldPassword);
+      const response = await UserService.changeEmail(this.newEmail, this.oldPassword);
+      if (response) {
+        this.alert = {
+          text: "Email is changed",
+          active: true
+        };
+        this.userProfile.profile.email = response;
+      } else {
+        this.alert = {
+          text: "An error occurred",
+          active: true
+        };
+      }
     }
   }
 };
