@@ -129,14 +129,14 @@ export default {
     if (response.status === 200) {
       this.userNotifications = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   fetchOnServer: false,

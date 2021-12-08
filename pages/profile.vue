@@ -449,10 +449,7 @@ export default {
     if (response.status === 200) {
       this.userChats = response.data;
     } else {
-      this.alert = {
-        text: response.errors.join("; "),
-        active: true
-      };
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/user-security-settings");
