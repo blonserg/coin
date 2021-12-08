@@ -6,12 +6,12 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <div v-if="alert.active">
+      <v-dialog v-model="alert.active">
         <Alert
           :text="alert.text"
           @close="() => { alert.active = false; }"
         />
-      </div>
+      </v-dialog>
       <v-col md="4">
         <v-card class="profile-info">
           <div class="profile-avatar">
@@ -159,6 +159,7 @@
                   <v-text-field
                     v-model="oldPassword"
                     :label="staticDataChangePassword.change_password_enter_current_password"
+                    type="password"
                     solo
                   />
                   <span class="label">
@@ -167,6 +168,7 @@
                   <v-text-field
                     v-model="newPassword"
                     :label="staticDataChangePassword.change_password_enter_new_password"
+                    type="password"
                     solo
                   />
                   <v-btn
@@ -219,6 +221,7 @@
                   <v-text-field
                     v-model="oldPassword"
                     :label="staticDataChangeEmail.change_email_enter_password"
+                    type="password"
                     solo
                   />
                   <v-btn
