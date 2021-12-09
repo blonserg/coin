@@ -87,9 +87,9 @@ export default {
     };
     const response = await HttpService.post(path, undefined, params);
     if (response.status === 200) {
-      return response.data.email;
-    } else {
       return false;
+    } else {
+      return response.errors;
     }
   }
 }

@@ -524,16 +524,16 @@ export default {
       }
     },
     async changeUserEmail () {
-      const response = await UserService.changeEmail(this.newEmail, this.oldPassword);
-      if (response) {
+      const errors = await UserService.changeEmail(this.newEmail, this.oldPassword);
+      if (!errors) {
         this.alert = {
           text: "Email is changed",
           active: true
         };
-        this.userProfile.profile.email = response;
+        this.userProfile.profile.email = this.newEmail;
       } else {
         this.alert = {
-          text: "An error occurred",
+          text: errors.error_text,
           active: true
         };
       }
