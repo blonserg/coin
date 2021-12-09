@@ -313,3 +313,7 @@ body,
     border: 1px solid #fff;
   }
 }
+
+.v-input--switch--inset .v-input--switch__track {
+  opacity: 1 !important;
+}
