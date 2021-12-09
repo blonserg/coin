@@ -94,7 +94,7 @@ export default {
   data () {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       switch1: true,
       items: [
@@ -142,7 +142,7 @@ export default {
     if (response.status === 200) {
       this.authUserInfo = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   fetchOnServer: false,

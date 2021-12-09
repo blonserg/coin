@@ -194,7 +194,6 @@
     </div>
     <div class="article-invest">
       <v-row>
-        <!-- <v-col v-for="(item, i) in invests" :key="i" md="4"> -->
         <v-col v-for="(item, i) in projects" :key="i" md="4">
           <v-card transition="fade-transition" class="article-item_invest">
             <div class="article-head d-flex align-center">

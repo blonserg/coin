@@ -5,6 +5,16 @@
   padding: 60px 50px;
   position: relative;
 
+  &.v-card.v-sheet.theme--dark {
+    background: #1e1f26;
+    border: 1px solid #272a33;
+  }
+
+  &.v-card.v-sheet.theme--light {
+    background-color: #f6f7f9;
+    border: 1px solid #f6f7f9;
+  }
+
   &-image {
     img {
       max-width: 100%;
@@ -18,12 +28,20 @@
       line-height: 34px;
       color: #fff;
       margin-bottom: 30px;
+
+      .theme--light & {
+        color: #474856;
+      }
     }
 
     strong {
       color: #fff;
       font-size: 16px;
       margin-bottom: 10px;
+
+      .theme--light & {
+        color: #474856;
+      }
     }
 
     p {
@@ -36,6 +54,15 @@
     &_review {
       color: #adafc2;
       max-width: 250px;
+    }
+
+    &-inner {
+      max-width: 282px;
+      margin: 0 auto;
+
+      .v-input--is-disabled .v-text-field__details {
+        display: none;
+      }
     }
   }
 

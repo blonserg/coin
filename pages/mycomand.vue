@@ -136,7 +136,12 @@
         </div>
       </v-col>
     </v-row>
-    <Title class="ttl--small mb-9" :title="`Сетка реферальных партнеров`" />
+    <Title
+      class="ttl--small mb-9"
+      :title="`Сетка реферальных партнеров`"
+      :on-select-sort-type="onSortTypeChange"
+      :sort-items="sortItems"
+    />
     <div class="table mb-16">
       <div class="table-head">
         <v-row>
@@ -204,22 +209,46 @@ export default {
       userFirstReferal: null,
       userPaidReferal: null,
       userProjects: null,
-      userPartners: null
+      userPartners: null,
+      selectedSortType: null,
+      sortItems: [
+        {
+          text: "Самие активние",
+          value: "1"
+        },
+        {
+          text: "Mенее активны",
+          value: "2"
+        }
+      ]
     };
   },
   async fetch () {
-    const response = await HttpService.get("/user-team");
-    if (response.status === 200) {
-      this.userTeam = response.data.team.all_referrals;
-      this.userFirstReferal = response.data.team.first_line_referrals;
-      this.userPaidReferal = response.data.team.paid_referrals;
-      this.userProjects = response.data.projects;
-      this.userPartners = response.data.partners;
-    } else {
-      // TODO
-    }
+    await this.getUserTeam();
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  methods: {
+    async getUserTeam () {
+      const params = {};
+      if (this.selectedSortType !== null) {
+        params.sort = this.selectedSortType;
+      }
+      const response = await HttpService.get("/user-team", params);
+      if (response.status === 200) {
+        this.userTeam = response.data.team.all_referrals;
+        this.userFirstReferal = response.data.team.first_line_referrals;
+        this.userPaidReferal = response.data.team.paid_referrals;
+        this.userProjects = response.data.projects;
+        this.userPartners = response.data.partners;
+      } else {
+      // TODO
+      }
+    },
+    onSortTypeChange (sortType) {
+      this.selectedSortType = sortType;
+      this.getUserTeam();
+    }
+  }
 };
 </script>
 

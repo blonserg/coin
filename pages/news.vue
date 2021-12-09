@@ -6,6 +6,7 @@
         :title="staticData.news_title"
         :sort="staticData.news_sort"
         :filtr="staticData.news_category_filter"
+        :sort-items="sortItems"
         :categories="categories"
         :on-select-sort-type="onSortTypeChange"
         :on-select-categories="onCategoriesChange"
@@ -99,9 +100,18 @@ export default {
       staticData: [],
       apiNews: null,
       categories: ["category1", "category2", "category3"], // TODO get data from apiNews
-      categorizedNews: null,
       selectedSortType: null,
-      selectedCategories: null
+      selectedCategories: null,
+      sortItems: [
+        {
+          text: "Latest",
+          value: "latest"
+        },
+        {
+          text: "Oldest",
+          value: "oldest"
+        }
+      ]
     };
   },
   async fetch () {

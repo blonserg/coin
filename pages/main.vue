@@ -1,17 +1,23 @@
 <template>
   <div>
-    <Title :title="staticData.cabinet_main_event" />
-    Events:
-    {{ events }}
-    <div class="events-list">
-      <v-card class="events-item d-flex justify-space-between align-center">
+    <Title
+      :title="staticData.cabinet_main_event"
+      :sort-items="sortItems"
+      :on-select-sort-type="onSortTypeChangeEvents"
+    />
+    <div class="d-flex mb-16">
+    <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
+      <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
-          <span class="events-date_month"> Авг </span>
-          <span class="events-date_day"> 26 </span>
+          <span class="events-date_month"> {{ item.date | moment("MMM") }}</span>
+          <span class="events-date_day">{{ item.date | moment("DD") }}</span>
         </div>
         <v-divider vertical />
         <div class="events-info">
-          <div class="events-ttl">Как инвестировать в криптовалюту</div>
+          <div class="events-ttl d-flex">
+            {{ item.title }}
+            <ArrowRight class="ml-4" />
+          </div>
           <div
             class="events-info_bottom d-flex justify-space-between align-center"
           >
@@ -28,22 +34,27 @@
                   fill="#808190"
                 />
               </svg>
-              Дмитрий Портнягин
+              {{ item.author }}
             </div>
-            <div class="events-time">12:00</div>
+            <div v-if="item.event_time" class="events-time">{{ item.event_time }}</div>
           </div>
         </div>
       </v-card>
+    <!-- </VueSlickCarousel> -->
     </div>
-    Promo:
+    <!-- Promo:
     {{ promo }}
     <br>
     Отзывы - reviews:
-    {{ reviews }}
+    {{ reviews }} -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
-    News:
-    {{ newsApi }}
-    <Title :title="staticData.cabinet_main_news" />
+    <Title
+      :title="staticData.cabinet_main_news"
+      :categories="categories"
+      :sort-items="sortItems"
+      :on-select-sort-type="onSortTypeChangeNews"
+      :on-select-categories="onCategoriesChangeNews"
+    />
     <v-row>
       <v-col v-for="item in news" :key="item.slug" md="4">
         <News :title="item.title" :views="item.views" :date="item.date" />
@@ -79,13 +90,9 @@
           36 459
         </div>
         <v-btn-toggle v-model="text" tile group>
-          <v-btn value="day"> Сутки </v-btn>
-
-          <v-btn value="week"> Неделя </v-btn>
-
-          <v-btn value="month"> Месяц </v-btn>
-
-          <v-btn value="all"> ВСе время </v-btn>
+          <v-btn @click="applyInterval('1month')"> 1 месяц </v-btn>
+          <v-btn @click="applyInterval('3months')"> 3 месяца </v-btn>
+          <v-btn value="all" @click="applyInterval('all')"> Все время </v-btn>
         </v-btn-toggle>
       </div>
       <div class="main-body">
@@ -141,18 +148,26 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
+import Vue from "vue";
+import VueMoment from "vue-moment";
+// import moment from "moment";
+// import "moment/locale/ru";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import ArrowRight from "~~/components/svg/ArrowRight";
+
+Vue.use(VueMoment);
+// VueMoment.locale("ru");
 
 export default {
   components: {
     Title,
     News,
-    Seetoo
-    // VueSlickCarousel
+    Seetoo,
+    ArrowRight
   },
   data () {
     return {
@@ -161,22 +176,48 @@ export default {
       events: null,
       promo: null,
       reviews: null,
-      newsApi: null,
+      apiNews: null,
       statisticsCountries: null,
-      statisticsCities: null
+      statisticsCities: null,
+      selectedSortTypeEvents: null,
+      selectedSortTypeNews: null,
+      selectedCategoriesNews: null,
+      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
+      sortItems: [
+        {
+          text: "Latest",
+          value: "latest"
+        },
+        {
+          text: "Oldest",
+          value: "oldest"
+        }
+      ]
+      // settings: {
+      //   "slidesToShow": 3,
+      //   "slidesToScroll": 1,
+      //   "arrows": false,
+      //   "variableWidth": true,
+      //   "responsive": [
+      //     {
+      //       "breakpoint": 768,
+      //       "settings": {
+      //         "slidesToShow": 1,
+      //         "slidesToScroll": 1
+      //       }
+      //     }
+      //   ]
+      // }
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/cabinet_main");
 
-    let response = await HttpService.get("/events");
-    if (response.status === 200) {
-      this.events = response.data;
-    } else {
-      // TODO
-    }
+    await this.getEvents();
 
-    response = await HttpService.get("/promo");
+    await this.getNews();
+
+    let response = await HttpService.get("/promo");
     if (response.status === 200) {
       this.promo = response.data;
     } else {
@@ -186,13 +227,6 @@ export default {
     response = await HttpService.get("/reviews");
     if (response.status === 200) {
       this.reviews = response.data;
-    } else {
-      // TODO
-    }
-
-    response = await HttpService.get("/news");
-    if (response.status === 200) {
-      this.apiNews = response.data.articles;
     } else {
       // TODO
     }
@@ -212,6 +246,61 @@ export default {
     },
     news () {
       return this.$store.state.news;
+    }
+  },
+  methods: {
+    async applyInterval (interval) {
+      const params = {
+        interval
+      }
+      const response = await HttpService.get("/statistics", params);
+      if (response.status === 200) {
+        this.statisticsCountries = response.data.countries;
+        this.statisticsCities = response.data.cities;
+      } else {
+      // TODO
+      }
+    },
+    async getEvents () {
+      const params = {};
+      if (this.selectedSortTypeEvents !== null) {
+        params.sort = this.selectedSortTypeEvents;
+      }
+      const response = await HttpService.get("/events", params);
+      if (response.status === 200) {
+        this.events = response.data;
+      } else {
+        // TODO
+      }
+    },
+    onSortTypeChangeEvents (sortType) {
+      this.selectedSortTypeEvents = sortType;
+      this.getEvents();
+    },
+    async getNews () {
+      const params = {};
+      if (this.selectedSortTypeNews !== null) {
+        params.sort = this.selectedSortTypeNews;
+      }
+      if (this.selectedCategoriesNews !== null) {
+        this.selectedCategoriesNews.forEach((categoryName, categoryIndex) => {
+          params["category[" + categoryIndex + "]"] = categoryName;
+        });
+      }
+      const response = await HttpService.get("/news", params);
+      if (response.status === 200) {
+        this.apiNews = response.data;
+      } else {
+        // TODO
+      }
+    },
+    onSortTypeChangeNews (sortType) {
+      this.selectedSortTypeNews = sortType;
+      this.getNews();
+    },
+    onCategoriesChangeNews (categories) {
+      this.selectedCategoriesNews = categories;
+      this.getNews();
     }
   }
 };

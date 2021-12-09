@@ -3,16 +3,25 @@
     <div v-if="$fetchState.pending">Loading...</div>
     <div v-else>
       <v-row class="landing-block first-block align-center">
-        <v-col cols="12" md="7">
+        <v-col cols="12" md="7" data-aos="zoom-in" data-aos-duration="1500">
           <div class="landing-ttl">
             <LandTtl />
           </div>
           <div class="landing-txt mb-10">
             {{ staticData.want_max }}
           </div>
-          <div class="d-flex align-center">
+          <div class="d-flex align-center flex-column flex-md-row">
             <v-btn
-              class="btn"
+              class="btn--more"
+              x-large
+              plain
+              height="48px"
+            >
+              {{ staticData.learn_more }}
+              <ArrowRight class="ml-2" />
+            </v-btn>
+            <v-btn
+              class="btn ml-md-6 mt-4 mt-md-0"
               color="#2d7bf6"
               x-large
               height="48px"
@@ -21,25 +30,14 @@
             </v-btn>
           </div>
         </v-col>
-        <v-col cols="12" md="5" style="position: relative">
+        <v-col cols="12" md="5" data-aos="zoom-in" data-aos-duration="1500">
           <img class="landing-main_image" src="/man-rocket.png" alt="" />
         </v-col>
       </v-row>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-      >
-        <div class="landing-subtxt">{{ staticData.about_team }}</div>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        min-height="200"
-        transition="scroll-y-transition"
+      <div class="landing-subtxt">{{ staticData.about_team }}</div>
+      <div
         class="landing-block"
+        data-aos="fade-up"
       >
         <v-row>
           <v-col cols="12" md="4" class="landing-ttl">
@@ -49,14 +47,11 @@
             {{ staticData.about_team_left_text }}
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
+      </div>
+      <div
         id="system"
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+        data-aos="fade-up"
+        data-aos-duration="1500"
       >
         <div class="landing-block_system text-center">
           <div class="landing-subtxt">{{ staticData.about_system }}</div>
@@ -68,19 +63,13 @@
             {{ staticData.about_system_small_headline }}
           </div>
         </div>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
-      >
+      </div>
+      <div>
         <v-row class="landing-block_system">
-          <v-col cols="12" md="7">
+          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500">
             <img src="/learn.png" alt="" />
           </v-col>
-          <v-col cols="12" md="5" class="pr-md-14">
+          <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
             <LandSmile />
             <div class="landing-block_ttl">Обучение</div>
             <div class="landing-block_txt">
@@ -90,13 +79,11 @@
             </div>
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+      </div>
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <v-row class="landing-block_system">
           <v-col cols="12" md="5" class="pl-md-14">
@@ -112,19 +99,13 @@
             <img src="/strategy.png" alt="" />
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
-      >
+      </div>
+      <div>
         <v-row class="landing-block_system">
-          <v-col cols="12" md="7">
+          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <img src="/stock.png" alt="" />
           </v-col>
-          <v-col cols="12" md="5" class="pr-md-14">
+          <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
             <LandSmile />
             <div class="landing-block_ttl">Биржа услуг</div>
             <div class="landing-block_txt">
@@ -133,13 +114,11 @@
             </div>
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+      </div>
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <v-row class="landing-block_system">
           <v-col cols="12" md="5" class="pl-md-14">
@@ -155,21 +134,28 @@
             <img src="/strategy.png" alt="" />
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+      </div>
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="center-center"
       >
         <div class="landing-ascent">
           <div class="landing-ascent_ttl">
             {{ staticData.first_blue_background_big_text }}
           </div>
-          <div class="d-flex align-center justify-center">
+          <div class="d-flex align-center justify-center flex-column flex-md-row">
             <v-btn
-              class="btn btn--invert"
+              class="btn--more"
+              x-large
+              plain
+              height="48px"
+            >
+              {{ staticData.learn_more }}
+              <ArrowRight class="ml-2" />
+            </v-btn>
+            <v-btn
+              class="btn btn--invert ml-md-6 mb-2 mb-md-0"
               color="#fff"
               x-large
               height="48px"
@@ -178,17 +164,10 @@
             </v-btn>
           </div>
         </div>
-      </v-lazy>
-      <v-lazy
-        id="statistic"
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
-      >
-        <v-row transition="scroll-y-transition">
-          <v-col md="6">
+      </div>
+      <div id="statistic">
+        <v-row>
+          <v-col md="6" data-aos="fade-down-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <div class="landing-subtxt">
               {{ staticData.statistics }}
             </div>
@@ -199,7 +178,7 @@
               {{ staticData.statistics_left_text }}
             </div>
           </v-col>
-          <v-col md="6" class="table">
+          <v-col md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500" data-aos-anchor-placement="center-center">
             <div class="landing-table">
               <div class="d-flex justify-space-between align-center mb-14">
                 <div class="landing-table_ttl">
@@ -244,7 +223,7 @@
                   </v-btn-toggle>
                 </div>
                 <div class="main-body">
-                  <v-simple-table>
+                  <!-- <v-simple-table>
                     <template #default>
                       <thead>
                         <tr>
@@ -264,7 +243,7 @@
                         </tr>
                       </tbody>
                     </template>
-                  </v-simple-table>
+                  </v-simple-table> -->
                 </div>
                 <p class="main-info d-none d-md-block">
                   {{ staticData.statistics_bottom_text }}
@@ -273,14 +252,10 @@
             </div>
           </v-col>
         </v-row>
-      </v-lazy>
-      <v-lazy
+      </div>
+      <div
         id="speak"
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+        data-aos="fade-up"
       >
         <div class="landing-review">
           <div class="landing-subtxt">О нас говорят</div>
@@ -380,13 +355,10 @@
             </div>
           </div>
         </div>
-      </v-lazy>
-      <v-lazy
-        :options="{
-          threshold: 1.0,
-        }"
-        transition="scroll-y-transition"
-        min-height="200"
+      </div>
+      <div
+        data-aos="fade-up"
+        data-aos-anchor-placement="center-center"
       >
         <div class="landing-ascent">
           <div class="landing-ascent_ttl">
@@ -403,12 +375,14 @@
             </v-btn>
           </div>
         </div>
-      </v-lazy>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import LandTtl from "~~/components/svg/LandTtl";
 import LandSmile from "~~/components/svg/LandSmile";
 import StaticService from "~/services/StaticService";
@@ -417,6 +391,7 @@ import PlaySvg from "~~/components/svg/PlaySvg";
 import RegisterSvg from "~~/components/svg/RegisterSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import LogoSvg from "~~/components/svg/LogoSvg";
+import ArrowRight from "~~/components/svg/ArrowRight";
 
 export default {
   components: {
@@ -425,7 +400,8 @@ export default {
     PlaySvg,
     RegisterSvg,
     CloseButton,
-    LogoSvg
+    LogoSvg,
+    ArrowRight
   },
   layout: "landing",
   data () {
@@ -439,28 +415,21 @@ export default {
         }
       ],
       staticData: [],
-      dynamicData: {},
-      statisticsCountries: null,
-      statisticsCities: null
+      dynamicData: {}
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/main");
 
-    let response = await HttpService.get("/main-page");
+    const response = await HttpService.get("/main-page");
     if (response.status === 200) {
       this.dynamicData = response.data;
     } else {
       // TODO
     }
-
-    response = await HttpService.get("/statistics");
-    if (response.status === 200) {
-      this.statisticsCountries = response.data.countries;
-      this.statisticsCities = response.data.cities;
-    } else {
-      // TODO
-    }
+  },
+  created () {
+    AOS.init()
   },
   fetchOnServer: false
 };

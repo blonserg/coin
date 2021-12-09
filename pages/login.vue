@@ -77,7 +77,8 @@ export default {
       errorStatus: false,
       nameRules: [
         v => !!v || "Обязательное поле"
-      ]
+      ],
+      dialog: false
     }
   },
   async fetch () {
@@ -108,7 +109,18 @@ export default {
       const response = await HttpService.post(path);
       if (response.status === 200) {
         // TODO inform user, that email was send
-        alert("email sent");
+        alert("email was send");
+      } else {
+      // TODO
+        alert(response.errors.error_text);
+      }
+    },
+    async forgotPasswordReset () {
+      const path = "/delete-reset-password?email=" + this.user.email;
+      const response = await HttpService.post(path);
+      if (response.status === 200) {
+        // TODO inform user, that email was send
+        this.forgotPassword();
       } else {
       // TODO
         alert(response.errors.error_text);

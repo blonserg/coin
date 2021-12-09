@@ -13,7 +13,6 @@ export default {
       });
       return res;
     } else {
-      // TODO: notify user somehow about the error
       return {};
     }
   }

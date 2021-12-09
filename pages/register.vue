@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import HttpService from "~/services/HttpService";
 import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
@@ -120,7 +121,11 @@ export default {
       emailRules: [
         v => !!v || "Обязательное поле",
         v => /.+@.+/.test(v) || "E-mail не правильное"
-      ]
+      ],
+      refferer: { // TODO get from refferal link
+        referer_id: 1,
+        link: "test"
+      }
     };
   },
   async fetch () {
@@ -141,16 +146,29 @@ export default {
         ...this.user
       };
       if (this.refer) {
-        // TODO: get from somewhere the referer_id
-        registrationUserData.referer_id = 1;
+        registrationUserData.referer_id = this.refferer.referer_id
       }
-      const errors = await UserService.registration(registrationUserData);
-      if (!errors) {
+      const registrationResponse = await UserService.registration(registrationUserData);
+      if (registrationResponse.status === 200) {
+        if (this.refer) {
+          const params = {
+            "user_id": registrationResponse.data.user.user_id,
+            "referral_id": this.refferer.referer_id,
+            "link": this.refferer.link
+          }
+          const response = await HttpService.post("/register/test", undefined, params);
+          if (response.status === 200) {
+            // TODO do not inform user
+            alert("статистика врахована")
+          } else {
+            alert(response.errors.data.error_text);
+          }
+        }
         this.$router.push("main");
       } else {
         // TODO: process errors
         this.errorStatus = true
-        this.errorList = errors;
+        this.errorList = registrationResponse.errors;
       }
     }
   }

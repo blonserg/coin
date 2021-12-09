@@ -1,9 +1,11 @@
 <template>
-  <v-app>
+  <v-app class="landing-page">
     <v-main>
       <v-container>
         <HeaderLand />
-        <Nuxt />
+        <client-only>
+          <Nuxt />
+        </client-only>
         <FooterLand />
       </v-container>
     </v-main>
@@ -23,9 +25,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .v-main__wrap {
-    @media screen and (max-width: 758px) {
-      padding: 0 25px;
-    }
+.v-main__wrap {
+  @media screen and (max-width: 758px) {
+    padding: 0 25px;
   }
+}
 </style>

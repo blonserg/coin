@@ -6,6 +6,12 @@
       </v-col>
     </v-row>
     <v-row v-else>
+      <v-dialog v-model="alert.active">
+        <Alert
+          :text="alert.text"
+          @close="() => { alert.active = false; }"
+        />
+      </v-dialog>
       <v-col md="4">
         <v-card class="profile-info">
           <div class="profile-avatar">
@@ -78,7 +84,179 @@
               {{ staticData.my_profile_desc }}
             </div>
           </div>
-          <div class="d-flex justify-center mt-4">
+          <v-dialog
+            v-model="dialog"
+          >
+            <template #activator="{ on, attrs }">
+              <div class="d-flex justify-center mt-16">
+                <v-btn
+                  v-bind="attrs"
+                  class="btn btn--settings"
+                  color="#2d7bf6"
+                  x-large
+                  height="48px"
+                  v-on="on"
+                >
+                  Настройки аккаунта
+                  <LockSvg class="ml-2" />
+                </v-btn>
+              </div>
+            </template>
+
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2 class="text-center">{{ staticDataAccountSettings.account_settings_title }}</h2>
+                  <span class="label d-block">Email</span>
+                  <v-text-field
+                    :label="userProfile.profile.email"
+                    solo
+                    disabled
+                  />
+                  <v-btn
+                    class="btn--change"
+                    plain
+                    @click="dialog1 = !dialog1"
+                  >
+                    {{ staticDataAccountSettings.account_settings_change }}
+                  </v-btn>
+                  <span class="label d-block">
+                    {{ staticDataAccountSettings.account_settings_your_password }}
+                  </span>
+                  <v-text-field
+                    solo
+                    :value="123456"
+                    type="password"
+                    disabled
+                  />
+                  <v-btn
+                    class="btn--change"
+                    plain
+                    @click="dialog2 = !dialog2"
+                  >
+                    {{ staticDataAccountSettings.account_settings_change }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
+            v-model="dialog2"
+          >
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2>{{ staticDataChangePassword.change_password_title }}</h2>
+                  <span class="label">
+                    {{ staticDataChangePassword.change_password_current_password }}
+                  </span>
+                  <v-text-field
+                    v-model="oldPassword"
+                    :label="staticDataChangePassword.change_password_enter_current_password"
+                    type="password"
+                    solo
+                  />
+                  <span class="label">
+                    {{ staticDataChangePassword.change_password_new_password }}
+                  </span>
+                  <v-text-field
+                    v-model="newPassword"
+                    :label="staticDataChangePassword.change_password_enter_new_password"
+                    type="password"
+                    solo
+                  />
+                  <v-btn
+                    class="btn--cancel"
+                    plain
+                    @click="dialog2 = false"
+                  >
+                    {{ staticDataChangePassword.change_password_cancel }}
+                  </v-btn>
+                  <v-btn
+                    class="btn"
+                    color="#2d7bf6"
+                    height="48px"
+                    x-large
+                    @click.native="changeUserPassword"
+                  >
+                    {{ staticDataChangePassword.change_password_save }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog2 = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
+            v-model="dialog1"
+          >
+            <v-card class="dialog">
+              <v-card-text class="dialog-text">
+                <div class="dialog-text-inner">
+                  <h2>{{ staticDataChangeEmail.change_email_title }}</h2>
+                  <span class="label">
+                    {{ staticDataChangeEmail.change_email_new_email }}
+                  </span>
+                  <v-text-field
+                    v-model="newEmail"
+                    :label="staticDataChangeEmail.change_email_enter_new_email"
+                    solo
+                  />
+                  <span class="label">
+                    {{ staticDataChangeEmail.change_email_password }}
+                  </span>
+                  <v-text-field
+                    v-model="oldPassword"
+                    :label="staticDataChangeEmail.change_email_enter_password"
+                    type="password"
+                    solo
+                  />
+                  <v-btn
+                    class="btn--cancel"
+                    plain
+                    @click="dialog1 = false"
+                  >
+                    {{ staticDataChangeEmail.change_email_cancel }}
+                  </v-btn>
+                  <v-btn
+                    class="btn"
+                    color="#2d7bf6"
+                    height="48px"
+                    x-large
+                    @click.native="changeUserEmail"
+                  >
+                    {{ staticDataChangeEmail.change_email_save }}
+                  </v-btn>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog1 = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <div class="d-flex justify-center mt-8">
             <v-btn
               class="btn btn--logout"
               x-large
@@ -208,54 +386,86 @@ import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
+import LockSvg from "~~/components/svg/LockSvg";
+import CloseButton from "~~/components/svg/CloseButton";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     LogoutSvg,
-    PencilSvg
+    PencilSvg,
+    LockSvg,
+    CloseButton,
+    Alert
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
     countries: ["Ukraine", "France"],
     staticData: [],
+    staticDataAccountSettings: [],
+    staticDataChangeEmail: [],
+    staticDataChangePassword: [],
     userProfile: null,
     tariffs: null,
     userChats: null,
     userSecuritySettings: null,
     userProfileProjects: null,
     editUser: true,
-    show: false
+    show: false,
+    oldPassword: null,
+    newPassword: null,
+    newEmail: null,
+    dialog: false,
+    dialog1: false,
+    dialog2: false,
+    alert: {
+      text: "",
+      active: false
+    }
+
   }),
   async fetch () {
-    this.staticData = await StaticService.get("/my_profile")
+    this.staticData = await StaticService.get("/my_profile");
+    this.staticDataAccountSettings = await StaticService.get("/account_settings");
+    this.staticDataChangeEmail = await StaticService.get("/change_email");
+    this.staticDataChangePassword = await StaticService.get("/change_password");
 
     let response = await HttpService.get("/user-profile");
     if (response.status === 200) {
       this.userProfile = response.data;
       this.userProfileProjects = response.data.projects_links;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
 
     response = await HttpService.get("/tariffs");
     if (response.status === 200) {
       this.tariffs = response.data;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
 
     response = await HttpService.get("/user-chats");
     if (response.status === 200) {
       this.userChats = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
       this.userSecuritySettings = response.data;
     } else {
-      // TODO
+      this.alert = {
+        text: response.errors.join("; "),
+        active: true
+      };
     }
   },
   fetchOnServer: false,
@@ -265,16 +475,26 @@ export default {
       if (!errors) {
         this.$router.push("/");
       } else {
-        // TODO: process errors
+        this.alert = {
+          text: errors.join("; "),
+          active: true
+        };
       }
     },
     async changeUserProfile () {
       const response = await HttpService.post("/user-profile", this.userProfile.profile);
       if (response.status === 200) {
         this.userProfile = response.data;
-        this.editUser = true
+        this.editUser = true;
+        this.alert = {
+          text: "Profile is changed",
+          active: true
+        };
       } else {
-      // TODO
+        this.alert = {
+          text: response.errors.join("; "),
+          active: true
+        };
       }
     },
     editUserProfile () {
@@ -286,6 +506,37 @@ export default {
       document.execCommand("copy");
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
+    },
+    async changeUserPassword () {
+      const errors = await UserService.changePassword(this.oldPassword, this.newPassword);
+      if (!errors) {
+        this.alert = {
+          text: "Password is changed",
+          active: true
+        };
+        this.oldPassword = this.newPassword;
+        this.newPassword = null;
+      } else {
+        this.alert = {
+          text: errors.error_text,
+          active: true
+        };
+      }
+    },
+    async changeUserEmail () {
+      const response = await UserService.changeEmail(this.newEmail, this.oldPassword);
+      if (response) {
+        this.alert = {
+          text: "Email is changed",
+          active: true
+        };
+        this.userProfile.profile.email = response;
+      } else {
+        this.alert = {
+          text: "An error occurred",
+          active: true
+        };
+      }
     }
   }
 };
