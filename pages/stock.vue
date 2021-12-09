@@ -89,14 +89,14 @@ export default {
     if (response.status === 200) {
       this.services = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     const resp = await HttpService.get("/services-request", this.servicesRequestParams);
     if (resp.status === 200) {
       this.servicesRequest = resp.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   fetchOnServer: false

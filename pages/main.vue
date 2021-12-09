@@ -221,14 +221,14 @@ export default {
     if (response.status === 200) {
       this.promo = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/reviews");
     if (response.status === 200) {
       this.reviews = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/statistics");
@@ -236,7 +236,7 @@ export default {
       this.statisticsCountries = response.data.countries;
       this.statisticsCities = response.data.cities;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   fetchOnServer: false,
@@ -258,7 +258,7 @@ export default {
         this.statisticsCountries = response.data.countries;
         this.statisticsCities = response.data.cities;
       } else {
-      // TODO
+      // TODO do we need to inform user?
       }
     },
     async getEvents () {
@@ -270,7 +270,7 @@ export default {
       if (response.status === 200) {
         this.events = response.data;
       } else {
-        // TODO
+        // TODO do we need to inform user?
       }
     },
     onSortTypeChangeEvents (sortType) {
@@ -291,7 +291,7 @@ export default {
       if (response.status === 200) {
         this.apiNews = response.data;
       } else {
-        // TODO
+        // TODO do we need to inform user?
       }
     },
     onSortTypeChangeNews (sortType) {
