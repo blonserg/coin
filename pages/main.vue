@@ -5,7 +5,7 @@
       :sort-items="sortItems"
       :on-select-sort-type="onSortTypeChangeEvents"
     />
-    <div class="d-flex">
+    <div class="d-flex mb-16">
     <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
       <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
@@ -42,11 +42,11 @@
       </v-card>
     <!-- </VueSlickCarousel> -->
     </div>
-    Promo:
+    <!-- Promo:
     {{ promo }}
     <br>
     Отзывы - reviews:
-    {{ reviews }}
+    {{ reviews }} -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
     <Title
       :title="staticData.cabinet_main_news"
@@ -92,7 +92,7 @@
         <v-btn-toggle v-model="text" tile group>
           <v-btn @click="applyInterval('1month')"> 1 месяц </v-btn>
           <v-btn @click="applyInterval('3months')"> 3 месяца </v-btn>
-          <v-btn @click="applyInterval('all')"> Все время </v-btn>
+          <v-btn value="all" @click="applyInterval('all')"> Все время </v-btn>
         </v-btn-toggle>
       </div>
       <div class="main-body">
@@ -150,6 +150,8 @@
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import Vue from "vue";
 import VueMoment from "vue-moment";
+// import moment from "moment";
+// import "moment/locale/ru";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
@@ -158,6 +160,7 @@ import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
 
 Vue.use(VueMoment);
+// VueMoment.locale("ru");
 
 export default {
   components: {

@@ -109,6 +109,7 @@
                   <h2 class="text-center">{{ staticDataAccountSettings.account_settings_title }}</h2>
                   <span class="label d-block">Email</span>
                   <v-text-field
+                    :label="userProfile.profile.email"
                     solo
                     disabled
                   />
@@ -124,6 +125,8 @@
                   </span>
                   <v-text-field
                     solo
+                    :value="123456"
+                    type="password"
                     disabled
                   />
                   <v-btn
