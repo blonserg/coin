@@ -83,9 +83,8 @@
       <div
         data-aos="fade-up"
         data-aos-duration="1500"
-        data-aos-anchor-placement="center-center"
       >
-        <v-row class="landing-block_system">
+        <v-row class="landing-block_system flex-column-reverse flex-md-row">
           <v-col cols="12" md="5" class="pl-md-14">
             <LandSmile />
             <div class="landing-block_ttl">Стратегии</div>
@@ -102,7 +101,7 @@
       </div>
       <div>
         <v-row class="landing-block_system">
-          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
+          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500">
             <img src="/stock.png" alt="" />
           </v-col>
           <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
@@ -118,7 +117,6 @@
       <div
         data-aos="fade-up"
         data-aos-duration="1500"
-        data-aos-anchor-placement="center-center"
       >
         <v-row class="landing-block_system">
           <v-col cols="12" md="5" class="pl-md-14">
@@ -138,7 +136,6 @@
       <div
         data-aos="fade-up"
         data-aos-duration="1500"
-        data-aos-anchor-placement="center-center"
       >
         <div class="landing-ascent">
           <div class="landing-ascent_ttl">
@@ -167,7 +164,7 @@
       </div>
       <div id="statistic">
         <v-row>
-          <v-col md="6" data-aos="fade-down-right" data-aos-duration="1500" data-aos-anchor-placement="center-center">
+          <v-col md="6" data-aos="fade-down-right" data-aos-duration="1500">
             <div class="landing-subtxt">
               {{ staticData.statistics }}
             </div>
@@ -178,7 +175,7 @@
               {{ staticData.statistics_left_text }}
             </div>
           </v-col>
-          <v-col md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500" data-aos-anchor-placement="center-center">
+          <v-col md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500">
             <div class="landing-table">
               <div class="d-flex justify-space-between align-center mb-14">
                 <div class="landing-table_ttl">
@@ -436,6 +433,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .landing {
+    img {
+      @media screen and (max-width: 758px) {
+        max-width: 100%;
+      }
+    }
+  }
   .main {
       &-table {
           &_people {

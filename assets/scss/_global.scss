@@ -321,3 +321,9 @@ body,
 .v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label {
   color: #6a6b79;
 }
+
+.landing-page {
+  @media screen and (max-width: 758px) {
+    overflow-x: hidden;
+  }
+}
