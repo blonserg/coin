@@ -51,7 +51,14 @@
         </v-tooltip>
       </div>
       <div :class="alert ? '_close' : ''" class="header-notifcatns">
-        <v-badge transition="scale-transition" class="header-notifcatns_btn" overlap :content="userNotifications || `0`" color="#F75050">
+        <v-badge
+          :class="!userNotifications ? '_disabled' : ''"
+          transition="scale-transition"
+          class="header-notifcatns_btn"
+          overlap
+          :content="userNotifications || `0`"
+          color="#F75050"
+        >
           <v-btn
             fab
             small

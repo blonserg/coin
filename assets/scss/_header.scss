@@ -118,6 +118,10 @@
       ._close & {
         display: none !important;
       }
+
+      &._disabled {
+        pointer-events: none;
+      }
     }
 
     &_alert {
