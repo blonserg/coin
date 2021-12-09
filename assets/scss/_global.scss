@@ -317,3 +317,7 @@ body,
 .v-input--switch--inset .v-input--switch__track {
   opacity: 1 !important;
 }
+
+.v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label {
+  color: #6a6b79;
+}
