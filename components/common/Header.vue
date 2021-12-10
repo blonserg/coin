@@ -55,7 +55,7 @@
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
-          :content="userNotifications.length || `0`"
+          :content="userNotificationsCount || `0`"
           color="#F75050"
         >
           <v-btn
@@ -130,13 +130,15 @@ export default {
       alert: false,
       authUserId: null,
       authUserCode: null,
-      authUserSum: null
+      authUserSum: null,
+      userNotificationsCount: null
     };
   },
   async fetch () {
     let response = await HttpService.get("/user-notifications");
     if (response.status === 200) {
       this.userNotifications = response.data;
+      this.userNotificationsCount = this.userNotifications.length
     } else {
       // TODO do we need to inform user?
     }
