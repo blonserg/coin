@@ -124,7 +124,7 @@ export default {
       ],
       refferer: { // TODO get from refferal link
         referer_id: 1,
-        link: "test"
+        link: "http://test"
       }
     };
   },
@@ -158,10 +158,9 @@ export default {
           }
           const response = await HttpService.post("/register/test", undefined, params);
           if (response.status === 200) {
-            // TODO do not inform user
-            alert("статистика врахована")
+            // TODO do not inform user?
           } else {
-            alert(response.errors.data.error_text);
+            // TODO do not inform user?
           }
         }
         this.$router.push("main");

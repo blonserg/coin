@@ -1,5 +1,11 @@
 <template>
   <v-card class="login">
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
     <LogoSvg />
     <div class="login-ttl">Укажите новый пароль</div>
     <v-form v-model="valid">
@@ -43,11 +49,13 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     LogoSvg,
-    Button
+    Button,
+    Alert
   },
   layout: "signup",
   data () {
@@ -66,7 +74,12 @@ export default {
       emailRules: [
         v => !!v || "Обязательное поле",
         v => /.+@.+/.test(v) || "E-mail не правильное"
-      ]
+      ],
+      recoveryEmail: "",
+      alert: {
+        text: "",
+        active: false
+      }
     };
   },
   async fetch () {
@@ -74,16 +87,19 @@ export default {
   },
   mounted () {
     this.recoveryKey = this.$route.params.recoveryKey;
+    this.recoveryEmail = this.$route.query.email;
   },
   fetchOnServer: false,
   methods: {
     async send () {
-      const errors = await UserService.recoveryPassword(this.recoveryKey, this.user.password, this.user.password_confirmation);
+      const errors = await UserService.recoveryPassword(this.recoveryEmail, this.recoveryKey, this.user.password, this.user.password_confirmation);
       if (!errors) {
-        this.$router.push("main");
+        this.$router.push("/main");
       } else {
-        // TODO: process errors
-        alert(errors.error_text);
+        this.alert = {
+          text: errors.error_text,
+          active: true
+        };
       }
     }
   }

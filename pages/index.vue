@@ -422,7 +422,7 @@ export default {
     if (response.status === 200) {
       this.dynamicData = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   created () {

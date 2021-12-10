@@ -241,7 +241,7 @@ export default {
         this.userProjects = response.data.projects;
         this.userPartners = response.data.partners;
       } else {
-      // TODO
+      // TODO do we need to inform user?
       }
     },
     onSortTypeChange (sortType) {

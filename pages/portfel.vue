@@ -134,7 +134,7 @@ export default {
       if (response.status === 200) {
         this.portfelItem = response.data
       } else {
-      // TODO
+      // TODO do we need to inform user
       }
     }
 
