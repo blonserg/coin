@@ -9,20 +9,19 @@
           <img src="/avatar.png" alt="" />
         </div>
         <div class="header-avatar_txt">
-          {{ authUserInfo }}
-          <span class="header-avatar_subtxt">Lorem ipsum</span>
+          <span class="header-avatar_subtxt">ID: {{ authUserId }}</span>
         </div>
       </div>
       <div class="header-rate d-none d-md-flex align-center">
         <div class="header-rate_txt">Тариф:</div>
-        <div class="header-tariph premium">PREMIUM</div>
+        <div :class="authUserCode!=='Basic' ? 'premium' : ''" class="header-tariph">{{ authUserCode }}</div>
       </div>
       <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">Баланс:</div>
-        <div class="header-balance_info">497 баллов</div>
+        <div class="header-balance_info">{{ authUserSum }} баллов</div>
       </div>
       <div class="header-refs d-none d-md-flex align-center">
-        <v-text-field ref="textToCopy" v-model="value" outlined readonly />
+        <v-text-field ref="textToCopy" :value="authUserRef" outlined readonly />
         <button
           color="primary"
           class="header-refs_btn d-flex align-center justify-center"
@@ -56,7 +55,7 @@
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
-          :content="userNotifications || `0`"
+          :content="userNotifications.length || `0`"
           color="#F75050"
         >
           <v-btn
@@ -124,11 +123,14 @@ export default {
   },
   data () {
     return {
-      value: "loremipsum",
       userNotifications: null,
       show: false,
       authUserInfo: null,
-      alert: false
+      authUserRef: null,
+      alert: false,
+      authUserId: null,
+      authUserCode: null,
+      authUserSum: null
     };
   },
   async fetch () {
@@ -142,6 +144,10 @@ export default {
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
+      this.authUserRef = response.data.user.referral_link;
+      this.authUserId = response.data.user.id;
+      this.authUserCode = response.data.tariff.code;
+      this.authUserSum = response.data.tariff.sum;
     } else {
       // TODO do we need to inform user?
     }

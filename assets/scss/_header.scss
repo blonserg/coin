@@ -134,11 +134,14 @@
   }
 
   &-tariph {
-    background: #241a40;
-    border: 1px solid #241a40;
+    background: #402c15;
+    border: 1px solid #f7aa50;
     border-radius: 6px;
     padding: 4px 8px;
     font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #f7aa50;
+    text-transform: uppercase;
 
     .theme--light & {
       background: #f6f7f9;
@@ -147,6 +150,7 @@
     &.premium {
       border: 1px solid #8d68f5;
       color: #8d68f5;
+      background: #241a40;
     }
   }
 
