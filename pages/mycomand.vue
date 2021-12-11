@@ -51,7 +51,7 @@
           Вышестоящие партнеры
         </div>
         <div class="d-flex align-center mb-15">
-          <div class="d-flex align-center">
+          <div class="d-flex align-center mr-4">
             <div class="mycomand-avatar">
               <v-avatar
                 color="primary"
@@ -123,7 +123,8 @@
                 {{ item.project }}
               </v-col>
               <v-col class="text-center col-2">
-                {{ item.active }}
+                <MyComandActive v-if="item.active == 1" />
+                <MyComandPassive v-else />
               </v-col>
               <v-col class="text-right col-3">
                 {{ item.first_line_referrals }}
@@ -191,10 +192,14 @@
 <script>
 import Title from "~~/components/common/Title";
 import HttpService from "~/services/HttpService";
+import MyComandActive from "~~/components/svg/MyComandActive";
+import MyComandPassive from "~~/components/svg/MyComandPassive";
 
 export default {
   components: {
-    Title
+    Title,
+    MyComandActive,
+    MyComandPassive
   },
   data () {
     return {
