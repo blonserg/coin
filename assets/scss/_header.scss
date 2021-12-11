@@ -60,6 +60,14 @@
   &-refs {
     position: relative;
 
+    .v-text-field--outlined fieldset {
+      border-width: 0;
+    }
+
+    .v-text-field--outlined.v-input--is-focused fieldset {
+      border-width: 0;
+    }
+
     .v-input .v-input__control {
       .v-input__slot {
         min-height: 30px;
@@ -142,6 +150,7 @@
     letter-spacing: 0.5px;
     color: #f7aa50;
     text-transform: uppercase;
+    cursor: pointer;
 
     .theme--light & {
       background: #f6f7f9;
@@ -217,6 +226,53 @@
       font-size: 12px;
       line-height: 14px;
       color: #40424e;
+    }
+  }
+
+  &-tooltip.v-tooltip__content {
+    max-width: 330px;
+    background: #1e1f26;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #adafc2;
+    padding: 15px;
+    opacity: 1 !important;
+    top: 110px !important;
+    left: 80px !important;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #1e1f26;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+    
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #1e1f26;
+      top: -16px;
+      transform: translateX(-50%);
+      left: 50%;
+    }
+
+    span {
+      color: #8d68f5;
     }
   }
 }

@@ -205,7 +205,7 @@
                 <img :src="item.image" alt="">
               </div>
               <div class="article-head_rt">
-                <div class="article-name">
+                <div class="article-name mb-2">
                   {{ item.title }}
                 </div>
                 <div class="article-link" @click="getClickedProject(item)">

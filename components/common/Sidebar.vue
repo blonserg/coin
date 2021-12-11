@@ -52,6 +52,9 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <div class="sidebar-footer">
+        <v-divider />
+      </div>
       <v-list>
         <v-list-item
           :to="`/profile`"

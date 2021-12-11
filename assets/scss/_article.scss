@@ -53,6 +53,20 @@
     line-height: 20px;
     color: #808190;
     margin-bottom: 0;
+
+    &._hide,
+    &._disabled {
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+    }
+
+    &._hide.active {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+    }
   }
 
   &-info {
@@ -132,6 +146,9 @@
     &_invest {
       border-radius: 15px;
       padding: 30px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin-bottom: 20px;
 
       @media screen and (max-width: 758px) {
         padding: 20px;
@@ -141,6 +158,10 @@
         background: #23262e;
         border: 1px solid #272a33;
         border-radius: 15px;
+      }
+
+      .article-name {
+        font-weight: 400;
       }
     }
 
@@ -226,7 +247,7 @@
   &-link {
     font-weight: 600;
     font-size: 11px;
-    line-height: 14px;
+    line-height: 16px;
     padding: 4px 8px;
     width: 128px;
     height: 22px;
@@ -236,6 +257,7 @@
     text-decoration: none;
     letter-spacing: 0.5px;
     text-align: center;
+    cursor: pointer;
 
     .theme--light & {
       color: #fff;
@@ -307,6 +329,62 @@
       font-size: 14px;
       line-height: 18px;
       color: #6a6b79;
+    }
+  }
+
+  &-pannel {
+    .article-link {
+      display: inline-block;
+      width: auto;
+    }
+
+    .v-expansion-panel-header--active .article-link._more {
+      display: none;
+    }
+
+    .article-link._used {
+      display: none;
+    }
+
+    .v-expansion-panel-header--active .article-link._used {
+      display: block;
+    }
+
+    .article-link.v-expansion-panels {
+      border-radius: 0;
+    }
+
+    .v-expansion-panel {
+      background: none !important;
+    }
+
+    .v-expansion-panel::before {
+      content: none;
+    }
+
+    .v-expansion-panel-content__wrap {
+      padding: 0;
+    }
+
+    .v-expansion-panel-header {
+      padding: 0;
+      width: auto;
+    }
+
+    .v-expansion-panel-header > *:not(.v-expansion-panel-header__icon) {
+      flex: inherit;
+    }
+  }
+
+  &-grid {
+    column-count: 2;
+
+    @media screen and (max-width: 758px) {
+      column-count: 1;
+    }
+
+    &_item {
+      display: inline-block;
     }
   }
 }

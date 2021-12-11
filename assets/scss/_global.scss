@@ -18,6 +18,8 @@ body,
 
 .base.v-main  {
   .v-main__wrap {
+    background: #18191e;
+
     .theme--light & {
       background-color: #f6f7f9;
     }
@@ -30,6 +32,7 @@ body,
 
 .main {
   padding: 0 40px;
+  background: #18191e;
 
   @media screen and (max-width: 758px) {
     padding: 0 25px;
@@ -328,6 +331,11 @@ body,
   }
 }
 
-.theme--dark.v-data-table {
+.theme--dark.v-data-table,
+.theme--light.v-data-table {
+  background: none !important;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: none !important;
 }

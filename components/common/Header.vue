@@ -14,8 +14,22 @@
       </div>
       <div class="header-rate d-none d-md-flex align-center">
         <div class="header-rate_txt">Тариф:</div>
-        <div :class="authUserCode!=='Basic' ? 'premium' : ''" class="header-tariph">{{ authUserCode }}</div>
+        <div
+          :class="authUserCode!=='Basic' ? 'premium' : ''"
+          class="header-tariph"
+          @click="showTooltip = !showTooltip"
+        >
+          {{ authUserCode }}
+        </div>
       </div>
+      <v-tooltip
+        v-model="showTooltip"
+        attach=".header"
+        content-class="header-tooltip"
+        bottom
+      >
+        Обновите тариф до <span>PREMIUM</span><br> и получите кучу новых возможностей и классных дополнений уже сейчас
+      </v-tooltip>
       <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">Баланс:</div>
         <div class="header-balance_info">{{ authUserSum }} баллов</div>
@@ -131,7 +145,8 @@ export default {
       authUserId: null,
       authUserCode: null,
       authUserSum: null,
-      userNotificationsCount: null
+      userNotificationsCount: null,
+      showTooltip: false
     };
   },
   async fetch () {
