@@ -83,6 +83,76 @@
     }
   }
 
+  &-tariffs {
+    background: #1c1d24;
+    border: 0.6px solid #272a33;
+    border-radius: 15px;
+
+    &.v-card.v-sheet {
+      background-color: #1c1d24;
+    }
+
+    &_inner {
+      padding: 20px;
+    }
+
+    &_ttl {
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 34px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    &_txt {
+      font-size: 14px;
+      line-height: 18px;
+      color: #808190;
+    }
+
+    &_bottom {
+      margin-top: 26px;
+      background: #1a1b21;
+      padding: 20px;
+    }
+
+    &_date {
+      font-size: 13px;
+      line-height: 17px;
+      color: #adafc2;
+    }
+
+    &_price {
+      font-size: 14px;
+      line-height: 18px;
+      color: #eef1f8;
+    }
+
+    h3 {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21px;
+      color: #eef1f8;
+      margin-bottom: 26px;
+    }
+
+    p {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: #adafc2;
+      margin-bottom: 26px;
+    }
+
+    ul {
+      li {
+        font-size: 14px;
+        line-height: 18px;
+        color: #808190;
+      }
+    }
+  }
+
   .v-card__actions {
     position: absolute;
     top: 10px;

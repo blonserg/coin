@@ -223,7 +223,7 @@
 
     &_img {
       margin-right: 20px;
-      max-width: 84px;
+      width: 138px;
 
       img {
         max-width: 100%;
@@ -321,6 +321,10 @@
           }
         }
       }
+    }
+
+    &_video {
+      border-radius: 10px;
     }
   }
 

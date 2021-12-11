@@ -46,6 +46,10 @@
     }
   }
 
+  &-rate {
+    position: relative;
+  }
+
   &-rate,
   &-balance {
     margin-right: 40px;
@@ -229,8 +233,23 @@
     }
   }
 
-  &-tooltip.v-tooltip__content {
-    max-width: 330px;
+  &-tooltip {
+    .article-link {
+      color: white;
+      margin-top: 20px;
+    }
+
+    &.v-alert {
+      position: absolute !important;
+      padding: 0;
+      top: 50px;
+      transform: translateX(-50%);
+      left: calc(50% + 25px);
+    }
+  }
+
+  &-tooltip .v-alert__wrapper {
+    width: 330px;
     background: #1e1f26;
     border-radius: 10px;
     font-size: 14px;

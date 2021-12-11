@@ -13,9 +13,9 @@
       <div class="article-head_img">
         <img :src="portfelItemImage" alt="">
       </div>
-      <div class="d-flex align-center justify-space-between" style="width: 100%;">
+      <div style="width: 100%;">
         <div>
-          <div class="article-name article-name--invest">
+          <div class="article-name article-name--invest mb-2">
             {{ portfelItemTitle }}
           </div>
         </div>
@@ -31,6 +31,13 @@
         <v-col md="8">
           <div class="article-invest_txt">
             {{ portfelItemContent }}
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col md="6">
+          <div class="article-invest_video">
+            {{ portfelItemVideo }}
           </div>
         </v-col>
       </v-row>
@@ -109,7 +116,8 @@ export default {
       portfelItemDeadlines: null,
       portfelItemStart: null,
       portfelItemAbout: null,
-      portfelItemBenefits: null
+      portfelItemBenefits: null,
+      portfelItemVideo: null
     };
   },
   async fetch () {
@@ -130,6 +138,7 @@ export default {
         this.portfelItemStart = response.data.start
         this.portfelItemAbout = response.data.about_project
         this.portfelItemBenefits = response.data.benefits
+        this.portfelItemVideo = response.data.video_link
       } else {
       // TODO do we need to inform user
       }
