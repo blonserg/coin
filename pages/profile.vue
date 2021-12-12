@@ -37,7 +37,7 @@
               Тариф:
             </div>
             <div class="header-tariph premium">
-              {{ userProfile.tariff.title }}
+              {{ userProfile.tariff.code }}
             </div>
           </div>
           <div class="profile-tariph_date">
@@ -344,6 +344,7 @@
               :items="countries"
               label="Country"
               solo
+              :disabled="editUser"
             />
           </v-col>
           <v-col md="6" class="mb-15">
@@ -353,6 +354,7 @@
               :items="cities"
               label="City"
               solo
+              :disabled="editUser"
             />
           </v-col>
         </v-row>

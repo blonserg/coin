@@ -44,7 +44,7 @@
       <Button :text="staticData.sign_in_button" @click.native="login" />
     </v-form>
     <div class="login-bottom">
-      <span>{{ staticData.sign_in_dont_have_account }}</span>
+      <span class="mr-2">{{ staticData.sign_in_dont_have_account }}</span>
       <NuxtLink to="/register">
         {{ staticData.sign_in_register }}
       </NuxtLink>

@@ -78,7 +78,7 @@
       </div>
     </v-form>
     <div class="login-bottom">
-      <span>{{ staticData.reg_have_account }}</span>
+      <span class="mr-2">{{ staticData.reg_have_account }}</span>
       <NuxtLink to="/login">
         {{ staticData.reg_sign_in }}
       </NuxtLink>
