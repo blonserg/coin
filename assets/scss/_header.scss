@@ -143,6 +143,10 @@
         display: block !important;
       }
     }
+
+    .v-btn--is-elevated.v-btn--fab {
+      box-shadow: none;
+    }
   }
 
   &-tariph {
