@@ -12,12 +12,13 @@
         :on-select-categories="onCategoriesChange"
       />
       <v-row>
-        <v-col v-for="item in news" :key="item.slug" md="4">
+        <v-col v-for="item in apiNews.articles" :key="item.id" md="4">
           <News
             :title="item.title"
-            :views="item.views"
             :date="item.date"
             :slug="item.slug"
+            :category="item.categories.name"
+            :image="item.preview"
           />
         </v-col>
       </v-row>
@@ -41,62 +42,6 @@ export default {
   },
   data () {
     return {
-      news: [
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test1"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test2"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test3"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test4"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test5"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test6"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test7"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test8"
-        },
-        {
-          title: "Cложность майнинга биткоина снова выросла",
-          views: "830",
-          date: "14 авг",
-          slug: "test9"
-        }
-      ],
       staticData: [],
       apiNews: null,
       categories: ["category1", "category2", "category3"], // TODO get data from apiNews
