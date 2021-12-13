@@ -3,8 +3,12 @@
     <div class="ttl">
       {{ staticData.strategy_title }}
     </div>
-    Стратегии strategy:
-    {{ strategies }}
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
     <div class="subttl">
       {{ staticData.strategy_paragraph }}
     </div>
@@ -201,7 +205,7 @@
                 <img :src="item.image" alt="">
               </div>
               <div class="article-head_rt">
-                <div class="article-name">
+                <div class="article-name mb-2">
                   {{ item.title }}
                 </div>
                 <div class="article-link" @click="getClickedProject(item)">
@@ -267,10 +271,12 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
-    VueSlickCarousel
+    VueSlickCarousel,
+    Alert
   },
   data () {
     return {
@@ -290,6 +296,10 @@ export default {
             }
           }
         ]
+      },
+      alert: {
+        text: "",
+        active: false
       }
     }
   },
@@ -300,14 +310,14 @@ export default {
     if (response.status === 200) {
       this.strategies = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/projects");
     if (response.status === 200) {
       this.projects = response.data;
     } else {
-      // TODO
+      // TODO do we need to inform user?
     }
   },
   fetchOnServer: false,
@@ -320,7 +330,10 @@ export default {
         const path = "portfel/" + slug;
         this.$router.push(path);
       } else {
-      // TODO
+        this.alert = {
+          text: response.errors.join("; "),
+          active: true
+        };
       }
     }
   }

@@ -45,13 +45,16 @@
           exact
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <component :is="item.icon"></component>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <div class="sidebar-footer">
+        <v-divider />
+      </div>
       <v-list>
         <v-list-item
           :to="`/profile`"
@@ -59,7 +62,7 @@
           exact
         >
           <v-list-item-action>
-            <v-icon>mdi-apps</v-icon>
+            <span><MenuProfile /></span>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="`Мой профиль`" />
@@ -85,11 +88,25 @@
 import LogoSvg from "~~/components/svg/LogoSvg";
 import CloseMob from "~~/components/svg/CloseMob";
 import HttpService from "~/services/HttpService";
+import MenuProfile from "~~/components/svg/MenuProfile";
+import MenuCommand from "~~/components/svg/MenuCommand";
+import MenuInvest from "~~/components/svg/MenuInvest";
+import MenuMain from "~~/components/svg/MenuMain";
+import MenuNews from "~~/components/svg/MenuNews";
+import MenuStock from "~~/components/svg/MenuStock";
+import MenuTelegram from "~~/components/svg/MenuTelegram";
 
 export default {
   components: {
     LogoSvg,
-    CloseMob
+    CloseMob,
+    MenuProfile,
+    MenuCommand,
+    MenuInvest,
+    MenuMain,
+    MenuNews,
+    MenuStock,
+    MenuTelegram
   },
   data () {
     return {
@@ -99,32 +116,32 @@ export default {
       switch1: true,
       items: [
         {
-          icon: "mdi-apps",
+          icon: "MenuMain",
           title: "Главная",
           to: "/main"
         },
         {
-          icon: "mdi-apps",
+          icon: "MenuInvest",
           title: "Инвестиции",
           to: "/invests"
         },
         {
-          icon: "mdi-apps",
+          icon: "MenuStock",
           title: "Биржа услуг",
           to: "/stock"
         },
         {
-          icon: "mdi-apps",
+          icon: "MenuCommand",
           title: "Моя команда",
           to: "/mycomand"
         },
         {
-          icon: "mdi-apps",
+          icon: "MenuNews",
           title: "Новости",
           to: "/news"
         },
         {
-          icon: "mdi-apps",
+          icon: "MenuTelegram",
           title: "Группы Telegram",
           to: "/telegrams"
         }

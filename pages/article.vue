@@ -114,7 +114,7 @@ export default {
       if (response.status === 200) {
         this.article = response.data;
       } else {
-      // TODO
+      // TODO do we need to inform user?
       }
     }
   },

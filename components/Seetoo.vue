@@ -55,7 +55,7 @@
                       <p>
                         Посмотри отзывы счастливых победителей прошлых розыгрышей
                       </p>
-                      <a href="">Смотреть отзывы</a>
+                      <a class="article-link" href="">Смотреть отзывы</a>
                     </div>
                   </v-card-text>
                 </v-col>
@@ -79,6 +79,63 @@
           <div class="seetoo-item_ttl">
             Отзывы победителей розыгрышей
           </div>
+          <button
+            type="button"
+            @click="dialogReview = !dialogReview"
+          >
+            <PlayVideo />
+          </button>
+          <v-dialog
+            v-model="dialogReview"
+          >
+            <v-card class="dialog dialog--review">
+              <v-row>
+                <v-col cols="12" md="5">
+                  <v-card-text class="dialog-text">
+                    <h2>
+                      Видео отзывы победителей розыгрыша Strike Team
+                    </h2>
+                    <p>
+                      Получи 500 баллов прямо сейчас! Запиши свой видео отзыв и отошли его нам в телеграм <span class="dialog-text_bot">@telegrambot</span>
+                    </p>
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" md="7">
+                  <v-row>
+                    <v-col cols="12" md="6" class="dialog-review">
+                      <div class="dialog-review_video">
+                      </div>
+                      <div class="dialog-review_name">
+                        Отзыв от Дмитрия Портнягина
+                      </div>
+                      <div class="dialog-review_date">
+                        28 окт
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="6" class="dialog-review">
+                      <div class="dialog-review_video">
+                      </div>
+                      <div class="dialog-review_name">
+                        Отзыв от Дмитрия Портнягина
+                      </div>
+                      <div class="dialog-review_date">
+                        28 окт
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialogReview = false"
+                >
+                  <CloseButton />
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </v-card>
     </div>
@@ -87,10 +144,12 @@
 
 <script>
 import CloseButton from "~~/components/svg/CloseButton";
+import PlayVideo from "~~/components/svg/PlayVideo";
 
 export default {
   components: {
-    CloseButton
+    CloseButton,
+    PlayVideo
   },
   props: {
     title: {
@@ -100,7 +159,8 @@ export default {
   },
   data () {
     return {
-      dialog: false
+      dialog: false,
+      dialogReview: false
     };
   }
 };

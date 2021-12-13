@@ -37,7 +37,7 @@
               Тариф:
             </div>
             <div class="header-tariph premium">
-              {{ userProfile.tariff.title }}
+              {{ userProfile.tariff.code }}
             </div>
           </div>
           <div class="profile-tariph_date">
@@ -344,6 +344,7 @@
               :items="countries"
               label="Country"
               solo
+              :disabled="editUser"
             />
           </v-col>
           <v-col md="6" class="mb-15">
@@ -353,6 +354,7 @@
               :items="cities"
               label="City"
               solo
+              :disabled="editUser"
             />
           </v-col>
         </v-row>
@@ -524,16 +526,16 @@ export default {
       }
     },
     async changeUserEmail () {
-      const response = await UserService.changeEmail(this.newEmail, this.oldPassword);
-      if (response) {
+      const errors = await UserService.changeEmail(this.newEmail, this.oldPassword);
+      if (!errors) {
         this.alert = {
           text: "Email is changed",
           active: true
         };
-        this.userProfile.profile.email = response;
+        this.userProfile.profile.email = this.newEmail;
       } else {
         this.alert = {
-          text: "An error occurred",
+          text: errors.error_text,
           active: true
         };
       }

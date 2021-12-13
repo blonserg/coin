@@ -9,20 +9,138 @@
           <img src="/avatar.png" alt="" />
         </div>
         <div class="header-avatar_txt">
-          {{ authUserInfo }}
-          <span class="header-avatar_subtxt">Lorem ipsum</span>
+          <span class="header-avatar_subtxt">ID: {{ authUserId }}</span>
         </div>
       </div>
       <div class="header-rate d-none d-md-flex align-center">
         <div class="header-rate_txt">Тариф:</div>
-        <div class="header-tariph premium">PREMIUM</div>
+        <div
+          :class="authUserCode!=='Basic' ? 'premium' : ''"
+          class="header-tariph"
+          @click="showTooltip = !showTooltip"
+        >
+          {{ authUserCode }}
+        </div>
+        <v-alert
+          v-model="showTooltip"
+          class="header-tooltip"
+          transition="scale-transition"
+        >
+          Обновите тариф до <span>PREMIUM</span><br> и получите кучу новых возможностей и классных дополнений уже сейчас
+          <button class="article-link" type="button" @click="dialogTariffs = !dialogTariffs, showTooltip = !showTooltip">
+            Обновить тариф
+          </button>
+        </v-alert>
+        <v-dialog
+          v-model="dialogTariffs"
+        >
+          <v-card class="dialog">
+            <v-row>
+              <v-col cols="12" md="4">
+                <h2 class="dialog-tariffs_ttl">
+                  Учні, студенти й викладачі можуть заощадити понад 33%.
+                </h2>
+                <div class="dialog-tariffs_txt">
+                  Спеціальна ціна для першого року використання – див. умови.
+                </div>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-card class="dialog-tariffs">
+                  <div class="dialog-tariffs_inner">
+                    <div class="header-tariph mb-6 d-inline-block">Basic</div>
+                    <h3>
+                      Тариф Basic - стандартный
+                    </h3>
+                    <p>
+                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
+                    </p>
+                    <p>
+                      Плюс:
+                    </p>
+                    <ul>
+                      <li>
+                        Покрокові навчальні посібники
+                      </li>
+                      <li>
+                        100 ГБ у хмарному сховищі
+                      </li>
+                      <li>
+                        Adobe Portfolio, Adobe Fonts і Adobe Spark
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
+                    <div>
+                      <div class="dialog-tariffs_date">
+                        5 месяцев
+                      </div>
+                      <div class="dialog-tariffs_price">
+                        30,00$
+                      </div>
+                    </div>
+                    <button class="article-link" type="button">
+                      Обновить тариф
+                    </button>
+                  </div>
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-card class="dialog-tariffs">
+                  <div class="dialog-tariffs_inner">
+                    <div class="header-tariph premium mb-6 d-inline-block">Premium</div>
+                    <h3>Тариф Premium - расширенный</h3>
+                    <p>
+                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
+                    </p>
+                    <p>
+                      Плюс:
+                    </p>
+                    <ul>
+                      <li>
+                        Покрокові навчальні посібники
+                      </li>
+                      <li>
+                        100 ГБ у хмарному сховищі
+                      </li>
+                      <li>
+                        Adobe Portfolio, Adobe Fonts і Adobe Spark
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
+                    <div>
+                      <div class="dialog-tariffs_date">
+                        5 месяцев
+                      </div>
+                      <div class="dialog-tariffs_price">
+                        30,00$
+                      </div>
+                    </div>
+                    <button class="article-link" type="button">
+                      Обновить тариф
+                    </button>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-card-actions>
+              <v-btn
+                color="primary"
+                text
+                @click="dialogTariffs = false"
+              >
+                <CloseButton />
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </div>
       <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">Баланс:</div>
-        <div class="header-balance_info">497 баллов</div>
+        <div class="header-balance_info">{{ authUserSum }} баллов</div>
       </div>
       <div class="header-refs d-none d-md-flex align-center">
-        <v-text-field ref="textToCopy" v-model="value" outlined readonly />
+        <v-text-field ref="textToCopy" :value="authUserRef" outlined readonly />
         <button
           color="primary"
           class="header-refs_btn d-flex align-center justify-center"
@@ -56,7 +174,7 @@
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
-          :content="userNotifications || `0`"
+          :content="userNotificationsCount || `0`"
           color="#F75050"
         >
           <v-btn
@@ -116,25 +234,34 @@
 import LogoSvg from "~~/components/svg/LogoSvg";
 import AlertClose from "~~/components/svg/AlertClose";
 import HttpService from "~/services/HttpService";
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
   components: {
     LogoSvg,
-    AlertClose
+    AlertClose,
+    CloseButton
   },
   data () {
     return {
-      value: "loremipsum",
       userNotifications: null,
       show: false,
       authUserInfo: null,
-      alert: false
+      authUserRef: null,
+      alert: false,
+      authUserId: null,
+      authUserCode: null,
+      authUserSum: null,
+      userNotificationsCount: null,
+      showTooltip: false,
+      dialogTariffs: false
     };
   },
   async fetch () {
     let response = await HttpService.get("/user-notifications");
     if (response.status === 200) {
       this.userNotifications = response.data;
+      this.userNotificationsCount = this.userNotifications.length
     } else {
       // TODO do we need to inform user?
     }
@@ -142,6 +269,10 @@ export default {
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
+      this.authUserRef = response.data.user.referral_link;
+      this.authUserId = response.data.user.id;
+      this.authUserCode = response.data.tariff.code;
+      this.authUserSum = response.data.tariff.sum;
     } else {
       // TODO do we need to inform user?
     }

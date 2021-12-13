@@ -46,6 +46,10 @@
     }
   }
 
+  &-rate {
+    position: relative;
+  }
+
   &-rate,
   &-balance {
     margin-right: 40px;
@@ -59,6 +63,14 @@
 
   &-refs {
     position: relative;
+
+    .v-text-field--outlined fieldset {
+      border-width: 0;
+    }
+
+    .v-text-field--outlined.v-input--is-focused fieldset {
+      border-width: 0;
+    }
 
     .v-input .v-input__control {
       .v-input__slot {
@@ -131,14 +143,22 @@
         display: block !important;
       }
     }
+
+    .v-btn--is-elevated.v-btn--fab {
+      box-shadow: none;
+    }
   }
 
   &-tariph {
-    background: #241a40;
-    border: 1px solid #241a40;
+    background: #402c15;
+    border: 1px solid #f7aa50;
     border-radius: 6px;
     padding: 4px 8px;
     font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #f7aa50;
+    text-transform: uppercase;
+    cursor: pointer;
 
     .theme--light & {
       background: #f6f7f9;
@@ -147,6 +167,7 @@
     &.premium {
       border: 1px solid #8d68f5;
       color: #8d68f5;
+      background: #241a40;
     }
   }
 
@@ -213,6 +234,68 @@
       font-size: 12px;
       line-height: 14px;
       color: #40424e;
+    }
+  }
+
+  &-tooltip {
+    .article-link {
+      color: white;
+      margin-top: 20px;
+    }
+
+    &.v-alert {
+      position: absolute !important;
+      padding: 0;
+      top: 50px;
+      transform: translateX(-50%);
+      left: calc(50% + 25px);
+    }
+  }
+
+  &-tooltip .v-alert__wrapper {
+    width: 330px;
+    background: #1e1f26;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #adafc2;
+    padding: 15px;
+    opacity: 1 !important;
+    top: 110px !important;
+    left: 80px !important;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #1e1f26;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+    
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid #1e1f26;
+      top: -16px;
+      transform: translateX(-50%);
+      left: 50%;
+    }
+
+    span {
+      color: #8d68f5;
     }
   }
 }

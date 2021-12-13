@@ -18,6 +18,8 @@ body,
 
 .base.v-main  {
   .v-main__wrap {
+    background: #18191e;
+
     .theme--light & {
       background-color: #f6f7f9;
     }
@@ -30,6 +32,7 @@ body,
 
 .main {
   padding: 0 40px;
+  background: #18191e;
 
   @media screen and (max-width: 758px) {
     padding: 0 25px;
@@ -326,4 +329,44 @@ body,
   @media screen and (max-width: 758px) {
     overflow-x: hidden;
   }
+}
+
+.theme--dark.v-data-table,
+.theme--light.v-data-table {
+  background: none !important;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+  background: none !important;
+}
+
+.mdi-menu-down::before {
+  content: "\F0140";
+}
+
+.v-select__slot .v-icon.v-icon {
+  font-size: 18px;
+  color: #6a6b79;
+}
+
+.v-select__slot .v-select__selection {
+  color: #adafc2;
+}
+
+.v-menu__content {
+  background-color: #2b2e38;
+
+  .v-list-item {
+    min-height: 34px;
+  }
+
+  .v-list-item__title {
+    color: #adafc2;
+    font-size: 13px;
+    line-height: 17px;
+  }
+}
+
+.theme--light .v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0px 2px 10px -2px rgb(0 0 0 / 20%), 0px 2px 14px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
