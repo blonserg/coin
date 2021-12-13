@@ -7,7 +7,7 @@
     />
     <div class="d-flex mb-16">
       <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
-      <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
+      <!-- <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
         <div class="events-date">
           <span class="events-date_month"> {{ item.date | moment("MMM") }}</span>
           <span class="events-date_day">{{ item.date | moment("DD") }}</span>
@@ -37,6 +37,41 @@
               {{ item.author }}
             </div>
             <div v-if="item.event_time" class="events-time">{{ item.event_time }}</div>
+          </div>
+        </div>
+      </v-card> -->
+      <v-card class="events-item d-flex justify-space-between align-center">
+        <div class="events-date">
+          <span class="events-date_month"> ДЕК</span>
+          <span class="events-date_day">31</span>
+        </div>
+        <v-divider vertical />
+        <div class="events-info">
+          <NuxtLink to="/event">
+            <div class="events-ttl d-flex">
+              Как инвестировать в криптовалюту
+              <ArrowRight class="ml-4" />
+            </div>
+          </NuxtLink>
+          <div
+            class="events-info_bottom d-flex justify-space-between align-center"
+          >
+            <div class="events-name">
+              <svg
+                width="10"
+                height="11"
+                viewBox="0 0 10 11"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 9.97586C0 8.45862 1.96296 6.37241 5 6.37241C8.03704 6.37241 10 8.45862 10 9.97586C10 10.6207 9.62963 11 8.51852 11H1.48148C0.37037 11 0 10.6207 0 9.97586ZM2.59259 2.65517C2.59259 1.21379 3.66667 0 5 0C6.33333 0 7.40741 1.21379 7.40741 2.65517C7.40741 4.17241 6.33333 5.34828 5 5.34828C3.66667 5.34828 2.59259 4.17241 2.59259 2.65517Z"
+                  fill="#808190"
+                />
+              </svg>
+              Дмитрий Портнягин
+            </div>
+            <div class="events-time">12:00</div>
           </div>
         </div>
       </v-card>
@@ -148,8 +183,8 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import Vue from "vue";
-import VueMoment from "vue-moment";
+// import Vue from "vue";
+// import VueMoment from "vue-moment";
 // import moment from "moment";
 // import "moment/locale/ru";
 import Title from "~~/components/common/Title";
@@ -159,7 +194,7 @@ import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
 
-Vue.use(VueMoment);
+// Vue.use(VueMoment);
 // VueMoment.locale("ru");
 
 export default {
