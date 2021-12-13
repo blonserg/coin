@@ -91,11 +91,17 @@
       :on-select-categories="onCategoriesChangeNews"
     />
     <v-row>
-      <v-col v-for="item in news" :key="item.slug" md="4">
-        <News :title="item.title" :views="item.views" :date="item.date" />
+      <v-col v-for="item in apiNews" :key="item.id" md="4">
+        <News
+          :title="item.title"
+          :date="item.date"
+          :slug="item.slug"
+          :category="item.categories.name"
+          :image="item.preview"
+        />
       </v-col>
     </v-row>
-    <v-btn class="btn btn-seetoo" block>{{ staticData.cabinet_main_see_more }} </v-btn>
+    <v-btn class="btn btn-seetoo" to="/news" block>{{ staticData.cabinet_main_see_more }} </v-btn>
     <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
       Учитываются все пользователи, зарегистрировавшиеся на Strike Team
@@ -324,7 +330,7 @@ export default {
       }
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
-        this.apiNews = response.data;
+        this.apiNews = response.data.articles;
       } else {
         // TODO do we need to inform user?
       }

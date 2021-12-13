@@ -262,6 +262,7 @@
     letter-spacing: 0.5px;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
 
     .theme--light & {
       color: #fff;
