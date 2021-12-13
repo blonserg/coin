@@ -16,6 +16,10 @@
     @media screen and (max-width: 758px) {
       overflow: visible !important;
     }
+
+    .theme--light & {
+      overflow: visible;
+    }
   }
 
   &-wrap {
