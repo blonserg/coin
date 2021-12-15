@@ -187,19 +187,12 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
-// import Vue from "vue";
-// import VueMoment from "vue-moment";
-// import moment from "moment";
-// import "moment/locale/ru";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
-
-// Vue.use(VueMoment);
-// VueMoment.locale("ru");
 
 export default {
   components: {

@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="profile-tariph_date">
-            до {{ userProfile.tariff.end_date }}
+            до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}
           </div>
           <a href="" class="article-link">
             Продлить тариф

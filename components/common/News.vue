@@ -19,7 +19,7 @@
             </svg>
           </div> -->
           <div class="news-date">
-            {{ date }}
+            {{ $moment(date).format("DD MMM YYYY") }}
           </div>
         </div>
       </div>

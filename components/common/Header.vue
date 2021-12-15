@@ -218,7 +218,7 @@
               {{ item.title }}
             </div>
             <div class="header-alert_date">
-              {{ item.date }}
+              {{ $moment(item.date).format("DD MMM YYYY") }}
             </div>
           </div>
           <div class="header-alert_txt">

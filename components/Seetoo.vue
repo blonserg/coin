@@ -133,7 +133,7 @@
                         {{ dynamicReviewitem.title }}
                       </div>
                       <div class="dialog-review_date">
-                        {{ dynamicReviewitem.date }}
+                        {{ $moment(dynamicReviewitem.date).format("DD MMM YYYY") }}
                       </div>
                     </v-col>
                   </v-row>

@@ -41,10 +41,16 @@ export default {
     "@nuxtjs/vuetify",
     // https://typescript.nuxtjs.org
     "@nuxt/typescript-build",
+    "@nuxtjs/moment",
     ["@nuxtjs/router", {
       keepDefaultRouter: true
     }]
   ],
+
+  moment: {
+    defaultLocale: "ru",
+    locales: ["ru"]
+  },
 
   typescript: {
     typeCheck: {

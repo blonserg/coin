@@ -7,7 +7,7 @@
       Новости
     </NuxtLink>
     <div class="article-main_date mb-8">
-      {{ articleDate }}
+      {{ $moment(articleDate).format("DD MMM YYYY") }}
     </div>
     <v-row>
       <v-col md="8">
