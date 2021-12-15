@@ -79,9 +79,7 @@
     </div>
     <!-- Promo:
     {{ promo }}
-    <br>
-    Отзывы - reviews:
-    {{ reviews }} -->
+    <br> -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
     <Title
       :title="staticData.cabinet_main_news"
@@ -216,7 +214,6 @@ export default {
       staticData: [],
       events: null,
       promo: null,
-      reviews: null,
       apiNews: null,
       statisticsCountries: null,
       statisticsCities: null,
@@ -261,13 +258,6 @@ export default {
     let response = await HttpService.get("/promo");
     if (response.status === 200) {
       this.promo = response.data;
-    } else {
-      // TODO do we need to inform user?
-    }
-
-    response = await HttpService.get("/reviews");
-    if (response.status === 200) {
-      this.reviews = response.data;
     } else {
       // TODO do we need to inform user?
     }
