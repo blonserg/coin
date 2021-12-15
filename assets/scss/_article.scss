@@ -12,6 +12,13 @@
     display: block;
   }
 
+  .regular.slider {
+    @media screen and (min-width: 759px) {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+
   .slick-list {
     @media screen and (max-width: 758px) {
       overflow: visible !important;

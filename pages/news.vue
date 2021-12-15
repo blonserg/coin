@@ -11,7 +11,7 @@
         :on-select-sort-type="onSortTypeChange"
         :on-select-categories="onCategoriesChange"
       />
-      <v-row>
+      <VueSlickCarousel v-bind="settings">
         <v-col v-for="item in apiNews.articles" :key="item.id" md="4">
           <News
             :title="item.title"
@@ -21,7 +21,7 @@
             :image="item.preview"
           />
         </v-col>
-      </v-row>
+      </VueSlickCarousel>
       <v-btn class="btn btn-seetoo" block>
         {{ staticData.news_show_more }}
       </v-btn>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import VueSlickCarousel from "vue-slick-carousel";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import StaticService from "~/services/StaticService";
@@ -37,6 +39,7 @@ import HttpService from "~/services/HttpService";
 
 export default {
   components: {
+    VueSlickCarousel,
     Title,
     News
   },
@@ -47,6 +50,24 @@ export default {
       categories: ["category1", "category2", "category3"], // TODO get data from apiNews
       selectedSortType: null,
       selectedCategories: null,
+      settings: {
+        "slidesToShow": 4,
+        "slidesToScroll": 4,
+        "arrows": false,
+        "responsive": [
+          {
+            "breakpoint": 1920,
+            "settings": "unslick"
+          },
+          {
+            "breakpoint": 768,
+            "settings": {
+              "slidesToShow": 1,
+              "slidesToScroll": 1
+            }
+          }
+        ]
+      },
       sortItems: [
         {
           text: "Latest",
@@ -93,3 +114,10 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.news-page {
+  .regular.slider {
+    display: flex;
+  }
+}
+</style>

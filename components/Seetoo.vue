@@ -102,24 +102,38 @@
                 </v-col>
                 <v-col cols="12" md="7">
                   <v-row>
-                    <v-col cols="12" md="6" class="dialog-review">
+                    <v-col v-for="dynamicReviewitem in reviews" :key="dynamicReviewitem.id" cols="12" md="6" class="dialog-review">
                       <div class="dialog-review_video">
+                        <img :src="dynamicReviewitem.image" alt="">
+                        <button class="dialog-review_play" type="button" @click="showVideo = dynamicReviewitem.id">
+                          <PlayVideo />
+                        </button>
+                      </div>
+                      <div v-if="showVideo === dynamicReviewitem.id" class="dialog-review_video-wrap">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          :src="dynamicReviewitem.link"
+                          title="YouTube video player"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                        >
+                        </iframe>
+                        <v-btn
+                          color="primary"
+                          class="dialog-review_video-close"
+                          text
+                          @click="showVideo = null"
+                        >
+                          <CloseButton />
+                        </v-btn>
                       </div>
                       <div class="dialog-review_name">
-                        Отзыв от Дмитрия Портнягина
+                        {{ dynamicReviewitem.title }}
                       </div>
                       <div class="dialog-review_date">
-                        28 окт
-                      </div>
-                    </v-col>
-                    <v-col cols="12" md="6" class="dialog-review">
-                      <div class="dialog-review_video">
-                      </div>
-                      <div class="dialog-review_name">
-                        Отзыв от Дмитрия Портнягина
-                      </div>
-                      <div class="dialog-review_date">
-                        28 окт
+                        {{ $moment(dynamicReviewitem.date).format("DD MMM YYYY") }}
                       </div>
                     </v-col>
                   </v-row>
@@ -143,6 +157,7 @@
 </template>
 
 <script>
+import HttpService from "~/services/HttpService";
 import CloseButton from "~~/components/svg/CloseButton";
 import PlayVideo from "~~/components/svg/PlayVideo";
 
@@ -160,9 +175,20 @@ export default {
   data () {
     return {
       dialog: false,
-      dialogReview: false
+      dialogReview: false,
+      reviews: null,
+      showVideo: null
     };
-  }
+  },
+  async fetch () {
+    const response = await HttpService.get("/reviews");
+    if (response.status === 200) {
+      this.reviews = response.data;
+    } else {
+      // TODO do we need to inform user?
+    }
+  },
+  fetchOnServer: false
 };
 </script>
 

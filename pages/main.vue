@@ -79,9 +79,7 @@
     </div>
     <!-- Promo:
     {{ promo }}
-    <br>
-    Отзывы - reviews:
-    {{ reviews }} -->
+    <br> -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
     <Title
       :title="staticData.cabinet_main_news"
@@ -189,19 +187,12 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
-// import Vue from "vue";
-// import VueMoment from "vue-moment";
-// import moment from "moment";
-// import "moment/locale/ru";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
-
-// Vue.use(VueMoment);
-// VueMoment.locale("ru");
 
 export default {
   components: {
@@ -216,7 +207,6 @@ export default {
       staticData: [],
       events: null,
       promo: null,
-      reviews: null,
       apiNews: null,
       statisticsCountries: null,
       statisticsCities: null,
@@ -261,13 +251,6 @@ export default {
     let response = await HttpService.get("/promo");
     if (response.status === 200) {
       this.promo = response.data;
-    } else {
-      // TODO do we need to inform user?
-    }
-
-    response = await HttpService.get("/reviews");
-    if (response.status === 200) {
-      this.reviews = response.data;
     } else {
       // TODO do we need to inform user?
     }
