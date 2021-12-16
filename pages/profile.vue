@@ -437,8 +437,14 @@ export default {
       this.userProfile = response.data;
       this.userProfileProjects = response.data.projects_links;
     } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
       this.alert = {
-        text: response.errors.join("; "),
+        text: errorText,
         active: true
       };
     }

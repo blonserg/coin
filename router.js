@@ -26,6 +26,10 @@ export function createRouter (ssrContext, createDefaultRouter, routerOptions, co
         path: "/recovery/:recoveryKey",
         component: RecoveryPage
       }
+      // {
+      //   path: "/event/:slug",
+      //   component: EventPage
+      // }
     ]
   })
 }

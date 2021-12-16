@@ -5,6 +5,12 @@
       :sort-items="sortItems"
       :on-select-sort-type="onSortTypeChangeEvents"
     />
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
     <div class="d-flex mb-16">
       <!-- <VueSlickCarousel v-if="events" v-bind="settings" class="events"> -->
       <!-- <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
@@ -13,7 +19,7 @@
           <span class="events-date_day">{{ item.date | moment("DD") }}</span>
         </div>
         <v-divider vertical />
-        <div class="events-info">
+        <div class="events-info" @click="getClickedEvent(item)">
           <div class="events-ttl d-flex">
             {{ item.title }}
             <ArrowRight class="ml-4" />
@@ -193,6 +199,7 @@ import Seetoo from "~~/components/Seetoo";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
+import Alert from "~~/components/common/Alert";
 
 // Vue.use(VueMoment);
 // VueMoment.locale("ru");
@@ -202,7 +209,8 @@ export default {
     Title,
     News,
     Seetoo,
-    ArrowRight
+    ArrowRight,
+    Alert
   },
   data () {
     return {
@@ -227,7 +235,11 @@ export default {
           text: "Oldest",
           value: "oldest"
         }
-      ]
+      ],
+      alert: {
+        text: "",
+        active: false
+      }
       // settings: {
       //   "slidesToShow": 3,
       //   "slidesToScroll": 1,
@@ -306,6 +318,25 @@ export default {
         this.events = response.data;
       } else {
         // TODO do we need to inform user?
+      }
+    },
+    async getClickedEvent (item) {
+      const slug = item.slug;
+      const apiPath = "/events/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.$router.push(apiPath);
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
       }
     },
     onSortTypeChangeEvents (sortType) {

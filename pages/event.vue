@@ -74,7 +74,31 @@
 </template>
 
 <script>
-export default {};
+import HttpService from "~/services/HttpService";
+
+export default {
+  components: {
+
+  },
+  data () {
+    return {
+      event: null
+    };
+  },
+  async fetch () {
+    const slug = this.$route.params.slug || null;
+    if (slug) {
+      const apiPath = "/events/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.event = response.data;
+      } else {
+      // TODO do we need to inform user?
+      }
+    }
+  },
+  fetchOnServer: false
+};
 </script>
 
 <style lang="scss" scoped>
