@@ -41,10 +41,10 @@
       >
         <v-row>
           <v-col cols="12" md="4" class="landing-ttl">
-            Lorem ipsum dolor sit amet
+            {{ staticData.about_team_left_text }}
           </v-col>
           <v-col cols="12" md="8" class="landing-txt">
-            {{ staticData.about_team_left_text }}
+            {{ staticData.about_team_right_text }}
           </v-col>
         </v-row>
       </div>
@@ -337,7 +337,7 @@
                         {{ dynamicReviewitem.title }}
                       </div>
                       <div class="dialog-review_date">
-                        {{ dynamicReviewitem.date }}
+                        {{ $moment(dynamicReviewitem.date).format("DD MMM YYYY") }}
                       </div>
                     </v-col>
                   </v-row>
@@ -388,7 +388,6 @@
         </div>
       </div>
     </div>
-    {{ dynamicData }}
   </div>
 </template>
 

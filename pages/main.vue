@@ -85,9 +85,7 @@
     </div>
     <!-- Promo:
     {{ promo }}
-    <br>
-    Отзывы - reviews:
-    {{ reviews }} -->
+    <br> -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
     <Title
       :title="staticData.cabinet_main_news"
@@ -97,11 +95,17 @@
       :on-select-categories="onCategoriesChangeNews"
     />
     <v-row>
-      <v-col v-for="item in news" :key="item.slug" md="4">
-        <News :title="item.title" :views="item.views" :date="item.date" />
+      <v-col v-for="item in apiNews" :key="item.id" md="4">
+        <News
+          :title="item.title"
+          :date="item.date"
+          :slug="item.slug"
+          :category="item.categories.name"
+          :image="item.preview"
+        />
       </v-col>
     </v-row>
-    <v-btn class="btn btn-seetoo" block>{{ staticData.cabinet_main_see_more }} </v-btn>
+    <v-btn class="btn btn-seetoo" to="/news" block>{{ staticData.cabinet_main_see_more }} </v-btn>
     <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
       Учитываются все пользователи, зарегистрировавшиеся на Strike Team
@@ -189,10 +193,6 @@
 <script>
 // import VueSlickCarousel from "vue-slick-carousel";
 // import "vue-slick-carousel/dist/vue-slick-carousel.css";
-// import Vue from "vue";
-// import VueMoment from "vue-moment";
-// import moment from "moment";
-// import "moment/locale/ru";
 import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import Seetoo from "~~/components/Seetoo";
@@ -200,9 +200,6 @@ import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import ArrowRight from "~~/components/svg/ArrowRight";
 import Alert from "~~/components/common/Alert";
-
-// Vue.use(VueMoment);
-// VueMoment.locale("ru");
 
 export default {
   components: {
@@ -218,7 +215,6 @@ export default {
       staticData: [],
       events: null,
       promo: null,
-      reviews: null,
       apiNews: null,
       statisticsCountries: null,
       statisticsCities: null,
@@ -267,13 +263,6 @@ export default {
     let response = await HttpService.get("/promo");
     if (response.status === 200) {
       this.promo = response.data;
-    } else {
-      // TODO do we need to inform user?
-    }
-
-    response = await HttpService.get("/reviews");
-    if (response.status === 200) {
-      this.reviews = response.data;
     } else {
       // TODO do we need to inform user?
     }
@@ -355,7 +344,7 @@ export default {
       }
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
-        this.apiNews = response.data;
+        this.apiNews = response.data.articles;
       } else {
         // TODO do we need to inform user?
       }

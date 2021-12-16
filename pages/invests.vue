@@ -289,6 +289,10 @@ export default {
         "arrows": false,
         "responsive": [
           {
+            "breakpoint": 1920,
+            "settings": "unslick"
+          },
+          {
             "breakpoint": 768,
             "settings": {
               "slidesToShow": 1,

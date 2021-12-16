@@ -12,9 +12,20 @@
     display: block;
   }
 
+  .regular.slider {
+    @media screen and (min-width: 759px) {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+
   .slick-list {
     @media screen and (max-width: 758px) {
       overflow: visible !important;
+    }
+
+    .theme--light & {
+      overflow: visible;
     }
   }
 
@@ -258,6 +269,7 @@
     letter-spacing: 0.5px;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
 
     .theme--light & {
       color: #fff;

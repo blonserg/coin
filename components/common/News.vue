@@ -1,25 +1,25 @@
 <template>
   <v-card class="news-item" @click="goToNewsItem()">
-    <div class="news-img" />
+    <div class="news-img">
+      <img :src="image" alt="">
+    </div>
     <div class="news-info">
       <div class="news-ttl">
-        <NuxtLink to="/article">
-          {{ title }}
-        </NuxtLink>
+        {{ title }}
       </div>
       <div class="news-bottom d-flex justify-space-between">
         <div class="news-label c-green">
-          Прогнозы
+          {{ category }}
         </div>
         <div class="news-metrics d-flex">
-          <div class="news-views">
+          <!-- <div class="news-views">
             {{ views }}
             <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 3.5C0 2.65865 2.25982 0 5.51662 0C8.77341 0 11 2.65865 11 3.5C11 4.34135 8.74018 7 5.51662 7C2.29305 7 0 4.30769 0 3.5ZM7.77643 3.5C7.77643 2.22115 6.77946 1.21154 5.51662 1.21154C4.25378 1.21154 3.2568 2.22115 3.2568 3.5C3.2568 4.74519 4.25378 5.78846 5.51662 5.78846C6.74622 5.78846 7.77643 4.74519 7.77643 3.5ZM4.6858 3.5C4.6858 3.02885 5.05136 2.65865 5.51662 2.65865C5.98187 2.65865 6.34743 3.02885 6.34743 3.5C6.34743 3.9375 5.98187 4.34135 5.51662 4.34135C5.05136 4.30769 4.6858 3.9375 4.6858 3.5Z" fill="#808190" />
             </svg>
-          </div>
+          </div> -->
           <div class="news-date">
-            {{ date }}
+            {{ $moment(date).format("DD MMM YYYY") }}
           </div>
         </div>
       </div>
@@ -34,13 +34,21 @@ export default {
       type: String,
       default: "Новость"
     },
-    views: {
+    category: {
       type: String,
-      default: "1"
+      default: "Прогноз"
     },
+    // views: {
+    //   type: String,
+    //   default: "1"
+    // },
     date: {
       type: String,
       default: "1 янв"
+    },
+    image: {
+      type: String,
+      default: ""
     },
     slug: {
       type: String,
@@ -76,6 +84,13 @@ export default {
 
     &-img {
       height: 263px;
+
+      img {
+        max-width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px 15px 0 0;
+      }
     }
 
     &-info {
