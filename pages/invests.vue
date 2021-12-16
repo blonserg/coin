@@ -334,8 +334,14 @@ export default {
         const path = "portfel/" + slug;
         this.$router.push(path);
       } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
         this.alert = {
-          text: response.errors.join("; "),
+          text: errorText,
           active: true
         };
       }

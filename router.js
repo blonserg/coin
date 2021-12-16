@@ -4,6 +4,7 @@ import Router from "vue-router"
 import PortfelPage from "~/pages/portfel"
 import ArticlePage from "~/pages/article"
 import RecoveryPage from "~/pages/recovery"
+import EventPage from "~/pages/event"
 
 Vue.use(Router)
 
@@ -25,11 +26,11 @@ export function createRouter (ssrContext, createDefaultRouter, routerOptions, co
       {
         path: "/recovery/:recoveryKey",
         component: RecoveryPage
+      },
+      {
+        path: "/event/:slug",
+        component: EventPage
       }
-      // {
-      //   path: "/event/:slug",
-      //   component: EventPage
-      // }
     ]
   })
 }

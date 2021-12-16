@@ -314,7 +314,8 @@ export default {
       const apiPath = "/events/" + slug;
       const response = await HttpService.get(apiPath);
       if (response.status === 200) {
-        this.$router.push(apiPath);
+        const path = "event/" + slug;
+        this.$router.push(path);
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
