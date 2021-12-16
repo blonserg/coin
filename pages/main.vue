@@ -83,9 +83,6 @@
       </v-card>
     <!-- </VueSlickCarousel> -->
     </div>
-    <!-- Promo:
-    {{ promo }}
-    <br> -->
     <Seetoo :title="staticData.cabinet_main_be_interested" />
     <Title
       :title="staticData.cabinet_main_news"
@@ -214,7 +211,6 @@ export default {
       text: "all",
       staticData: [],
       events: null,
-      promo: null,
       apiNews: null,
       statisticsCountries: null,
       statisticsCities: null,
@@ -260,14 +256,7 @@ export default {
 
     await this.getNews();
 
-    let response = await HttpService.get("/promo");
-    if (response.status === 200) {
-      this.promo = response.data;
-    } else {
-      // TODO do we need to inform user?
-    }
-
-    response = await HttpService.get("/statistics");
+    const response = await HttpService.get("/statistics");
     if (response.status === 200) {
       this.statisticsCountries = response.data.countries;
       this.statisticsCities = response.data.cities;
