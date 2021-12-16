@@ -18,26 +18,26 @@
     <v-row>
       <v-col md="11">
         <div class="article-invest_img">
-          <img src="/article.png" alt="" />
+          <img :src="eventImage" alt="" />
         </div>
       </v-col>
     </v-row>
     <v-row>
       <v-col md="12">
         <h1 class="article-main_ttl">
-          Вебинар: Как инвестировать в криптовалюту
+          {{ eventTitle }}
         </h1>
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="3">
-        <div class="mb-2">
+      <v-col md="3" class="align-center">
+        <div>
           <span class="article-event_txt">Когда:</span>
-          <span class="article-event_date">26 августа, 2021</span>
+          <span class="article-event_date">{{ $moment(eventDate).format("D MMMM, YYYY") }}</span>
         </div>
         <div>
           <span class="article-event_txt">Спикер:</span>
-          <span class="article-event_name">Дмитрий Портнягин</span>
+          <span class="article-event_name">{{ eventAuthor }}</span>
         </div>
       </v-col>
       <v-col md="3">
@@ -54,18 +54,8 @@
     <div class="mt-16">
       <v-row>
         <v-col md="10">
-          <h2>Для кого этот вебинар?</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            {{ eventContent }}
           </p>
         </v-col>
       </v-row>
@@ -74,7 +64,38 @@
 </template>
 
 <script>
-export default {};
+import HttpService from "~/services/HttpService";
+
+export default {
+  data () {
+    return {
+      event: null,
+      eventTitle: null,
+      eventContent: null,
+      eventDate: null,
+      eventAuthor: null,
+      eventImage: null
+    };
+  },
+  async fetch () {
+    const slug = this.$route.params.slug || null;
+    if (slug) {
+      const apiPath = "/events/" + slug;
+      const response = await HttpService.get(apiPath);
+      if (response.status === 200) {
+        this.event = response.data;
+        this.eventTitle = response.data.title;
+        this.eventContent = response.data.content;
+        this.eventDate = response.data.date;
+        this.eventAuthor = response.data.author;
+        this.eventImage = response.data.image;
+      } else {
+      // TODO do we need to inform user?
+      }
+    }
+  },
+  fetchOnServer: false
+};
 </script>
 
 <style lang="scss" scoped>

@@ -437,8 +437,14 @@ export default {
       this.userProfile = response.data;
       this.userProfileProjects = response.data.projects_links;
     } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
       this.alert = {
-        text: response.errors.join("; "),
+        text: errorText,
         active: true
       };
     }
@@ -447,8 +453,14 @@ export default {
     if (response.status === 200) {
       this.tariffs = response.data;
     } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
       this.alert = {
-        text: response.errors.join("; "),
+        text: errorText,
         active: true
       };
     }
@@ -464,8 +476,14 @@ export default {
     if (response.status === 200) {
       this.userSecuritySettings = response.data;
     } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
       this.alert = {
-        text: response.errors.join("; "),
+        text: errorText,
         active: true
       };
     }
@@ -477,8 +495,14 @@ export default {
       if (!errors) {
         this.$router.push("/");
       } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
         this.alert = {
-          text: errors.join("; "),
+          text: errorText,
           active: true
         };
       }
@@ -493,8 +517,14 @@ export default {
           active: true
         };
       } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
         this.alert = {
-          text: response.errors.join("; "),
+          text: errorText,
           active: true
         };
       }

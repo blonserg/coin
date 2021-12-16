@@ -4,14 +4,16 @@
       {{ title }}
     </div>
     <div class="seetoo-list d-flex flex-column flex-md-row justify-space-between">
-      <v-card class="seetoo-item item-2">
-        <img src="" alt="">
+      <v-card v-for="promoItem in promo" :key="promoItem.id" class="seetoo-item item-2">
+        <div class="seetoo-img">
+          <img :src="promoItem.image" alt="">
+        </div>
         <div class="seetoo-item_bottom d-md-flex justify-space-between">
           <div class="seetoo-item_ttl mb-2 mb-md-0">
-            Выиграй iPhone 12 Pro Max
-            <span class="seetoo-item_subttl">
+            {{ promoItem.title }}
+            <!-- <span class="seetoo-item_subttl">
               Читай условия розыгрыша в описании
-            </span>
+            </span> -->
           </div>
           <v-dialog
             v-model="dialog"
@@ -33,30 +35,15 @@
               <v-row>
                 <v-col cols="12" md="4">
                   <div class="dialog-image">
-                    <img src="/article.png" alt="">
+                    <img :src="promoItem.image" alt="">
                   </div>
                 </v-col>
                 <v-col cols="12" md="8">
                   <v-card-text class="dialog-text">
-                    <h2>Выиграй iPhone 12 Pro Max</h2>
-                    <strong>
-                      Условия розыгрыша
-                    </strong>
+                    <h2>{{ promoItem.title }}</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      {{ promoItem.content }}
                     </p>
-                    <p>
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p>
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    </p>
-                    <div class="dialog-text_bottom">
-                      <p>
-                        Посмотри отзывы счастливых победителей прошлых розыгрышей
-                      </p>
-                      <a class="article-link" href="">Смотреть отзывы</a>
-                    </div>
                   </v-card-text>
                 </v-col>
               </v-row>
@@ -177,11 +164,19 @@ export default {
       dialog: false,
       dialogReview: false,
       reviews: null,
-      showVideo: null
+      showVideo: null,
+      promo: null
     };
   },
   async fetch () {
-    const response = await HttpService.get("/reviews");
+    let response = await HttpService.get("/promo");
+    if (response.status === 200) {
+      this.promo = response.data;
+    } else {
+      // TODO do we need to inform user?
+    }
+
+    response = await HttpService.get("/reviews");
     if (response.status === 200) {
       this.reviews = response.data;
     } else {

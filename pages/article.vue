@@ -16,12 +16,9 @@
         </h1>
       </v-col>
     </v-row>
-    <div class="d-flex align-center mb-5">
+    <div v-for="item in articleCategories" :key="item.id" class="d-flex align-center mb-5">
       <div class="news-label c-purple">
-        Криптовалюта
-      </div>
-      <div class="news-label c-orange">
-        Биржа
+        {{ item.name }}
       </div>
     </div>
     <v-row>
@@ -52,7 +49,8 @@ export default {
       articleTitle: null,
       articleContent: null,
       articleDate: null,
-      articleImage: null
+      articleImage: null,
+      articleCategories: null
     };
   },
   async fetch () {
@@ -66,6 +64,7 @@ export default {
         this.articleContent = response.data.content;
         this.articleDate = response.data.date;
         this.articleImage = response.data.image;
+        this.articleCategories = response.data.categories;
       } else {
       // TODO do we need to inform user?
       }
