@@ -17,7 +17,7 @@
             :title="item.title"
             :date="item.date"
             :slug="item.slug"
-            :category="item.categories.name"
+            :category="item.categories | nameCategories"
             :image="item.preview"
           />
         </v-col>
@@ -42,6 +42,11 @@ export default {
     VueSlickCarousel,
     Title,
     News
+  },
+  filters: {
+    nameCategories (value) {
+      return value[0].name;
+    }
   },
   data () {
     return {
