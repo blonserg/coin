@@ -9,6 +9,8 @@
           <img src="/avatar.png" alt="" />
         </div>
         <div class="header-avatar_txt">
+          <span>{{ userProfileFirstName }}</span>
+          <span>{{ userProfileLastName }}</span>
           <span class="header-avatar_subtxt">ID: {{ authUserId }}</span>
         </div>
       </div>
@@ -254,7 +256,9 @@ export default {
       authUserSum: null,
       userNotificationsCount: null,
       showTooltip: false,
-      dialogTariffs: false
+      dialogTariffs: false,
+      userProfileFirstName: null,
+      userProfileLastName: null
     };
   },
   async fetch () {
@@ -273,6 +277,14 @@ export default {
       this.authUserId = response.data.user.id;
       this.authUserCode = response.data.tariff.code;
       this.authUserSum = response.data.tariff.sum;
+    } else {
+      // TODO do we need to inform user?
+    }
+
+    response = await HttpService.get("/user-profile");
+    if (response.status === 200) {
+      this.userProfileFirstName = response.data.profile.first_name;
+      this.userProfileLastName = response.data.profile.last_name;
     } else {
       // TODO do we need to inform user?
     }

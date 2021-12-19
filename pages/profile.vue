@@ -270,7 +270,7 @@
         </v-card>
       </v-col>
       <v-col class="profile-form" md="8">
-        <div class="d-flex">
+        <div class="d-flex align-center mb-10">
           <div class="profile-ttl">
             {{ staticData.my_profile_main_info }}
           </div>
@@ -296,7 +296,7 @@
           </div>
         </div>
         <v-row>
-          <v-col md="6" class="mb-10">
+          <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_name }}</span>
             <v-text-field
               v-model="userProfile.profile.first_name"
@@ -305,7 +305,7 @@
               :disabled="editUser"
             />
           </v-col>
-          <v-col md="6" class="mb-10">
+          <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_last_name }}</span>
             <v-text-field
               v-model="userProfile.profile.last_name"
@@ -316,7 +316,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="6" class="mb-10">
+          <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_telegram }}</span>
             <v-text-field
               v-model="userProfile.profile.telegram"
@@ -325,7 +325,7 @@
               :disabled="editUser"
             />
           </v-col>
-          <v-col md="6" class="mb-10">
+          <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_instagram }}</span>
             <v-text-field
               v-model="userProfile.profile.instagram"

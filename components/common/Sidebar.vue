@@ -23,16 +23,20 @@
             <img src="/avatar.png" alt="">
           </div>
           <div class="header-avatar_txt">
-            Влад Борин
-            <span class="header-avatar_subtxt">Lorem ipsum</span>
+            <span>{{ userProfileFirstName }}</span>
+            <span>{{ userProfileLastName }}</span>
+            <span class="header-avatar_subtxt mt-1">ID: {{ userProfileID }}</span>
           </div>
         </div>
         <div class="header-rate d-none d-md-flex align-center">
           <div class="header-rate_txt">
             Тариф:
           </div>
-          <div class="header-tariph premium">
-            PREMIUM
+          <div
+            :class="userProfileCode!=='Basic' ? 'premium' : ''"
+            class="header-tariph"
+          >
+            {{ userProfileCode }}
           </div>
         </div>
       </div>
@@ -111,7 +115,7 @@ export default {
   data () {
     return {
       clipped: false,
-      drawer: true,
+      drawer: false,
       fixed: false,
       switch1: true,
       items: [
@@ -149,15 +153,20 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js",
       darkMode: true,
-      authUserInfo: null
+      userProfileFirstName: null,
+      userProfileLastName: null,
+      userProfileID: null,
+      userProfileCode: null
     };
   },
   async fetch () {
-    const response = await HttpService.get("/auth-user-info");
+    const response = await HttpService.get("/user-profile");
     if (response.status === 200) {
-      this.authUserInfo = response.data;
+      this.userProfileFirstName = response.data.profile.first_name;
+      this.userProfileLastName = response.data.profile.last_name;
+      this.userProfileID = response.data.profile.id;
+      this.userProfileCode = response.data.profile.code;
     } else {
       // TODO do we need to inform user?
     }

@@ -169,37 +169,6 @@ body,
   display: inline-block;
 }
 
-.table {
-  &-head {
-    background: #1e1f26;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #adafc2;
-    padding: 0 30px;
-    margin-bottom: 30px;
-
-    .theme--light & {
-      background: #fff;
-    }
-  }
-
-  &-body {
-    padding: 15px 30px;
-    border-radius: 16px;
-    border: 1px solid #272a33;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.01em;
-    color: #adafc2;
-
-    .row + .row {
-      border-top: 1px solid #272a33;
-    }
-  }
-}
-
 .link {
   font-size: 13px;
   line-height: 17px;
@@ -369,4 +338,23 @@ body,
 
 .theme--light .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 15px 30px -12px rgba(26, 38, 68, 0.15);
+}
+
+.v-application--wrap  {
+  .sidebar.v-navigation-drawer {
+    @media screen and (min-width: 758px) {
+      height: 100vh;
+      top: 0px;
+      transform: translateX(0%) !important;
+      width: 260px;
+      max-height: calc(100% - 0px);
+      visibility: visible;
+    }
+  }
+
+  .v-main.base {
+    @media screen and (min-width: 758px) {
+      padding-left: 260px !important;
+    }
+  }
 }
