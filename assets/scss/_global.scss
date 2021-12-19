@@ -169,37 +169,6 @@ body,
   display: inline-block;
 }
 
-.table {
-  &-head {
-    background: #1e1f26;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #adafc2;
-    padding: 0 30px;
-    margin-bottom: 30px;
-
-    .theme--light & {
-      background: #fff;
-    }
-  }
-
-  &-body {
-    padding: 15px 30px;
-    border-radius: 16px;
-    border: 1px solid #272a33;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.01em;
-    color: #adafc2;
-
-    .row + .row {
-      border-top: 1px solid #272a33;
-    }
-  }
-}
-
 .link {
   font-size: 13px;
   line-height: 17px;

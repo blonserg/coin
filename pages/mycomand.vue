@@ -50,8 +50,8 @@
         <div class="mycomand-ttl">
           Вышестоящие партнеры
         </div>
-        <div class="d-flex align-center mb-15">
-          <div class="d-flex align-center mr-4">
+        <div class="d-flex flex-column flex-md-row align-md-center mb-8 mb-md-15">
+          <div class="d-flex align-center mb-4 mb-md-0 mr-4">
             <div class="mycomand-avatar">
               <v-avatar
                 color="primary"
@@ -93,20 +93,20 @@
         </div>
         <div class="table">
           <div class="table-head">
-            <v-row>
-              <v-col class="text-center col-1">
+            <v-row class="flex-nowrap flex-md-wrap">
+              <v-col class="text-center col-4 col-md-1">
                 #-
               </v-col>
-              <v-col class="text-left col-2">
+              <v-col class="text-left col-4 col-md-2">
                 Проект
               </v-col>
-              <v-col class="text-center col-2">
+              <v-col class="text-center col-4 col-md-2">
                 Мое участие
               </v-col>
-              <v-col class="text-right col-3">
+              <v-col class="text-right col-4 col-md-3">
                 Первая линия
               </v-col>
-              <v-col class="text-right col-4">
+              <v-col class="text-right col-4 col-md-4">
                 Партнеров в структуре
               </v-col>
             </v-row>
@@ -115,21 +115,22 @@
             <v-row
               v-for="item in userProjects"
               :key="item.name"
+              class="flex-nowrap flex-md-wrap"
             >
-              <v-col class="text-center col-1">
+              <v-col class="text-center col-4 col-md-1">
                 {{ item.id }}
               </v-col>
-              <v-col class="text-left col-2">
+              <v-col class="text-left col-4 col-md-2">
                 {{ item.project }}
               </v-col>
-              <v-col class="text-center col-2">
+              <v-col class="text-center col-4 col-md-2">
                 <MyComandActive v-if="item.active == 1" />
                 <MyComandPassive v-else />
               </v-col>
-              <v-col class="text-right col-3">
+              <v-col class="text-right col-4 col-md-3">
                 {{ item.first_line_referrals }}
               </v-col>
-              <v-col class="text-right col-4">
+              <v-col class="text-right col-4 col-md-4">
                 {{ item.all_referrals }}
               </v-col>
             </v-row>

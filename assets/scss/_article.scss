@@ -129,6 +129,7 @@
 
     @media screen and (max-width: 758px) {
       padding: 20px;
+      width: 90% !important;
       max-width: 90% !important;
       margin-right: 0;
     }
@@ -401,6 +402,10 @@
 
     &_item {
       display: inline-block;
+
+      @media screen and (max-width: 758px) {
+        display: block;
+      }
     }
   }
 }

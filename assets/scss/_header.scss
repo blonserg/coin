@@ -209,6 +209,10 @@
         height: 100%;
         z-index: -1;
       }
+
+      @media screen and (max-width: 758px) {
+        width: calc(100% - 40px);
+      }
     }
 
     &_item {
@@ -217,6 +221,10 @@
       border-radius: 15px !important;
       padding: 12px;
       width: 346px;
+
+      @media screen and (max-width: 758px) {
+        width: 100%;
+      }
 
       .theme--dark & {
         background: #1e1f26 !important;
