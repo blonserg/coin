@@ -61,7 +61,7 @@ export default {
         "arrows": false,
         "responsive": [
           {
-            "breakpoint": 1920,
+            "breakpoint": 2600,
             "settings": "unslick"
           },
           {
@@ -123,6 +123,7 @@ export default {
 .news-page {
   .regular.slider {
     display: flex;
+    margin: 0 -10px;
   }
 }
 </style>
