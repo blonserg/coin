@@ -124,6 +124,10 @@ export default {
   .regular.slider {
     display: flex;
     margin: 0 -10px;
+
+     @media screen and (min-width: 768px) {
+      flex-wrap: wrap;
+    }
   }
 }
 </style>
