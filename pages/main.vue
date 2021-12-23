@@ -295,6 +295,7 @@ export default {
     },
     async getNews () {
       const params = {};
+      params.type = "main";
       if (this.selectedSortTypeNews !== null) {
         params.sort = this.selectedSortTypeNews;
       }
