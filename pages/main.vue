@@ -238,6 +238,12 @@ export default {
       return this.$store.state.news;
     }
   },
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     async applyInterval (interval) {
       const params = {

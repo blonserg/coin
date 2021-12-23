@@ -90,6 +90,12 @@ export default {
     await this.getNews();
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     onSortTypeChange (sortType) {
       this.selectedSortType = sortType;

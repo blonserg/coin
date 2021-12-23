@@ -489,6 +489,12 @@ export default {
     }
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     async logoutUser () {
       const errors = await UserService.logout();

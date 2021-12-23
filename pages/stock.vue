@@ -86,6 +86,12 @@ export default {
       // TODO do we need to inform user?
     }
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  }
 };
 </script>

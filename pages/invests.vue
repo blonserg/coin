@@ -325,6 +325,12 @@ export default {
     }
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     async getClickedProject (item) {
       const slug = item.slug;
