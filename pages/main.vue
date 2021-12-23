@@ -263,7 +263,7 @@ export default {
         params.sort = this.selectedSortTypeEvents;
       }
       const response = await HttpService.get("/events", params);
-      if (response.status === 200) {
+      if (response.status === 200 && !(response.data.length === 0)) {
         this.events = response.data;
       } else {
         // TODO do we need to inform user?
