@@ -57,7 +57,7 @@ export default {
     return {
       staticData: [],
       apiNews: [],
-      categories: [], // TODO get data from apiNews
+      categories: [],
       selectedSortType: null,
       selectedCategories: null,
       newsPage: 1,
