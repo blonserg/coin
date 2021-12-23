@@ -64,72 +64,23 @@
           </div>
         </div>
       </div>
-      <div>
+      <div
+        v-for="blockContent in dynamicData.about_system"
+        :key="blockContent.id"
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        class="landing-block_system-wrap"
+      >
         <v-row class="landing-block_system">
           <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500">
-            <img src="/learn.png" alt="" />
+            <img :src="blockContent.image" alt="" />
           </v-col>
           <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
             <LandSmile />
-            <div class="landing-block_ttl">Обучение</div>
+            <div class="landing-block_ttl">{{ blockContent.title }}</div>
             <div class="landing-block_txt">
-              На нашей платформе будут выступать ведущие спикеры из
-              самых разных сфер жизни, поэтому каждый желающий найдет
-              что-то для себя
+              {{ blockContent.content }}
             </div>
-          </v-col>
-        </v-row>
-      </div>
-      <div
-        data-aos="fade-up"
-        data-aos-duration="1500"
-      >
-        <v-row class="landing-block_system flex-column-reverse flex-md-row">
-          <v-col cols="12" md="5" class="pl-md-14">
-            <LandSmile />
-            <div class="landing-block_ttl">Стратегии</div>
-            <div class="landing-block_txt">
-              Неважно, с какой суммы Вы желаете начать свой путь
-              инвестора, мы поможем подобрать оптимальную стратегию
-              исходя из Ваших желаний и возможностей
-            </div>
-          </v-col>
-          <v-col cols="12" md="7">
-            <img src="/strategy.png" alt="" />
-          </v-col>
-        </v-row>
-      </div>
-      <div>
-        <v-row class="landing-block_system">
-          <v-col cols="12" md="7" data-aos="fade-right" data-aos-duration="1500">
-            <img src="/stock.png" alt="" />
-          </v-col>
-          <v-col cols="12" md="5" class="pr-md-14" data-aos="fade-left">
-            <LandSmile />
-            <div class="landing-block_ttl">Биржа услуг</div>
-            <div class="landing-block_txt">
-              Наши первоклассные специалисты с удовольствием окажут
-              содействие в решении Ваших потребностей
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-      <div
-        data-aos="fade-up"
-        data-aos-duration="1500"
-      >
-        <v-row class="landing-block_system">
-          <v-col cols="12" md="5" class="pl-md-14">
-            <LandSmile />
-            <div class="landing-block_ttl">Нетворк</div>
-            <div class="landing-block_txt">
-              StrikeTeam это большая и дружная команда, с которой
-              можно не только работать, но и отлично проводить время.
-              Вливайся!
-            </div>
-          </v-col>
-          <v-col md="7">
-            <img src="/strategy.png" alt="" />
           </v-col>
         </v-row>
       </div>
@@ -164,7 +115,7 @@
       </div>
       <div id="statistic">
         <v-row>
-          <v-col md="6" data-aos="fade-down-right" data-aos-duration="1500">
+          <v-col cols="12" md="6" data-aos="fade-down-right" data-aos-duration="1500">
             <div class="landing-subtxt">
               {{ staticData.statistics }}
             </div>
@@ -175,7 +126,7 @@
               {{ staticData.statistics_left_text }}
             </div>
           </v-col>
-          <v-col md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500">
+          <v-col cols="12" md="6" class="table" data-aos="zoom-in-left" data-aos-duration="1500">
             <div class="landing-table">
               <div class="d-flex justify-space-between align-center mb-14">
                 <div class="landing-table_ttl">
@@ -422,12 +373,6 @@ export default {
       text: "all",
       dialog: false,
       showVideo: null,
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159
-        }
-      ],
       staticData: [],
       dynamicData: {}
     };

@@ -146,6 +146,12 @@ export default {
 
     this.staticData = await StaticService.get("/project")
   },
-  fetchOnServer: false
+  fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  }
 };
 </script>

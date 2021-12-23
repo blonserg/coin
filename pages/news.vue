@@ -12,7 +12,7 @@
         :on-select-categories="onCategoriesChange"
       />
       <VueSlickCarousel v-bind="settings">
-        <v-col v-for="item in apiNews.articles" :key="item.id" md="4">
+        <v-col v-for="item in apiNews" :key="item.id" md="4">
           <News
             :title="item.title"
             :date="item.date"
@@ -22,7 +22,12 @@
           />
         </v-col>
       </VueSlickCarousel>
-      <v-btn class="btn btn-seetoo" block>
+      <v-btn
+        v-if="showMoreNewsButton"
+        class="btn btn-seetoo"
+        block
+        @click="showMoreNews()"
+      >
         {{ staticData.news_show_more }}
       </v-btn>
     </div>
@@ -51,10 +56,12 @@ export default {
   data () {
     return {
       staticData: [],
-      apiNews: null,
-      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
+      apiNews: [],
+      categories: [],
       selectedSortType: null,
       selectedCategories: null,
+      newsPage: 1,
+      showMoreNewsButton: true,
       settings: {
         "slidesToShow": 4,
         "slidesToScroll": 4,
@@ -87,9 +94,15 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
-    await this.getNews();
+    await this.getNews(true);
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     onSortTypeChange (sortType) {
       this.selectedSortType = sortType;
@@ -99,8 +112,9 @@ export default {
       this.selectedCategories = categories;
       this.getNews();
     },
-    async getNews () {
+    async getNews (doGetCategories) {
       const params = {};
+      params.page = this.newsPage;
       if (this.selectedSortType !== null) {
         params.sort = this.selectedSortType;
       }
@@ -111,10 +125,29 @@ export default {
       }
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
-        this.apiNews = response.data;
+        if (!response.data.articles || response.data.articles.length === 0) {
+          this.showMoreNewsButton = false;
+        } else {
+          this.apiNews = this.apiNews.concat(response.data.articles);
+        }
+        if (doGetCategories &&
+            response.data.filter &&
+            response.data.filter.categories &&
+            response.data.filter.categories.length !== 0) {
+          this.categories = response.data.filter.categories.map((categoryItem) => {
+            return {
+              text: categoryItem.name,
+              value: categoryItem.slug
+            };
+          });
+        }
       } else {
         // TODO do we need to inform user?
       }
+    },
+    showMoreNews () {
+      this.newsPage = this.newsPage + 1;
+      this.getNews();
     }
   }
 };

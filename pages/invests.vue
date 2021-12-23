@@ -14,177 +14,54 @@
     </div>
     <div class="article-wrap">
       <div class="article">
-        <VueSlickCarousel v-bind="settings">
-          <v-card transition="fade-transition" class="article-item  basic">
+        <VueSlickCarousel v-if="strategies" v-bind="settings">
+          <v-card
+            v-for="strategiesItem in strategies"
+            :key="strategiesItem.id"
+            transition="fade-transition"
+            class="article-item"
+            :class="strategiesItem.code"
+          >
             <div class="article-ttl">
-              Basic
+              {{ strategiesItem.code }}
             </div>
             <p class="article-txt">
-              Инвестиция
+              {{ strategiesItem.title }}
             </p>
             <div class="article-count">
-              $100-$500
+              {{ strategiesItem.price }}
             </div>
             <p class="article-txt">
-              Самая высокая точность и максимальное количество данных
+              {{ strategiesItem.content }}
             </p>
             <div class="article-info">
               <div class="article-info_item d-flex justify-space-between">
                 <span class="article-info_lt">
-                  Деверсификация
+                  {{ staticData.diversification }}
                 </span>
                 <span class="article-info_rt">
-                  1 проект
+                  {{ strategiesItem.diversification }}
                 </span>
               </div>
               <div class="article-info_item d-flex justify-space-between">
                 <span class="article-info_lt">
-                  Доходность (год)
+                  {{ staticData.profit_a_year }}
                 </span>
                 <span class="article-info_rt">
-                  ±150%
+                  {{ strategiesItem.profit }}
                 </span>
               </div>
               <div class="article-info_item d-flex justify-space-between">
                 <span class="article-info_lt">
-                  Риск
+                  {{ staticData.risk }}
                 </span>
                 <span class="article-info_rt">
-                  Повышенный
+                  {{ strategiesItem.risk }}
                 </span>
               </div>
             </div>
             <div class="article-btn">
-              <a class="btn" href="">{{ staticData.strategy_button }}</a>
-            </div>
-          </v-card>
-          <v-card class="article-item individual">
-            <div class="article-ttl">
-              Individual
-            </div>
-            <p class="article-txt">
-              Инвестиция
-            </p>
-            <div class="article-count">
-              $500-$1000
-            </div>
-            <p class="article-txt">
-              Внутридневной технический анализ для дневных трейдеров
-            </p>
-            <div class="article-info">
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Деверсификация
-                </span>
-                <span class="article-info_rt">
-                  2 проекта
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Доходность (год)
-                </span>
-                <span class="article-info_rt">
-                  ±200%
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Риск
-                </span>
-                <span class="article-info_rt">
-                  Умеренный
-                </span>
-              </div>
-            </div>
-            <div class="article-btn">
-              <a class="btn" href="">{{ staticData.strategy_button }}</a>
-            </div>
-          </v-card>
-          <v-card class="article-item professional">
-            <div class="article-ttl">
-              Professional
-            </div>
-            <p class="article-subttl">
-              Инвестиция
-            </p>
-            <div class="article-count">
-              $1000-$1500
-            </div>
-            <p class="article-txt">
-              Ничто не будет отвлекать от трейдинга и инвестирования. Больше графиков
-            </p>
-            <div class="article-info">
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Деверсификация
-                </span>
-                <span class="article-info_rt">
-                  3 проекта
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Доходность (год)
-                </span>
-                <span class="article-info_rt">
-                  ±250%
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Риск
-                </span>
-                <span class="article-info_rt">
-                  Пониженный
-                </span>
-              </div>
-            </div>
-            <div class="article-btn">
-              <a class="btn" href="">{{ staticData.strategy_button }}</a>
-            </div>
-          </v-card>
-          <v-card class="article-item professional-more">
-            <div class="article-ttl">
-              Professional +
-            </div>
-            <p class="article-subttl">
-              Инвестиция
-            </p>
-            <div class="article-count">
-              $1500-$2000
-            </div>
-            <p class="article-txt">
-              Ничто не будет отвлекать от трейдинга и инвестирования технический анализ
-            </p>
-            <div class="article-info">
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Деверсификация
-                </span>
-                <span class="article-info_rt">
-                  4 проекта
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Доходность (год)
-                </span>
-                <span class="article-info_rt">
-                  ±300%
-                </span>
-              </div>
-              <div class="article-info_item d-flex justify-space-between">
-                <span class="article-info_lt">
-                  Риск
-                </span>
-                <span class="article-info_rt">
-                  Минимальный
-                </span>
-              </div>
-            </div>
-            <div class="article-btn">
-              <a class="btn" href="">{{ staticData.strategy_button }}</a>
+              <a class="btn" :href="strategiesItem.link">{{ staticData.strategy_button }}</a>
             </div>
           </v-card>
         </VueSlickCarousel>
@@ -325,6 +202,12 @@ export default {
     }
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     async getClickedProject (item) {
       const slug = item.slug;

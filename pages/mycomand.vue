@@ -233,6 +233,12 @@ export default {
     await this.getUserTeam();
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   methods: {
     async getUserTeam () {
       const params = {};

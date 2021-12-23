@@ -63,6 +63,18 @@
         margin: 0 auto;
         max-width: 345px;
       }
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &_system-wrap {
+      &:nth-child(even) {
+        .landing-block_system.row {
+          flex-direction: row-reverse;
+        }
+      }
     }
 
     &_ttl {

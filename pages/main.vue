@@ -177,13 +177,13 @@ export default {
       text: "all",
       staticData: [],
       events: null,
-      apiNews: null,
+      apiNews: [],
+      categories: [],
       statisticsCountries: null,
       statisticsCities: null,
       selectedSortTypeEvents: null,
       selectedSortTypeNews: null,
       selectedCategoriesNews: null,
-      categories: ["category1", "category2", "category3"], // TODO get data from apiNews
       sortItems: [
         {
           text: "Latest",
@@ -219,7 +219,7 @@ export default {
 
     await this.getEvents();
 
-    await this.getNews();
+    await this.getNews(true);
 
     const response = await HttpService.get("/statistics");
     if (response.status === 200) {
@@ -236,6 +236,12 @@ export default {
     },
     news () {
       return this.$store.state.news;
+    }
+  },
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
     }
   },
   methods: {
@@ -257,7 +263,7 @@ export default {
         params.sort = this.selectedSortTypeEvents;
       }
       const response = await HttpService.get("/events", params);
-      if (response.status === 200) {
+      if (response.status === 200 && !(response.data.length === 0)) {
         this.events = response.data;
       } else {
         // TODO do we need to inform user?
@@ -287,8 +293,9 @@ export default {
       this.selectedSortTypeEvents = sortType;
       this.getEvents();
     },
-    async getNews () {
+    async getNews (doGetCategories) {
       const params = {};
+      params.type = "main";
       if (this.selectedSortTypeNews !== null) {
         params.sort = this.selectedSortTypeNews;
       }
@@ -299,7 +306,20 @@ export default {
       }
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
-        this.apiNews = response.data.articles;
+        if (response.data.articles && response.data.articles.length !== 0) {
+          this.apiNews = response.data.articles;
+        }
+        if (doGetCategories &&
+            response.data.filter &&
+            response.data.filter.categories &&
+            response.data.filter.categories.length !== 0) {
+          this.categories = response.data.filter.categories.map((categoryItem) => {
+            return {
+              text: categoryItem.name,
+              value: categoryItem.slug
+            };
+          });
+        }
       } else {
         // TODO do we need to inform user?
       }

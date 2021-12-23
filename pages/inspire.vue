@@ -87,3 +87,14 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (!token) {
+      this.$router.push("login");
+    }
+  }
+}
+</script>
