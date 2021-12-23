@@ -74,6 +74,7 @@ body,
   }
 }
 
+
 .theme--dark.v-application.landing-page {
   background: #131418;
 }
@@ -298,6 +299,12 @@ body,
   @media screen and (max-width: 758px) {
     overflow-x: hidden;
   }
+
+  @media (min-width: 1904px) {
+    .container {
+      max-width: 1185px;
+    }
+  }
 }
 
 .theme--dark.v-data-table,
@@ -341,6 +348,11 @@ body,
 }
 
 .v-application--wrap  {
+  @media screen and (min-width: 1400px) {
+    max-width: 1440px !important;
+    margin: 0 auto;
+  }
+
   .sidebar.v-navigation-drawer {
     @media screen and (min-width: 758px) {
       height: 100vh;
@@ -349,6 +361,10 @@ body,
       width: 260px;
       max-height: calc(100% - 0px);
       visibility: visible;
+    }
+
+    @media screen and (min-width: 1400px) {
+      left: auto !important;
     }
   }
 

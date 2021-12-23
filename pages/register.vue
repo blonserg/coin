@@ -165,9 +165,8 @@ export default {
         }
         this.$router.push("main");
       } else {
-        // TODO: process errors
         this.errorStatus = true
-        this.errorList = registrationResponse.errors;
+        this.errorList = registrationResponse.errors.error_text;
       }
     }
   }
