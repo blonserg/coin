@@ -20,7 +20,7 @@
               size="120"
             >
               <span class="profile-avatar_txt">
-                ВБ
+                {{ userProfile.profile.first_name.charAt(0) }}{{ userProfile.profile.last_name.charAt(0) }}
               </span>
             </v-avatar>
           </div>
