@@ -7,11 +7,11 @@
       {{ staticData.project_list_title }}
     </NuxtLink>
     <div class="article-invest_img mb-12">
-      <img src="/invest.png" alt="">
+      <img :src="portfelItemImage" alt="">
     </div>
     <div class="article-head d-flex align-center mb-16">
       <div class="article-head_img">
-        <img :src="portfelItemImage" alt="">
+        <img :src="portfelItemPreview" alt="">
       </div>
       <div style="width: 100%;">
         <div>
@@ -109,6 +109,7 @@ export default {
       portfelItemTitle: null,
       portfelItemContent: null,
       portfelItemImage: null,
+      portfelItemPreview: null,
       portfelItemTraded: null,
       portfelItemInvest: null,
       portfelItemProfit: null,
@@ -139,6 +140,7 @@ export default {
         this.portfelItemAbout = response.data.about_project
         this.portfelItemBenefits = response.data.benefits
         this.portfelItemVideo = response.data.video_link
+        this.portfelItemPreview = response.data.preview
       } else {
       // TODO do we need to inform user
       }
