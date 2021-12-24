@@ -20,7 +20,8 @@
               size="120"
             >
               <span class="profile-avatar_txt">
-                {{ userProfile.profile.first_name.charAt(0) }}{{ userProfile.profile.last_name.charAt(0) }}
+                <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
+                <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
             </v-avatar>
           </div>
