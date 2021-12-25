@@ -227,6 +227,7 @@
             {{ item.description }}
           </div>
         </v-alert>
+        <div @click="postTransaction()">Post transaction</div>
       </div>
     </header>
   </div>
@@ -254,12 +255,16 @@ export default {
       authUserId: null,
       authUserCode: null,
       authUserSum: null,
+      authUserTariffId: null,
       userNotificationsCount: null,
       showTooltip: false,
       dialogTariffs: false,
       userProfileFirstName: null,
       userProfileLastName: null,
-      currencies: null
+      currencies: null,
+      selectedCurrency: "UAH", // TODO get from somewhere
+      amount: 25, // TODO get from somewhere
+      addr: null
     };
   },
   async fetch () {
@@ -278,6 +283,7 @@ export default {
       this.authUserId = response.data.user.id;
       this.authUserCode = response.data.tariff.code;
       this.authUserSum = response.data.tariff.sum;
+      this.authUserTariffId = response.data.tariff.tariff_id;
     } else {
       // TODO do we need to inform user?
     }
@@ -290,7 +296,7 @@ export default {
       // TODO do we need to inform user?
     }
 
-    await this.getCurrencies(); // TODO move from fetch to button
+    await this.getCurrencies();// TODO move from fetch to button
   },
   fetchOnServer: false,
   methods: {
@@ -307,6 +313,21 @@ export default {
         this.currencies = response.data.currencies;
       } else {
       // TODO do we need to inform user?
+      }
+    },
+    async postTransaction () {
+      const bodyObject = {
+        "currency": this.selectedCurrency,
+        "amount": this.amount,
+        "tariff_id": this.authUserTariffId,
+        "user_id": this.authUserId
+      }
+      const response = await HttpService.post("/transaction", bodyObject);
+      if (response.status === 200) {
+        alert("Transaction was send");// TODO how to inform user?
+        this.addr = response.data.addr;
+      } else {
+        alert("An error occurred") // TODO how to inform user?
       }
     }
   }
