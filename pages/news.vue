@@ -94,7 +94,7 @@ export default {
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
-    await this.getNews(true);
+    await this.getNews(true, false);
   },
   fetchOnServer: false,
   mounted () {
@@ -106,48 +106,57 @@ export default {
   methods: {
     onSortTypeChange (sortType) {
       this.selectedSortType = sortType;
-      this.getNews();
+      this.getNews(false, false);
     },
     onCategoriesChange (categories) {
       this.selectedCategories = categories;
-      this.getNews();
+      this.getNews(false, false);
     },
-    async getNews (doGetCategories) {
+    async getNews (doGetCategories, doConcatNews) {
       const params = {};
       params.page = this.newsPage;
       if (this.selectedSortType !== null) {
         params.sort = this.selectedSortType;
       }
       if (this.selectedCategories !== null) {
-        this.selectedCategories.forEach((categoryName, categoryIndex) => {
-          params["category[" + categoryIndex + "]"] = categoryName;
+        this.selectedCategories.forEach((categoryId, categoryIndex) => {
+          params["category[" + categoryIndex + "]"] = categoryId;
         });
       }
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
+        if (doGetCategories) {
+          this.getNewsCategories(response);
+        }
         if (!response.data.articles || response.data.articles.length === 0) {
           this.showMoreNewsButton = false;
-        } else {
-          this.apiNews = this.apiNews.concat(response.data.articles);
         }
-        if (doGetCategories &&
-            response.data.filter &&
-            response.data.filter.categories &&
-            response.data.filter.categories.length !== 0) {
-          this.categories = response.data.filter.categories.map((categoryItem) => {
-            return {
-              text: categoryItem.name,
-              value: categoryItem.slug
-            };
-          });
+        if (Array.isArray(response.data.articles) && response.data.articles.length !== 0) {
+          if (doConcatNews) {
+            this.apiNews = this.apiNews.concat(response.data.articles);
+          } else {
+            this.apiNews = response.data.articles;
+          }
         }
       } else {
         // TODO do we need to inform user?
       }
     },
+    getNewsCategories (response) {
+      if (response.data.filter &&
+            response.data.filter.categories &&
+            response.data.filter.categories.length !== 0) {
+        this.categories = response.data.filter.categories.map((categoryItem) => {
+          return {
+            text: categoryItem.name,
+            value: categoryItem.id
+          };
+        });
+      }
+    },
     showMoreNews () {
       this.newsPage = this.newsPage + 1;
-      this.getNews();
+      this.getNews(false, true);
     }
   }
 };

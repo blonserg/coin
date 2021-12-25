@@ -309,19 +309,23 @@ export default {
         if (response.data.articles && response.data.articles.length !== 0) {
           this.apiNews = response.data.articles;
         }
-        if (doGetCategories &&
-            response.data.filter &&
-            response.data.filter.categories &&
-            response.data.filter.categories.length !== 0) {
-          this.categories = response.data.filter.categories.map((categoryItem) => {
-            return {
-              text: categoryItem.name,
-              value: categoryItem.slug
-            };
-          });
+        if (doGetCategories) {
+          this.getNewsCategories(response);
         }
       } else {
         // TODO do we need to inform user?
+      }
+    },
+    getNewsCategories (response) {
+      if (response.data.filter &&
+            response.data.filter.categories &&
+            response.data.filter.categories.length !== 0) {
+        this.categories = response.data.filter.categories.map((categoryItem) => {
+          return {
+            text: categoryItem.name,
+            value: categoryItem.id
+          };
+        });
       }
     },
     onSortTypeChangeNews (sortType) {
