@@ -258,7 +258,8 @@ export default {
       showTooltip: false,
       dialogTariffs: false,
       userProfileFirstName: null,
-      userProfileLastName: null
+      userProfileLastName: null,
+      currencies: null
     };
   },
   async fetch () {
@@ -288,6 +289,8 @@ export default {
     } else {
       // TODO do we need to inform user?
     }
+
+    await this.getCurrencies(); // TODO move from fetch to button
   },
   fetchOnServer: false,
   methods: {
@@ -297,6 +300,14 @@ export default {
       document.execCommand("copy");
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
+    },
+    async getCurrencies () {
+      const response = await HttpService.get("/currency");
+      if (response.status === 200) {
+        this.currencies = response.data.currencies;
+      } else {
+      // TODO do we need to inform user?
+      }
     }
   }
 };
