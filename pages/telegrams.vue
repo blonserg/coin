@@ -37,6 +37,7 @@
 
 <script>
 import StaticService from "~/services/StaticService";
+import HttpService from "~/services/HttpService";
 
 export default {
   data () {
@@ -61,11 +62,19 @@ export default {
           title: "SMM продвижение и аналитика"
         }
       ],
-      staticData: []
+      staticData: [],
+      userChats: null
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/telegram")
+
+    const response = await HttpService.get("/user-chats");
+    if (response.status === 200) {
+      this.userChats = response.data;
+    } else {
+      // TODO do we need to inform user?
+    }
   },
   fetchOnServer: false,
   mounted () {
