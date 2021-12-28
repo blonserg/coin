@@ -408,7 +408,6 @@ export default {
     staticDataChangeEmail: [],
     staticDataChangePassword: [],
     userProfile: null,
-    tariffs: null,
     userSecuritySettings: null,
     userProfileProjects: null,
     editUser: true,
@@ -435,22 +434,6 @@ export default {
     if (response.status === 200) {
       this.userProfile = response.data;
       this.userProfileProjects = response.data.projects_links;
-    } else {
-      let errorText;
-      if (Array.isArray(response.errors)) {
-        errorText = response.errors.join("; ")
-      } else {
-        errorText = "An error occurred"
-      }
-      this.alert = {
-        text: errorText,
-        active: true
-      };
-    }
-
-    response = await HttpService.get("/tariffs");
-    if (response.status === 200) {
-      this.tariffs = response.data;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {

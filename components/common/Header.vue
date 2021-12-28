@@ -264,7 +264,8 @@ export default {
       currencies: null,
       selectedCurrency: "UAH", // TODO get from somewhere
       amount: 25, // TODO get from somewhere
-      addr: null
+      addr: null,
+      tariffs: null
     };
   },
   async fetch () {
@@ -294,6 +295,22 @@ export default {
       this.userProfileLastName = response.data.profile.last_name;
     } else {
       // TODO do we need to inform user?
+    }
+
+    response = await HttpService.get("/tariffs");
+    if (response.status === 200) {
+      this.tariffs = response.data;
+    } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
+      this.alert = {
+        text: errorText,
+        active: true
+      };
     }
 
     await this.getCurrencies();// TODO move from fetch to button
