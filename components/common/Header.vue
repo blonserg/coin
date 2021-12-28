@@ -47,6 +47,14 @@
                 </div>
               </v-col>
               <v-col cols="12" md="4">
+                <tbody>
+                  <tr v-for="item in tariffs" :key="item.id">
+                    <td>{{ item.title }}</td>
+                    <button class="article-link" type="button" @click="postTransaction(item)">
+                      Обновить тариф
+                    </button>
+                  </tr>
+                </tbody>
                 <v-card class="dialog-tariffs">
                   <div class="dialog-tariffs_inner">
                     <div class="header-tariph mb-6 d-inline-block">Basic</div>
@@ -227,7 +235,6 @@
             {{ item.description }}
           </div>
         </v-alert>
-        <div @click="postTransaction()">Post transaction</div>
       </div>
     </header>
   </div>
@@ -255,7 +262,6 @@ export default {
       authUserId: null,
       authUserCode: null,
       authUserSum: null,
-      authUserTariffId: null,
       userNotificationsCount: null,
       showTooltip: false,
       dialogTariffs: false,
@@ -263,7 +269,6 @@ export default {
       userProfileLastName: null,
       currencies: null,
       selectedCurrency: "UAH", // TODO get from somewhere
-      amount: 25, // TODO get from somewhere
       addr: null,
       tariffs: null
     };
@@ -284,7 +289,6 @@ export default {
       this.authUserId = response.data.user.id;
       this.authUserCode = response.data.tariff.code;
       this.authUserSum = response.data.tariff.sum;
-      this.authUserTariffId = response.data.tariff.tariff_id;
     } else {
       // TODO do we need to inform user?
     }
@@ -332,11 +336,11 @@ export default {
       // TODO do we need to inform user?
       }
     },
-    async postTransaction () {
+    async postTransaction (item) {
       const bodyObject = {
         "currency": this.selectedCurrency,
-        "amount": this.amount,
-        "tariff_id": this.authUserTariffId,
+        "amount": item.price,
+        "tariff_id": item.id,
         "user_id": this.authUserId
       }
       const response = await HttpService.post("/transaction", bodyObject);
