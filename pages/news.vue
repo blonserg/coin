@@ -128,15 +128,12 @@ export default {
         if (doGetCategories) {
           this.getNewsCategories(response);
         }
-        if (!response.data.articles || response.data.articles.length === 0) {
+        if (!response.data.articles || !Array.isArray(response.data.articles) || response.data.articles.length === 0) {
           this.showMoreNewsButton = false;
-        }
-        if (Array.isArray(response.data.articles) && response.data.articles.length !== 0) {
-          if (doConcatNews) {
-            this.apiNews = this.apiNews.concat(response.data.articles);
-          } else {
-            this.apiNews = response.data.articles;
-          }
+        } else if (doConcatNews) {
+          this.apiNews = this.apiNews.concat(response.data.articles);
+        } else {
+          this.apiNews = response.data.articles;
         }
       } else {
         // TODO do we need to inform user?
