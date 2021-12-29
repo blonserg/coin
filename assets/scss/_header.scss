@@ -164,7 +164,7 @@
       background: #f6f7f9;
     }
 
-    &.premium {
+    &.Premium {
       border: 1px solid #8d68f5;
       color: #8d68f5;
       background: #241a40;
@@ -257,6 +257,8 @@
   }
 
   &-tooltip {
+    z-index: 10;
+
     .article-link {
       color: white;
       margin-top: 20px;

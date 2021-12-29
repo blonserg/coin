@@ -40,7 +40,7 @@
                       {{ staticData.read_more }}
                     </span>
                     <a :href="item.link" class="article-link _used">
-                      Воспользоваться услугой
+                      {{ staticData.burse_used }}
                     </a>
                   </v-expansion-panel-header>
                 </div>

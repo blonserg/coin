@@ -46,87 +46,32 @@
                   Спеціальна ціна для першого року використання – див. умови.
                 </div>
               </v-col>
-              <v-col cols="12" md="4">
-                <tbody>
-                  <tr v-for="item in tariffs" :key="item.id">
-                    <td>{{ item.title }}</td>
-                    <button class="article-link" type="button" @click="postTransaction(item)">
-                      Обновить тариф
-                    </button>
-                  </tr>
-                </tbody>
+              <v-col v-for="item in tariffs" :key="item.id" cols="12" md="4">
                 <v-card class="dialog-tariffs">
                   <div class="dialog-tariffs_inner">
-                    <div class="header-tariph mb-6 d-inline-block">Basic</div>
+                    <div
+                      class="header-tariph mb-6 d-inline-block"
+                      :class="item.code"
+                    >
+                      {{ item.code }}
+                    </div>
                     <h3>
-                      Тариф Basic - стандартный
+                      {{ item.title }}
                     </h3>
                     <p>
-                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
+                      {{ item.content }}
                     </p>
-                    <p>
-                      Плюс:
-                    </p>
-                    <ul>
-                      <li>
-                        Покрокові навчальні посібники
-                      </li>
-                      <li>
-                        100 ГБ у хмарному сховищі
-                      </li>
-                      <li>
-                        Adobe Portfolio, Adobe Fonts і Adobe Spark
-                      </li>
-                    </ul>
                   </div>
                   <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
                     <div>
                       <div class="dialog-tariffs_date">
-                        5 месяцев
+                        {{ item.month }} {{ item.month_text }}
                       </div>
                       <div class="dialog-tariffs_price">
-                        30,00$
+                        {{ item.price }} $
                       </div>
                     </div>
-                    <button class="article-link" type="button">
-                      Обновить тариф
-                    </button>
-                  </div>
-                </v-card>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-card class="dialog-tariffs">
-                  <div class="dialog-tariffs_inner">
-                    <div class="header-tariph premium mb-6 d-inline-block">Premium</div>
-                    <h3>Тариф Premium - расширенный</h3>
-                    <p>
-                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
-                    </p>
-                    <p>
-                      Плюс:
-                    </p>
-                    <ul>
-                      <li>
-                        Покрокові навчальні посібники
-                      </li>
-                      <li>
-                        100 ГБ у хмарному сховищі
-                      </li>
-                      <li>
-                        Adobe Portfolio, Adobe Fonts і Adobe Spark
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
-                    <div>
-                      <div class="dialog-tariffs_date">
-                        5 месяцев
-                      </div>
-                      <div class="dialog-tariffs_price">
-                        30,00$
-                      </div>
-                    </div>
-                    <button class="article-link" type="button">
+                    <button class="article-link" type="button" @click="postTransaction(item)">
                       Обновить тариф
                     </button>
                   </div>
