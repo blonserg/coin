@@ -70,7 +70,7 @@
     <v-btn class="btn btn-seetoo" to="/news" block>{{ staticData.cabinet_main_see_more }} </v-btn>
     <h2 class="main-ttl">{{ staticData.cabinet_main_total_user_amount }}</h2>
     <span class="main-subttl">
-      Учитываются все пользователи, зарегистрировавшиеся на Strike Team
+      {{ staticData.cabinet_main_all_registered }}
     </span>
     <div class="main-table">
       <div
@@ -97,9 +97,9 @@
           36 459
         </div>
         <v-btn-toggle v-model="text" tile group>
-          <v-btn @click="applyInterval('1month')"> 1 месяц </v-btn>
-          <v-btn @click="applyInterval('3months')"> 3 месяца </v-btn>
-          <v-btn value="all" @click="applyInterval('all')"> Все время </v-btn>
+          <v-btn @click="applyInterval('1month')">{{ staticData.statistic_month }}</v-btn>
+          <v-btn @click="applyInterval('3months')">{{ staticData.statistic_3month }}</v-btn>
+          <v-btn value="all" @click="applyInterval('all')">{{ staticData.statistic_all_time }}</v-btn>
         </v-btn-toggle>
       </div>
       <div class="main-body">
@@ -110,8 +110,8 @@
                 <template #default>
                   <thead>
                     <tr>
-                      <th class="text-left">Страна</th>
-                      <th class="text-left">Количество</th>
+                      <th class="text-left">{{ staticData.statistic_country }}</th>
+                      <th class="text-left">{{ staticData.statistic_qty }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -128,8 +128,8 @@
                 <template #default>
                   <thead>
                     <tr>
-                      <th class="text-left">Город</th>
-                      <th class="text-left">Количество</th>
+                      <th class="text-left">{{ staticData.statistic_city }}</th>
+                      <th class="text-left">{{ staticData.statistic_qty }}</th>
                     </tr>
                   </thead>
                   <v-spacer />
@@ -231,9 +231,6 @@ export default {
   },
   fetchOnServer: false,
   computed: {
-    desserts () {
-      return this.$store.state.desserts;
-    },
     news () {
       return this.$store.state.news;
     }

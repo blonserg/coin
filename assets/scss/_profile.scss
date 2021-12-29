@@ -14,11 +14,13 @@
     margin-bottom: 30px;
 
     &_txt {
+      display: flex;
       font-weight: 500;
       font-size: 52px;
       line-height: 68px;
       text-align: center;
       color: #adafc2;
+      text-transform: uppercase;
     }
   }
 

@@ -20,7 +20,8 @@
               size="120"
             >
               <span class="profile-avatar_txt">
-                ВБ
+                <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
+                <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
             </v-avatar>
           </div>
@@ -34,7 +35,7 @@
           <v-divider />
           <div class="profile-tariph">
             <div class="profile-tariph_txt">
-              Тариф:
+              {{ staticData.tariff }}:
             </div>
             <div class="header-tariph premium">
               {{ userProfile.tariff.code }}
@@ -44,7 +45,7 @@
             до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}
           </div>
           <a href="" class="article-link">
-            Продлить тариф
+            {{ staticData.extend_tariff }}
           </a>
           <v-divider class="mt-15" />
           <div class="profile-referal">
@@ -77,7 +78,7 @@
                 bottom
                 nudge-bottom="24"
               >
-                <span>Скопировано в буфер</span>
+                <span>{{ staticData.copied }}</span>
               </v-tooltip>
             </div>
             <div class="profile-referal_txt">
@@ -97,7 +98,7 @@
                   height="48px"
                   v-on="on"
                 >
-                  Настройки аккаунта
+                  {{ staticData.my_profile_account_settings }}
                   <LockSvg class="ml-2" />
                 </v-btn>
               </div>
@@ -263,7 +264,7 @@
               height="48px"
               @click.native="logoutUser"
             >
-              Выйти
+              {{ staticData.my_profile_sign_out }}
               <LogoutSvg class="ml-2" />
             </v-btn>
           </div>
@@ -281,7 +282,7 @@
               plain
               @click.native="editUserProfile"
             >
-              Редактировать
+              {{ staticData.my_profile_edit }}
               <PencilSvg class="ml-2" />
             </v-btn>
             <v-btn
@@ -290,7 +291,7 @@
               plain
               @click.native="changeUserProfile"
             >
-              Сохранить
+              {{ staticData.save }}
               <PencilSvg class="ml-2" />
             </v-btn>
           </div>

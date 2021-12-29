@@ -37,7 +37,7 @@
                   </div>
                   <v-expansion-panel-header expand-icon="">
                     <span class="article-link _more">
-                      Читать больше
+                      {{ staticData.read_more }}
                     </span>
                     <a :href="item.link" class="article-link _used">
                       Воспользоваться услугой
