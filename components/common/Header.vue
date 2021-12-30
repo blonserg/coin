@@ -213,7 +213,6 @@ export default {
       userProfileFirstName: null,
       userProfileLastName: null,
       currencies: null,
-      selectedCurrency: "UAH", // TODO get from somewhere
       addr: null,
       tariffs: null
     };
@@ -283,8 +282,6 @@ export default {
     },
     async postTransaction (item) {
       const bodyObject = {
-        "currency": this.selectedCurrency,
-        "amount": item.price,
         "tariff_id": item.id,
         "user_id": this.authUserId
       }
