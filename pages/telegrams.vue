@@ -22,7 +22,7 @@
             </p>
             <div class="article-bottom d-flex justify-space-between align-center">
               <a class="article-link" :href="item.link">
-                Перейти в чат
+                {{ staticData.telegram_go_to_chat }}
               </a>
             </div>
           </div>

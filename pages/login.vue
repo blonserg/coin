@@ -38,7 +38,7 @@
           outlined
           type="error"
         >
-          Неверный логин или пароль
+          {{ staticData.reg_wrong_login_or_password }}
         </v-alert>
       </div>
       <Button :text="staticData.sign_in_button" @click.native="login" />
