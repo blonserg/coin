@@ -73,6 +73,8 @@ export default {
   data () {
     return {
       dialogTariffs: false,
+      currencies: null,
+      addr: null,
       tariffs: null
     };
   },
@@ -92,6 +94,8 @@ export default {
         active: true
       };
     }
+
+    await this.getCurrencies();// TODO move from fetch to button
   },
   fetchOnServer: false,
   methods: {

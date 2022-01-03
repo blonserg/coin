@@ -152,9 +152,7 @@ export default {
       userNotificationsCount: null,
       showTooltip: false,
       userProfileFirstName: null,
-      userProfileLastName: null,
-      currencies: null,
-      addr: null
+      userProfileLastName: null
     };
   },
   async fetch () {
@@ -184,8 +182,6 @@ export default {
     } else {
       // TODO do we need to inform user?
     }
-
-    await this.getCurrencies();// TODO move from fetch to button
   },
   fetchOnServer: false,
   methods: {
