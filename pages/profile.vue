@@ -44,9 +44,7 @@
           <div class="profile-tariph_date">
             до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}
           </div>
-          <a href="" class="article-link">
-            {{ staticData.extend_tariff }}
-          </a>
+          <DialogTariffs />
           <v-divider class="mt-15" />
           <div class="profile-referal">
             <div class="profile-referal_ttl">
@@ -392,6 +390,7 @@ import PencilSvg from "~~/components/svg/PencilSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
+import DialogTariffs from "~~/components/DialogTariffs";
 
 export default {
   components: {
@@ -399,7 +398,8 @@ export default {
     PencilSvg,
     LockSvg,
     CloseButton,
-    Alert
+    Alert,
+    DialogTariffs
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
