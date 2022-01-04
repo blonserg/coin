@@ -237,6 +237,10 @@
       margin-right: 20px;
       width: 138px;
 
+      .article-telegram & {
+        width: 84px;
+      }
+
       img {
         max-width: 100%;
         border-radius: 14px;

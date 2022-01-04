@@ -46,79 +46,32 @@
                   Спеціальна ціна для першого року використання – див. умови.
                 </div>
               </v-col>
-              <v-col cols="12" md="4">
+              <v-col v-for="item in tariffs" :key="item.id" cols="12" md="4">
                 <v-card class="dialog-tariffs">
                   <div class="dialog-tariffs_inner">
-                    <div class="header-tariph mb-6 d-inline-block">Basic</div>
+                    <div
+                      class="header-tariph mb-6 d-inline-block"
+                      :class="item.code"
+                    >
+                      {{ item.code }}
+                    </div>
                     <h3>
-                      Тариф Basic - стандартный
+                      {{ item.title }}
                     </h3>
                     <p>
-                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
+                      {{ item.content }}
                     </p>
-                    <p>
-                      Плюс:
-                    </p>
-                    <ul>
-                      <li>
-                        Покрокові навчальні посібники
-                      </li>
-                      <li>
-                        100 ГБ у хмарному сховищі
-                      </li>
-                      <li>
-                        Adobe Portfolio, Adobe Fonts і Adobe Spark
-                      </li>
-                    </ul>
                   </div>
                   <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
                     <div>
                       <div class="dialog-tariffs_date">
-                        5 месяцев
+                        {{ item.month }} {{ item.month_text }}
                       </div>
                       <div class="dialog-tariffs_price">
-                        30,00$
+                        {{ item.price }} $
                       </div>
                     </div>
-                    <button class="article-link" type="button">
-                      Обновить тариф
-                    </button>
-                  </div>
-                </v-card>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-card class="dialog-tariffs">
-                  <div class="dialog-tariffs_inner">
-                    <div class="header-tariph premium mb-6 d-inline-block">Premium</div>
-                    <h3>Тариф Premium - расширенный</h3>
-                    <p>
-                      Отримайте більше 20 програм для творчості, зокрема Photoshop, Illustrator, InDesign, Premiere Pro та Acrobat Pro.
-                    </p>
-                    <p>
-                      Плюс:
-                    </p>
-                    <ul>
-                      <li>
-                        Покрокові навчальні посібники
-                      </li>
-                      <li>
-                        100 ГБ у хмарному сховищі
-                      </li>
-                      <li>
-                        Adobe Portfolio, Adobe Fonts і Adobe Spark
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="dialog-tariffs_bottom d-flex justify-space-between align-center">
-                    <div>
-                      <div class="dialog-tariffs_date">
-                        5 месяцев
-                      </div>
-                      <div class="dialog-tariffs_price">
-                        30,00$
-                      </div>
-                    </div>
-                    <button class="article-link" type="button">
+                    <button class="article-link" type="button" @click="postTransaction(item)">
                       Обновить тариф
                     </button>
                   </div>
@@ -258,7 +211,10 @@ export default {
       showTooltip: false,
       dialogTariffs: false,
       userProfileFirstName: null,
-      userProfileLastName: null
+      userProfileLastName: null,
+      currencies: null,
+      addr: null,
+      tariffs: null
     };
   },
   async fetch () {
@@ -288,6 +244,24 @@ export default {
     } else {
       // TODO do we need to inform user?
     }
+
+    response = await HttpService.get("/tariffs");
+    if (response.status === 200) {
+      this.tariffs = response.data;
+    } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
+      this.alert = {
+        text: errorText,
+        active: true
+      };
+    }
+
+    await this.getCurrencies();// TODO move from fetch to button
   },
   fetchOnServer: false,
   methods: {
@@ -297,6 +271,27 @@ export default {
       document.execCommand("copy");
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
+    },
+    async getCurrencies () {
+      const response = await HttpService.get("/currency");
+      if (response.status === 200) {
+        this.currencies = response.data.currencies;
+      } else {
+      // TODO do we need to inform user?
+      }
+    },
+    async postTransaction (item) {
+      const bodyObject = {
+        "tariff_id": item.id,
+        "user_id": this.authUserId
+      }
+      const response = await HttpService.post("/transaction", bodyObject);
+      if (response.status === 200) {
+        alert("Transaction was send");// TODO how to inform user?
+        this.addr = response.data.addr;
+      } else {
+        alert("An error occurred") // TODO how to inform user?
+      }
     }
   }
 };

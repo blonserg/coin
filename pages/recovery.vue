@@ -7,7 +7,9 @@
       />
     </v-dialog>
     <LogoSvg />
-    <div class="login-ttl">Укажите новый пароль</div>
+    <div class="login-ttl">
+      {{ staticData.reg_enter_new_password }}
+    </div>
     <v-form v-model="valid">
       <div class="login-password">
         <v-text-field
@@ -31,14 +33,14 @@
       </div>
       <div v-if="errorStatus">
         <v-alert dense outlined type="error">
-          Неверный логин или пароль
+          {{ staticData.reg_wrong_login_or_password }}
         </v-alert>
       </div>
       <Button :text="`Подвердить`" @click.native="send" />
     </v-form>
     <div class="login-bottom text-center">
       <NuxtLink to="/login">
-        Отмена действия
+        {{ staticData.reg_cancel_action }}
       </NuxtLink>
     </div>
   </v-card>

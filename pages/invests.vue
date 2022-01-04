@@ -104,7 +104,7 @@
               </div>
               <div class="article-info_item d-flex justify-space-between">
                 <span class="article-info_lt">
-                  Доходность (год)
+                  {{ staticData.profit_a_year }}
                 </span>
                 <span class="article-info_rt">
                   {{ item.profit }}
@@ -120,7 +120,7 @@
               </div>
               <div class="article-info_item d-flex justify-space-between">
                 <span class="article-info_lt">
-                  Риск
+                  {{ staticData.risk }}
                 </span>
                 <span class="article-info_rt">
                   {{ item.risk }}

@@ -409,8 +409,6 @@ export default {
     staticDataChangeEmail: [],
     staticDataChangePassword: [],
     userProfile: null,
-    tariffs: null,
-    userChats: null,
     userSecuritySettings: null,
     userProfileProjects: null,
     editUser: true,
@@ -448,29 +446,6 @@ export default {
         text: errorText,
         active: true
       };
-    }
-
-    response = await HttpService.get("/tariffs");
-    if (response.status === 200) {
-      this.tariffs = response.data;
-    } else {
-      let errorText;
-      if (Array.isArray(response.errors)) {
-        errorText = response.errors.join("; ")
-      } else {
-        errorText = "An error occurred"
-      }
-      this.alert = {
-        text: errorText,
-        active: true
-      };
-    }
-
-    response = await HttpService.get("/user-chats");
-    if (response.status === 200) {
-      this.userChats = response.data;
-    } else {
-      // TODO do we need to inform user?
     }
 
     response = await HttpService.get("/user-security-settings");

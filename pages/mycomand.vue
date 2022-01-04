@@ -192,6 +192,7 @@
 
 <script>
 import Title from "~~/components/common/Title";
+import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import MyComandActive from "~~/components/svg/MyComandActive";
 import MyComandPassive from "~~/components/svg/MyComandPassive";
@@ -216,6 +217,7 @@ export default {
       userPaidReferal: null,
       userProjects: null,
       userPartners: null,
+      staticData: null,
       selectedSortType: null,
       sortItems: [
         {
@@ -231,6 +233,7 @@ export default {
   },
   async fetch () {
     await this.getUserTeam();
+    this.staticData = await StaticService.get("/my_profile");
   },
   fetchOnServer: false,
   mounted () {
@@ -245,13 +248,20 @@ export default {
       if (this.selectedSortType !== null) {
         params.sort = this.selectedSortType;
       }
-      const response = await HttpService.get("/user-team", params);
+      let response = await HttpService.get("/user-team", params);
       if (response.status === 200) {
         this.userTeam = response.data.team.all_referrals;
         this.userFirstReferal = response.data.team.first_line_referrals;
         this.userPaidReferal = response.data.team.paid_referrals;
         this.userProjects = response.data.projects;
         this.userPartners = response.data.partners;
+      } else {
+      // TODO do we need to inform user?
+      }
+
+      response = await HttpService.get("/my_team");
+      if (response.status === 200) {
+        this.myTeam = response.data;
       } else {
       // TODO do we need to inform user?
       }
