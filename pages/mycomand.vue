@@ -1,16 +1,16 @@
 <template>
   <div class="mycomand">
     <h1 class="ttl">
-      Моя команда
+      {{ staticData.title }}
     </h1>
     <v-row class="mb-12">
       <v-col md="4">
         <v-card class="mycomand-main">
           <div class="mycomand-main_ttl">
-            Общее количество партнеров
+            {{ staticData.team_qty_partners }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все пользователи в вашей сетке партнеров
+            {{ staticData.team_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,10 +20,10 @@
           </div>
           <v-divider />
           <div class="mycomand-main_ttl">
-            Личные приглашения
+            {{ staticData.team_personal_invitations }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все пользователи зарегистрировавшиеся по вашему приглашению
+            {{ staticData.team_personal_invitations_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,10 +33,10 @@
           </div>
           <v-divider />
           <div class="mycomand-main_ttl">
-            Количество оплаченых партнеров
+            {{ staticData.team_paid_partners }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все оплаченные пользователи зарегистрировавшиеся по вашему приглашению
+            {{ staticData.team_paid_partners_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
       </v-col>
       <v-col md="8">
         <div class="mycomand-ttl">
-          Вышестоящие партнеры
+          {{ staticData.team_superior_partners }}
         </div>
         <div class="d-flex flex-column flex-md-row align-md-center mb-8 mb-md-15">
           <div class="d-flex align-center mb-4 mb-md-0 mr-4">
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="mycomand-ttl">
-          Проекты
+          {{ staticData.team_projects }}
         </div>
         <div class="table">
           <div class="table-head">
@@ -98,16 +98,16 @@
                 #-
               </v-col>
               <v-col class="text-left col-4 col-md-2">
-                Проект
+                {{ staticData.team_project }}
               </v-col>
               <v-col class="text-center col-4 col-md-2">
-                Мое участие
+                {{ staticData.team_my_participation }}
               </v-col>
               <v-col class="text-right col-4 col-md-3">
-                Первая линия
+                {{ staticData.team_first_line }}
               </v-col>
               <v-col class="text-right col-4 col-md-4">
-                Партнеров в структуре
+                {{ staticData.team_partnership_in_structure }}
               </v-col>
             </v-row>
           </div>
@@ -151,16 +151,16 @@
             #-
           </v-col>
           <v-col class="text-left col-2">
-            Проект
+            {{ staticData.team_ref_partners_ref }}
           </v-col>
           <v-col class="text-center col-2">
-            Мое участие
+            {{ staticData.team_net_partners_ref_first_line }}
           </v-col>
           <v-col class="text-right col-3">
-            Первая линия
+            {{ staticData.team_net_partners_ref_all_partners }}
           </v-col>
           <v-col class="text-right col-4">
-            Партнеров в структуре
+            {{ staticData.team_net_partners_ref_finished_courses }}
           </v-col>
         </v-row>
       </div>
@@ -217,7 +217,7 @@ export default {
       userPaidReferal: null,
       userProjects: null,
       userPartners: null,
-      staticData: null,
+      staticData: [],
       selectedSortType: null,
       sortItems: [
         {
@@ -233,7 +233,7 @@ export default {
   },
   async fetch () {
     await this.getUserTeam();
-    this.staticData = await StaticService.get("/my_profile");
+    this.staticData = await StaticService.get("/my_team");
   },
   fetchOnServer: false,
   mounted () {
