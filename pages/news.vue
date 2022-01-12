@@ -132,8 +132,10 @@ export default {
           this.showMoreNewsButton = false;
         } else if (doConcatNews) {
           this.apiNews = this.apiNews.concat(response.data.articles);
+          this.showMoreNewsButton = response.data.show_button;
         } else {
           this.apiNews = response.data.articles;
+          this.showMoreNewsButton = response.data.show_button;
         }
       } else {
         // TODO do we need to inform user?
