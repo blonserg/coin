@@ -19,7 +19,7 @@
             {{ portfelItemTitle }}
           </div>
         </div>
-        <Button :text="staticData.project_reg_button" />
+        <Button :text="staticData.project_reg_button" @click.native="registerButtonClick" />
       </div>
     </div>
     <div>
@@ -118,7 +118,8 @@ export default {
       portfelItemStart: null,
       portfelItemAbout: null,
       portfelItemBenefits: null,
-      portfelItemVideo: null
+      portfelItemVideo: null,
+      referralLink: ""
     };
   },
   async fetch () {
@@ -141,6 +142,7 @@ export default {
         this.portfelItemBenefits = response.data.benefits
         this.portfelItemVideo = response.data.video_link
         this.portfelItemPreview = response.data.preview
+        this.referralLink = response.data.referral_link
       } else {
       // TODO do we need to inform user
       }
@@ -153,6 +155,29 @@ export default {
     const token = window.localStorage.getItem("userToken");
     if (!token) {
       this.$router.push("login");
+    }
+  },
+  methods: {
+    async registerButtonClick () {
+      const slug = this.$route.params.slug || null;
+      if (slug) {
+        const response = await HttpService.get("/user-profile");
+        if (response.status === 200) {
+          const userId = response.data.profile.id;
+          if (this.referralLink) {
+            await HttpService.post("/register/" + slug, undefined, {
+              "user_id": userId
+            });
+            window.location.href = this.referralLink;
+            // TODO: what else should happen?
+          } else {
+            await HttpService.post("/register/notif/" + slug, undefined, {
+              "user_id": userId
+            });
+            // TODO: what else should happen?
+          }
+        }
+      }
     }
   }
 };
