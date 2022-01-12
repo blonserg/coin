@@ -120,7 +120,8 @@
         </div>
       </v-col>
     </v-row>
-    <div v-show="userRefnet">
+
+    <div v-if="userRefnet && Object.values(userRefnet).length">
       <Title
         class="ttl--small mb-9"
         :title="`Сетка реферальных партнеров`"

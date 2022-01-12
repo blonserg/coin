@@ -186,11 +186,11 @@ export default {
       selectedCategoriesNews: null,
       sortItems: [
         {
-          text: "Latest",
+          text: "Новые",
           value: "latest"
         },
         {
-          text: "Oldest",
+          text: "Старые",
           value: "oldest"
         }
       ],
