@@ -72,7 +72,6 @@ export default {
   },
   data () {
     return {
-      value: "loremipsum",
       drawer: null
     };
   },

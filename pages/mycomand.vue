@@ -1,16 +1,16 @@
 <template>
   <div class="mycomand">
     <h1 class="ttl">
-      Моя команда
+      {{ staticData.title_my_team }}
     </h1>
     <v-row class="mb-12">
       <v-col md="4">
         <v-card class="mycomand-main">
           <div class="mycomand-main_ttl">
-            Общее количество партнеров
+            {{ staticData.team_qty_partners }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все пользователи в вашей сетке партнеров
+            {{ staticData.team_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,10 +20,10 @@
           </div>
           <v-divider />
           <div class="mycomand-main_ttl">
-            Личные приглашения
+            {{ staticData.team_personal_invitations }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все пользователи зарегистрировавшиеся по вашему приглашению
+            {{ staticData.team_personal_invitations_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,10 +33,10 @@
           </div>
           <v-divider />
           <div class="mycomand-main_ttl">
-            Количество оплаченых партнеров
+            {{ staticData.team_paid_partners }}
           </div>
           <div class="mycomand-main_txt">
-            Учитываются все оплаченные пользователи зарегистрировавшиеся по вашему приглашению
+            {{ staticData.team_paid_partners_considered_users }}
           </div>
           <div class="mycomand-main_count">
             <svg width="21" height="13" viewBox="0 0 21 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,48 +48,30 @@
       </v-col>
       <v-col md="8">
         <div class="mycomand-ttl">
-          Вышестоящие партнеры
+          {{ staticData.team_superior_partners }}
         </div>
         <div class="d-flex flex-column flex-md-row align-md-center mb-8 mb-md-15">
-          <div class="d-flex align-center mb-4 mb-md-0 mr-4">
+          <div v-for="(item, i) in userPartners" :key="i" class="d-flex align-center mb-4 mb-md-0 mr-4">
             <div class="mycomand-avatar">
               <v-avatar
-                color="primary"
+                color="#7049E0"
                 size="50"
               >
                 <span class="mycomand-avatar_txt">
-                  ВБ
+                  {{ item.name.charAt(0) }}
                 </span>
               </v-avatar>
             </div>
             <div class="mycomand-name">
-              Владислав Борин
+              {{ item.name }}
               <span class="mycomand-name_nick">
-                @usernameplace
-              </span>
-            </div>
-          </div>
-          <div class="d-flex align-center">
-            <div class="mycomand-avatar">
-              <v-avatar
-                color="primary"
-                size="50"
-              >
-                <span class="mycomand-avatar_txt">
-                  ВБ
-                </span>
-              </v-avatar>
-            </div>
-            <div class="mycomand-name">
-              Владислав Борин
-              <span class="mycomand-name_nick">
-                @usernameplace
+                {{ item.telegram }}
               </span>
             </div>
           </div>
         </div>
         <div class="mycomand-ttl">
-          Проекты
+          {{ staticData.team_projects }}
         </div>
         <div class="table">
           <div class="table-head">
@@ -98,16 +80,16 @@
                 #-
               </v-col>
               <v-col class="text-left col-4 col-md-2">
-                Проект
+                {{ staticData.team_project }}
               </v-col>
               <v-col class="text-center col-4 col-md-2">
-                Мое участие
+                {{ staticData.team_my_participation }}
               </v-col>
               <v-col class="text-right col-4 col-md-3">
-                Первая линия
+                {{ staticData.team_first_line }}
               </v-col>
               <v-col class="text-right col-4 col-md-4">
-                Партнеров в структуре
+                {{ staticData.team_partnership_in_structure }}
               </v-col>
             </v-row>
           </div>
@@ -138,53 +120,88 @@
         </div>
       </v-col>
     </v-row>
-    <Title
-      class="ttl--small mb-9"
-      :title="`Сетка реферальных партнеров`"
-      :on-select-sort-type="onSortTypeChange"
-      :sort-items="sortItems"
-    />
-    <div class="table mb-16">
-      <div class="table-head">
-        <v-row>
-          <v-col class="text-center col-1">
-            #-
-          </v-col>
-          <v-col class="text-left col-2">
-            Проект
-          </v-col>
-          <v-col class="text-center col-2">
-            Мое участие
-          </v-col>
-          <v-col class="text-right col-3">
-            Первая линия
-          </v-col>
-          <v-col class="text-right col-4">
-            Партнеров в структуре
-          </v-col>
-        </v-row>
-      </div>
-      <div class="table-body">
-        <v-row
-          v-for="item in userPartners"
-          :key="item.name"
-        >
-          <v-col class="text-center col-1">
-            {{ item.id }}
-          </v-col>
-          <v-col class="text-left col-2">
-            {{ item.project }}
-          </v-col>
-          <v-col class="text-center col-2">
-            {{ item.active }}
-          </v-col>
-          <v-col class="text-right col-3">
-            {{ item.first_line_referrals }}
-          </v-col>
-          <v-col class="text-right col-4">
-            {{ item.all_referrals }}
-          </v-col>
-        </v-row>
+
+    <div v-if="userRefnet && Object.values(userRefnet).length">
+      <Title
+        class="ttl--small mb-9"
+        :title="`Сетка реферальных партнеров`"
+        :on-select-sort-type="onSortTypeChange"
+        :sort-items="sortItems"
+      />
+      <div class="table mb-16">
+        <div class="table-head">
+          <v-row>
+            <v-col class="text-center col-1">
+              #-
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_ref_partners_ref }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_first_line }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_all_partners }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_finished_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_part_in_projects }}
+            </v-col>
+            <v-col class="text-left text-right col-1">
+              {{ staticData.team_net_partners_ref_reserve_fond }}
+            </v-col>
+          </v-row>
+        </div>
+        <div class="table-body">
+          <v-row
+            v-for="(item, index) in userRefnet"
+            :key="item.name"
+            class="align-center"
+          >
+            <v-col class="text-center col-1">
+              {{ index }}
+            </v-col>
+            <v-col class="text-left col-2">
+              <div class="d-flex flex-column flex-md-row align-md-center">
+                <div class="d-flex align-center">
+                  <div class="mycomand-avatar">
+                    <v-avatar
+                      color="#7049E0"
+                      size="50"
+                    >
+                      <span class="mycomand-avatar_txt">
+                        {{ item.name.charAt(0) }}
+                      </span>
+                    </v-avatar>
+                  </div>
+                  <div class="mycomand-name">
+                    {{ item.name }}
+                    <span class="mycomand-name_nick">
+                      {{ item.telegram }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.first_line_referrals }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.all_partners }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.completed_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.projects }}
+            </v-col>
+            <v-col class="text-right col-1">
+              {{ item.projects_count }}
+            </v-col>
+          </v-row>
+        </div>
       </div>
     </div>
   </div>
@@ -217,7 +234,8 @@ export default {
       userPaidReferal: null,
       userProjects: null,
       userPartners: null,
-      staticData: null,
+      userRefnet: null,
+      staticData: [],
       selectedSortType: null,
       sortItems: [
         {
@@ -233,7 +251,7 @@ export default {
   },
   async fetch () {
     await this.getUserTeam();
-    this.staticData = await StaticService.get("/my_profile");
+    this.staticData = await StaticService.get("/my_team");
   },
   fetchOnServer: false,
   mounted () {
@@ -255,6 +273,7 @@ export default {
         this.userPaidReferal = response.data.team.paid_referrals;
         this.userProjects = response.data.projects;
         this.userPartners = response.data.partners;
+        this.userRefnet = response.data.referrals_net;
       } else {
       // TODO do we need to inform user?
       }

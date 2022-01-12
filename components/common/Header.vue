@@ -190,6 +190,7 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import AlertClose from "~~/components/svg/AlertClose";
 import HttpService from "~/services/HttpService";
 import CloseButton from "~~/components/svg/CloseButton";
+import Const from "~~/const/Const";
 
 export default {
   components: {
@@ -213,7 +214,6 @@ export default {
       userProfileFirstName: null,
       userProfileLastName: null,
       currencies: null,
-      addr: null,
       tariffs: null
     };
   },
@@ -229,7 +229,7 @@ export default {
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
-      this.authUserRef = response.data.user.referral_link;
+      this.authUserRef = Const.siteUrl + "/register?" + response.data.user.referral_link;
       this.authUserId = response.data.user.id;
       this.authUserCode = response.data.tariff.code;
       this.authUserSum = response.data.tariff.sum;
@@ -287,8 +287,7 @@ export default {
       }
       const response = await HttpService.post("/transaction", bodyObject);
       if (response.status === 200) {
-        alert("Transaction was send");// TODO how to inform user?
-        this.addr = response.data.addr;
+        window.location.href = response.data.addr;
       } else {
         alert("An error occurred") // TODO how to inform user?
       }

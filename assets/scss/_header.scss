@@ -64,6 +64,12 @@
   &-refs {
     position: relative;
 
+    &--mycom {
+      @media screen and (min-width: 758px) {
+        width: 324px;
+      }
+    }
+
     .v-text-field--outlined fieldset {
       border-width: 0;
     }

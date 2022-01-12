@@ -1,7 +1,7 @@
 <template>
   <v-card class="login">
     <LogoSvg />
-    <div v-if="refer" class="login-refer">
+    <div v-if="refferer.referer_id" class="login-refer">
       <div class="login-ttl">
         Регистрация<br> по приглашению от:
       </div>
@@ -101,8 +101,6 @@ export default {
   layout: "signup",
   data () {
     return {
-      // TODO: change refer - unknown logic?
-      refer: false,
       valid: true,
       staticData: [],
       user: {
@@ -123,7 +121,7 @@ export default {
         v => /.+@.+/.test(v) || "E-mail не правильное"
       ],
       refferer: { // TODO get from refferal link
-        referer_id: 1,
+        referer_id: null,
         link: "http://test"
       }
     };
@@ -132,12 +130,15 @@ export default {
     const res = await UserService.getMyIp();
     this.user.ip = res;
     let staticData;
-    if (this.refer) {
+    if (this.refferer.referer_id) {
       staticData = await StaticService.get("/ref_registration");
     } else {
       staticData = await StaticService.get("/registration")
     }
-    this.staticData = staticData
+    this.staticData = staticData;
+    if (this.$route.query.referer_id) {
+      this.refferer.referer_id = this.$route.query.referer_id;
+    }
   },
   fetchOnServer: false,
   methods: {
@@ -145,12 +146,12 @@ export default {
       const registrationUserData = {
         ...this.user
       };
-      if (this.refer) {
+      if (this.refferer.referer_id) {
         registrationUserData.referer_id = this.refferer.referer_id
       }
       const registrationResponse = await UserService.registration(registrationUserData);
       if (registrationResponse.status === 200) {
-        if (this.refer) {
+        if (this.refferer.referer_id) {
           const params = {
             "user_id": registrationResponse.data.user.user_id,
             "referral_id": this.refferer.referer_id,

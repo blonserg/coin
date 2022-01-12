@@ -25,6 +25,7 @@
               color="#2d7bf6"
               x-large
               height="48px"
+              to="register"
             >
               {{ staticData.start_now }}
             </v-btn>
@@ -107,6 +108,7 @@
               color="#fff"
               x-large
               height="48px"
+              to="register"
             >
               {{ staticData.start_now }}
             </v-btn>
@@ -137,65 +139,7 @@
                 </div>
               </div>
               <div class="main-table">
-                <div
-                  class="main-table_head d-flex flex-column-reverse flex-md-row justify-space-between"
-                >
-                  <div class="main-table_people">
-                    <svg
-                      width="24"
-                      height="17"
-                      viewBox="0 0 24 17"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 15.2518C0 12.7553 2.46729 9.80496 6.4486 9.80496C8.13084 9.80496 9.42056 10.3156 10.4299 11.0532C8.52337 12.5851 7.51402 15.3085 8.41121 16.5H1.45794C0.448598 16.5 0 16.0461 0 15.2518ZM3.42056 5.03901C3.42056 3.16667 4.82243 1.69149 6.50467 1.69149C8.18692 1.69149 9.53271 3.16667 9.53271 5.03901C9.53271 6.96809 8.13084 8.44326 6.50467 8.44326C4.87851 8.44326 3.42056 6.96809 3.42056 5.03901ZM9.19626 15.3085C9.19626 12.9823 12.0561 9.8617 16.5981 9.8617C21.1402 9.8617 24 13.039 24 15.3085C24 16.1028 23.4953 16.4433 22.2617 16.4433H10.9907C9.70094 16.5 9.19626 16.1028 9.19626 15.3085ZM13.1215 4.35816C13.1215 2.20213 14.7477 0.5 16.6542 0.5C18.5607 0.5 20.1869 2.14539 20.1869 4.30142C20.1869 6.51418 18.5607 8.21631 16.6542 8.21631C14.7477 8.27305 13.1215 6.57092 13.1215 4.35816Z"
-                        fill="#6A6B79"
-                      />
-                    </svg>
-                    36 459
-                  </div>
-                  <v-btn-toggle
-                    v-model="text"
-                    tile
-                    group
-                    class="mb-4 mb-md-0"
-                  >
-                    <v-btn value="day"> {{ staticData.statistics_day }} </v-btn>
-
-                    <v-btn value="week"> {{ staticData.statistics_week }} </v-btn>
-
-                    <v-btn value="month"> {{ staticData.statistics_month }} </v-btn>
-
-                    <v-btn value="all"> {{ staticData.statistics_all_time }} </v-btn>
-                  </v-btn-toggle>
-                </div>
-                <div class="main-body">
-                  <!-- <v-simple-table>
-                    <template #default>
-                      <thead>
-                        <tr>
-                          <th class="text-left">{{ staticData.statistics_country }}</th>
-                          <th class="text-left">
-                            {{ staticData.statistics_qty }}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          v-for="item in statisticsCountries"
-                          :key="item.country"
-                        >
-                          <td>{{ item.country }}</td>
-                          <td>{{ item.procent }}</td>
-                        </tr>
-                      </tbody>
-                    </template>
-                  </v-simple-table> -->
-                </div>
-                <p class="main-info d-none d-md-block">
-                  {{ staticData.statistics_bottom_text }}
-                </p>
+                <img class="main-table_img" src="svg/static.svg" alt="">
               </div>
             </div>
           </v-col>
@@ -332,6 +276,7 @@
               color="#fff"
               x-large
               height="48px"
+              to="register"
             >
               {{ staticData.start_now }}
             </v-btn>
@@ -497,5 +442,9 @@ export default {
 
   a {
     text-decoration: none;
+  }
+
+  .main-table_img {
+    max-width: 100%;
   }
 </style>

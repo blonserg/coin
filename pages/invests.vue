@@ -166,7 +166,7 @@ export default {
         "arrows": false,
         "responsive": [
           {
-            "breakpoint": 1920,
+            "breakpoint": 6000,
             "settings": "unslick"
           },
           {
