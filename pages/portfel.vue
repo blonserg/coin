@@ -84,9 +84,14 @@
           <div class="article-invest_ttl">
             {{ staticData.project_benefits }}
           </div>
+          <!-- <div>{{ portfelItemBenefits }}</div>
           <div class="article-invest_txt">
-            {{ portfelItemBenefits }}
-          </div>
+            <ul>
+              <li v-for="item in portfelItemBenefits" :key="item">
+                {{ item }}
+              </li>
+            </ul>
+          </div> -->
         </v-col>
       </v-row>
     </div>
