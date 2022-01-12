@@ -138,53 +138,56 @@
         </div>
       </v-col>
     </v-row>
-    <Title
-      class="ttl--small mb-9"
-      :title="`Сетка реферальных партнеров`"
-      :on-select-sort-type="onSortTypeChange"
-      :sort-items="sortItems"
-    />
-    <div class="table mb-16">
-      <div class="table-head">
-        <v-row>
-          <v-col class="text-center col-1">
-            #-
-          </v-col>
-          <v-col class="text-left col-2">
-            {{ staticData.team_ref_partners_ref }}
-          </v-col>
-          <v-col class="text-center col-2">
-            {{ staticData.team_net_partners_ref_first_line }}
-          </v-col>
-          <v-col class="text-right col-3">
-            {{ staticData.team_net_partners_ref_all_partners }}
-          </v-col>
-          <v-col class="text-right col-4">
-            {{ staticData.team_net_partners_ref_finished_courses }}
-          </v-col>
-        </v-row>
-      </div>
-      <div class="table-body">
-        <v-row
-          v-for="item in userPartners"
-          :key="item.name"
-        >
-          <v-col class="text-center col-1">
-            {{ item.id }}
-          </v-col>
-          <v-col class="text-left col-2">
-            {{ item.project }}
-          </v-col>
-          <v-col class="text-center col-2">
-            {{ item.active }}
-          </v-col>
-          <v-col class="text-right col-3">
-            {{ item.first_line_referrals }}
-          </v-col>
-          <v-col class="text-right col-4">
-            {{ item.all_referrals }}
-          </v-col>
-        </v-row>
+
+    <div v-if="userPartners && Object.values(userPartners).length">
+      <Title
+        class="ttl--small mb-9"
+        :title="`Сетка реферальных партнеров`"
+        :on-select-sort-type="onSortTypeChange"
+        :sort-items="sortItems"
+      />
+      <div class="table mb-16">
+        <div class="table-head">
+          <v-row>
+            <v-col class="text-center col-1">
+              #-
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_ref_partners_ref }}
+            </v-col>
+            <v-col class="text-center col-2">
+              {{ staticData.team_net_partners_ref_first_line }}
+            </v-col>
+            <v-col class="text-right col-3">
+              {{ staticData.team_net_partners_ref_all_partners }}
+            </v-col>
+            <v-col class="text-right col-4">
+              {{ staticData.team_net_partners_ref_finished_courses }}
+            </v-col>
+          </v-row>
+        </div>
+        <div class="table-body">
+          <v-row
+            v-for="(item, id) in userPartners"
+            :key="item.name"
+          >
+            <v-col class="text-center col-1">
+              {{ id }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.project }}
+            </v-col>
+            <v-col class="text-center col-2">
+              {{ item.active }}
+            </v-col>
+            <v-col class="text-right col-3">
+              {{ item.first_line_referrals }}
+            </v-col>
+            <v-col class="text-right col-4">
+              {{ item.all_referrals }}
+            </v-col>
+          </v-row>
+        </div>
       </div>
     </div>
   </div>
