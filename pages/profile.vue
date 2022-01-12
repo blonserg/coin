@@ -498,7 +498,7 @@ export default {
         this.userProfile = response.data;
         this.editUser = true;
         this.alert = {
-          text: "Profile is changed",
+          text: this.staticData.profile_changed,
           active: true
         };
       } else {
@@ -528,7 +528,7 @@ export default {
       const errors = await UserService.changePassword(this.oldPassword, this.newPassword);
       if (!errors) {
         this.alert = {
-          text: "Password is changed",
+          text: this.staticData.password_changed,
           active: true
         };
         this.oldPassword = this.newPassword;
