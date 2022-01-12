@@ -137,36 +137,68 @@
             <v-col class="text-left col-2">
               {{ staticData.team_ref_partners_ref }}
             </v-col>
-            <v-col class="text-center col-2">
+            <v-col class="text-left col-2">
               {{ staticData.team_net_partners_ref_first_line }}
             </v-col>
-            <v-col class="text-right col-3">
+            <v-col class="text-left col-2">
               {{ staticData.team_net_partners_ref_all_partners }}
             </v-col>
-            <v-col class="text-right col-4">
+            <v-col class="text-left col-2">
               {{ staticData.team_net_partners_ref_finished_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_part_in_projects }}
+            </v-col>
+            <v-col class="text-left text-right col-1">
+              {{ staticData.team_net_partners_ref_reserve_fond }}
             </v-col>
           </v-row>
         </div>
         <div class="table-body">
           <v-row
-            v-for="item in userRefnet"
+            v-for="(item, index) in userRefnet"
             :key="item.name"
+            class="align-center"
           >
             <v-col class="text-center col-1">
-              {{ item.id }}
+              {{ index }}
             </v-col>
             <v-col class="text-left col-2">
-              {{ item.project }}
+              <div class="d-flex flex-column flex-md-row align-md-center">
+                <div class="d-flex align-center">
+                  <div class="mycomand-avatar">
+                    <v-avatar
+                      color="#7049E0"
+                      size="50"
+                    >
+                      <span class="mycomand-avatar_txt">
+                        {{ item.name.charAt(0) }}
+                      </span>
+                    </v-avatar>
+                  </div>
+                  <div class="mycomand-name">
+                    {{ item.name }}
+                    <span class="mycomand-name_nick">
+                      {{ item.telegram }}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </v-col>
-            <v-col class="text-center col-2">
-              {{ item.active }}
-            </v-col>
-            <v-col class="text-right col-3">
+            <v-col class="text-left col-2">
               {{ item.first_line_referrals }}
             </v-col>
-            <v-col class="text-right col-4">
-              {{ item.all_referrals }}
+            <v-col class="text-left col-2">
+              {{ item.all_partners }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.completed_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.projects }}
+            </v-col>
+            <v-col class="text-right col-1">
+              {{ item.projects_count }}
             </v-col>
           </v-row>
         </div>
@@ -241,11 +273,7 @@ export default {
         this.userPaidReferal = response.data.team.paid_referrals;
         this.userProjects = response.data.projects;
         this.userPartners = response.data.partners;
-        if (!(response.data.referrals_net.length === 0)) {
-          this.userRefnet = response.data.referrals_net;
-        } else {
-          // TODO do we need to inform user?
-        }
+        this.userRefnet = response.data.referrals_net;
       } else {
       // TODO do we need to inform user?
       }

@@ -369,7 +369,7 @@
               {{ item.title }}
             </div>
           </div>
-          <div class="header-refs header-refs--mycom d-flex align-center">
+          <div v-if="item.link" class="header-refs header-refs--mycom d-flex align-center">
             <v-text-field ref="textToCopyR" :value="item.link" outlined readonly />
             <button color="primary" class="header-refs_btn d-flex align-center justify-center" @click="copyText">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
