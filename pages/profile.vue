@@ -53,7 +53,7 @@
               {{ staticData.my_profile_ref_link }}
             </div>
             <div id="profileref" class="header-refs d-none d-md-flex align-center">
-              <v-text-field ref="textToCopySidebar" :value="userProfile.profile.referral_link" outlined readonly />
+              <v-text-field ref="textToCopySidebar" :value="authUserRef" outlined readonly />
               <button
                 color="primary"
                 class="header-refs_btn d-flex align-center justify-center"
@@ -392,6 +392,7 @@ import PencilSvg from "~~/components/svg/PencilSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
+import Const from "~~/const/Const";
 
 export default {
   components: {
@@ -413,6 +414,7 @@ export default {
     userProfileProjects: null,
     editUser: true,
     show: false,
+    authUserRef: null,
     oldPassword: null,
     newPassword: null,
     newEmail: null,
@@ -434,6 +436,7 @@ export default {
     let response = await HttpService.get("/user-profile");
     if (response.status === 200) {
       this.userProfile = response.data;
+      this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
     } else {
       let errorText;
