@@ -214,7 +214,6 @@ export default {
       userProfileFirstName: null,
       userProfileLastName: null,
       currencies: null,
-      addr: null,
       tariffs: null
     };
   },
@@ -288,8 +287,7 @@ export default {
       }
       const response = await HttpService.post("/transaction", bodyObject);
       if (response.status === 200) {
-        alert("Transaction was send");// TODO how to inform user?
-        this.addr = response.data.addr;
+        window.location.href = response.data.addr;
       } else {
         alert("An error occurred") // TODO how to inform user?
       }
