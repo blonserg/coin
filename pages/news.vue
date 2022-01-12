@@ -80,20 +80,21 @@ export default {
           }
         ]
       },
-      sortItems: [
-        {
-          text: "Latest",
-          value: "latest"
-        },
-        {
-          text: "Oldest",
-          value: "oldest"
-        }
-      ]
+      sortItems: []
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
+    this.sortItems = [
+      {
+        text: this.staticData.news_latest,
+        value: "latest"
+      },
+      {
+        text: this.staticData.news_oldest,
+        value: "oldest"
+      }
+    ];
     await this.getNews(true, false);
   },
   fetchOnServer: false,
