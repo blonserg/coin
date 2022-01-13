@@ -37,7 +37,7 @@
       <v-row>
         <v-col md="6">
           <div class="article-invest_video">
-            {{ portfelItemVideo }}
+            <youtube :video-id="portfelItemVideo"></youtube>
           </div>
         </v-col>
       </v-row>
@@ -99,13 +99,15 @@
 </template>
 
 <script>
+import { Youtube } from "vue-youtube";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 
 export default {
   components: {
-    Button
+    Button,
+    Youtube
   },
   data () {
     return {
