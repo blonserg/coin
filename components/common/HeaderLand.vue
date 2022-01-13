@@ -10,18 +10,7 @@
         <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
         <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
       </div>
-      <NuxtLink v-if="userLogin" to="/login">
-        <v-btn
-          class="btn d-none d-md-flex"
-          color="#2d7bf6"
-          x-large
-          height="48px"
-        >
-          {{ userName }}
-          <RegisterSvg class="ml-2" />
-        </v-btn>
-      </NuxtLink>
-      <NuxtLink v-else to="/register">
+      <NuxtLink to="/register">
         <v-btn
           class="btn d-none d-md-flex"
           color="#2d7bf6"
@@ -91,12 +80,8 @@ export default {
   },
   async fetch () {
     const response = await HttpService.get("/main-page");
-    if (response.status === 200 && !(response.data.user.api_token.length === 0)) {
-      this.userLogin = response.data.user.api_token;
-      this.userName = response.data.user.name;
-    } else {
-      // TODO do we need to inform user?
-    }
+    this.userLogin = response.data.user.api_token;
+    this.userName = response.data.user.name;
   },
   methods: {
     copyText () {
