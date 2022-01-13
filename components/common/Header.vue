@@ -96,7 +96,8 @@
         <div class="header-balance_info">
           <span v-if="authUserSum">{{ authUserSum }}</span>
           <span v-else>0</span>
-          баллов</div>
+          баллов
+        </div>
       </div>
       <div class="header-refs d-none d-md-flex align-center">
         <v-text-field ref="textToCopy" :value="authUserRef" outlined readonly />
