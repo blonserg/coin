@@ -10,7 +10,18 @@
         <nuxt-link :to="{ path: '/',hash:'#statistic'}">Статистика</nuxt-link>
         <nuxt-link :to="{ path: '/',hash:'#speak'}">О нас говорят</nuxt-link>
       </div>
-      <NuxtLink to="/register">
+      <NuxtLink v-if="userLogin" to="/login">
+        <v-btn
+          class="btn d-none d-md-flex"
+          color="#2d7bf6"
+          x-large
+          height="48px"
+        >
+          {{ userName }}
+          <RegisterSvg class="ml-2" />
+        </v-btn>
+      </NuxtLink>
+      <NuxtLink v-else to="/register">
         <v-btn
           class="btn d-none d-md-flex"
           color="#2d7bf6"
@@ -60,6 +71,7 @@
 </template>
 
 <script>
+import HttpService from "~/services/HttpService";
 import LogoSvg from "~~/components/svg/LogoSvg";
 import RegisterSvg from "~~/components/svg/RegisterSvg";
 import CloseMob from "~~/components/svg/CloseMob";
@@ -72,8 +84,19 @@ export default {
   },
   data () {
     return {
-      drawer: null
+      drawer: null,
+      userLogin: null,
+      userName: null
     };
+  },
+  async fetch () {
+    const response = await HttpService.get("/main-page");
+    if (response.status === 200 && !(response.data.user.api_token.length === 0)) {
+      this.userLogin = response.data.user.api_token;
+      this.userName = response.data.user.name;
+    } else {
+      // TODO do we need to inform user?
+    }
   },
   methods: {
     copyText () {
@@ -81,7 +104,8 @@ export default {
       textToCopy.select();
       document.execCommand("copy");
     }
-  }
+  },
+  fetchOnServer: false
 };
 </script>
 
