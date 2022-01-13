@@ -1,5 +1,11 @@
 <template>
   <div class="article-invest">
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
     <NuxtLink class="link d-block mb-6" to="/invests">
       <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.2 5.0248C0.05 4.8748 0 4.7248 0 4.5248C0 4.3248 0.05 4.1748 0.2 4.0248L3.9 0.374805C4.05 0.224805 4.2 0.174805 4.35 0.174805C4.75 0.174805 5 0.474805 5 0.824805C5 0.974805 4.95 1.1748 4.8 1.2748L1.55 4.5248L4.8 7.7248C4.95 7.8748 5 8.0248 5 8.1748C5 8.52481 4.7 8.8248 4.35 8.8248C4.15 8.8248 4 8.7748 3.9 8.6248L0.2 5.0248Z" fill="#2D7BF6" />
@@ -103,11 +109,13 @@ import { Youtube } from "vue-youtube";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     Button,
-    Youtube
+    Youtube,
+    Alert
   },
   data () {
     return {
@@ -126,7 +134,10 @@ export default {
       portfelItemAbout: null,
       portfelItemBenefits: null,
       portfelItemVideo: null,
-      referralLink: ""
+      alert: {
+        text: "",
+        active: false
+      }
     };
   },
   async fetch () {
@@ -149,7 +160,6 @@ export default {
         this.portfelItemBenefits = response.data.benefits
         this.portfelItemVideo = response.data.video_link
         this.portfelItemPreview = response.data.preview
-        this.referralLink = response.data.referral_link
       } else {
       // TODO do we need to inform user
       }
@@ -168,20 +178,17 @@ export default {
     async registerButtonClick () {
       const slug = this.$route.params.slug || null;
       if (slug) {
-        const response = await HttpService.get("/user-profile");
+        const response = await HttpService.post("/register/" + slug);
         if (response.status === 200) {
-          const userId = response.data.profile.id;
-          if (this.referralLink) {
-            await HttpService.post("/register/" + slug, undefined, {
-              "user_id": userId
-            });
-            window.location.href = this.referralLink;
-            // TODO: what else should happen?
+          const link = response.data.link;
+          if (link) {
+            window.location.href = link;
           } else {
-            await HttpService.post("/register/notif/" + slug, undefined, {
-              "user_id": userId
-            });
-            // TODO: what else should happen?
+            const message = response.data.message;
+            this.alert = {
+              text: message,
+              active: true
+            };
           }
         }
       }
