@@ -347,6 +347,9 @@
               solo
               :disabled="editUser"
             />
+            <div @click="getCountryByCode">Get counrty by code</div>
+            <div @click="getCountryByName">Get counrty by name</div>
+            <div @click="getCitiesByCountryId">Get cities by country id</div>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
@@ -404,7 +407,13 @@ export default {
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
-    countries: ["Ukraine", "France"],
+    countries: ["Ukraine", "France"], // TODO replace with apyCountries
+    apiCountries: null,
+    apiCities: null,
+    selectedCountryCode: "Pl", // TODO get from dropdown
+    countryData: null, // TODO fix
+    selectedCountryName: "Poland", // TODO get from dropdown
+    selectedCountryId: 1, // TODO get from dropdown
     staticData: [],
     staticDataAccountSettings: [],
     staticDataChangeEmail: [],
@@ -454,6 +463,22 @@ export default {
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
       this.userSecuritySettings = response.data;
+    } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
+      this.alert = {
+        text: errorText,
+        active: true
+      };
+    }
+
+    response = await HttpService.get("/countries");
+    if (response.status === 200) {
+      this.apiCountries = response.data;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -551,6 +576,66 @@ export default {
       } else {
         this.alert = {
           text: errors.error_text,
+          active: true
+        };
+      }
+    },
+    async getCountryByCode () {
+      const params = {
+        "code": this.selectedCountryCode
+      }
+      const response = await HttpService.get("/country", params);
+      if (response.status === 200) {
+        this.countryData = response.data; // TODO fix
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    async getCountryByName () {
+      const params = {
+        "name": this.selectedCountryName
+      }
+      const response = await HttpService.get("/country-by-name", params);
+      if (response.status === 200) {
+        this.countryData = response.data; // TODO fix
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    async getCitiesByCountryId () {
+      const params = {
+        "country_id": this.selectedCountryId
+      }
+      const response = await HttpService.get("/cities", params);
+      if (response.status === 200) {
+        this.apiCities = response.data; // TODO fix
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
           active: true
         };
       }
