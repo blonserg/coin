@@ -21,7 +21,8 @@
           class="header-tariph"
           @click="showTooltip = !showTooltip"
         >
-          {{ authUserCode }}
+          <span v-if="authUserCode">{{ authUserCode }}</span>
+          <span v-else>Standart</span>
         </div>
         <v-alert
           v-model="showTooltip"
@@ -92,7 +93,10 @@
       </div>
       <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">Баланс:</div>
-        <div class="header-balance_info">{{ authUserSum }} баллов</div>
+        <div class="header-balance_info">
+          <span v-if="authUserSum">{{ authUserSum }}</span>
+          <span v-else>0</span>
+          баллов</div>
       </div>
       <div class="header-refs d-none d-md-flex align-center">
         <v-text-field ref="textToCopy" :value="authUserRef" outlined readonly />
@@ -230,9 +234,7 @@ export default {
     if (response.status === 200) {
       this.authUserInfo = response.data;
       this.authUserRef = Const.siteUrl + "/register?" + response.data.user.referral_link;
-      this.authUserId = response.data.user.id;
       this.authUserCode = response.data.tariff.code;
-      this.authUserSum = response.data.tariff.sum;
     } else {
       // TODO do we need to inform user?
     }
@@ -241,6 +243,8 @@ export default {
     if (response.status === 200) {
       this.userProfileFirstName = response.data.profile.first_name;
       this.userProfileLastName = response.data.profile.last_name;
+      this.authUserId = response.data.profile.id;
+      this.authUserSum = response.data.scores;
     } else {
       // TODO do we need to inform user?
     }

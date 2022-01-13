@@ -33,7 +33,7 @@
             </span>
           </div>
           <v-divider />
-          <div class="profile-tariph">
+          <div v-if="userProfile.tariff.code" class="profile-tariph">
             <div class="profile-tariph_txt">
               {{ staticData.tariff }}:
             </div>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="profile-tariph_date">
-            до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}
+            <span v-if="userProfile.tariff.code">до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}</span>
           </div>
           <a href="" class="article-link">
             {{ staticData.extend_tariff }}
