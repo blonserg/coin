@@ -92,32 +92,36 @@
                 <v-col cols="12" md="7">
                   <v-row>
                     <v-col v-for="dynamicReviewitem in reviews" :key="dynamicReviewitem.id" cols="12" md="6" class="dialog-review">
-                      <div class="dialog-review_video">
+                      <div class="dialog-review_video" @click="dialogVideo = true, showVideo = dynamicReviewitem.id">
                         <img :src="dynamicReviewitem.image" alt="">
-                        <button class="dialog-review_play" type="button" @click="showVideo = dynamicReviewitem.id">
+                        <button class="dialog-review_play" type="button">
                           <PlayVideo />
                         </button>
                       </div>
-                      <div v-if="showVideo === dynamicReviewitem.id" class="dialog-review_video-wrap">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          :src="dynamicReviewitem.link"
-                          title="YouTube video player"
-                          frameborder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowfullscreen
-                        >
-                        </iframe>
-                        <v-btn
-                          color="primary"
-                          class="dialog-review_video-close"
-                          text
-                          @click="showVideo = null"
-                        >
-                          <CloseButton />
-                        </v-btn>
-                      </div>
+                      <v-dialog v-if="showVideo === dynamicReviewitem.id" v-model="dialogVideo">
+                        <v-card class="dialog dialog--video">
+                          <div class="dialog-review_video-wrap">
+                            <iframe
+                              width="100%"
+                              height="100%"
+                              :src="dynamicReviewitem.link"
+                              title="YouTube video player"
+                              frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowfullscreen
+                            >
+                            </iframe>
+                            <v-btn
+                              color="primary"
+                              class="dialog-review_video-close"
+                              text
+                              @click="showVideo = null, dialogVideo = false"
+                            >
+                              <CloseButton />
+                            </v-btn>
+                          </div>
+                        </v-card>
+                      </v-dialog>
                       <div class="dialog-review_name">
                         {{ dynamicReviewitem.title }}
                       </div>
@@ -165,6 +169,7 @@ export default {
     return {
       dialog: false,
       dialogReview: false,
+      dialogVideo: false,
       reviews: null,
       showVideo: null,
       promo: null

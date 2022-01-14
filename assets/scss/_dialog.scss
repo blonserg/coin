@@ -20,6 +20,10 @@
     text-align: center;
   }
 
+  &--video {
+    min-height: 90vh;
+  }
+
   &-image {
     height: 400px;
 
@@ -97,6 +101,7 @@
 
     &_video {
       position: relative;
+      cursor: pointer;
 
       img {
         max-width: 100%;
