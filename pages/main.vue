@@ -13,39 +13,47 @@
     </v-dialog>
     <div class="mb-16">
       <VueSlickCarousel v-if="events" v-bind="settings" class="events">
-        <v-card v-for="item in events" :key="item.id" class="events-item d-flex justify-space-between align-center">
-          <div class="events-date">
-            <span class="events-date_month">{{ $moment(item.date).format("MMM") }}</span>
-            <span class="events-date_day">{{ $moment(item.date).format("DD") }}</span>
-          </div>
-          <v-divider vertical />
-          <div class="events-info" @click="getClickedEvent(item)">
-            <div class="events-ttl d-flex">
-              {{ item.title }}
-              <ArrowRight class="ml-4" />
+        <div v-for="item in events" :key="item.id">
+          <v-card class="events-item d-flex justify-space-between align-center">
+            <div class="events-date">
+              <span class="events-date_month">{{ $moment(item.date).format("MMM") }}</span>
+              <span class="events-date_day">{{ $moment(item.date).format("DD") }}</span>
             </div>
-            <div
-              class="events-info_bottom d-flex justify-space-between align-center"
-            >
-              <div class="events-name">
-                <svg
-                  width="10"
-                  height="11"
-                  viewBox="0 0 10 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0 9.97586C0 8.45862 1.96296 6.37241 5 6.37241C8.03704 6.37241 10 8.45862 10 9.97586C10 10.6207 9.62963 11 8.51852 11H1.48148C0.37037 11 0 10.6207 0 9.97586ZM2.59259 2.65517C2.59259 1.21379 3.66667 0 5 0C6.33333 0 7.40741 1.21379 7.40741 2.65517C7.40741 4.17241 6.33333 5.34828 5 5.34828C3.66667 5.34828 2.59259 4.17241 2.59259 2.65517Z"
-                    fill="#808190"
-                  />
-                </svg>
-                {{ item.author }}
+            <v-divider vertical />
+            <div class="events-info" @click="getClickedEvent(item)">
+              <div class="events-ttl d-flex">
+                {{ item.title }}
+                <ArrowRight class="ml-4" />
               </div>
-              <div v-if="item.live" class="events-time">{{ item.live }}</div>
+              <div
+                class="events-info_bottom d-flex justify-space-between align-center"
+              >
+                <div class="events-name">
+                  <svg
+                    width="10"
+                    height="11"
+                    viewBox="0 0 10 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 9.97586C0 8.45862 1.96296 6.37241 5 6.37241C8.03704 6.37241 10 8.45862 10 9.97586C10 10.6207 9.62963 11 8.51852 11H1.48148C0.37037 11 0 10.6207 0 9.97586ZM2.59259 2.65517C2.59259 1.21379 3.66667 0 5 0C6.33333 0 7.40741 1.21379 7.40741 2.65517C7.40741 4.17241 6.33333 5.34828 5 5.34828C3.66667 5.34828 2.59259 4.17241 2.59259 2.65517Z"
+                      fill="#808190"
+                    />
+                  </svg>
+                  {{ item.author }}
+                </div>
+                <div
+                  v-if="item.live"
+                  :class="item.live==='live' ? 'live' : ''"
+                  class="events-time"
+                >
+                  {{ item.live }}
+                </div>
+              </div>
             </div>
-          </div>
-        </v-card>
+          </v-card>
+        </div>
       </VueSlickCarousel>
     </div>
     <Seetoo :title="staticData.cabinet_main_be_interested" />

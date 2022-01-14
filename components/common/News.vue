@@ -4,8 +4,9 @@
       <img :src="image" alt="">
     </div>
     <div class="news-info">
-      <div class="news-ttl">
-        {{ title }}
+      <div class="news-ttl d-flex">
+        <span class="pr-5">{{ title }}</span>
+        <ArrowRight class="ml-4" />
       </div>
       <div class="news-bottom d-flex justify-space-between">
         <div class="news-label c-green">
@@ -19,7 +20,7 @@
             </svg>
           </div> -->
           <div class="news-date">
-            {{ $moment(date).format("DD MMM YYYY") }}
+            {{ $moment(date).format("DD MMM") }}
           </div>
         </div>
       </div>
@@ -28,7 +29,12 @@
 </template>
 
 <script>
+import ArrowRight from "~~/components/svg/ArrowRight";
+
 export default {
+  components: {
+    ArrowRight
+  },
   props: {
     title: {
       type: String,
@@ -75,6 +81,10 @@ export default {
       border: 1px solid #272a33;
       border-radius: 15px;
       width: 344px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .theme--light & {
         background: #e4e5e8;
@@ -97,6 +107,10 @@ export default {
     &-info {
       background: #23262e;
       padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 2;
 
       .theme--light & {
         background: #fff;
@@ -106,8 +120,8 @@ export default {
     &-ttl {
       font-size: 20px;
       line-height: 26px;
-      padding-right: 20px;
       margin-bottom: 20px;
+      justify-content: space-between;
 
       a {
         color: #eef1f8;

@@ -61,7 +61,9 @@
         </div>
       </v-card>
       <v-card class="seetoo-item item-1">
-        <img src="" alt="">
+        <div class="seetoo-img">
+          <img src="/review.png" alt="">
+        </div>
         <div class="seetoo-item_bottom d-flex justify-space-between">
           <div class="seetoo-item_ttl">
             Отзывы победителей розыгрышей
