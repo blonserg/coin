@@ -15,6 +15,15 @@
     border: 1px solid #f6f7f9;
   }
 
+  &--acess {
+    padding: 20px 18px;
+    text-align: center;
+  }
+
+  &--video {
+    min-height: 90vh;
+  }
+
   &-image {
     height: 400px;
 
@@ -92,6 +101,7 @@
 
     &_video {
       position: relative;
+      cursor: pointer;
 
       img {
         max-width: 100%;

@@ -91,7 +91,7 @@ export default {
   },
   async fetch () {
     const response = await HttpService.get("/main-page");
-    if (response.status === 200 && !(response.data.user.api_token.length === 0)) {
+    if (response.status === 200 && response.data.user) {
       this.userLogin = response.data.user.api_token;
       this.userName = response.data.user.name;
     } else {
