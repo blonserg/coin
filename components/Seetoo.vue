@@ -11,9 +11,9 @@
         <div class="seetoo-item_bottom d-md-flex justify-space-between">
           <div class="seetoo-item_ttl mb-2 mb-md-0">
             {{ promoItem.title }}
-            <!-- <span class="seetoo-item_subttl">
-              Читай условия розыгрыша в описании
-            </span> -->
+            <span class="seetoo-item_subttl">
+              {{ promoItem.sub_title }}
+            </span>
           </div>
           <v-dialog
             v-model="dialog"
@@ -35,7 +35,7 @@
               <v-row>
                 <v-col cols="12" md="4">
                   <div class="dialog-image">
-                    <img :src="promoItem.image" alt="">
+                    <img :src="promoItem.image2" alt="">
                   </div>
                 </v-col>
                 <v-col cols="12" md="8">
@@ -92,7 +92,7 @@
                 <v-col cols="12" md="7">
                   <v-row>
                     <v-col v-for="dynamicReviewitem in reviews" :key="dynamicReviewitem.id" cols="12" md="6" class="dialog-review">
-                      <div class="dialog-review_video" @click="dialogVideo = true, showVideo = dynamicReviewitem.id">
+                      <div class="dialog-review_video" @click="dialogVideo = !dialogVideo, showVideo = dynamicReviewitem.id">
                         <img :src="dynamicReviewitem.image" alt="">
                         <button class="dialog-review_play" type="button">
                           <PlayVideo />
@@ -115,7 +115,7 @@
                               color="primary"
                               class="dialog-review_video-close"
                               text
-                              @click="showVideo = null, dialogVideo = false"
+                              @click="dialogVideo = !dialogVideo"
                             >
                               <CloseButton />
                             </v-btn>
