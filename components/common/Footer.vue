@@ -79,6 +79,7 @@
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
 import StopSvg from "~~/components/svg/StopSvg";
+import HttpService from "~/services/HttpService";
 
 export default {
   components: {
@@ -121,8 +122,17 @@ export default {
           title: "Мой профиль",
           to: "/profile"
         }
-      ]
+      ],
+      lockInfoUser: null // TODO use to show message
     };
+  },
+  async fetch () {
+    const response = await HttpService.get("/auth-user-info");
+    if (response.status === 405) {
+      this.lockInfoUser = true;
+    } else {
+      this.lockInfoUser = false;
+    }
   }
 };
 </script>
