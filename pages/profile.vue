@@ -347,9 +347,9 @@
               solo
               :disabled="editUser"
             />
-            <!-- <div @click="getCountryByCode">Get counrty by code</div>
+            <div @click="getCountryByCode">Get counrty by code</div>
             <div @click="getCountryByName">Get counrty by name</div>
-            <div @click="getCitiesByCountryId">Get cities by country id</div> -->
+            <div @click="getCitiesByCountryId">Get cities by country id</div>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
