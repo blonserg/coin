@@ -22,24 +22,6 @@
         </svg>
       </a>
     </div>
-    <v-dialog
-      v-model="dialogAcess"
-      content-class="dialog-shrink"
-      max-width="280"
-      persistent
-    >
-      <v-card class="dialog dialog--acess">
-        <StopSvg />
-        <p>
-          Купите тариф чтобы воспользоватсья полным функиционалом
-        </p>
-        <NuxtLink to="/main">
-          <button class="article-link" type="button" @click="dialogAcess = false">
-            Продолжить
-          </button>
-        </NuxtLink>
-      </v-card>
-    </v-dialog>
     <v-list>
       <v-list-item
         v-for="(item, i) in items_first"
@@ -78,16 +60,13 @@
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
-import StopSvg from "~~/components/svg/StopSvg";
 
 export default {
   components: {
-    LogoSvg,
-    StopSvg
+    LogoSvg
   },
   data () {
     return {
-      dialogAcess: false,
       items_first: [
         {
           title: "Главная",
