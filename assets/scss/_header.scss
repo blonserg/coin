@@ -227,6 +227,7 @@
       border-radius: 15px !important;
       padding: 12px;
       width: 346px;
+      position: relative;
 
       @media screen and (max-width: 758px) {
         width: 100%;
@@ -259,6 +260,14 @@
       font-size: 12px;
       line-height: 14px;
       color: #40424e;
+    }
+
+    &_close {
+      position: absolute;
+      left: -30px;
+      top: calc(50% + 5px);
+      transform: translateY(-50%);
+      cursor: pointer;
     }
   }
 

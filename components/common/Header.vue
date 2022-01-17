@@ -130,7 +130,7 @@
       </div>
       <div :class="alert ? '_close' : ''" class="header-notifcatns">
         <v-badge
-          :class="!userNotifications ? '_disabled' : ''"
+          :class="!(userNotifications && Object.values(userNotifications).length) ? '_disabled' : ''"
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
@@ -186,7 +186,9 @@
             </div>
             <div class="header-alert_txt">
               {{ item.description }}
-              <div @click="postOpenedNotification(item)">Закрити</div>
+            </div>
+            <div class="header-alert_close" @click="postOpenedNotification(item)">
+              <CloseButton />
             </div>
           </v-alert>
         </div>
