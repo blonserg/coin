@@ -204,6 +204,7 @@
         </div>
       </div>
     </div>
+    <LockUser />
   </div>
 </template>
 
@@ -213,12 +214,14 @@ import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import MyComandActive from "~~/components/svg/MyComandActive";
 import MyComandPassive from "~~/components/svg/MyComandPassive";
+import LockUser from "~~/components/common/LockUser";
 
 export default {
   components: {
     Title,
     MyComandActive,
-    MyComandPassive
+    MyComandPassive,
+    LockUser
   },
   data () {
     return {

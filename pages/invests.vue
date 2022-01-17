@@ -140,6 +140,7 @@
         </v-col>
       </v-row>
     </div>
+    <LockUser />
   </div>
 </template>
 
@@ -149,11 +150,13 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import Alert from "~~/components/common/Alert";
+import LockUser from "~~/components/common/LockUser";
 
 export default {
   components: {
     VueSlickCarousel,
-    Alert
+    Alert,
+    LockUser
   },
   data () {
     return {

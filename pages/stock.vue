@@ -50,14 +50,19 @@
         </article>
       </section>
     </div>
+    <LockUser />
   </div>
 </template>
 
 <script>
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import LockUser from "~~/components/common/LockUser";
 
 export default {
+  components: {
+    LockUser
+  },
   data () {
     return {
       staticData: [],
