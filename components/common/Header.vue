@@ -134,7 +134,7 @@
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
-          :content="userNotificationsCount || `0`"
+          :content="(userNotifications && userNotifications.filter((item) => item.read == 0).length) || `0`"
           color="#F75050"
         >
           <v-btn
@@ -166,25 +166,30 @@
         </v-btn>
       </div>
       <div class="header-alert_list">
-        <v-alert
+        <div
           v-for="item in userNotifications"
           :key="item.id"
-          :value="alert"
-          transition="scale-transition"
-          class="header-alert_item"
         >
-          <div class="d-flex justify-space-between">
-            <div class="header-alert_ttl">
-              {{ item.title }}
+          <v-alert
+            v-if="item.read == 0"
+            :value="alert"
+            transition="scale-transition"
+            class="header-alert_item"
+          >
+            <div class="d-flex justify-space-between">
+              <div class="header-alert_ttl">
+                {{ item.title }}
+              </div>
+              <div class="header-alert_date">
+                {{ $moment(item.date).format("DD MMM YYYY") }}
+              </div>
             </div>
-            <div class="header-alert_date">
-              {{ $moment(item.date).format("DD MMM YYYY") }}
+            <div class="header-alert_txt">
+              {{ item.description }}
+              <div @click="postOpenedNotification(item)">Закрити</div>
             </div>
-          </div>
-          <div class="header-alert_txt">
-            {{ item.description }}
-          </div>
-        </v-alert>
+          </v-alert>
+        </div>
       </div>
     </header>
   </div>
@@ -213,7 +218,6 @@ export default {
       authUserId: null,
       authUserCode: null,
       authUserSum: null,
-      userNotificationsCount: null,
       showTooltip: false,
       dialogTariffs: false,
       userProfileFirstName: null,
@@ -226,7 +230,6 @@ export default {
     let response = await HttpService.get("/user-notifications");
     if (response.status === 200) {
       this.userNotifications = response.data;
-      this.userNotificationsCount = this.userNotifications.length
     } else {
       // TODO do we need to inform user?
     }
@@ -295,6 +298,21 @@ export default {
         window.location.href = response.data.addr;
       } else {
         alert("An error occurred") // TODO how to inform user?
+      }
+    },
+    async postOpenedNotification (item) {
+      const notificationKey = "notifications[0]";
+      const params = {};
+      params[notificationKey] = item.id;
+      const response = await HttpService.post("/user-notifications/id", undefined, params);
+      if (response.status === 200) {
+        item.read = 1;
+        const index = this.userNotifications.findIndex(x => x.id === item.id);
+        if (index !== -1) {
+          this.userNotifications[index] = item;
+        }
+      } else {
+      // TODO do we need to inform user?
       }
     }
   }
