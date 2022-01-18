@@ -379,3 +379,7 @@ body,
     }
   }
 }
+
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: none !important;
+}

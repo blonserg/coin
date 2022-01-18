@@ -42,6 +42,9 @@
                   <v-card-text class="dialog-text">
                     <h2>{{ promoItem.title }}</h2>
                     <div v-html="promoItem.content" />
+                    <button class="article-link" type="button" @click="dialog = false, dialogReview = !dialogReview">
+                      Смотреть отзывы
+                    </button>
                   </v-card-text>
                 </v-col>
               </v-row>
