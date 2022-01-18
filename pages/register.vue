@@ -1,5 +1,11 @@
 <template>
   <v-card class="login">
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
     <LogoSvg />
     <div v-if="refferer.referer_id" class="login-refer">
       <div class="login-ttl">
@@ -92,11 +98,13 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     LogoSvg,
-    Button
+    Button,
+    Alert
   },
   layout: "signup",
   data () {
@@ -122,13 +130,20 @@ export default {
       ],
       refferer: { // TODO get from refferal link
         referer_id: null,
-        link: "http://test"
+        link: "http://test",
+        firstName: null,
+        lastName: null,
+        telegram: null
+      },
+      alert: {
+        text: "",
+        active: false
       }
     };
   },
   async fetch () {
-    const res = await UserService.getMyIp();
-    this.user.ip = res;
+    let response = await UserService.getMyIp();
+    this.user.ip = response;
     let staticData;
     if (this.refferer.referer_id) {
       staticData = await StaticService.get("/ref_registration");
@@ -136,8 +151,32 @@ export default {
       staticData = await StaticService.get("/registration")
     }
     this.staticData = staticData;
+
     if (this.$route.query.referer_id) {
       this.refferer.referer_id = this.$route.query.referer_id;
+    }
+
+    if (this.refferer.referer_id) {
+      const params = {
+        "referer_id": this.refferer.referer_id
+      }
+      response = await HttpService.get("/referer-data", params);
+      if (response.status === 200) {
+        this.refferer.firstName = response.data.profile.first_name;
+        this.refferer.lastName = response.data.profile.last_name;
+        this.refferer.telegram = response.data.profile.telegram;
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        }
+      }
     }
   },
   fetchOnServer: false,
@@ -168,6 +207,28 @@ export default {
       } else {
         this.errorStatus = true
         this.errorList = registrationResponse.errors.error_text;
+      }
+    },
+    async getRefferData () {
+      const params = {
+        "referer_id ": this.refferer.referer_id
+      }
+      response = await HttpService.get("/referer-data", undefined, params);
+      if (response.status === 200) {
+        this.refferer.firstName = response.data.profile.first_name;
+        this.refferer.lastName = response.data.profile.last_name;
+        this.refferer.telegram = response.data.profile.telegram;
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        }
       }
     }
   }
