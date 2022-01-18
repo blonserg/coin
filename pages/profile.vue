@@ -341,7 +341,6 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
             <v-select
-              v-model="userProfileCountry"
               :items="apiCountries"
               :label="userProfileCountry.title_ru"
               solo
@@ -357,7 +356,7 @@
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <v-select
+            <!-- <v-select
               v-model="userProfile.profile.city"
               :items="cities"
               label="City"
@@ -370,7 +369,7 @@
               <template #selection="{item}">
                 {{ item.title_ru }}
               </template>
-            </v-select>
+            </v-select> -->
           </v-col>
         </v-row>
         <div class="profile-ttl">
@@ -465,7 +464,8 @@ export default {
       this.userProfile = response.data;
       this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
-      this.userProfileCountry = response.data.profile.country
+      this.userProfileCountry = response.data.profile.country;
+      // this.userProfileCountry = JSON.parse(this.userProfileCountry);
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -478,7 +478,6 @@ export default {
         active: true
       };
     }
-    this.userProfileCountry = JSON.parse(this.userProfileCountry)
 
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
