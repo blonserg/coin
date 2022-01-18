@@ -341,15 +341,19 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
             <v-select
-              v-model="userProfile.profile.country"
-              :items="countries"
-              label="Country"
+              v-model="userProfileCountry"
+              :items="apiCountries"
+              :label="userProfileCountry.title_ru"
               solo
               :disabled="editUser"
-            />
-            <!-- <div @click="getCountryByCode">Get counrty by code</div>
-            <div @click="getCountryByName">Get counrty by name</div>
-            <div @click="getCitiesByCountryId">Get cities by country id</div> -->
+            >
+              <template #item="{item}">
+                {{ item.title_ru }}
+              </template>
+              <template #selection="{item}">
+                {{ item.title_ru }}
+              </template>
+            </v-select>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
@@ -359,7 +363,14 @@
               label="City"
               solo
               :disabled="editUser"
-            />
+            >
+              <template #item="{item}">
+                {{ item.title_ru }}
+              </template>
+              <template #selection="{item}">
+                {{ item.title_ru }}
+              </template>
+            </v-select>
           </v-col>
         </v-row>
         <div class="profile-ttl">
@@ -415,7 +426,6 @@ export default {
   },
   data: () => ({
     cities: ["Sambir", "Lviv", "Kyiv"],
-    countries: ["Ukraine", "France"], // TODO replace with apyCountries
     apiCountries: null,
     apiCities: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
@@ -429,6 +439,7 @@ export default {
     userProfile: null,
     userSecuritySettings: null,
     userProfileProjects: null,
+    userProfileCountry: null,
     editUser: true,
     show: false,
     authUserRef: null,
@@ -455,6 +466,7 @@ export default {
       this.userProfile = response.data;
       this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
+      this.userProfileCountry = response.data.profile.country
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -467,6 +479,7 @@ export default {
         active: true
       };
     }
+    this.userProfileCountry = JSON.parse(this.userProfileCountry)
 
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
