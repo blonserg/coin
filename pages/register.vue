@@ -180,6 +180,12 @@ export default {
     }
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (token) {
+      this.$router.push("main");
+    }
+  },
   methods: {
     async registration () {
       const registrationUserData = {
