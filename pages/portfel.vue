@@ -90,14 +90,13 @@
           <div class="article-invest_ttl">
             {{ staticData.project_benefits }}
           </div>
-          <!-- <div>{{ portfelItemBenefits }}</div>
           <div class="article-invest_txt">
             <ul>
-              <li v-for="item in portfelItemBenefits" :key="item">
-                {{ item }}
+              <li v-for="item in portfelItemBenefitsList" :key="item.name">
+                {{ item.name }}
               </li>
             </ul>
-          </div> -->
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -134,6 +133,7 @@ export default {
       portfelItemAbout: null,
       portfelItemBenefits: null,
       portfelItemVideo: null,
+      portfelItemBenefitsList: null,
       alert: {
         text: "",
         active: false
@@ -163,6 +163,7 @@ export default {
       } else {
       // TODO do we need to inform user
       }
+      this.portfelItemBenefitsList = JSON.parse(this.portfelItemBenefits)
     }
 
     this.staticData = await StaticService.get("/project")
