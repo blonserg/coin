@@ -126,6 +126,10 @@
       min-height: auto;
     }
 
+    .v-text-field.v-text-field--enclosed .v-text-field__details {
+      display: block;
+    }
+
     // & + & {
     //   border-top: 1px solid #313440;
     // }
