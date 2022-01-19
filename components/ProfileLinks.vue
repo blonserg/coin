@@ -1,11 +1,10 @@
 <template>
-  <div>
+  <div class="d-flex align-center">
     <v-text-field
       ref="textToCopyR"
-      v-model="item.link"
-      :disabled="editLink"
+      disabled
       outlined
-      :label="item.link || `https://`"
+      :label="link || `https://`"
       solo
     />
     <button color="primary" class="header-refs_btn d-flex align-center justify-center" @click="copyText">
@@ -18,13 +17,19 @@
 
 <script>
 export default {
+  props: {
+    link: {
+      type: String,
+      default: ""
+    }
+  },
   methods: {
     copyText () {
       const textToCopyR = this.$refs.textToCopyR.$el.querySelector("input");
       textToCopyR.select();
       document.execCommand("copy");
-      this.show = true;
-      setTimeout(() => (this.show = false), 2000);
+      // this.show = true;
+      // setTimeout(() => (this.show = false), 2000);
     }
   }
 }

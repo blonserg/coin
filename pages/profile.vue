@@ -395,7 +395,7 @@
             </div>
           </div>
           <div v-if="item.link" class="header-refs header-refs--mycom d-flex align-center">
-            <ProfileLinks />
+            <ProfileLinks :link="item.link" />
           </div>
         </div>
         <div class="d-flex justify-center mt-7">
