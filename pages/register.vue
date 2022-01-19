@@ -17,14 +17,15 @@
           size="90"
         >
           <span class="profile-avatar_txt">
-            ВБ
+            <span v-if="refferer.firstName">{{ refferer.firstName.charAt(0) }}</span>
+            <span v-if="refferer.lastName">{{ refferer.lastName.charAt(0) }}</span>
           </span>
         </v-avatar>
       </div>
       <div class="profile-name">
-        Владислав Борин
-        <span class="profile-name_nick">
-          @usernameplace
+        {{ refferer.firstName }} {{ refferer.lastName }}
+        <span v-if="refferer.telegram" class="profile-name_nick">
+          {{ refferer.telegram }}
         </span>
       </div>
     </div>
