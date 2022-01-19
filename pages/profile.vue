@@ -372,8 +372,20 @@
             </v-select> -->
           </v-col>
         </v-row>
-        <div class="profile-ttl">
-          {{ staticData.my_profile_ref_project_links }}
+        <div class="d-flex align-center mb-10">
+          <div class="profile-ttl">
+            {{ staticData.my_profile_ref_project_links }}
+          </div>
+          <div class="profile-edit">
+            <v-btn
+              class="btn--edit"
+              plain
+              @click.native="editUserLink"
+            >
+              {{ staticData.my_profile_edit }}
+              <PencilSvg class="ml-2" />
+            </v-btn>
+          </div>
         </div>
         <div v-for="item in userProfileProjects" :key="item.id" class="profile-refitem d-flex align-center justify-space-between">
           <div class="d-flex align-center">
@@ -386,6 +398,7 @@
             <v-text-field
               ref="textToCopyR"
               v-model="item.link"
+              :disabled="editLink"
               outlined
               :label="item.link || `https://`"
               solo
@@ -397,7 +410,11 @@
             </button>
           </div>
         </div>
-        <div @click="postUserProjectLinks()">Зберегти всі посилання</div>
+        <div class="d-flex justify-center mt-7">
+          <button v-if="!editLink" class="article-link" type="button" @click="postUserProjectLinks()">
+            Сохранить
+          </button>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -439,6 +456,7 @@ export default {
     userProfileProjects: null,
     userProfileCountry: null,
     editUser: true,
+    editLink: true,
     show: false,
     authUserRef: null,
     oldPassword: null,
@@ -560,6 +578,9 @@ export default {
     },
     editUserProfile () {
       this.editUser = false
+    },
+    editUserLink () {
+      this.editLink = false
     },
     copyText () {
       const textToCopySidebar = this.$refs.textToCopySidebar.$el.querySelector("input");
