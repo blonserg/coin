@@ -23,7 +23,7 @@
             <p class="article-txt">
               {{ item.content }}
             </p>
-            <div class="article-bottom d-flex justify-space-between align-center">
+            <div v-if="item.link" class="article-bottom d-flex justify-space-between align-center">
               <a class="article-link" :href="item.link">
                 {{ staticData.telegram_go_to_chat }}
               </a>

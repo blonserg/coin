@@ -29,7 +29,7 @@
             <span>{{ userProfile.profile.first_name }}</span>
             <span>{{ userProfile.profile.last_name }}</span>
             <span class="profile-name_nick">
-              ID: {{ userProfile.profile.id }}
+              ID: {{ userProfile.profile.user_id }}
             </span>
           </div>
           <v-divider />
@@ -331,7 +331,6 @@
             <v-text-field
               v-model="userProfile.profile.instagram"
               :label="userProfile.profile.instagram || `@`"
-              :value="userProfile.profile.instagram || `@`"
               solo
               :disabled="editUser"
             />
@@ -356,24 +355,29 @@
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <!-- <v-select
+            <v-select
               v-model="userProfile.profile.city"
               :items="cities"
               label="City"
               solo
               :disabled="editUser"
-            >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select> -->
+            />
           </v-col>
         </v-row>
-        <div class="profile-ttl">
-          {{ staticData.my_profile_ref_project_links }}
+        <div class="d-flex align-center mb-10">
+          <div class="profile-ttl">
+            {{ staticData.my_profile_ref_project_links }}
+          </div>
+          <div class="profile-edit">
+            <v-btn
+              class="btn--edit"
+              plain
+              @click.native="editUserLink"
+            >
+              {{ staticData.my_profile_edit }}
+              <PencilSvg class="ml-2" />
+            </v-btn>
+          </div>
         </div>
         <div v-for="item in userProfileProjects" :key="item.id" class="profile-refitem d-flex align-center justify-space-between">
           <div class="d-flex align-center">
@@ -382,22 +386,38 @@
               {{ item.title }}
             </div>
           </div>
-          <div v-if="item.link" class="header-refs header-refs--mycom d-flex align-center">
-            <v-text-field
-              ref="textToCopyR"
-              v-model="item.link"
-              outlined
-              :label="item.link || `https://`"
-              solo
-            />
-            <button color="primary" class="header-refs_btn d-flex align-center justify-center" @click="copyText">
+          <div class="header-refs header-refs--mycom d-flex">
+            <v-form v-model="valid">
+              <v-text-field
+                v-model="item.link"
+                :disabled="editLink"
+                outlined
+                :label="item.link || `https://`"
+                solo
+                :rules="linkRules"
+              />
+            </v-form>
+            <button v-clipboard:copy="item.link" color="primary" class="header-refs_btn d-flex align-center justify-center" @click="showTooltip = item.id, showAlert()">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.27842 8.9769L3.46623 6.78548C3.36079 7.41914 3.36079 8.0264 3.54531 8.66007L2.30643 9.90099C1.19934 11.0099 1.19934 12.5677 2.33279 13.7294C3.43987 14.8383 5.02142 14.8383 6.1285 13.7294L9.23888 10.5875C10.346 9.47855 10.346 7.89439 9.23888 6.75908C8.81714 6.33663 8.31631 6.07261 7.84185 5.9934C7.86821 5.91419 8 5.75578 8.10544 5.65017L8.94893 4.80528C9.39704 4.9901 9.8715 5.28053 10.2932 5.70297C11.9802 7.39274 11.9802 9.79538 10.2932 11.4851L7.05107 14.7327C5.36409 16.4224 2.99177 16.4224 1.27842 14.7327C-0.408563 13.0429 -0.408563 10.6667 1.27842 8.9769ZM5.75948 10.2706C4.07249 8.58086 4.07249 6.17822 5.75948 4.51485L8.97529 1.26733C10.6623 -0.422442 13.0346 -0.422442 14.7216 1.26733C16.4086 2.9571 16.4086 5.35974 14.7216 7.0231L12.5601 9.24092C12.6656 8.60726 12.6656 7.9736 12.4811 7.36634L13.7199 6.15181C14.827 5.0165 14.827 3.43234 13.6936 2.29703C12.5865 1.18812 11.0049 1.18812 9.89786 2.29703L6.78748 5.41254C5.6804 6.52145 5.6804 8.10561 6.78748 9.21452C7.20923 9.63696 7.71005 9.90099 8.18452 9.9802C8.15816 10.0858 8.02636 10.2178 7.92093 10.3234L7.07743 11.1683C6.62933 11.0099 6.18122 10.6931 5.75948 10.2706Z" fill="#6A6B79" />
               </svg>
             </button>
+            <v-alert
+              v-show="showTooltip === item.id"
+              class="profile-refitem_alert"
+              transition="scale-transition"
+            >
+              <span>{{ staticData.copied }}</span>
+            </v-alert>
           </div>
         </div>
-        <div @click="postUserProjectLinks()">Зберегти всі посилання</div>
+        <div class="d-flex justify-center mt-7">
+          <div v-if="valid">
+            <button v-if="!editLink" :disabled="!valid" class="article-link" type="button" @click="postUserProjectLinks()">
+              Сохранить
+            </button>
+          </div>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -439,7 +459,9 @@ export default {
     userProfileProjects: null,
     userProfileCountry: null,
     editUser: true,
+    editLink: true,
     show: false,
+    showTooltip: null,
     authUserRef: null,
     oldPassword: null,
     newPassword: null,
@@ -450,7 +472,11 @@ export default {
     alert: {
       text: "",
       active: false
-    }
+    },
+    linkRules: [
+      v => /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+    ],
+    valid: false
 
   }),
   async fetch () {
@@ -561,12 +587,18 @@ export default {
     editUserProfile () {
       this.editUser = false
     },
+    editUserLink () {
+      this.editLink = false
+    },
     copyText () {
       const textToCopySidebar = this.$refs.textToCopySidebar.$el.querySelector("input");
       textToCopySidebar.select();
       document.execCommand("copy");
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
+    },
+    showAlert () {
+      setTimeout(() => (this.showTooltip = null), 2000);
     },
     async changeUserPassword () {
       const errors = await UserService.changePassword(this.oldPassword, this.newPassword);

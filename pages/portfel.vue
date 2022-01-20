@@ -43,7 +43,7 @@
       <v-row>
         <v-col md="6">
           <div class="article-invest_video">
-            <youtube :video-id="portfelItemVideo"></youtube>
+            <youtube :video-id="portfelItemVideo" />
           </div>
         </v-col>
       </v-row>
