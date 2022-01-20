@@ -35,6 +35,7 @@
         "vue/singleline-html-element-content-newline": ["off"],
         "@typescript-eslint/no-extra-semi": ["off"],
         "@typescript-eslint/no-explicit-any": ["off"],
-        "no-useless-escape": ["off"]
+        "no-useless-escape": ["off"],
+        "vue/no-v-html": ["off"]
     }
 }
