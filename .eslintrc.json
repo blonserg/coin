@@ -34,6 +34,7 @@
         "vue/html-self-closing": ["off"],
         "vue/singleline-html-element-content-newline": ["off"],
         "@typescript-eslint/no-extra-semi": ["off"],
-        "@typescript-eslint/no-explicit-any": ["off"]
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "no-useless-escape": ["off"]
     }
 }
