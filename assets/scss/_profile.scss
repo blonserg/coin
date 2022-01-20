@@ -122,6 +122,13 @@
       }
     }
 
+    &_alert {
+      position: absolute !important;
+      font-size: 14px !important;
+      right: 0;
+      padding: 5px !important;
+    }
+
     .v-text-field.v-text-field--solo .v-input__control {
       min-height: auto;
     }
@@ -140,11 +147,5 @@
         }
       }
     }
-
-    
-
-    // & + & {
-    //   border-top: 1px solid #313440;
-    // }
   }
 }
