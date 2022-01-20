@@ -249,7 +249,7 @@ export default {
     if (response.status === 200) {
       this.userProfileFirstName = response.data.profile.first_name;
       this.userProfileLastName = response.data.profile.last_name;
-      this.authUserId = response.data.profile.id;
+      this.authUserId = response.data.profile.user_id;
       this.authUserSum = response.data.scores;
     } else {
       // TODO do we need to inform user?

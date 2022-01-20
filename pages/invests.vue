@@ -60,7 +60,7 @@
                 </span>
               </div>
             </div>
-            <div class="article-btn">
+            <div v-if="strategiesItem.link" class="article-btn">
               <a class="btn" :href="strategiesItem.link">{{ staticData.strategy_button }}</a>
             </div>
           </v-card>

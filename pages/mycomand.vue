@@ -97,7 +97,7 @@
             <v-row
               v-for="item in userProjects"
               :key="item.name"
-              class="flex-nowrap flex-md-wrap"
+              class="flex-nowrap flex-md-wrap align-center"
             >
               <v-col class="text-center col-4 col-md-1">
                 {{ item.id }}
@@ -150,7 +150,7 @@
               {{ staticData.team_net_partners_ref_part_in_projects }}
             </v-col>
             <v-col class="text-left text-right col-1">
-              {{ staticData.team_net_partners_ref_reserve_fond }}
+              {{ staticData.team_filter_projects }}
             </v-col>
           </v-row>
         </div>

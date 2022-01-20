@@ -29,7 +29,7 @@
             <span>{{ userProfile.profile.first_name }}</span>
             <span>{{ userProfile.profile.last_name }}</span>
             <span class="profile-name_nick">
-              ID: {{ userProfile.profile.id }}
+              ID: {{ userProfile.profile.user_id }}
             </span>
           </div>
           <v-divider />
@@ -331,7 +331,6 @@
             <v-text-field
               v-model="userProfile.profile.instagram"
               :label="userProfile.profile.instagram || `@`"
-              :value="userProfile.profile.instagram || `@`"
               solo
               :disabled="editUser"
             />
@@ -356,20 +355,13 @@
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <!-- <v-select
+            <v-select
               v-model="userProfile.profile.city"
               :items="cities"
               label="City"
               solo
               :disabled="editUser"
-            >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select> -->
+            />
           </v-col>
         </v-row>
         <div class="d-flex align-center mb-10">
@@ -394,7 +386,7 @@
               {{ item.title }}
             </div>
           </div>
-          <div class="header-refs header-refs--mycom d-flex align-center">
+          <div class="header-refs header-refs--mycom d-flex">
             <v-form v-model="valid">
               <v-text-field
                 ref="textToCopyR"
