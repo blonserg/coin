@@ -67,7 +67,7 @@
         </div>
         <div class="seetoo-item_bottom d-flex justify-space-between">
           <div class="seetoo-item_ttl">
-            Отзывы победителей розыгрышей
+            {{ staticData.cab_prize_winner_reviews }}
           </div>
           <button
             type="button"
@@ -83,11 +83,9 @@
                 <v-col cols="12" md="5">
                   <v-card-text class="dialog-text">
                     <h2>
-                      Видео отзывы победителей розыгрыша Strike Team
+                      {{ staticData.cab_prize_winner_reviews_strike_team }}
                     </h2>
-                    <p>
-                      Получи 500 баллов прямо сейчас! Запиши свой видео отзыв и отошли его нам в телеграм <span class="dialog-text_bot">@telegrambot</span>
-                    </p>
+                    <div v-html="staticData.cab_prize_winner_reviews_sub_title" />
                   </v-card-text>
                 </v-col>
                 <v-col cols="12" md="7">
@@ -152,6 +150,7 @@
 
 <script>
 import HttpService from "~/services/HttpService";
+import StaticService from "~/services/StaticService";
 import CloseButton from "~~/components/svg/CloseButton";
 import PlayVideo from "~~/components/svg/PlayVideo";
 
@@ -168,6 +167,7 @@ export default {
   },
   data () {
     return {
+      staticData: [],
       dialog: false,
       dialogReview: false,
       dialogVideo: false,
@@ -190,6 +190,8 @@ export default {
     } else {
       // TODO do we need to inform user?
     }
+
+    this.staticData = await StaticService.get("/cabinet_main");
   },
   fetchOnServer: false
 };
