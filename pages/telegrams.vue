@@ -15,6 +15,9 @@
                 <div class="article-name">
                   {{ item.title }}
                 </div>
+                <span class="article-username">
+                  {{ item.username }}
+                </span>
               </div>
             </div>
             <p class="article-txt">
