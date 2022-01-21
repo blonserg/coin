@@ -25,7 +25,7 @@
             {{ portfelItemTitle }}
           </div>
         </div>
-        <Button :text="staticData.project_reg_button" @click.native="registerButtonClick" />
+        <Button v-if="showRegisterButton" :text="staticData.project_reg_button" @click.native="registerButtonClick" />
       </div>
     </div>
     <div>
@@ -137,7 +137,8 @@ export default {
       alert: {
         text: "",
         active: false
-      }
+      },
+      showRegisterButton: true
     };
   },
   async fetch () {
@@ -177,6 +178,7 @@ export default {
   },
   methods: {
     async registerButtonClick () {
+      this.showRegisterButton = false;
       const slug = this.$route.params.slug || null;
       if (slug) {
         const response = await HttpService.post("/register/" + slug);
@@ -190,6 +192,7 @@ export default {
               text: message,
               active: true
             };
+            this.showRegisterButton = true;
           }
         }
       }
