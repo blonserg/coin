@@ -474,7 +474,13 @@ export default {
       active: false
     },
     linkRules: [
-      v => /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+      (v) => {
+        if (v) {
+          return /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+        } else {
+          return true
+        }
+      }
     ],
     valid: false
 
