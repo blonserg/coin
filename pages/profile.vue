@@ -340,10 +340,12 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
             <v-select
-              :items="apiCountries"
+              v-model="selectedCountry"
+              :items="countries"
               :label="userProfileCountry.title_ru"
               solo
               :disabled="editUser"
+              @change="getCitiesByCountryId"
             >
               <template #item="{item}">
                 {{ item.title_ru }}
@@ -356,12 +358,20 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
             <v-select
-              v-model="userProfile.profile.city"
+              v-model="selectedCity"
               :items="cities"
               label="City"
               solo
               :disabled="editUser"
-            />
+              @change="addCityToProfile"
+            >
+              <template #item="{item}">
+                {{ item.title_ru }}
+              </template>
+              <template #selection="{item}">
+                {{ item.title_ru }}
+              </template>
+            </v-select>
           </v-col>
         </v-row>
         <div class="d-flex align-center mb-10">
@@ -443,13 +453,13 @@ export default {
     Alert
   },
   data: () => ({
-    cities: ["Sambir", "Lviv", "Kyiv"],
-    apiCountries: null,
-    apiCities: null,
+    cities: [],
+    countries: null,
+    selectedCountry: null,
+    selectedCity: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
-    countryData: null, // TODO fix
+    countryData: null, // TODO use
     selectedCountryName: "Poland", // TODO get from dropdown
-    selectedCountryId: 1, // TODO get from dropdown
     staticData: [],
     staticDataAccountSettings: [],
     staticDataChangeEmail: [],
@@ -529,7 +539,7 @@ export default {
 
     response = await HttpService.get("/countries");
     if (response.status === 200) {
-      this.apiCountries = response.data;
+      this.countries = response.data;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -643,7 +653,7 @@ export default {
       }
       const response = await HttpService.get("/country", params);
       if (response.status === 200) {
-        this.countryData = response.data; // TODO fix
+        this.countryData = response.data; // TODO use
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -663,7 +673,7 @@ export default {
       }
       const response = await HttpService.get("/country-by-name", params);
       if (response.status === 200) {
-        this.countryData = response.data; // TODO fix
+        this.countryData = response.data; // TODO use
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -679,11 +689,12 @@ export default {
     },
     async getCitiesByCountryId () {
       const params = {
-        "country_id": this.selectedCountryId
+        "country_id": this.selectedCountry.id
       }
       const response = await HttpService.get("/cities", params);
       if (response.status === 200) {
-        this.apiCities = response.data; // TODO fix
+        this.cities = response.data;
+        this.userProfile.profile.country = this.selectedCountry.id;
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -696,6 +707,9 @@ export default {
           active: true
         };
       }
+    },
+    addCityToProfile () {
+      this.userProfile.profile.city = this.selectedCity.id;
     },
     async postUserProjectLinks () {
       const projects = this.userProfileProjects;
