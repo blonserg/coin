@@ -5,14 +5,13 @@
       {{ staticData.two_factor_sent_code }}
     </div>
     <v-form class="login-auth">
-      <v-row>
-        <v-col cols="3">
-          <input inputmode="numeric" minlength="1" maxlength="1" size="8">
-        </v-col>
-      </v-row>
+      <v-otp-input
+        length="6"
+        type="number"
+        class="mb-5"
+      ></v-otp-input>
     </v-form>
     <Button :text="staticData.two_factor_continue_button" />
-    {{ staticData }}
   </v-card>
 </template>
 
@@ -29,7 +28,8 @@ export default {
   layout: "signup",
   data () {
     return {
-      staticData: []
+      staticData: [],
+      otp: ""
     };
   },
   async fetch () {
