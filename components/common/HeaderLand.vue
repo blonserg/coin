@@ -37,7 +37,6 @@
       <v-app-bar-nav-icon class="d-md-none" @click.stop="drawer = !drawer" />
       <v-navigation-drawer
         v-model="drawer"
-        :clipped="clipped"
         hide-overlay
         fixed
         class="header-land-nav"
