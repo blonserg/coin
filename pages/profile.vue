@@ -363,6 +363,7 @@
               label="City"
               solo
               :disabled="editUser"
+              no-data-text="No data available, wait and try again"
               @change="addCityToProfile"
             >
               <template #item="{item}">
@@ -540,6 +541,15 @@ export default {
     response = await HttpService.get("/countries");
     if (response.status === 200) {
       this.countries = response.data;
+      if (!this.selectedCountry) {
+        const index = this.countries.findIndex(x => x.id === Number(this.userProfile.profile.country));
+        this.selectedCountry = this.countries[index];
+      }
+      if (!this.selectedCity) {
+        await this.getCitiesByCountryId();
+        index = this.cities.findIndex(x => x.id === Number(this.userProfile.profile.city));
+        this.selectedCity = this.cities[index];
+      }
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -688,6 +698,7 @@ export default {
       }
     },
     async getCitiesByCountryId () {
+      this.cities = [];
       const params = {
         "country_id": this.selectedCountry.id
       }
