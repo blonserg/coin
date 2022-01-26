@@ -1,6 +1,13 @@
 <template>
   <div class="news-page">
-    <div v-if="$fetchState.pending">Loading...</div>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </div>
+    </div>
     <div v-else>
       <Title
         :title="staticData.news_title"

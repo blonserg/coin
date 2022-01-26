@@ -1,10 +1,13 @@
 <template>
   <div>
-    <v-row v-if="$fetchState.pending">
-      <v-col md="4">
-        Loading...
-      </v-col>
-    </v-row>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </div>
+    </div>
     <v-row v-else>
       <v-dialog v-model="alert.active">
         <Alert
