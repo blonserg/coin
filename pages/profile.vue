@@ -2,10 +2,7 @@
   <div>
     <div v-if="$fetchState.pending">
       <div class="loader d-flex justify-center align-center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
+        <Loader />
       </div>
     </div>
     <v-row v-else>
@@ -447,6 +444,7 @@ import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
 import Const from "~~/const/Const";
+import Loader from "~~/components/common/Loader.vue";
 
 export default {
   components: {
@@ -454,7 +452,8 @@ export default {
     PencilSvg,
     LockSvg,
     CloseButton,
-    Alert
+    Alert,
+    Loader
   },
   data: () => ({
     cities: [],

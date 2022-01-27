@@ -2,10 +2,7 @@
   <div class="news-page">
     <div v-if="$fetchState.pending">
       <div class="loader d-flex justify-center align-center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
+        <Loader />
       </div>
     </div>
     <div v-else>
@@ -48,12 +45,14 @@ import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import Loader from "~~/components/common/Loader.vue";
 
 export default {
   components: {
     VueSlickCarousel,
     Title,
-    News
+    News,
+    Loader
   },
   filters: {
     nameCategories (value) {
