@@ -1,6 +1,13 @@
 <template>
   <div class="landing">
-    <div v-if="$fetchState.pending">Loading...</div>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </div>
+    </div>
     <div v-else>
       <v-row class="landing-block first-block align-center">
         <v-col cols="12" md="7" data-aos="zoom-in" data-aos-duration="1500">

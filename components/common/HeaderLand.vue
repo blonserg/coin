@@ -2,7 +2,9 @@
   <div>
     <header class="header-land mt-5 mb-5 d-flex align-center flex-md-row justify-space-between">
       <div class="d-block">
-        <LogoSvg />
+        <NuxtLink to="/">
+          <LogoSvg />
+        </NuxtLink>
       </div>
       <div class="header-menu d-none d-md-block">
         <nuxt-link :to="{ path: '/',hash:'#system'}">О команде</nuxt-link>
@@ -35,7 +37,6 @@
       <v-app-bar-nav-icon class="d-md-none" @click.stop="drawer = !drawer" />
       <v-navigation-drawer
         v-model="drawer"
-        :clipped="clipped"
         hide-overlay
         fixed
         class="header-land-nav"

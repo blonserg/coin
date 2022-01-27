@@ -1,10 +1,13 @@
 <template>
   <div>
-    <v-row v-if="$fetchState.pending">
-      <v-col md="4">
-        Loading...
-      </v-col>
-    </v-row>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </div>
+    </div>
     <v-row v-else>
       <v-dialog v-model="alert.active">
         <Alert
@@ -340,10 +343,12 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
             <v-select
-              :items="apiCountries"
+              v-model="selectedCountry"
+              :items="countries"
               :label="userProfileCountry.title_ru"
               solo
               :disabled="editUser"
+              @change="getCitiesByCountryId"
             >
               <template #item="{item}">
                 {{ item.title_ru }}
@@ -356,12 +361,21 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
             <v-select
-              v-model="userProfile.profile.city"
+              v-model="selectedCity"
               :items="cities"
               label="City"
               solo
               :disabled="editUser"
-            />
+              no-data-text="No data available, wait and try again"
+              @change="addCityToProfile"
+            >
+              <template #item="{item}">
+                {{ item.title_ru }}
+              </template>
+              <template #selection="{item}">
+                {{ item.title_ru }}
+              </template>
+            </v-select>
           </v-col>
         </v-row>
         <div class="d-flex align-center mb-10">
@@ -443,13 +457,13 @@ export default {
     Alert
   },
   data: () => ({
-    cities: ["Sambir", "Lviv", "Kyiv"],
-    apiCountries: null,
-    apiCities: null,
+    cities: [],
+    countries: null,
+    selectedCountry: null,
+    selectedCity: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
-    countryData: null, // TODO fix
+    countryData: null, // TODO use
     selectedCountryName: "Poland", // TODO get from dropdown
-    selectedCountryId: 1, // TODO get from dropdown
     staticData: [],
     staticDataAccountSettings: [],
     staticDataChangeEmail: [],
@@ -474,7 +488,13 @@ export default {
       active: false
     },
     linkRules: [
-      v => /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+      (v) => {
+        if (v) {
+          return /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+        } else {
+          return true
+        }
+      }
     ],
     valid: false
 
@@ -523,7 +543,16 @@ export default {
 
     response = await HttpService.get("/countries");
     if (response.status === 200) {
-      this.apiCountries = response.data;
+      this.countries = response.data;
+      if (!this.selectedCountry) {
+        const index = this.countries.findIndex(x => x.id === Number(this.userProfile.profile.country));
+        this.selectedCountry = this.countries[index];
+      }
+      if (!this.selectedCity) {
+        await this.getCitiesByCountryId();
+        index = this.cities.findIndex(x => x.id === Number(this.userProfile.profile.city));
+        this.selectedCity = this.cities[index];
+      }
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -637,7 +666,7 @@ export default {
       }
       const response = await HttpService.get("/country", params);
       if (response.status === 200) {
-        this.countryData = response.data; // TODO fix
+        this.countryData = response.data; // TODO use
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -657,7 +686,7 @@ export default {
       }
       const response = await HttpService.get("/country-by-name", params);
       if (response.status === 200) {
-        this.countryData = response.data; // TODO fix
+        this.countryData = response.data; // TODO use
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -672,12 +701,14 @@ export default {
       }
     },
     async getCitiesByCountryId () {
+      this.cities = [];
       const params = {
-        "country_id": this.selectedCountryId
+        "country_id": this.selectedCountry.id
       }
       const response = await HttpService.get("/cities", params);
       if (response.status === 200) {
-        this.apiCities = response.data; // TODO fix
+        this.cities = response.data;
+        this.userProfile.profile.country = this.selectedCountry.id;
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -690,6 +721,9 @@ export default {
           active: true
         };
       }
+    },
+    addCityToProfile () {
+      this.userProfile.profile.city = this.selectedCity.id;
     },
     async postUserProjectLinks () {
       const projects = this.userProfileProjects;

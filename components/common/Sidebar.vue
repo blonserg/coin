@@ -4,7 +4,6 @@
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
-      :clipped="clipped"
       hide-overlay
       fixed
       app
@@ -12,7 +11,9 @@
       width="260px"
     >
       <div class="sidebar-head d-flex d-md-block align-center">
-        <LogoSvg />
+        <NuxtLink to="/">
+          <LogoSvg />
+        </NuxtLink>
         <span class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer">
           <CloseMob />
         </span>
