@@ -2,10 +2,7 @@
   <div class="landing">
     <div v-if="$fetchState.pending">
       <div class="loader d-flex justify-center align-center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
+        <Loader />
       </div>
     </div>
     <div v-else>
@@ -307,6 +304,7 @@ import CloseButton from "~~/components/svg/CloseButton";
 import LogoSvg from "~~/components/svg/LogoSvg";
 import ArrowRight from "~~/components/svg/ArrowRight";
 import PlayVideo from "~~/components/svg/PlayVideo";
+import Loader from "~~/components/common/Loader.vue";
 
 export default {
   components: {
@@ -317,7 +315,8 @@ export default {
     CloseButton,
     LogoSvg,
     ArrowRight,
-    PlayVideo
+    PlayVideo,
+    Loader
   },
   layout: "landing",
   data () {
