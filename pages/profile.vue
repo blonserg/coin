@@ -44,9 +44,7 @@
           <div class="profile-tariph_date">
             <span v-if="userProfile.tariff.code">до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}</span>
           </div>
-          <a href="" class="article-link">
-            {{ staticData.extend_tariff }}
-          </a>
+          <DialogTariffs />
           <v-divider class="mt-15" />
           <div class="profile-referal">
             <div class="profile-referal_ttl">
@@ -474,6 +472,7 @@ import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
 import Const from "~~/const/Const";
 import Loader from "~~/components/common/Loader.vue";
+import DialogTariffs from "~~/components/DialogTariffs";
 
 export default {
   components: {
@@ -483,7 +482,8 @@ export default {
     CloseButton,
     Alert,
     Loader,
-    ChangeSvg
+    ChangeSvg,
+    DialogTariffs
   },
   data: () => ({
     cities: [],
