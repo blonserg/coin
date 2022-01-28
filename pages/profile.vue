@@ -44,9 +44,7 @@
           <div class="profile-tariph_date">
             <span v-if="userProfile.tariff.code">до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}</span>
           </div>
-          <a href="" class="article-link">
-            {{ staticData.extend_tariff }}
-          </a>
+          <DialogTariffs />
           <v-divider class="mt-15" />
           <div class="profile-referal">
             <div class="profile-referal_ttl">
@@ -431,6 +429,34 @@
         </div>
       </v-col>
     </v-row>
+    <v-dialog
+      v-model="dialogProfile"
+      content-class="dialog-shrink"
+      max-width="280"
+    >
+      <v-card class="dialog dialog--acess">
+        <v-card-text>
+          <div class="dialog-text-inner">
+            <ChangeSvg class="mt-6 mb-7" />
+            <p class="dialog-text_change">
+              Новые настройки профиля успешно сохранены
+            </p>
+          </div>
+          <button class="article-link mt-3" type="button" @click="dialogProfile = false">
+            Продолжить
+          </button>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            text
+            @click="dialogProfile = false"
+          >
+            <CloseButton />
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -440,11 +466,13 @@ import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
+import ChangeSvg from "~~/components/svg/ChangeSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
 import Const from "~~/const/Const";
 import Loader from "~~/components/common/Loader.vue";
+import DialogTariffs from "~~/components/DialogTariffs";
 
 export default {
   components: {
@@ -453,7 +481,9 @@ export default {
     LockSvg,
     CloseButton,
     Alert,
-    Loader
+    Loader,
+    ChangeSvg,
+    DialogTariffs
   },
   data: () => ({
     cities: [],
@@ -482,6 +512,7 @@ export default {
     dialog: false,
     dialog1: false,
     dialog2: false,
+    dialogProfile: false,
     alert: {
       text: "",
       active: false
@@ -595,10 +626,11 @@ export default {
       if (response.status === 200) {
         this.userProfile = response.data;
         this.editUser = true;
-        this.alert = {
-          text: this.staticData.profile_changed,
-          active: true
-        };
+        this.dialogProfile = true;
+        // this.alert = {
+        //   text: this.staticData.profile_changed,
+        //   active: true
+        // };
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {

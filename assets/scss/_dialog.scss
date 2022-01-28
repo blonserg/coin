@@ -1,7 +1,7 @@
 .dialog {
   background: #1e1f26;
   border: 1px solid #272a33;
-  border-radius: 15px;
+  border-radius: 15px !important;
   padding: 60px 50px;
   position: relative;
 
@@ -18,6 +18,14 @@
   &--acess {
     padding: 20px 18px;
     text-align: center;
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      line-height: 20px;
+    }
   }
 
   &--video {
@@ -84,6 +92,14 @@
     a {
       color: #2d7bf6;
       text-decoration: none;
+    }
+
+    &_change {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21px;
+      text-align: center;
+      color: #eef1f8;
     }
   }
 

@@ -11,7 +11,7 @@
       width="260px"
     >
       <div class="sidebar-head d-flex d-md-block align-center">
-        <NuxtLink to="/">
+        <NuxtLink to="/main">
           <LogoSvg />
         </NuxtLink>
         <span class="sidebar-menu_close d-md-none" @click.stop="drawer = !drawer">
