@@ -91,7 +91,7 @@
               </div>
             </div>
             <p class="article-txt">
-              {{ item.content }}
+              {{ item.preview_text }}
             </p>
             <div class="article-info">
               <div class="article-info_item d-flex justify-space-between">

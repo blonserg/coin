@@ -16,6 +16,17 @@
             Продолжить
           </button>
         </NuxtLink>
+        <div class="v-card__actions">
+          <NuxtLink to="/main">
+            <v-btn
+              color="primary"
+              text
+              @click="dialogLock = false"
+            >
+              <CloseButton />
+            </v-btn>
+          </NuxtLink>
+        </div>
       </v-card>
     </v-dialog>
   </div>
@@ -24,10 +35,12 @@
 <script>
 import HttpService from "~/services/HttpService";
 import StopSvg from "~~/components/svg/StopSvg";
+import CloseButton from "~~/components/svg/CloseButton";
 
 export default {
   components: {
-    StopSvg
+    StopSvg,
+    CloseButton
   },
   data () {
     return {
