@@ -13,6 +13,14 @@
   &-avatar {
     margin-bottom: 30px;
 
+    img {
+      object-fit: contain;
+    }
+
+    .v-avatar {
+      overflow: visible;
+    }
+
     &_txt {
       display: flex;
       font-weight: 500;
@@ -21,6 +29,26 @@
       text-align: center;
       color: #adafc2;
       text-transform: uppercase;
+    }
+
+    &_save,
+    &_edit {
+      position: absolute;
+      bottom:  6px;
+
+      .v-icon {
+        background: #2d7bf6;
+        border-radius: 50% !important;
+        font-size: 16px !important;
+      }
+    }
+
+    &_save {
+      left: -10px;
+    }
+
+    &_edit {
+      right: -10px;
     }
   }
 

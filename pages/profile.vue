@@ -19,10 +19,41 @@
               color="primary"
               size="120"
             >
-              <span class="profile-avatar_txt">
+              <span v-if="!url" class="profile-avatar_txt">
                 <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
                 <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
+              <img v-if="url && Object.values(url).length" :src="url" alt="">
+              <div class="profile-avatar_edit">
+                <v-file-input
+                  v-if="!showEdit"
+                  v-model="image"
+                  hide-input
+                  prepend-icon="mdi-pencil"
+                  @change="preview_image"
+                >
+                </v-file-input>
+                <div v-if="showEdit">
+                  <v-btn
+                    icon
+                    @click="clearInput"
+                  >
+                    <v-icon>
+                      mdi-close-thick
+                    </v-icon>
+                  </v-btn>
+                </div>
+              </div>
+              <div class="profile-avatar_save">
+                <v-btn
+                  v-if="showEdit"
+                  icon
+                >
+                  <v-icon>
+                    mdi-content-save-outline
+                  </v-icon>
+                </v-btn>
+              </div>
             </v-avatar>
           </div>
           <div class="profile-name">
@@ -503,8 +534,11 @@ export default {
     userProfileCountry: null,
     editUser: true,
     editLink: true,
+    url: null,
+    image: null,
     show: false,
     showTooltip: null,
+    showEdit: false,
     authUserRef: null,
     oldPassword: null,
     newPassword: null,
@@ -755,6 +789,17 @@ export default {
     },
     addCityToProfile () {
       this.userProfile.profile.city = this.selectedCity.id;
+    },
+    preview_image () {
+      if (this.image !== 0) {
+        this.url = URL.createObjectURL(this.image);
+        this.showEdit = true;
+      }
+    },
+    clearInput () {
+      this.url = null;
+      this.showEdit = false;
+      this.image = 0;
     },
     async postUserProjectLinks () {
       const projects = this.userProfileProjects;
