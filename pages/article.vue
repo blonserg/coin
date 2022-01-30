@@ -1,47 +1,68 @@
 <template>
-  <div class="article-main">
-    <NuxtLink class="link d-block mb-12" to="/news">
-      <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.2 5.0248C0.05 4.8748 0 4.7248 0 4.5248C0 4.3248 0.05 4.1748 0.2 4.0248L3.9 0.374805C4.05 0.224805 4.2 0.174805 4.35 0.174805C4.75 0.174805 5 0.474805 5 0.824805C5 0.974805 4.95 1.1748 4.8 1.2748L1.55 4.5248L4.8 7.7248C4.95 7.8748 5 8.0248 5 8.1748C5 8.52481 4.7 8.8248 4.35 8.8248C4.15 8.8248 4 8.7748 3.9 8.6248L0.2 5.0248Z" fill="#2D7BF6" />
-      </svg>
-      Новости
-    </NuxtLink>
-    <div class="article-main_date mb-8">
-      {{ $moment(articleDate).format("DD MMM YYYY") }}
-    </div>
-    <v-row>
-      <v-col md="8">
-        <h1 class="article-main_ttl">
-          {{ articleTitle }}
-        </h1>
-      </v-col>
-    </v-row>
-    <div v-for="item in articleCategories" :key="item.id" class="d-flex align-center mb-5">
-      <div class="news-label c-purple">
-        {{ item.name }}
+  <div>
+    <div class="article-main">
+      <NuxtLink class="link d-block mb-12" to="/news">
+        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.2 5.0248C0.05 4.8748 0 4.7248 0 4.5248C0 4.3248 0.05 4.1748 0.2 4.0248L3.9 0.374805C4.05 0.224805 4.2 0.174805 4.35 0.174805C4.75 0.174805 5 0.474805 5 0.824805C5 0.974805 4.95 1.1748 4.8 1.2748L1.55 4.5248L4.8 7.7248C4.95 7.8748 5 8.0248 5 8.1748C5 8.52481 4.7 8.8248 4.35 8.8248C4.15 8.8248 4 8.7748 3.9 8.6248L0.2 5.0248Z" fill="#2D7BF6" />
+        </svg>
+        Новости
+      </NuxtLink>
+      <div class="article-main_date mb-8">
+        {{ $moment(articleDate).format("DD MMM YYYY") }}
+      </div>
+      <v-row>
+        <v-col md="8">
+          <h1 class="article-main_ttl">
+            {{ articleTitle }}
+          </h1>
+        </v-col>
+      </v-row>
+      <div v-for="item in articleCategories" :key="item.id" class="d-flex align-center mb-5">
+        <div class="news-label c-purple">
+          {{ item.name }}
+        </div>
+      </div>
+      <v-row>
+        <v-col md="10">
+          <div class="article-invest_img">
+            <img :src="articleImage" alt="">
+          </div>
+        </v-col>
+      </v-row>
+      <div>
+        <v-row>
+          <v-col md="10" v-html="articleContent" />
+        </v-row>
       </div>
     </div>
+    <v-divider class="mb-16 mt-8" />
+    <div class="ttl mb-7">
+      <h2>
+        Лучшее за неделю
+      </h2>
+    </div>
     <v-row>
-      <v-col md="10">
-        <div class="article-invest_img">
-          <img :src="articleImage" alt="">
-        </div>
+      <v-col v-for="item in apiNews" :key="item.id" md="4">
+        <News
+          :title="item.title"
+          :date="item.date"
+          :slug="item.slug"
+          :category="item.categories.name"
+          :image="item.preview"
+        />
       </v-col>
     </v-row>
-    <div>
-      <v-row>
-        <v-col md="10" v-html="articleContent" />
-      </v-row>
-    </div>
+    <v-btn class="btn btn-seetoo" to="/news" block>Посмотреть все новости</v-btn>
   </div>
 </template>
 
 <script>
 import HttpService from "~/services/HttpService";
+import News from "~~/components/common/News";
 
 export default {
   components: {
-
+    News
   },
   data () {
     return {
@@ -50,10 +71,13 @@ export default {
       articleContent: null,
       articleDate: null,
       articleImage: null,
-      articleCategories: null
+      articleCategories: null,
+      apiNews: []
     };
   },
   async fetch () {
+    await this.getNews(true);
+
     const slug = this.$route.params.slug || null;
     if (slug) {
       const apiPath = "/news/" + slug;
@@ -75,6 +99,20 @@ export default {
     const token = window.localStorage.getItem("userToken");
     if (!token) {
       this.$router.push("login");
+    }
+  },
+  methods: {
+    async getNews () {
+      const params = {};
+      params.type = "main";
+      const response = await HttpService.get("/news", params);
+      if (response.status === 200) {
+        if (response.data.articles && response.data.articles.length !== 0) {
+          this.apiNews = response.data.articles;
+        }
+      } else {
+        // TODO do we need to inform user?
+      }
     }
   }
 };
