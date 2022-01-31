@@ -19,10 +19,42 @@
               color="primary"
               size="120"
             >
-              <span class="profile-avatar_txt">
+              <span v-if="!userProfileAvatar" class="profile-avatar_txt">
                 <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
                 <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
+              <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="">
+              <div class="profile-avatar_edit">
+                <v-file-input
+                  v-if="!showEdit"
+                  v-model="image"
+                  hide-input
+                  prepend-icon="mdi-pencil"
+                  @change="preview_image"
+                >
+                </v-file-input>
+                <div v-if="showEdit">
+                  <v-btn
+                    icon
+                    @click="clearInput"
+                  >
+                    <v-icon>
+                      mdi-close-thick
+                    </v-icon>
+                  </v-btn>
+                </div>
+              </div>
+              <div class="profile-avatar_save">
+                <v-btn
+                  v-if="showEdit"
+                  icon
+                  @click="saveImage(saveToServer)"
+                >
+                  <v-icon>
+                    mdi-content-save-outline
+                  </v-icon>
+                </v-btn>
+              </div>
             </v-avatar>
           </div>
           <div class="profile-name">
@@ -501,10 +533,13 @@ export default {
     userSecuritySettings: null,
     userProfileProjects: null,
     userProfileCountry: null,
+    userProfileAvatar: null,
     editUser: true,
     editLink: true,
+    image: null,
     show: false,
     showTooltip: null,
+    showEdit: false,
     authUserRef: null,
     oldPassword: null,
     newPassword: null,
@@ -541,7 +576,7 @@ export default {
       this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
       this.userProfileCountry = response.data.profile.country;
-      // this.userProfileCountry = JSON.parse(this.userProfileCountry);
+      this.userProfileAvatar = response.data.profile.avatar;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -756,6 +791,17 @@ export default {
     addCityToProfile () {
       this.userProfile.profile.city = this.selectedCity.id;
     },
+    preview_image () {
+      if (this.image !== 0) {
+        this.userProfileAvatar = URL.createObjectURL(this.image);
+        this.showEdit = true;
+      }
+    },
+    clearInput () {
+      this.userProfileAvatar = null;
+      this.showEdit = false;
+      this.image = 0;
+    },
     async postUserProjectLinks () {
       const projects = this.userProfileProjects;
       const projectParams = {};
@@ -772,6 +818,39 @@ export default {
         this.userProfile = response.data;
         this.alert = {
           text: this.staticData.profile_changed,
+          active: true
+        };
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    saveImage (callback) {
+      const reader = new FileReader();
+      let imageResult;
+      reader.onloadend = function () {
+        imageResult = reader.result;
+        callback(imageResult);
+      }
+      reader.readAsDataURL(this.image);
+    },
+    async saveToServer (imageResult) {
+      const params = {
+        "avatar": imageResult
+      }
+      const response = await HttpService.post("/save-avatar", params);
+      if (response.status === 200) {
+        const message = response.data.message;
+        this.alert = {
+          text: message,
           active: true
         };
       } else {
