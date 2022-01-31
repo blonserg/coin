@@ -48,6 +48,7 @@
                 <v-btn
                   v-if="showEdit"
                   icon
+                  @click="saveImage(saveToServer)"
                 >
                   <v-icon>
                     mdi-content-save-outline
@@ -817,6 +818,39 @@ export default {
         this.userProfile = response.data;
         this.alert = {
           text: this.staticData.profile_changed,
+          active: true
+        };
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    saveImage (callback) {
+      const reader = new FileReader();
+      let imageResult;
+      reader.onloadend = function () {
+        imageResult = reader.result;
+        callback(imageResult);
+      }
+      reader.readAsDataURL(this.image);
+    },
+    async saveToServer (imageResult) {
+      const params = {
+        "avatar": imageResult
+      }
+      const response = await HttpService.post("/save-avatar", params);
+      if (response.status === 200) {
+        const message = response.data.message;
+        this.alert = {
+          text: message,
           active: true
         };
       } else {
