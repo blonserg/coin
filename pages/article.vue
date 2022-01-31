@@ -104,7 +104,7 @@ export default {
   methods: {
     async getNews () {
       const params = {};
-      params.type = "main";
+      params.type = "best";
       const response = await HttpService.get("/news", params);
       if (response.status === 200) {
         if (response.data.articles && response.data.articles.length !== 0) {

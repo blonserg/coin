@@ -19,11 +19,11 @@
               color="primary"
               size="120"
             >
-              <span v-if="!url" class="profile-avatar_txt">
+              <span v-if="!userProfileAvatar" class="profile-avatar_txt">
                 <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
                 <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
-              <img v-if="url && Object.values(url).length" :src="url" alt="">
+              <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="">
               <div class="profile-avatar_edit">
                 <v-file-input
                   v-if="!showEdit"
@@ -533,9 +533,9 @@ export default {
     userSecuritySettings: null,
     userProfileProjects: null,
     userProfileCountry: null,
+    userProfileAvatar: null,
     editUser: true,
     editLink: true,
-    url: null,
     image: null,
     show: false,
     showTooltip: null,
@@ -576,7 +576,7 @@ export default {
       this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
       this.userProfileCountry = response.data.profile.country;
-      // this.userProfileCountry = JSON.parse(this.userProfileCountry);
+      this.userProfileAvatar = response.data.profile.avatar;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -793,12 +793,12 @@ export default {
     },
     preview_image () {
       if (this.image !== 0) {
-        this.url = URL.createObjectURL(this.image);
+        this.userProfileAvatar = URL.createObjectURL(this.image);
         this.showEdit = true;
       }
     },
     clearInput () {
-      this.url = null;
+      this.userProfileAvatar = null;
       this.showEdit = false;
       this.image = 0;
     },
