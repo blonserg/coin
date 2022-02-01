@@ -16,10 +16,11 @@
           color="primary"
           size="90"
         >
-          <span class="profile-avatar_txt">
+          <span v-if="!refferer.avatar" class="profile-avatar_txt">
             <span v-if="refferer.firstName">{{ refferer.firstName.charAt(0) }}</span>
             <span v-if="refferer.lastName">{{ refferer.lastName.charAt(0) }}</span>
           </span>
+          <img v-if="refferer.avatar && Object.values(refferer.avatar).length" :src="refferer.avatar" alt="">
         </v-avatar>
       </div>
       <div class="profile-name">
@@ -134,7 +135,8 @@ export default {
         link: "http://test",
         firstName: null,
         lastName: null,
-        telegram: null
+        telegram: null,
+        avatar: null
       },
       alert: {
         text: "",
@@ -166,6 +168,7 @@ export default {
         this.refferer.firstName = response.data.profile.first_name;
         this.refferer.lastName = response.data.profile.last_name;
         this.refferer.telegram = response.data.profile.telegram;
+        this.refferer.avatar = response.data.profile.avatar;
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -225,6 +228,7 @@ export default {
         this.refferer.firstName = response.data.profile.first_name;
         this.refferer.lastName = response.data.profile.last_name;
         this.refferer.telegram = response.data.profile.telegram;
+        this.refferer.avatar = response.data.profile.avatar;
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {

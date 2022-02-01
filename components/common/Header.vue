@@ -6,7 +6,11 @@
       </div>
       <div class="header-avatar d-none d-md-flex align-center">
         <div class="header-avatar_image">
-          <img src="/avatar.png" alt="" />
+          <span v-if="!userProfileAvatar" class="header-avatar_init">
+            <span v-if="userProfileFirstName">{{ userProfileFirstName.charAt(0) }}</span>
+            <span v-if="userProfileLastName">{{ userProfileLastName.charAt(0) }}</span>
+          </span>
+          <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="" />
         </div>
         <div class="header-avatar_txt">
           <span>{{ userProfileFirstName }}</span>
@@ -225,7 +229,8 @@ export default {
       userProfileFirstName: null,
       userProfileLastName: null,
       currencies: null,
-      tariffs: null
+      tariffs: null,
+      userProfileAvatar: null
     };
   },
   async fetch () {
@@ -251,6 +256,7 @@ export default {
       this.userProfileLastName = response.data.profile.last_name;
       this.authUserId = response.data.profile.user_id;
       this.authUserSum = response.data.scores;
+      this.userProfileAvatar = response.data.profile.avatar;
     } else {
       // TODO do we need to inform user?
     }

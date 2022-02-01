@@ -388,3 +388,7 @@ body,
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: none !important;
 }
+
+.v-avatar img {
+  object-fit: cover !important;
+}
