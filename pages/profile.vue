@@ -848,11 +848,13 @@ export default {
       }
       const response = await HttpService.post("/save-avatar", params);
       if (response.status === 200) {
-        const message = response.data.message;
-        this.alert = {
-          text: message,
-          active: true
-        };
+        // const message = response.data.message;
+        this.dialogProfile = true;
+        this.showEdit = false;
+        // this.alert = {
+        //   text: message,
+        //   active: true
+        // };
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
