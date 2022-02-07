@@ -368,6 +368,7 @@
             </v-btn>
           </div>
         </div>
+        {{ countries }}
         <v-row>
           <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_name }}</span>
@@ -417,7 +418,6 @@
               :label="userProfileCountry.title_ru"
               solo
               :disabled="editUser"
-              @change="getCitiesByCountryId"
             >
               <template #item="{item}">
                 {{ item.title_ru }}
@@ -429,22 +429,12 @@
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <v-select
-              v-model="selectedCity"
-              :items="cities"
-              label="City"
+            <v-text-field
+              v-model="userProfile.profile.city"
+              :label="userProfile.profile.city || `Не заполнено`"
               solo
               :disabled="editUser"
-              no-data-text="No data available, wait and try again"
-              @change="addCityToProfile"
-            >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select>
+            />
           </v-col>
         </v-row>
         <div class="d-flex align-center mb-10">
@@ -562,10 +552,8 @@ export default {
     DialogTariffs
   },
   data: () => ({
-    cities: [],
     countries: null,
     selectedCountry: null,
-    selectedCity: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
     countryData: null, // TODO use
     selectedCountryName: "Poland", // TODO get from dropdown
@@ -660,11 +648,6 @@ export default {
         const index = this.countries.findIndex(x => x.id === Number(this.userProfile.profile.country));
         this.selectedCountry = this.countries[index];
       }
-      if (!this.selectedCity) {
-        await this.getCitiesByCountryId();
-        index = this.cities.findIndex(x => x.id === Number(this.userProfile.profile.city));
-        this.selectedCity = this.cities[index];
-      }
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -709,10 +692,6 @@ export default {
         this.userProfile = response.data;
         this.editUser = true;
         this.dialogProfile = true;
-        // this.alert = {
-        //   text: this.staticData.profile_changed,
-        //   active: true
-        // };
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -812,31 +791,6 @@ export default {
           active: true
         };
       }
-    },
-    async getCitiesByCountryId () {
-      this.cities = [];
-      const params = {
-        "country_id": this.selectedCountry.id
-      }
-      const response = await HttpService.get("/cities", params);
-      if (response.status === 200) {
-        this.cities = response.data;
-        this.userProfile.profile.country = this.selectedCountry.id;
-      } else {
-        let errorText;
-        if (Array.isArray(response.errors)) {
-          errorText = response.errors.join("; ")
-        } else {
-          errorText = "An error occurred"
-        }
-        this.alert = {
-          text: errorText,
-          active: true
-        };
-      }
-    },
-    addCityToProfile () {
-      this.userProfile.profile.city = this.selectedCity.id;
     },
     preview_image () {
       if (this.image !== 0) {
