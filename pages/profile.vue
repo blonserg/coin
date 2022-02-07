@@ -343,7 +343,6 @@
         </v-card>
       </v-col>
       <v-col class="profile-form" md="8">
-        {{ userProfile.profile }}
         <div class="d-flex align-center mb-10">
           <div class="profile-ttl">
             {{ staticData.my_profile_main_info }}
@@ -413,7 +412,7 @@
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
             <v-autocomplete
-              v-model="selectedCountry"
+              v-model="userProfile.profile.country"
               :items="countries"
               :label="userProfileCountry"
               solo
