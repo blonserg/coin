@@ -343,6 +343,7 @@
         </v-card>
       </v-col>
       <v-col class="profile-form" md="8">
+        {{ userProfile.profile }}
         <div class="d-flex align-center mb-10">
           <div class="profile-ttl">
             {{ staticData.my_profile_main_info }}
@@ -368,7 +369,6 @@
             </v-btn>
           </div>
         </div>
-        {{ countries }}
         <v-row>
           <v-col md="6" class="mb-2 mb-md-10">
             <span class="label">{{ staticData.my_profile_name }}</span>
@@ -412,20 +412,14 @@
         <v-row>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
-            <v-select
+            <v-autocomplete
               v-model="selectedCountry"
               :items="countries"
-              :label="userProfileCountry.title_ru"
+              :label="userProfileCountry"
               solo
               :disabled="editUser"
             >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select>
+            </v-autocomplete>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
@@ -552,7 +546,7 @@ export default {
     DialogTariffs
   },
   data: () => ({
-    countries: null,
+    countries: {},
     selectedCountry: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
     countryData: null, // TODO use
@@ -644,10 +638,7 @@ export default {
     response = await HttpService.get("/countries");
     if (response.status === 200) {
       this.countries = response.data;
-      if (!this.selectedCountry) {
-        const index = this.countries.findIndex(x => x.id === Number(this.userProfile.profile.country));
-        this.selectedCountry = this.countries[index];
-      }
+      this.countries = Object.values(this.countries);
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
