@@ -6,7 +6,9 @@
         @close="() => { alert.active = false; }"
       />
     </v-dialog>
-    <LogoSvg />
+    <NuxtLink to="/">
+      <LogoSvg />
+    </NuxtLink>
     <div v-if="refferer.referer_id" class="login-refer">
       <div class="login-ttl">
         Регистрация<br> по приглашению от:
