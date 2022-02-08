@@ -44,7 +44,8 @@ export default {
     "@nuxtjs/moment",
     ["@nuxtjs/router", {
       keepDefaultRouter: true
-    }]
+    }],
+    "@nuxtjs/device"
   ],
 
   moment: {

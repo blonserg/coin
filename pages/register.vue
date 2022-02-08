@@ -117,7 +117,8 @@ export default {
         email: "",
         password: "",
         password_confirmation: "",
-        ip: ""
+        ip: "",
+        device: ""
       },
       checkbox: false,
       errorStatus: false,
@@ -186,6 +187,7 @@ export default {
     if (token) {
       this.$router.push("main");
     }
+    console.log(this.$device);
   },
   methods: {
     async registration () {
@@ -197,20 +199,25 @@ export default {
       }
       const registrationResponse = await UserService.registration(registrationUserData);
       if (registrationResponse.status === 200) {
-        if (this.refferer.referer_id) {
-          const params = {
-            "user_id": registrationResponse.data.user.user_id,
-            "referral_id": this.refferer.referer_id,
-            "link": this.refferer.link
-          }
-          const response = await HttpService.post("/register/test", undefined, params);
-          if (response.status === 200) {
-            // TODO do not inform user?
-          } else {
-            // TODO do not inform user?
-          }
+        this.alert = {
+          text: registrationResponse.data.message,
+          active: true
         }
-        this.$router.push("main");
+
+        // if (this.refferer.referer_id) {
+        //   const params = {
+        //     "user_id": registrationResponse.data.user.user_id,
+        //     "referral_id": this.refferer.referer_id,
+        //     "link": this.refferer.link
+        //   }
+        //   const response = await HttpService.post("/register/test", undefined, params);
+        //   if (response.status === 200) {
+        //     // TODO do not inform user?
+        //   } else {
+        //     // TODO do not inform user?
+        //   }
+        // }
+        // this.$router.push("main");
       } else {
         this.errorStatus = true
         this.errorList = registrationResponse.errors.error_text;

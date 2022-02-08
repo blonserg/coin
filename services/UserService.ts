@@ -19,8 +19,9 @@ export default {
   async registration (user: RequestRegisterModel): Promise<ResponseModel> {
     const response = await HttpService.post("/register", user);
     if (response.status === 200) {
-      const userData: UserModel = response.data.user;
-      localStorage.setItem("userToken", userData.api_token);
+
+      // const userData: UserModel = response.data.user;
+      // localStorage.setItem("userToken", userData.api_token);
     }
     return response;
   },

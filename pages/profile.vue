@@ -850,7 +850,7 @@ export default {
       if (response.status === 200) {
         const message = response.data.message;
         this.alert = {
-          text: message,
+          text: errorText,
           active: true
         };
       } else {
