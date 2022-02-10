@@ -308,6 +308,12 @@
     white-space: nowrap;
     color: #fff !important;
 
+    &--gray {
+      background: #28292E;
+      border: 1px solid #272A33;
+      color: #6a6b79 !important;
+    }
+
     .theme--light & {
       color: #fff;
     }

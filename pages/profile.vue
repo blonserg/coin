@@ -25,37 +25,79 @@
               </span>
               <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="">
               <div class="profile-avatar_edit">
-                <v-file-input
-                  v-if="!showEdit"
-                  v-model="image"
-                  hide-input
-                  prepend-icon="mdi-pencil"
-                  @change="preview_image"
-                >
-                </v-file-input>
-                <div v-if="showEdit">
-                  <v-btn
-                    icon
-                    @click="clearInput"
-                  >
-                    <v-icon>
-                      mdi-close-thick
-                    </v-icon>
-                  </v-btn>
-                </div>
-              </div>
-              <div class="profile-avatar_save">
                 <v-btn
-                  v-if="showEdit"
-                  icon
-                  @click="saveImage(saveToServer)"
+                  fab
+                  x-small
+                  color="#2d7bf6"
+                  @click="dialogAvatar = !dialogAvatar"
                 >
-                  <v-icon>
-                    mdi-content-save-outline
-                  </v-icon>
+                  <PencilWhite />
                 </v-btn>
               </div>
             </v-avatar>
+            <v-dialog
+              v-model="dialogAvatar"
+              max-width="351"
+            >
+              <v-card class="dialog dialog--load">
+                <v-card-text v-if="uploadImage" class="dialog-text">
+                  <div class="dialog-text-inner">
+                    <v-avatar
+                      color="#18191f"
+                      size="120"
+                      class="profile-avatar_dialog"
+                    >
+                      <span v-if="!userProfileAvatarLoad" class="profile-avatar_load">
+                        загрузить<br> фото
+                      </span>
+                      <img v-if="userProfileAvatarLoad && Object.values(userProfileAvatarLoad).length" :src="userProfileAvatarLoad" alt="">
+                      <div class="profile-avatar_edit">
+                        <v-file-input
+                          v-if="!userProfileAvatarLoad"
+                          v-model="image"
+                          hide-input
+                          prepend-icon="mdi-pencil"
+                          @change="preview_image"
+                        >
+                        </v-file-input>
+                        <div v-if="userProfileAvatarLoad">
+                          <v-btn
+                            fab
+                            x-small
+                            color="#f75050"
+                            class="profile-avatar_clear"
+                            @click="clearInput"
+                          >
+                            <v-icon>
+                              mdi-close
+                            </v-icon>
+                          </v-btn>
+                        </div>
+                      </div>
+                    </v-avatar>
+                    <div class="d-flex align-center justify-center mt-7">
+                      <button class="article-link mr-5 article-link--gray" type="button" @click="dialogAvatar = false">
+                        Отменить
+                      </button>
+                      <button :disabled="!showEdit" class="article-link" type="button" @click="saveImage(saveToServer)">
+                        Сохранить
+                      </button>
+                    </div>
+                  </div>
+                </v-card-text>
+                <v-card-text v-else>
+                  <div class="dialog-text-inner">
+                    <ChangeSvg class="mt-6 mb-7" />
+                    <p class="dialog-text_change">
+                      Новые настройки профиля успешно сохранены
+                    </p>
+                  </div>
+                  <button class="article-link mt-3" type="button" @click="dialogAvatar = false, renderPage()">
+                    Продолжить
+                  </button>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
           </div>
           <div class="profile-name">
             <span>{{ userProfile.profile.first_name }}</span>
@@ -369,40 +411,23 @@
         <v-row>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
-            <v-select
-              v-model="selectedCountry"
+            <v-autocomplete
+              v-model="userProfile.profile.country"
               :items="countries"
-              :label="userProfileCountry.title_ru"
+              :label="userProfileCountry"
               solo
               :disabled="editUser"
-              @change="getCitiesByCountryId"
             >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select>
+            </v-autocomplete>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <v-select
-              v-model="selectedCity"
-              :items="cities"
-              label="City"
+            <v-text-field
+              v-model="userProfile.profile.city"
+              :label="userProfile.profile.city || `Не заполнено`"
               solo
               :disabled="editUser"
-              no-data-text="No data available, wait and try again"
-              @change="addCityToProfile"
-            >
-              <template #item="{item}">
-                {{ item.title_ru }}
-              </template>
-              <template #selection="{item}">
-                {{ item.title_ru }}
-              </template>
-            </v-select>
+            />
           </v-col>
         </v-row>
         <div class="d-flex align-center mb-10">
@@ -474,7 +499,7 @@
               Новые настройки профиля успешно сохранены
             </p>
           </div>
-          <button class="article-link mt-3" type="button" @click="dialogProfile = false">
+          <button class="article-link mt-3" type="button" @click="dialogProfile = false, renderPage()">
             Продолжить
           </button>
         </v-card-text>
@@ -498,6 +523,7 @@ import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
+import PencilWhite from "~~/components/svg/PencilWhite";
 import ChangeSvg from "~~/components/svg/ChangeSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
@@ -510,6 +536,7 @@ export default {
   components: {
     LogoutSvg,
     PencilSvg,
+    PencilWhite,
     LockSvg,
     CloseButton,
     Alert,
@@ -518,10 +545,8 @@ export default {
     DialogTariffs
   },
   data: () => ({
-    cities: [],
-    countries: null,
+    countries: {},
     selectedCountry: null,
-    selectedCity: null,
     selectedCountryCode: "Pl", // TODO get from dropdown
     countryData: null, // TODO use
     selectedCountryName: "Poland", // TODO get from dropdown
@@ -534,6 +559,7 @@ export default {
     userProfileProjects: null,
     userProfileCountry: null,
     userProfileAvatar: null,
+    userProfileAvatarLoad: null,
     editUser: true,
     editLink: true,
     image: null,
@@ -548,6 +574,8 @@ export default {
     dialog1: false,
     dialog2: false,
     dialogProfile: false,
+    dialogAvatar: false,
+    uploadImage: true,
     alert: {
       text: "",
       active: false
@@ -609,15 +637,7 @@ export default {
     response = await HttpService.get("/countries");
     if (response.status === 200) {
       this.countries = response.data;
-      if (!this.selectedCountry) {
-        const index = this.countries.findIndex(x => x.id === Number(this.userProfile.profile.country));
-        this.selectedCountry = this.countries[index];
-      }
-      if (!this.selectedCity) {
-        await this.getCitiesByCountryId();
-        index = this.cities.findIndex(x => x.id === Number(this.userProfile.profile.city));
-        this.selectedCity = this.cities[index];
-      }
+      this.countries = Object.values(this.countries);
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -662,10 +682,6 @@ export default {
         this.userProfile = response.data;
         this.editUser = true;
         this.dialogProfile = true;
-        // this.alert = {
-        //   text: this.staticData.profile_changed,
-        //   active: true
-        // };
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -766,41 +782,19 @@ export default {
         };
       }
     },
-    async getCitiesByCountryId () {
-      this.cities = [];
-      const params = {
-        "country_id": this.selectedCountry.id
-      }
-      const response = await HttpService.get("/cities", params);
-      if (response.status === 200) {
-        this.cities = response.data;
-        this.userProfile.profile.country = this.selectedCountry.id;
-      } else {
-        let errorText;
-        if (Array.isArray(response.errors)) {
-          errorText = response.errors.join("; ")
-        } else {
-          errorText = "An error occurred"
-        }
-        this.alert = {
-          text: errorText,
-          active: true
-        };
-      }
-    },
-    addCityToProfile () {
-      this.userProfile.profile.city = this.selectedCity.id;
-    },
     preview_image () {
       if (this.image !== 0) {
-        this.userProfileAvatar = URL.createObjectURL(this.image);
+        this.userProfileAvatarLoad = URL.createObjectURL(this.image);
         this.showEdit = true;
       }
     },
     clearInput () {
-      this.userProfileAvatar = null;
+      this.userProfileAvatarLoad = null;
       this.showEdit = false;
       this.image = 0;
+    },
+    renderPage () {
+      this.$router.go(0);
     },
     async postUserProjectLinks () {
       const projects = this.userProfileProjects;
@@ -848,13 +842,8 @@ export default {
       }
       const response = await HttpService.post("/save-avatar", params);
       if (response.status === 200) {
-        // const message = response.data.message;
-        this.dialogProfile = true;
+        this.uploadImage = false;
         this.showEdit = false;
-        // this.alert = {
-        //   text: message,
-        //   active: true
-        // };
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {

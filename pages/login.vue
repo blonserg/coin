@@ -1,6 +1,8 @@
 <template>
   <v-card class="login">
-    <LogoSvg />
+    <NuxtLink to="/">
+      <LogoSvg />
+    </NuxtLink>
     <div class="login-ttl">
       {{ staticData.sign_in }}
     </div>

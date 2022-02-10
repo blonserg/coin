@@ -23,7 +23,7 @@
           <RegisterSvg class="ml-2" />
         </v-btn>
       </NuxtLink>
-      <NuxtLink v-else to="/register">
+      <NuxtLink v-else to="/login">
         <v-btn
           class="btn d-none d-md-flex"
           color="#2d7bf6"

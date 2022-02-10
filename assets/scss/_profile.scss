@@ -43,12 +43,37 @@
       }
     }
 
+    &_clear {
+      .v-icon {
+        background: inherit;
+      }
+    }
+
     &_save {
       left: -10px;
     }
 
     &_edit {
-      right: -10px;
+      right: 0;
+
+      .v-btn--fab.v-size--x-small {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    &_dialog {
+      border: 1px solid #272a33 !important;
+      overflow: visible !important;
+    }
+
+    &_load {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      text-transform: capitalize;
+      color: #272a33;
     }
   }
 
