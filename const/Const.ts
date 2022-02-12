@@ -1,3 +1,4 @@
 export default {
-  baseUrl: "http://api.st.cubic.pw/api/v1"
+  siteUrl: "http://striketeam.ru",
+  baseUrl: "http://api.striketeam.ru/api/v1"
 };

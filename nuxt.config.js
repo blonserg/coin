@@ -62,7 +62,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-
+    "nuxt-clipboard2"
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

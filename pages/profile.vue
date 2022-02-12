@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-row v-if="$fetchState.pending">
-      <v-col md="4">
-        Loading...
-      </v-col>
-    </v-row>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <Loader />
+      </div>
+    </div>
     <v-row v-else>
       <v-dialog v-model="alert.active">
         <Alert
@@ -19,21 +19,95 @@
               color="primary"
               size="120"
             >
-              <span class="profile-avatar_txt">
+              <span v-if="!userProfileAvatar" class="profile-avatar_txt">
                 <span v-if="userProfile.profile.first_name">{{ userProfile.profile.first_name.charAt(0) }}</span>
                 <span v-if="userProfile.profile.last_name">{{ userProfile.profile.last_name.charAt(0) }}</span>
               </span>
+              <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="">
+              <div class="profile-avatar_edit">
+                <v-btn
+                  fab
+                  x-small
+                  color="#2d7bf6"
+                  @click="dialogAvatar = !dialogAvatar"
+                >
+                  <PencilWhite />
+                </v-btn>
+              </div>
             </v-avatar>
+            <v-dialog
+              v-model="dialogAvatar"
+              max-width="351"
+            >
+              <v-card class="dialog dialog--load">
+                <v-card-text v-if="uploadImage" class="dialog-text">
+                  <div class="dialog-text-inner">
+                    <v-avatar
+                      color="#18191f"
+                      size="120"
+                      class="profile-avatar_dialog"
+                    >
+                      <span v-if="!userProfileAvatarLoad" class="profile-avatar_load">
+                        загрузить<br> фото
+                      </span>
+                      <img v-if="userProfileAvatarLoad && Object.values(userProfileAvatarLoad).length" :src="userProfileAvatarLoad" alt="">
+                      <div class="profile-avatar_edit">
+                        <v-file-input
+                          v-if="!userProfileAvatarLoad"
+                          v-model="image"
+                          hide-input
+                          prepend-icon="mdi-pencil"
+                          @change="preview_image"
+                        >
+                        </v-file-input>
+                        <div v-if="userProfileAvatarLoad">
+                          <v-btn
+                            fab
+                            x-small
+                            color="#f75050"
+                            class="profile-avatar_clear"
+                            @click="clearInput"
+                          >
+                            <v-icon>
+                              mdi-close
+                            </v-icon>
+                          </v-btn>
+                        </div>
+                      </div>
+                    </v-avatar>
+                    <div class="d-flex align-center justify-center mt-7">
+                      <button class="article-link mr-5 article-link--gray" type="button" @click="dialogAvatar = false">
+                        Отменить
+                      </button>
+                      <button :disabled="!showEdit" class="article-link" type="button" @click="saveImage(saveToServer)">
+                        Сохранить
+                      </button>
+                    </div>
+                  </div>
+                </v-card-text>
+                <v-card-text v-else>
+                  <div class="dialog-text-inner">
+                    <ChangeSvg class="mt-6 mb-7" />
+                    <p class="dialog-text_change">
+                      Новые настройки профиля успешно сохранены
+                    </p>
+                  </div>
+                  <button class="article-link mt-3" type="button" @click="dialogAvatar = false, renderPage()">
+                    Продолжить
+                  </button>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
           </div>
           <div class="profile-name">
             <span>{{ userProfile.profile.first_name }}</span>
             <span>{{ userProfile.profile.last_name }}</span>
             <span class="profile-name_nick">
-              ID: {{ userProfile.profile.id }}
+              ID: {{ userProfile.profile.user_id }}
             </span>
           </div>
           <v-divider />
-          <div class="profile-tariph">
+          <div v-if="userProfile.tariff.code" class="profile-tariph">
             <div class="profile-tariph_txt">
               {{ staticData.tariff }}:
             </div>
@@ -42,18 +116,16 @@
             </div>
           </div>
           <div class="profile-tariph_date">
-            до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}
+            <span v-if="userProfile.tariff.code">до {{ $moment(userProfile.tariff.end_date).format("DD MMM YYYY") }}</span>
           </div>
-          <a href="" class="article-link">
-            {{ staticData.extend_tariff }}
-          </a>
+          <DialogTariffs />
           <v-divider class="mt-15" />
           <div class="profile-referal">
             <div class="profile-referal_ttl">
               {{ staticData.my_profile_ref_link }}
             </div>
             <div id="profileref" class="header-refs d-none d-md-flex align-center">
-              <v-text-field ref="textToCopySidebar" :value="userProfile.profile.referral_link" outlined readonly />
+              <v-text-field ref="textToCopySidebar" :value="authUserRef" outlined readonly />
               <button
                 color="primary"
                 class="header-refs_btn d-flex align-center justify-center"
@@ -331,7 +403,6 @@
             <v-text-field
               v-model="userProfile.profile.instagram"
               :label="userProfile.profile.instagram || `@`"
-              :value="userProfile.profile.instagram || `@`"
               solo
               :disabled="editUser"
             />
@@ -340,27 +411,39 @@
         <v-row>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_country }}</span>
-            <v-select
+            <v-autocomplete
               v-model="userProfile.profile.country"
               :items="countries"
-              label="Country"
+              :label="userProfileCountry"
               solo
               :disabled="editUser"
-            />
+            >
+            </v-autocomplete>
           </v-col>
           <v-col md="6" class="mb-15">
             <span class="label">{{ staticData.my_profile_city }}</span>
-            <v-select
+            <v-text-field
               v-model="userProfile.profile.city"
-              :items="cities"
-              label="City"
+              :label="userProfile.profile.city || `Не заполнено`"
               solo
               :disabled="editUser"
             />
           </v-col>
         </v-row>
-        <div class="profile-ttl">
-          {{ staticData.my_profile_ref_project_links }}
+        <div class="d-flex align-center mb-10">
+          <div class="profile-ttl">
+            {{ staticData.my_profile_ref_project_links }}
+          </div>
+          <div class="profile-edit">
+            <v-btn
+              class="btn--edit"
+              plain
+              @click.native="editUserLink"
+            >
+              {{ staticData.my_profile_edit }}
+              <PencilSvg class="ml-2" />
+            </v-btn>
+          </div>
         </div>
         <div v-for="item in userProfileProjects" :key="item.id" class="profile-refitem d-flex align-center justify-space-between">
           <div class="d-flex align-center">
@@ -369,17 +452,68 @@
               {{ item.title }}
             </div>
           </div>
-          <div class="header-refs d-flex align-center">
-            <v-text-field ref="textToCopy" :value="item.link" outlined readonly />
-            <button color="primary" class="header-refs_btn d-flex align-center justify-center" @click="copyText">
+          <div class="header-refs header-refs--mycom d-flex">
+            <v-form v-model="valid">
+              <v-text-field
+                v-model="item.link"
+                :disabled="editLink"
+                outlined
+                :label="item.link || `https://`"
+                solo
+                :rules="linkRules"
+              />
+            </v-form>
+            <button v-clipboard:copy="item.link" color="primary" class="header-refs_btn d-flex align-center justify-center" @click="showTooltip = item.id, showAlert()">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.27842 8.9769L3.46623 6.78548C3.36079 7.41914 3.36079 8.0264 3.54531 8.66007L2.30643 9.90099C1.19934 11.0099 1.19934 12.5677 2.33279 13.7294C3.43987 14.8383 5.02142 14.8383 6.1285 13.7294L9.23888 10.5875C10.346 9.47855 10.346 7.89439 9.23888 6.75908C8.81714 6.33663 8.31631 6.07261 7.84185 5.9934C7.86821 5.91419 8 5.75578 8.10544 5.65017L8.94893 4.80528C9.39704 4.9901 9.8715 5.28053 10.2932 5.70297C11.9802 7.39274 11.9802 9.79538 10.2932 11.4851L7.05107 14.7327C5.36409 16.4224 2.99177 16.4224 1.27842 14.7327C-0.408563 13.0429 -0.408563 10.6667 1.27842 8.9769ZM5.75948 10.2706C4.07249 8.58086 4.07249 6.17822 5.75948 4.51485L8.97529 1.26733C10.6623 -0.422442 13.0346 -0.422442 14.7216 1.26733C16.4086 2.9571 16.4086 5.35974 14.7216 7.0231L12.5601 9.24092C12.6656 8.60726 12.6656 7.9736 12.4811 7.36634L13.7199 6.15181C14.827 5.0165 14.827 3.43234 13.6936 2.29703C12.5865 1.18812 11.0049 1.18812 9.89786 2.29703L6.78748 5.41254C5.6804 6.52145 5.6804 8.10561 6.78748 9.21452C7.20923 9.63696 7.71005 9.90099 8.18452 9.9802C8.15816 10.0858 8.02636 10.2178 7.92093 10.3234L7.07743 11.1683C6.62933 11.0099 6.18122 10.6931 5.75948 10.2706Z" fill="#6A6B79" />
               </svg>
+            </button>
+            <v-alert
+              v-show="showTooltip === item.id"
+              class="profile-refitem_alert"
+              transition="scale-transition"
+            >
+              <span>{{ staticData.copied }}</span>
+            </v-alert>
+          </div>
+        </div>
+        <div class="d-flex justify-center mt-7">
+          <div v-if="valid">
+            <button v-if="!editLink" :disabled="!valid" class="article-link" type="button" @click="postUserProjectLinks()">
+              Сохранить
             </button>
           </div>
         </div>
       </v-col>
     </v-row>
+    <v-dialog
+      v-model="dialogProfile"
+      content-class="dialog-shrink"
+      max-width="280"
+    >
+      <v-card class="dialog dialog--acess">
+        <v-card-text>
+          <div class="dialog-text-inner">
+            <ChangeSvg class="mt-6 mb-7" />
+            <p class="dialog-text_change">
+              Новые настройки профиля успешно сохранены
+            </p>
+          </div>
+          <button class="article-link mt-3" type="button" @click="dialogProfile = false, renderPage()">
+            Продолжить
+          </button>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            text
+            @click="dialogProfile = false"
+          >
+            <CloseButton />
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -389,21 +523,33 @@ import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 import LogoutSvg from "~~/components/svg/LogoutSvg";
 import PencilSvg from "~~/components/svg/PencilSvg";
+import PencilWhite from "~~/components/svg/PencilWhite";
+import ChangeSvg from "~~/components/svg/ChangeSvg";
 import LockSvg from "~~/components/svg/LockSvg";
 import CloseButton from "~~/components/svg/CloseButton";
 import Alert from "~~/components/common/Alert";
+import Const from "~~/const/Const";
+import Loader from "~~/components/common/Loader.vue";
+import DialogTariffs from "~~/components/DialogTariffs";
 
 export default {
   components: {
     LogoutSvg,
     PencilSvg,
+    PencilWhite,
     LockSvg,
     CloseButton,
-    Alert
+    Alert,
+    Loader,
+    ChangeSvg,
+    DialogTariffs
   },
   data: () => ({
-    cities: ["Sambir", "Lviv", "Kyiv"],
-    countries: ["Ukraine", "France"],
+    countries: {},
+    selectedCountry: null,
+    selectedCountryCode: "Pl", // TODO get from dropdown
+    countryData: null, // TODO use
+    selectedCountryName: "Poland", // TODO get from dropdown
     staticData: [],
     staticDataAccountSettings: [],
     staticDataChangeEmail: [],
@@ -411,18 +557,39 @@ export default {
     userProfile: null,
     userSecuritySettings: null,
     userProfileProjects: null,
+    userProfileCountry: null,
+    userProfileAvatar: null,
+    userProfileAvatarLoad: null,
     editUser: true,
+    editLink: true,
+    image: null,
     show: false,
+    showTooltip: null,
+    showEdit: false,
+    authUserRef: null,
     oldPassword: null,
     newPassword: null,
     newEmail: null,
     dialog: false,
     dialog1: false,
     dialog2: false,
+    dialogProfile: false,
+    dialogAvatar: false,
+    uploadImage: true,
     alert: {
       text: "",
       active: false
-    }
+    },
+    linkRules: [
+      (v) => {
+        if (v) {
+          return /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v) || "Ссылка должна быть в формате http://st.cubic.pw/test"
+        } else {
+          return true
+        }
+      }
+    ],
+    valid: false
 
   }),
   async fetch () {
@@ -434,7 +601,10 @@ export default {
     let response = await HttpService.get("/user-profile");
     if (response.status === 200) {
       this.userProfile = response.data;
+      this.authUserRef = Const.siteUrl + "/register?" + response.data.profile.referral_link;
       this.userProfileProjects = response.data.projects_links;
+      this.userProfileCountry = response.data.profile.country;
+      this.userProfileAvatar = response.data.profile.avatar;
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -451,6 +621,23 @@ export default {
     response = await HttpService.get("/user-security-settings");
     if (response.status === 200) {
       this.userSecuritySettings = response.data;
+    } else {
+      let errorText;
+      if (Array.isArray(response.errors)) {
+        errorText = response.errors.join("; ")
+      } else {
+        errorText = "An error occurred"
+      }
+      this.alert = {
+        text: errorText,
+        active: true
+      };
+    }
+
+    response = await HttpService.get("/countries");
+    if (response.status === 200) {
+      this.countries = response.data;
+      this.countries = Object.values(this.countries);
     } else {
       let errorText;
       if (Array.isArray(response.errors)) {
@@ -494,10 +681,7 @@ export default {
       if (response.status === 200) {
         this.userProfile = response.data;
         this.editUser = true;
-        this.alert = {
-          text: "Profile is changed",
-          active: true
-        };
+        this.dialogProfile = true;
       } else {
         let errorText;
         if (Array.isArray(response.errors)) {
@@ -514,6 +698,9 @@ export default {
     editUserProfile () {
       this.editUser = false
     },
+    editUserLink () {
+      this.editLink = false
+    },
     copyText () {
       const textToCopySidebar = this.$refs.textToCopySidebar.$el.querySelector("input");
       textToCopySidebar.select();
@@ -521,11 +708,14 @@ export default {
       this.show = true;
       setTimeout(() => (this.show = false), 2000);
     },
+    showAlert () {
+      setTimeout(() => (this.showTooltip = null), 2000);
+    },
     async changeUserPassword () {
       const errors = await UserService.changePassword(this.oldPassword, this.newPassword);
       if (!errors) {
         this.alert = {
-          text: "Password is changed",
+          text: this.staticData.password_changed,
           active: true
         };
         this.oldPassword = this.newPassword;
@@ -548,6 +738,121 @@ export default {
       } else {
         this.alert = {
           text: errors.error_text,
+          active: true
+        };
+      }
+    },
+    async getCountryByCode () {
+      const params = {
+        "code": this.selectedCountryCode
+      }
+      const response = await HttpService.get("/country", params);
+      if (response.status === 200) {
+        this.countryData = response.data; // TODO use
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    async getCountryByName () {
+      const params = {
+        "name": this.selectedCountryName
+      }
+      const response = await HttpService.get("/country-by-name", params);
+      if (response.status === 200) {
+        this.countryData = response.data; // TODO use
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    preview_image () {
+      if (this.image !== 0) {
+        this.userProfileAvatarLoad = URL.createObjectURL(this.image);
+        this.showEdit = true;
+      }
+    },
+    clearInput () {
+      this.userProfileAvatarLoad = null;
+      this.showEdit = false;
+      this.image = 0;
+    },
+    renderPage () {
+      this.$router.go(0);
+    },
+    async postUserProjectLinks () {
+      const projects = this.userProfileProjects;
+      const projectParams = {};
+      Object.keys(projects).forEach((key) => {
+        const projectParamsKey = "projects_links[" + projects[key].id + "]";
+        projectParams[projectParamsKey] = projects[key].link;
+      });
+      const params = {
+        ...this.userProfile.profile,
+        ...projectParams
+      };
+      const response = await HttpService.post("/user-profile", undefined, params);
+      if (response.status === 200) {
+        this.userProfile = response.data;
+        this.alert = {
+          text: this.staticData.profile_changed,
+          active: true
+        };
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        };
+      }
+    },
+    saveImage (callback) {
+      const reader = new FileReader();
+      let imageResult;
+      reader.onloadend = function () {
+        imageResult = reader.result;
+        callback(imageResult);
+      }
+      reader.readAsDataURL(this.image);
+    },
+    async saveToServer (imageResult) {
+      const params = {
+        "avatar": imageResult
+      }
+      const response = await HttpService.post("/save-avatar", params);
+      if (response.status === 200) {
+        this.uploadImage = false;
+        this.showEdit = false;
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
           active: true
         };
       }

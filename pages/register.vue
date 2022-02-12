@@ -1,7 +1,15 @@
 <template>
   <v-card class="login">
-    <LogoSvg />
-    <div v-if="refer" class="login-refer">
+    <v-dialog v-model="alert.active">
+      <Alert
+        :text="alert.text"
+        @close="() => { alert.active = false; }"
+      />
+    </v-dialog>
+    <NuxtLink to="/">
+      <LogoSvg />
+    </NuxtLink>
+    <div v-if="refferer.referer_id" class="login-refer">
       <div class="login-ttl">
         Регистрация<br> по приглашению от:
       </div>
@@ -10,15 +18,17 @@
           color="primary"
           size="90"
         >
-          <span class="profile-avatar_txt">
-            ВБ
+          <span v-if="!refferer.avatar" class="profile-avatar_txt">
+            <span v-if="refferer.firstName">{{ refferer.firstName.charAt(0) }}</span>
+            <span v-if="refferer.lastName">{{ refferer.lastName.charAt(0) }}</span>
           </span>
+          <img v-if="refferer.avatar && Object.values(refferer.avatar).length" :src="refferer.avatar" alt="">
         </v-avatar>
       </div>
       <div class="profile-name">
-        Владислав Борин
-        <span class="profile-name_nick">
-          @usernameplace
+        {{ refferer.firstName }} {{ refferer.lastName }}
+        <span v-if="refferer.telegram" class="profile-name_nick">
+          {{ refferer.telegram }}
         </span>
       </div>
     </div>
@@ -92,17 +102,17 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
+import Alert from "~~/components/common/Alert";
 
 export default {
   components: {
     LogoSvg,
-    Button
+    Button,
+    Alert
   },
   layout: "signup",
   data () {
     return {
-      // TODO: change refer - unknown logic?
-      refer: false,
       valid: true,
       staticData: [],
       user: {
@@ -123,34 +133,76 @@ export default {
         v => /.+@.+/.test(v) || "E-mail не правильное"
       ],
       refferer: { // TODO get from refferal link
-        referer_id: 1,
-        link: "http://test"
+        referer_id: null,
+        link: "http://test",
+        firstName: null,
+        lastName: null,
+        telegram: null,
+        avatar: null
+      },
+      alert: {
+        text: "",
+        active: false
       }
     };
   },
   async fetch () {
-    const res = await UserService.getMyIp();
-    this.user.ip = res;
+    let response = await UserService.getMyIp();
+    this.user.ip = response;
     let staticData;
-    if (this.refer) {
+    if (this.refferer.referer_id) {
       staticData = await StaticService.get("/ref_registration");
     } else {
       staticData = await StaticService.get("/registration")
     }
-    this.staticData = staticData
+    this.staticData = staticData;
+
+    if (this.$route.query.referer_id) {
+      this.refferer.referer_id = this.$route.query.referer_id;
+    }
+
+    if (this.refferer.referer_id) {
+      const params = {
+        "referer_id": this.refferer.referer_id
+      }
+      response = await HttpService.get("/referer-data", params);
+      if (response.status === 200) {
+        this.refferer.firstName = response.data.profile.first_name;
+        this.refferer.lastName = response.data.profile.last_name;
+        this.refferer.telegram = response.data.profile.telegram;
+        this.refferer.avatar = response.data.profile.avatar;
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        }
+      }
+    }
   },
   fetchOnServer: false,
+  mounted () {
+    const token = window.localStorage.getItem("userToken");
+    if (token) {
+      this.$router.push("main");
+    }
+  },
   methods: {
     async registration () {
       const registrationUserData = {
         ...this.user
       };
-      if (this.refer) {
+      if (this.refferer.referer_id) {
         registrationUserData.referer_id = this.refferer.referer_id
       }
       const registrationResponse = await UserService.registration(registrationUserData);
       if (registrationResponse.status === 200) {
-        if (this.refer) {
+        if (this.refferer.referer_id) {
           const params = {
             "user_id": registrationResponse.data.user.user_id,
             "referral_id": this.refferer.referer_id,
@@ -167,6 +219,29 @@ export default {
       } else {
         this.errorStatus = true
         this.errorList = registrationResponse.errors.error_text;
+      }
+    },
+    async getRefferData () {
+      const params = {
+        "referer_id ": this.refferer.referer_id
+      }
+      response = await HttpService.get("/referer-data", undefined, params);
+      if (response.status === 200) {
+        this.refferer.firstName = response.data.profile.first_name;
+        this.refferer.lastName = response.data.profile.last_name;
+        this.refferer.telegram = response.data.profile.telegram;
+        this.refferer.avatar = response.data.profile.avatar;
+      } else {
+        let errorText;
+        if (Array.isArray(response.errors)) {
+          errorText = response.errors.join("; ")
+        } else {
+          errorText = "An error occurred"
+        }
+        this.alert = {
+          text: errorText,
+          active: true
+        }
       }
     }
   }

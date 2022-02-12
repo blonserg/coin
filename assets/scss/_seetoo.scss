@@ -22,6 +22,7 @@
 
     &.item-1 {
       width: 32%;
+      display: block;
 
       @media screen and (max-width: 758px) {
         width: 100%;

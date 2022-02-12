@@ -1,6 +1,8 @@
 <template>
   <v-card class="login">
-    <LogoSvg />
+    <NuxtLink to="/">
+      <LogoSvg />
+    </NuxtLink>
     <div class="login-ttl">
       {{ staticData.sign_in }}
     </div>
@@ -38,7 +40,7 @@
           outlined
           type="error"
         >
-          {{ staticData.reg_wrong_login_or_password }}
+          Неверный логин или пароль
         </v-alert>
       </div>
       <Button :text="staticData.sign_in_button" @click.native="login" />
@@ -75,6 +77,7 @@ export default {
       },
       checkbox: false,
       errorStatus: false,
+      errorList: "",
       nameRules: [
         v => !!v || "Обязательное поле"
       ],
@@ -102,6 +105,7 @@ export default {
       } else {
         // TODO: process errors
         this.errorStatus = true
+        // this.errorList = errors.original.data.error_text;
       }
     },
     async forgotPassword () {

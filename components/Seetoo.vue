@@ -11,9 +11,9 @@
         <div class="seetoo-item_bottom d-md-flex justify-space-between">
           <div class="seetoo-item_ttl mb-2 mb-md-0">
             {{ promoItem.title }}
-            <!-- <span class="seetoo-item_subttl">
-              Читай условия розыгрыша в описании
-            </span> -->
+            <span class="seetoo-item_subttl">
+              {{ promoItem.sub_title }}
+            </span>
           </div>
           <v-dialog
             v-model="dialog"
@@ -35,15 +35,16 @@
               <v-row>
                 <v-col cols="12" md="4">
                   <div class="dialog-image">
-                    <img :src="promoItem.image" alt="">
+                    <img :src="promoItem.image2" alt="">
                   </div>
                 </v-col>
                 <v-col cols="12" md="8">
                   <v-card-text class="dialog-text">
                     <h2>{{ promoItem.title }}</h2>
-                    <p>
-                      {{ promoItem.content }}
-                    </p>
+                    <div v-html="promoItem.content" />
+                    <button class="article-link" type="button" @click="dialog = false, dialogReview = !dialogReview">
+                      Смотреть отзывы
+                    </button>
                   </v-card-text>
                 </v-col>
               </v-row>
@@ -61,10 +62,12 @@
         </div>
       </v-card>
       <v-card class="seetoo-item item-1">
-        <img src="" alt="">
+        <div class="seetoo-img">
+          <img src="/review.png" alt="">
+        </div>
         <div class="seetoo-item_bottom d-flex justify-space-between">
           <div class="seetoo-item_ttl">
-            Отзывы победителей розыгрышей
+            {{ staticData.cab_prize_winner_reviews }}
           </div>
           <button
             type="button"
@@ -80,42 +83,44 @@
                 <v-col cols="12" md="5">
                   <v-card-text class="dialog-text">
                     <h2>
-                      Видео отзывы победителей розыгрыша Strike Team
+                      {{ staticData.cab_prize_winner_reviews_strike_team }}
                     </h2>
-                    <p>
-                      Получи 500 баллов прямо сейчас! Запиши свой видео отзыв и отошли его нам в телеграм <span class="dialog-text_bot">@telegrambot</span>
-                    </p>
+                    <div v-html="staticData.cab_prize_winner_reviews_sub_title" />
                   </v-card-text>
                 </v-col>
                 <v-col cols="12" md="7">
                   <v-row>
                     <v-col v-for="dynamicReviewitem in reviews" :key="dynamicReviewitem.id" cols="12" md="6" class="dialog-review">
-                      <div class="dialog-review_video">
+                      <div class="dialog-review_video" @click="dialogVideo = !dialogVideo, showVideo = dynamicReviewitem.id">
                         <img :src="dynamicReviewitem.image" alt="">
-                        <button class="dialog-review_play" type="button" @click="showVideo = dynamicReviewitem.id">
+                        <button class="dialog-review_play" type="button">
                           <PlayVideo />
                         </button>
                       </div>
-                      <div v-if="showVideo === dynamicReviewitem.id" class="dialog-review_video-wrap">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          :src="dynamicReviewitem.link"
-                          title="YouTube video player"
-                          frameborder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowfullscreen
-                        >
-                        </iframe>
-                        <v-btn
-                          color="primary"
-                          class="dialog-review_video-close"
-                          text
-                          @click="showVideo = null"
-                        >
-                          <CloseButton />
-                        </v-btn>
-                      </div>
+                      <v-dialog v-if="showVideo === dynamicReviewitem.id" v-model="dialogVideo">
+                        <v-card class="dialog dialog--video">
+                          <div class="dialog-review_video-wrap">
+                            <iframe
+                              width="100%"
+                              height="100%"
+                              :src="dynamicReviewitem.link"
+                              title="YouTube video player"
+                              frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowfullscreen
+                            >
+                            </iframe>
+                            <v-btn
+                              color="primary"
+                              class="dialog-review_video-close"
+                              text
+                              @click="dialogVideo = !dialogVideo"
+                            >
+                              <CloseButton />
+                            </v-btn>
+                          </div>
+                        </v-card>
+                      </v-dialog>
                       <div class="dialog-review_name">
                         {{ dynamicReviewitem.title }}
                       </div>
@@ -145,6 +150,7 @@
 
 <script>
 import HttpService from "~/services/HttpService";
+import StaticService from "~/services/StaticService";
 import CloseButton from "~~/components/svg/CloseButton";
 import PlayVideo from "~~/components/svg/PlayVideo";
 
@@ -161,8 +167,10 @@ export default {
   },
   data () {
     return {
+      staticData: [],
       dialog: false,
       dialogReview: false,
+      dialogVideo: false,
       reviews: null,
       showVideo: null,
       promo: null
@@ -182,6 +190,8 @@ export default {
     } else {
       // TODO do we need to inform user?
     }
+
+    this.staticData = await StaticService.get("/cabinet_main");
   },
   fetchOnServer: false
 };

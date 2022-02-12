@@ -15,12 +15,15 @@
                 <div class="article-name">
                   {{ item.title }}
                 </div>
+                <span class="article-username">
+                  {{ item.username }}
+                </span>
               </div>
             </div>
             <p class="article-txt">
               {{ item.content }}
             </p>
-            <div class="article-bottom d-flex justify-space-between align-center">
+            <div v-if="item.link" class="article-bottom d-flex justify-space-between align-center">
               <a class="article-link" :href="item.link">
                 {{ staticData.telegram_go_to_chat }}
               </a>
@@ -29,14 +32,19 @@
         </v-col>
       </v-row>
     </div>
+    <LockUser />
   </div>
 </template>
 
 <script>
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import LockUser from "~~/components/common/LockUser";
 
 export default {
+  components: {
+    LockUser
+  },
   data () {
     return {
       staticData: [],

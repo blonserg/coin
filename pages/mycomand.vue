@@ -1,7 +1,7 @@
 <template>
   <div class="mycomand">
     <h1 class="ttl">
-      {{ staticData.title }}
+      {{ staticData.title_my_team }}
     </h1>
     <v-row class="mb-12">
       <v-col md="4">
@@ -51,39 +51,21 @@
           {{ staticData.team_superior_partners }}
         </div>
         <div class="d-flex flex-column flex-md-row align-md-center mb-8 mb-md-15">
-          <div class="d-flex align-center mb-4 mb-md-0 mr-4">
+          <div v-for="(item, i) in userPartners" :key="i" class="d-flex align-center mb-4 mb-md-0 mr-4">
             <div class="mycomand-avatar">
               <v-avatar
-                color="primary"
+                color="#7049E0"
                 size="50"
               >
                 <span class="mycomand-avatar_txt">
-                  ВБ
+                  {{ item.name.charAt(0) }}
                 </span>
               </v-avatar>
             </div>
             <div class="mycomand-name">
-              Владислав Борин
+              {{ item.name }}
               <span class="mycomand-name_nick">
-                @usernameplace
-              </span>
-            </div>
-          </div>
-          <div class="d-flex align-center">
-            <div class="mycomand-avatar">
-              <v-avatar
-                color="primary"
-                size="50"
-              >
-                <span class="mycomand-avatar_txt">
-                  ВБ
-                </span>
-              </v-avatar>
-            </div>
-            <div class="mycomand-name">
-              Владислав Борин
-              <span class="mycomand-name_nick">
-                @usernameplace
+                {{ item.telegram }}
               </span>
             </div>
           </div>
@@ -115,7 +97,7 @@
             <v-row
               v-for="item in userProjects"
               :key="item.name"
-              class="flex-nowrap flex-md-wrap"
+              class="flex-nowrap flex-md-wrap align-center"
             >
               <v-col class="text-center col-4 col-md-1">
                 {{ item.id }}
@@ -138,55 +120,91 @@
         </div>
       </v-col>
     </v-row>
-    <Title
-      class="ttl--small mb-9"
-      :title="`Сетка реферальных партнеров`"
-      :on-select-sort-type="onSortTypeChange"
-      :sort-items="sortItems"
-    />
-    <div class="table mb-16">
-      <div class="table-head">
-        <v-row>
-          <v-col class="text-center col-1">
-            #-
-          </v-col>
-          <v-col class="text-left col-2">
-            {{ staticData.team_ref_partners_ref }}
-          </v-col>
-          <v-col class="text-center col-2">
-            {{ staticData.team_net_partners_ref_first_line }}
-          </v-col>
-          <v-col class="text-right col-3">
-            {{ staticData.team_net_partners_ref_all_partners }}
-          </v-col>
-          <v-col class="text-right col-4">
-            {{ staticData.team_net_partners_ref_finished_courses }}
-          </v-col>
-        </v-row>
-      </div>
-      <div class="table-body">
-        <v-row
-          v-for="item in userPartners"
-          :key="item.name"
-        >
-          <v-col class="text-center col-1">
-            {{ item.id }}
-          </v-col>
-          <v-col class="text-left col-2">
-            {{ item.project }}
-          </v-col>
-          <v-col class="text-center col-2">
-            {{ item.active }}
-          </v-col>
-          <v-col class="text-right col-3">
-            {{ item.first_line_referrals }}
-          </v-col>
-          <v-col class="text-right col-4">
-            {{ item.all_referrals }}
-          </v-col>
-        </v-row>
+
+    <div v-if="userRefnet && Object.values(userRefnet).length">
+      <Title
+        class="ttl--small mb-9"
+        :title="`Сетка реферальных партнеров`"
+        :on-select-sort-type="onSortTypeChange"
+        :sort-items="sortItems"
+      />
+      <div class="table mb-16">
+        <div class="table-head">
+          <v-row>
+            <v-col class="text-center col-1">
+              #-
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_ref_partners_ref }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_first_line }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_all_partners }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_finished_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ staticData.team_net_partners_ref_part_in_projects }}
+            </v-col>
+            <v-col class="text-left text-right col-1">
+              {{ staticData.team_filter_projects }}
+            </v-col>
+          </v-row>
+        </div>
+        <div class="table-body">
+          <v-row
+            v-for="(item, index) in userRefnet"
+            :key="item.name"
+            class="align-center"
+          >
+            <v-col class="text-center col-1">
+              {{ index }}
+            </v-col>
+            <v-col class="text-left col-2">
+              <div class="d-flex flex-column flex-md-row align-md-center">
+                <div class="d-flex align-center">
+                  <div class="mycomand-avatar">
+                    <v-avatar
+                      color="#7049E0"
+                      size="50"
+                    >
+                      <span class="mycomand-avatar_txt">
+                        {{ item.name.charAt(0) }}
+                      </span>
+                    </v-avatar>
+                  </div>
+                  <div class="mycomand-name">
+                    {{ item.name }}
+                    <span class="mycomand-name_nick">
+                      {{ item.telegram }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.first_line_referrals }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.all_partners }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.completed_courses }}
+            </v-col>
+            <v-col class="text-left col-2">
+              {{ item.projects }}
+            </v-col>
+            <v-col class="text-right col-1">
+              {{ item.projects_count }}
+            </v-col>
+          </v-row>
+        </div>
       </div>
     </div>
+    <LockUser />
   </div>
 </template>
 
@@ -196,12 +214,14 @@ import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
 import MyComandActive from "~~/components/svg/MyComandActive";
 import MyComandPassive from "~~/components/svg/MyComandPassive";
+import LockUser from "~~/components/common/LockUser";
 
 export default {
   components: {
     Title,
     MyComandActive,
-    MyComandPassive
+    MyComandPassive,
+    LockUser
   },
   data () {
     return {
@@ -217,6 +237,7 @@ export default {
       userPaidReferal: null,
       userProjects: null,
       userPartners: null,
+      userRefnet: null,
       staticData: [],
       selectedSortType: null,
       sortItems: [
@@ -255,6 +276,7 @@ export default {
         this.userPaidReferal = response.data.team.paid_referrals;
         this.userProjects = response.data.projects;
         this.userPartners = response.data.partners;
+        this.userRefnet = response.data.referrals_net;
       } else {
       // TODO do we need to inform user?
       }

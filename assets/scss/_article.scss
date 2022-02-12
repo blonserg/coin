@@ -65,6 +65,10 @@
     color: #808190;
     margin-bottom: 0;
 
+    .article-stock & {
+      color: #adafc2;
+    }
+
     &._hide,
     &._disabled {
       opacity: 0;
@@ -105,9 +109,10 @@
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0.01em;
+      color: #61ccbf;
 
       .Basic & {
-        color: #61ccbf;
+        color: #f7aa50;
       }
 
       .Professional & {
@@ -158,9 +163,9 @@
     &_invest {
       border-radius: 15px;
       padding: 30px;
+      height: 100%;
       page-break-inside: avoid;
       break-inside: avoid;
-      margin-bottom: 20px;
 
       @media screen and (max-width: 758px) {
         padding: 20px;
@@ -198,16 +203,17 @@
     font-size: 16px;
     line-height: 21px;
     margin-bottom: 10px;
+    color: #61ccbf;
 
     .Basic & {
-      color: #61ccbf;
+      color: #f7aa50;
     }
 
     .Professional & {
       color: #8d68f5;
     }
 
-    .Professional-more & {
+    .Professional + .Professional & {
       color: #f75050;
     }
   }
@@ -237,8 +243,23 @@
       margin-right: 20px;
       width: 138px;
 
-      .article-telegram & {
+      .article-telegram &,
+      .article-invest &,
+      .article-stock & {
         width: 84px;
+        min-width: 84px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .article-invest.main & {
+        min-width: 138px;
+
+        img {
+          width: 100%;
+        }
       }
 
       img {
@@ -258,14 +279,24 @@
     .theme--light & {
       color: #474856;
     }
+
+    .article-stock & {
+      font-size: 22px;
+    }
+  }
+
+  &-username {
+    color: #2d7bf6;
   }
 
   &-link {
+    font-family: 'SF Pro Text';
+    display: inline;
     font-weight: 600;
     font-size: 11px;
     line-height: 16px;
-    padding: 4px 8px;
-    width: 128px;
+    padding: 3px 8px;
+    width: auto;
     height: 22px;
     background: #2d7bf6;
     border-radius: 21px;
@@ -275,6 +306,13 @@
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
+    color: #fff !important;
+
+    &--gray {
+      background: #28292E;
+      border: 1px solid #272A33;
+      color: #6a6b79 !important;
+    }
 
     .theme--light & {
       color: #fff;
@@ -290,6 +328,15 @@
       letter-spacing: 0.02em;
       color: #808190;
     }
+
+    &_top {
+      border: 1px solid #f7aa50;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: #f7aa50;
+    }
   }
 
   &-stock {
@@ -302,8 +349,18 @@
 
   &-invest {
     &_img {
+      height: 478px;
+      margin-bottom: 15px;
+
+      .article-invest & {
+        height: 306px;
+      }
+
       img {
         max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         border-radius: 16px;
       }
     }
@@ -406,6 +463,8 @@
 
     &_item {
       display: inline-block;
+      margin-bottom: 20px;
+      width: 100%;
 
       @media screen and (max-width: 758px) {
         display: block;

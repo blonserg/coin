@@ -1,6 +1,10 @@
 <template>
   <div class="news-page">
-    <div v-if="$fetchState.pending">Loading...</div>
+    <div v-if="$fetchState.pending">
+      <div class="loader d-flex justify-center align-center">
+        <Loader />
+      </div>
+    </div>
     <div v-else>
       <Title
         :title="staticData.news_title"
@@ -41,12 +45,14 @@ import Title from "~~/components/common/Title";
 import News from "~~/components/common/News";
 import StaticService from "~/services/StaticService";
 import HttpService from "~/services/HttpService";
+import Loader from "~~/components/common/Loader.vue";
 
 export default {
   components: {
     VueSlickCarousel,
     Title,
-    News
+    News,
+    Loader
   },
   filters: {
     nameCategories (value) {
@@ -80,20 +86,21 @@ export default {
           }
         ]
       },
-      sortItems: [
-        {
-          text: "Latest",
-          value: "latest"
-        },
-        {
-          text: "Oldest",
-          value: "oldest"
-        }
-      ]
+      sortItems: []
     };
   },
   async fetch () {
     this.staticData = await StaticService.get("/news");
+    this.sortItems = [
+      {
+        text: this.staticData.news_latest,
+        value: "latest"
+      },
+      {
+        text: this.staticData.news_oldest,
+        value: "oldest"
+      }
+    ];
     await this.getNews(true, false);
   },
   fetchOnServer: false,
@@ -132,8 +139,10 @@ export default {
           this.showMoreNewsButton = false;
         } else if (doConcatNews) {
           this.apiNews = this.apiNews.concat(response.data.articles);
+          this.showMoreNewsButton = response.data.show_button;
         } else {
           this.apiNews = response.data.articles;
+          this.showMoreNewsButton = response.data.show_button;
         }
       } else {
         // TODO do we need to inform user?

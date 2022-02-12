@@ -6,7 +6,11 @@
       </div>
       <div class="header-avatar d-none d-md-flex align-center">
         <div class="header-avatar_image">
-          <img src="/avatar.png" alt="" />
+          <span v-if="!userProfileAvatar" class="header-avatar_init">
+            <span v-if="userProfileFirstName">{{ userProfileFirstName.charAt(0) }}</span>
+            <span v-if="userProfileLastName">{{ userProfileLastName.charAt(0) }}</span>
+          </span>
+          <img v-if="userProfileAvatar && Object.values(userProfileAvatar).length" :src="userProfileAvatar" alt="" />
         </div>
         <div class="header-avatar_txt">
           <span>{{ userProfileFirstName }}</span>
@@ -21,7 +25,8 @@
           class="header-tariph"
           @click="showTooltip = !showTooltip"
         >
-          {{ authUserCode }}
+          <span v-if="authUserCode">{{ authUserCode }}</span>
+          <span v-else>Standart</span>
         </div>
         <v-alert
           v-model="showTooltip"
@@ -92,7 +97,11 @@
       </div>
       <div class="header-balance d-none d-md-flex align-center">
         <div class="header-balance_txt">Баланс:</div>
-        <div class="header-balance_info">{{ authUserSum }} баллов</div>
+        <div class="header-balance_info">
+          <span v-if="authUserSum">{{ authUserSum }}</span>
+          <span v-else>0</span>
+          баллов
+        </div>
       </div>
       <div class="header-refs d-none d-md-flex align-center">
         <v-text-field ref="textToCopy" :value="authUserRef" outlined readonly />
@@ -125,11 +134,11 @@
       </div>
       <div :class="alert ? '_close' : ''" class="header-notifcatns">
         <v-badge
-          :class="!userNotifications ? '_disabled' : ''"
+          :class="!(userNotifications && Object.values(userNotifications).length) ? '_disabled' : ''"
           transition="scale-transition"
           class="header-notifcatns_btn"
           overlap
-          :content="userNotificationsCount || `0`"
+          :content="(userNotifications && userNotifications.filter((item) => item.read == 0).length) || `0`"
           color="#F75050"
         >
           <v-btn
@@ -161,25 +170,32 @@
         </v-btn>
       </div>
       <div class="header-alert_list">
-        <v-alert
+        <div
           v-for="item in userNotifications"
           :key="item.id"
-          :value="alert"
-          transition="scale-transition"
-          class="header-alert_item"
         >
-          <div class="d-flex justify-space-between">
-            <div class="header-alert_ttl">
-              {{ item.title }}
+          <v-alert
+            v-if="item.read == 0"
+            :value="alert"
+            transition="scale-transition"
+            class="header-alert_item"
+          >
+            <div class="d-flex justify-space-between">
+              <div class="header-alert_ttl">
+                {{ item.title }}
+              </div>
+              <div class="header-alert_date">
+                {{ $moment(item.date).format("DD MMM YYYY") }}
+              </div>
             </div>
-            <div class="header-alert_date">
-              {{ $moment(item.date).format("DD MMM YYYY") }}
+            <div class="header-alert_txt">
+              {{ item.description }}
             </div>
-          </div>
-          <div class="header-alert_txt">
-            {{ item.description }}
-          </div>
-        </v-alert>
+            <div class="header-alert_close" @click="postOpenedNotification(item)">
+              <CloseButton />
+            </div>
+          </v-alert>
+        </div>
       </div>
     </header>
   </div>
@@ -190,6 +206,7 @@ import LogoSvg from "~~/components/svg/LogoSvg";
 import AlertClose from "~~/components/svg/AlertClose";
 import HttpService from "~/services/HttpService";
 import CloseButton from "~~/components/svg/CloseButton";
+import Const from "~~/const/Const";
 
 export default {
   components: {
@@ -207,21 +224,19 @@ export default {
       authUserId: null,
       authUserCode: null,
       authUserSum: null,
-      userNotificationsCount: null,
       showTooltip: false,
       dialogTariffs: false,
       userProfileFirstName: null,
       userProfileLastName: null,
       currencies: null,
-      addr: null,
-      tariffs: null
+      tariffs: null,
+      userProfileAvatar: null
     };
   },
   async fetch () {
     let response = await HttpService.get("/user-notifications");
     if (response.status === 200) {
       this.userNotifications = response.data;
-      this.userNotificationsCount = this.userNotifications.length
     } else {
       // TODO do we need to inform user?
     }
@@ -229,10 +244,8 @@ export default {
     response = await HttpService.get("/auth-user-info");
     if (response.status === 200) {
       this.authUserInfo = response.data;
-      this.authUserRef = response.data.user.referral_link;
-      this.authUserId = response.data.user.id;
+      this.authUserRef = Const.siteUrl + "/register?" + response.data.user.referral_link;
       this.authUserCode = response.data.tariff.code;
-      this.authUserSum = response.data.tariff.sum;
     } else {
       // TODO do we need to inform user?
     }
@@ -241,6 +254,9 @@ export default {
     if (response.status === 200) {
       this.userProfileFirstName = response.data.profile.first_name;
       this.userProfileLastName = response.data.profile.last_name;
+      this.authUserId = response.data.profile.user_id;
+      this.authUserSum = response.data.scores;
+      this.userProfileAvatar = response.data.profile.avatar;
     } else {
       // TODO do we need to inform user?
     }
@@ -287,10 +303,24 @@ export default {
       }
       const response = await HttpService.post("/transaction", bodyObject);
       if (response.status === 200) {
-        alert("Transaction was send");// TODO how to inform user?
-        this.addr = response.data.addr;
+        window.location.href = response.data.addr;
       } else {
         alert("An error occurred") // TODO how to inform user?
+      }
+    },
+    async postOpenedNotification (item) {
+      const notificationKey = "notifications[0]";
+      const params = {};
+      params[notificationKey] = item.id;
+      const response = await HttpService.post("/user-notifications/id", undefined, params);
+      if (response.status === 200) {
+        item.read = 1;
+        const index = this.userNotifications.findIndex(x => x.id === item.id);
+        if (index !== -1) {
+          this.userNotifications[index] = item;
+        }
+      } else {
+      // TODO do we need to inform user?
       }
     }
   }

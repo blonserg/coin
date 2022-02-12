@@ -30,12 +30,37 @@
 
     &_image {
       margin-right: 9px;
+      width: 50px;
+      height: 50px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
     }
 
     &_txt {
       font-size: 14px;
       line-height: 15px;
       letter-spacing: 0.02em;
+    }
+
+    &_init {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 22px;
+      text-align: center;
+      color: #adafc2;
+      text-transform: uppercase;
+      margin-right: 9px;
+      width: 50px;
+      height: 50px;
+      background-color: #000;
+      border-radius: 50%;
     }
 
     &_subtxt {
@@ -63,6 +88,16 @@
 
   &-refs {
     position: relative;
+
+    &--mycom {
+      @media screen and (min-width: 758px) {
+        width: 324px;
+      }
+
+      form {
+        width: 100%;
+      }
+    }
 
     .v-text-field--outlined fieldset {
       border-width: 0;
@@ -221,6 +256,7 @@
       border-radius: 15px !important;
       padding: 12px;
       width: 346px;
+      position: relative;
 
       @media screen and (max-width: 758px) {
         width: 100%;
@@ -253,6 +289,14 @@
       font-size: 12px;
       line-height: 14px;
       color: #40424e;
+    }
+
+    &_close {
+      position: absolute;
+      left: -30px;
+      top: calc(50% + 5px);
+      transform: translateY(-50%);
+      cursor: pointer;
     }
   }
 
