@@ -1,0 +1,12 @@
+.learn-list {
+  &-alert {
+    .icon {
+      margin-right: 20px;
+    }
+
+    .v-alert__content {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

@@ -1,18 +1,24 @@
 <template>
   <div class="learn">
-    <div class="ttl">
+    <div class="ttl mb-2">
       Обучение
     </div>
-    <div class="subttl">
-      Наши курсы и коучинги приобрели широкий общественный резонанс благодаря уникальному формату обучения с интенсивной практикой, опытными наставниками и гарантией результата
-    </div>
+    <v-row>
+      <v-col col="12" md="6">
+        <div class="subttl">
+          Наши курсы и коучинги приобрели широкий общественный резонанс благодаря уникальному формату обучения с интенсивной практикой, опытными наставниками и гарантией результата
+        </div>
+      </v-col>
+    </v-row>
     <div class="learn-subttl">
       Доступные программы:
     </div>
     <v-row>
       <v-col col="12" md="6">
         <v-card class="learn-item">
-          <div class="learn-img"></div>
+          <div class="learn-img">
+            <img src="/article.png" alt="">
+          </div>
           <div class="learn-info">
             <div class="learn-ttl">
               Введение: Работа со Strike Team
@@ -44,7 +50,9 @@
       </v-col>
       <v-col col="12" md="6">
         <v-card class="learn-item">
-          <div class="learn-img"></div>
+          <div class="learn-img">
+            <img src="/article.png" alt="">
+          </div>
           <div class="learn-info">
             <div class="learn-ttl">
               Введение: Работа со Strike Team
@@ -109,7 +117,7 @@ export default {
     }
 
     &-img {
-      height: 263px;
+      height: 386px;
 
       img {
         max-width: 100%;
