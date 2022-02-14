@@ -92,15 +92,15 @@
           Пополнить баланс
         </v-btn>
       </div>
-      <v-card class="learn-bottom">
-        <div class="learn-bottom-txt mb-5">
+      <v-card class="learn-card">
+        <div class="learn-card-txt mb-5">
           Пройдите тест чтобы lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
         </div>
         <v-btn
           class="btn"
           color="#2d7bf6"
           height="48px"
-          to="/learnlist"
+          to="/test"
         >
           <span class="mr-2">Пройти тест</span>
           <LearnTest class="mt-1" />
