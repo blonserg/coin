@@ -17,7 +17,7 @@
       <v-col col="12" md="6">
         <v-card class="learn-item">
           <div class="learn-img">
-            <img src="/article.png" alt="">
+            <img src="/learn-free.png" alt="">
           </div>
           <div class="learn-info">
             <div class="learn-ttl">
@@ -51,14 +51,21 @@
       <v-col col="12" md="6">
         <v-card class="learn-item">
           <div class="learn-img">
-            <img src="/article.png" alt="">
+            <img src="/learn-pro.png" alt="">
           </div>
           <div class="learn-info">
             <div class="learn-ttl">
               Введение: Работа со Strike Team
             </div>
-            <div class="learn-bottom d-flex justify-space-between">
-              <div class="learn-label"></div>
+            <div class="learn-bottom d-flex mb-2">
+              <div class="learn-label">
+                <LearnPlay class="mr-2" />
+                100 уроков
+              </div>
+              <div class="learn-label">
+                <LearnTime class="mr-2" />
+                100+ часов
+              </div>
             </div>
             <p class="article-txt mb-7">
               Освой JavaScript и frontend-разработку на React, Redux и Typescript с нуля. Самый востребованный стек для работы над крупными проектами.
