@@ -46,6 +46,10 @@
   &-question {
     margin-bottom: 60px;
 
+    .v-text-field.v-input--is-focused > .v-input__control > .v-input__slot:after {
+      transform: scaleX(0);
+    }
+
     &-number {
       width: 30px;
       height: 30px;
