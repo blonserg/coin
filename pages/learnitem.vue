@@ -33,29 +33,27 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col md="8">
-          <h1 class="article-main_ttl">
-            Lorem ipsum dolor sit amet
-          </h1>
-        </v-col>
-      </v-row>
-      <div class="d-flex align-center justify-space-between mb-7">
-        <div class="learn-list-bottom d-flex">
-          <div class="learn-list-label">
-            <LearnPlay class="mr-2" />
-            10 уроков
-          </div>
-          <div class="learn-list-label">
-            <LearnTime class="mr-2" />
-            10+ часов
+      <div class="d-flex justify-space-between align-center">
+        <h1 class="article-main_ttl mb-3">
+          Веб-дизайн 3.0
+        </h1>
+        <div class="d-flex align-center justify-space-between">
+          <div class="learn-list-bottom d-flex">
+            <div class="learn-list-label">
+              <LearnPlay class="mr-2" />
+              10 уроков
+            </div>
+            <div class="learn-list-label">
+              <LearnTime class="mr-2" />
+              10+ часов
+            </div>
           </div>
         </div>
-        <div class="learn-speaker d-flex align-center">
-          <span>Спикеры:</span>
-          <span>Алексей Алексеев</span>
-          <span>Алексей Алексеев</span>
-        </div>
+      </div>
+      <div class="learn-speaker d-flex align-center  mb-7">
+        <span>Спикеры:</span>
+        <span class="learn-speaker-item">Алексей Алексеев,</span>
+        <span class="learn-speaker-item">Алексей Алексеев</span>
       </div>
       <v-row class="mb-2">
         <v-col md="10">
@@ -70,27 +68,24 @@
           </p>
         </v-col>
       </v-row>
-      <div class="d-flex align-center">
-        <v-btn
-          class="btn mr-5"
-          color="#2d7bf6"
-          height="48px"
-          to="/learnlist"
-        >
-          Купить
-        </v-btn>
-        <div class="learn-price">
-          <span class="mr-2">Цена</span>
-          <span class="mr-5">100 балов</span>
+      <div class="learn-buy">
+        <div class="learn-buy_ttl">
+          Приобрести курс
         </div>
-        <v-btn
-          class="btn"
-          color="#2d7bf6"
-          height="48px"
-          to="/learnlist"
-        >
-          Пополнить баланс
-        </v-btn>
+        <div class="learn-buy_txt">
+          Вы можете приобрести данный курс за баллы системы. Доступ ко всем урокам остается у вас безсрочно.
+        </div>
+        <div class="learn-buy_bottom">
+          <div class="d-flex align-center justify-space-between">
+            <div class="learn-price">
+              <span class="learn-price_first">10$</span>
+              <span class="learn-price_second">100$</span>
+            </div>
+            <button class="article-link">
+              Приобрести
+            </button>
+          </div>
+        </div>
       </div>
       <v-card class="learn-card">
         <div class="learn-card-txt mb-5">

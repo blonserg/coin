@@ -1,9 +1,14 @@
 .learn {
   &-speaker {
     font-size: 14px;
+    color: #adafc2;
 
     span {
-      margin-right: 15px;
+      margin-right: 10px;
+    }
+
+    &-item {
+      color: #2d7bf6;
     }
   }
 
@@ -48,6 +53,14 @@
 
     .v-text-field.v-input--is-focused > .v-input__control > .v-input__slot:after {
       transform: scaleX(0);
+    }
+
+    .v-text-field .v-label {
+      color: #6a6b79;
+    }
+
+    .theme--dark.v-text-field > .v-input__control > .v-input__slot:before {
+      border-color: #272a33;
     }
 
     &-number {
@@ -129,6 +142,52 @@
 
   &-complete {
     margin-left: 50px;
+  }
+
+  &-buy {
+    width: 532px;
+    background: #1c1d24;
+    border: 1px solid #272a33;
+    border-radius: 15px;
+
+    &_ttl {
+      padding: 20px 20px 10px;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+      color: #eef1f8;
+    }
+
+    &_txt {
+      font-size: 14px;
+      line-height: 18px;
+      color: #adafc2;
+      padding: 0 20px 24px;
+    }
+
+    &_bottom {
+      background: #1a1b21;
+      border-top: 1px solid #272a33;
+      padding: 20px;
+      border-radius: 0 0 15px 15px;
+    }
+  }
+
+  &-price {
+    &_first {
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      color: #808190;
+    }
+
+    &_second {
+      display: block;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 23px;
+      color: #eef1f8;
+    }
   }
 }
 

@@ -12,7 +12,7 @@
       </div>
       <v-row>
         <v-col md="8">
-          <h1 class="article-main_ttl">
+          <h1 class="article-main_ttl mb-4">
             {{ articleTitle }}
           </h1>
         </v-col>
