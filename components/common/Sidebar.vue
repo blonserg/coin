@@ -100,6 +100,7 @@ import MenuMain from "~~/components/svg/MenuMain";
 import MenuNews from "~~/components/svg/MenuNews";
 import MenuStock from "~~/components/svg/MenuStock";
 import MenuTelegram from "~~/components/svg/MenuTelegram";
+import MenuLearn from "~~/components/svg/MenuLearn";
 
 export default {
   components: {
@@ -111,7 +112,8 @@ export default {
     MenuMain,
     MenuNews,
     MenuStock,
-    MenuTelegram
+    MenuTelegram,
+    MenuLearn
   },
   data () {
     return {
@@ -139,6 +141,11 @@ export default {
           icon: "MenuCommand",
           title: "Моя команда",
           to: "/mycomand"
+        },
+        {
+          icon: "MenuLearn",
+          title: "Обучение",
+          to: "/learn"
         },
         {
           icon: "MenuNews",

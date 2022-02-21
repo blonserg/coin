@@ -314,6 +314,11 @@
       color: #6a6b79 !important;
     }
 
+    &-prev {
+      transform: scaleX(-1);
+      margin-top: 2px;
+    }
+
     .theme--light & {
       color: #fff;
     }

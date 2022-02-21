@@ -16,6 +16,10 @@ body,
   }
 }
 
+.v-application p {
+  color: #abacb8;
+}
+
 .base.v-main  {
   .v-main__wrap {
     background: #18191e;
@@ -62,6 +66,7 @@ body,
   h2 {
     font-weight: 600;
     font-size: 36px;
+    margin: 0;
 
     @media screen and (max-width: 758px) {
       font-size: 32px;
