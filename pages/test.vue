@@ -67,9 +67,54 @@
         class="btn"
         color="#2d7bf6"
         height="48px"
+        @click="dialogTest = true"
       >
         Завершить тест
       </v-btn>
     </div>
+    <v-dialog
+      v-model="dialogTest"
+      max-width="400"
+    >
+      <v-card class="dialog dialog--test">
+        <TestComplete class="mb-7" />
+        <p class="mb-7">
+          Тест завершен! Вы получите уведомление о результатах в течении 24 часов.
+        </p>
+        <NuxtLink to="/learn">
+          <button class="article-link" type="button" @click="dialogTest = false">
+            Смотреть курс
+          </button>
+        </NuxtLink>
+        <div class="v-card__actions">
+          <NuxtLink to="/learn">
+            <v-btn
+              color="primary"
+              text
+              @click="dialogTest = false"
+            >
+              <CloseButton />
+            </v-btn>
+          </NuxtLink>
+        </div>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
+
+<script>
+import CloseButton from "~~/components/svg/CloseButton";
+import TestComplete from "~~/components/svg/TestComplete";
+
+export default {
+  components: {
+    CloseButton,
+    TestComplete
+  },
+  data () {
+    return {
+      dialogTest: null
+    }
+  }
+}
+</script>

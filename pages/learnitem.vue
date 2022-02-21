@@ -81,7 +81,7 @@
               <span class="learn-price_first">10$</span>
               <span class="learn-price_second">100$</span>
             </div>
-            <button class="article-link">
+            <button class="article-link" @click="dialogBuy = true">
               Приобрести
             </button>
           </div>
@@ -102,6 +102,60 @@
         </v-btn>
       </v-card>
     </div>
+    <v-dialog
+      v-model="dialogBuy"
+      max-width="400"
+    >
+      <v-card class="dialog dialog--test">
+        <div v-if="enableBuy">
+          <RocketSvg class="mb-7" />
+          <p class="mb-7">
+            Вы действительно хотите приобрести курс “Веб дизайн 3.0”?
+          </p>
+          <div class="d-flex align-center justify-center mt-7">
+            <button class="article-link mr-3 article-link--gray" type="button" @click="dialogBuy = false">
+              отмена
+            </button>
+            <button class="article-link" type="button" @click="enableBuy = false">
+              Купить
+            </button>
+          </div>
+        </div>
+        <div v-if="!enableBuy">
+          <BuyDenied class="mb-7" />
+          <p class="mb-7">
+            У вас не достаточно баллов для покупки данного курса
+          </p>
+          <NuxtLink to="/learn">
+            <button class="article-link" type="button" @click="dialogBuy = false">
+              Смотреть курс
+            </button>
+          </NuxtLink>
+        </div>
+        <div v-if="completeBuy">
+          <TestComplete class="mb-7" />
+          <p class="mb-7">
+            Поздравляем, вы успешно приобрели курс “Веб дизайн 3.0”
+          </p>
+          <NuxtLink to="/learn">
+            <button class="article-link" type="button" @click="dialogBuy = false">
+              Смотреть курс
+            </button>
+          </NuxtLink>
+        </div>
+        <div class="v-card__actions">
+          <NuxtLink to="/learn">
+            <v-btn
+              color="primary"
+              text
+              @click="dialogBuy = false"
+            >
+              <CloseButton />
+            </v-btn>
+          </NuxtLink>
+        </div>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -110,13 +164,28 @@ import LearnPlay from "~~/components/svg/LearnPlay";
 import LearnTime from "~~/components/svg/LearnTime";
 import ArrowRight from "~~/components/svg/ArrowRight";
 import LearnTest from "~~/components/svg/LearnTest";
+import CloseButton from "~~/components/svg/CloseButton";
+import TestComplete from "~~/components/svg/TestComplete";
+import RocketSvg from "~~/components/svg/RocketSvg";
+import BuyDenied from "~~/components/svg/BuyDenied";
 
 export default {
   components: {
     LearnPlay,
     LearnTime,
     ArrowRight,
-    LearnTest
+    LearnTest,
+    CloseButton,
+    TestComplete,
+    RocketSvg,
+    BuyDenied
+  },
+  data () {
+    return {
+      dialogBuy: null,
+      enableBuy: true,
+      completeBuy: false
+    }
   }
 }
 </script>

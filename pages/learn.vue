@@ -41,7 +41,6 @@
               color="#2d7bf6"
               height="48px"
               to="/learnlist"
-              v-on="on"
             >
               Подробнее
             </v-btn>
@@ -75,7 +74,6 @@
               color="#2d7bf6"
               height="48px"
               to="/learnlist"
-              v-on="on"
             >
               Подробнее
             </v-btn>
