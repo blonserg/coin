@@ -1,8 +1,15 @@
 <template>
   <div class="mycomand">
-    <h1 class="ttl">
-      {{ staticData.title_my_team }}
-    </h1>
+    <div class="d-flex justify-space-between align-center">
+      <h1 class="ttl">
+        {{ staticData.title_my_team }}
+      </h1>
+      <NuxtLink to="/housework">
+        <button class="mycomand-housework" type="button" @click="dialogTest = false">
+          Housework
+        </button>
+      </NuxtLink>
+    </div>
     <v-row class="mb-12">
       <v-col md="4">
         <v-card class="mycomand-main">

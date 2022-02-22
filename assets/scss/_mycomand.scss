@@ -76,4 +76,31 @@
       line-height: 18px;
     }
   }
+
+  &-housework {
+    font-family: 'SF Pro Text';
+    display: inline;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    padding: 3px 8px;
+    width: auto;
+    height: 22px;
+    background: inherit;
+    border-radius: 21px;
+    border: 1px solid #2d7bf6;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #2d7bf6 !important;
+
+    &--gray {
+      background: #28292E;
+      border: 1px solid #272A33;
+      color: #6a6b79 !important;
+    }
+  }
 }

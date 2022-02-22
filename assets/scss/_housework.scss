@@ -1,0 +1,111 @@
+.housework {
+  &-radio {
+    &_item {
+      .mycomand-name {
+        font-size: 13px;
+        line-height: 17px;
+        color: #adafc2;
+      }
+
+      .mycomand-name_nick {
+        font-size: 13px;
+      }
+
+      .mycomand-avatar_txt {
+        font-size: 16px;
+        line-height: 21px;
+        color: #fff;
+        opacity: 0.8;
+      }
+    }
+    
+  }
+
+  &-radio {
+    &_item {
+      display: block;
+      margin-bottom: 18px;
+
+      input {
+        display: none;
+      }
+
+      input:checked + .housework-radio_inner:after {
+        content: '';
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translatey(-50%);
+        width: 8px;
+        height: 8px;
+        background-image: url("../../static/svg/housework.svg");
+        border-radius: 50%;
+        background-color: #2d7bf6;
+      }
+
+      input:checked + .housework-radio_inner:before {
+        border: 1px solid #2d7bf6;
+        background-color: #2d7bf6;
+      }
+
+      input:checked + .housework-radio_inner {
+        border: 1px solid #2d7bf6;
+      }
+    }
+
+    &_inner {
+      display: block;
+      padding: 16px 16px 16px 45px;
+      position: relative;
+      transition: all 0.25s linear;
+      font-size: 16px;
+      line-height: 21px;
+      color: #808190;
+      border-radius: 16px;
+      border: 1px solid #272a33;
+    }
+
+    &_inner:before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translatey(-50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid #23262e;
+    }
+  }
+
+  &-body {
+    border-radius: 16px;
+    border: 1px solid #272a33;
+    height: 100%;
+    padding: 20px;
+
+    &_text {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      color: #adafc2;
+      max-width: 350px;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: #adafc2;
+    width: 20%;
+  }
+}

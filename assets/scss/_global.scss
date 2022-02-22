@@ -6,6 +6,10 @@ body,
   font-family: 'SF Pro Display', sans-serif !important;
 }
 
+a {
+  text-decoration: none;
+}
+
 .v-main {
   &__wrap {
     padding: 0;
