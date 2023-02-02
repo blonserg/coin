@@ -96,10 +96,10 @@ export default {
   },
   fetchOnServer: false,
   mounted () {
-    const token = window.localStorage.getItem("userToken");
-    if (!token) {
-      this.$router.push("login");
-    }
+    // const token = window.localStorage.getItem("userToken");
+    // if (!token) {
+    //   this.$router.push("login");
+    // }
   }
 };
 </script>

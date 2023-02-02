@@ -43,12 +43,23 @@
           Неверный логин или пароль
         </v-alert>
       </div>
-      <Button :text="staticData.sign_in_button" @click.native="login" />
+      <NuxtLink v-else to="/main">
+        <v-btn
+          class="btn d-none d-md-flex"
+          color="#2d7bf6"
+          x-large
+          height="48px"
+        >
+          Login
+          <RegisterSvg class="ml-2" />
+        </v-btn>
+      </NuxtLink>
+      <!-- <Button :text="staticData.sign_in_button" @click.native="login" /> -->
     </v-form>
     <div class="login-bottom">
-      <span class="mr-2">{{ staticData.sign_in_dont_have_account }}</span>
+      <span class="mr-2">Register</span>
       <NuxtLink to="/register">
-        {{ staticData.sign_in_register }}
+        Register
       </NuxtLink>
     </div>
   </v-card>
@@ -56,15 +67,13 @@
 
 <script>
 import LogoSvg from "~~/components/svg/LogoSvg";
-import Button from "~~/components/common/Button";
 import StaticService from "~/services/StaticService";
 import UserService from "~/services/UserService";
 import HttpService from "~/services/HttpService";
 
 export default {
   components: {
-    LogoSvg,
-    Button
+    LogoSvg
   },
   layout: "signup",
   data () {
